@@ -10,7 +10,7 @@ public class WeightActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_weigh);
+        setContentView(R.layout.activity_weight);
     }
 
     @Override
