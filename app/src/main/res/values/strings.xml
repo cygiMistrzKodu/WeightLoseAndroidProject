@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Friendly lose weight helper</string>
 
-    <string name="hello_world">Hello Again</string>
+    <string name="weight_enter">Enter your weight</string>
     <string name="action_settings">Settings</string>
+    <string name="ok_button">OK</string>
+    <string name="weight_units">Kg</string>
 </resources>
