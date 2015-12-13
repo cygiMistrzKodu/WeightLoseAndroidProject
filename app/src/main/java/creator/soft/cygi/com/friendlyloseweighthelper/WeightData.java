@@ -6,6 +6,7 @@ import android.util.Log;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +16,7 @@ import java.util.Map;
 public class WeightData {
 
     private static String TAG = "WeightData";
-    private Map<Date,Integer> timeWeightPair = new HashMap<Date,Integer>();
+    private Map<Date,Integer> timeWeightPair = new LinkedHashMap<Date,Integer>();
 
 
     public void setWeightWithCurrentDate(Integer weight){
@@ -27,6 +28,11 @@ public class WeightData {
 
         timeWeightPair.put(currentDate,weight);
 
+    }
+
+    public Map<Date,Integer> getWeightAndTimeData() {
+
+        return timeWeightPair;
     }
 
 

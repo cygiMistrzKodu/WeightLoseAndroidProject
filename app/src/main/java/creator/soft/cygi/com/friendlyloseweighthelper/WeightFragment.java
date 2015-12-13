@@ -1,7 +1,6 @@
 package creator.soft.cygi.com.friendlyloseweighthelper;
 
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,12 +12,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Map;
+
 /**
  * Created by CygiMasterProgrammer on 2015-12-09.
  */
 public class WeightFragment extends Fragment {
 
     private static String TAG = "WeightFragment";
+    public static final String WEIGHT_DATA = "weightTimeData";
+    public static final String DATE_DATA = "dateData";
 
     private WeightData weightData;
     private EditText weightInput;
@@ -30,6 +36,7 @@ public class WeightFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         weightData = new WeightData();
+        setRetainInstance(true);
 
     }
 
@@ -64,6 +71,26 @@ public class WeightFragment extends Fragment {
             public void onClick(View v) {
 
                 Intent i = new Intent(getActivity(),ChartActivity.class);
+
+                ArrayList<String> dateSeries = new ArrayList<String>();
+                ArrayList<Integer> weight_units = new ArrayList<Integer>();
+
+
+                SimpleDateFormat dt = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
+                for (Map.Entry<Date,Integer> entry : weightData.getWeightAndTimeData().entrySet()){
+
+                    Date date = entry.getKey();
+                    dateSeries.add(dt.format(date));
+
+                    Integer weight = entry.getValue();
+                    weight_units.add(weight);
+
+                }
+
+               i.putExtra(WEIGHT_DATA,weight_units);
+                i.putExtra(DATE_DATA,dateSeries);
+
                 startActivity(i);
 
             }
