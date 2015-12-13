@@ -1,5 +1,6 @@
 package creator.soft.cygi.com.friendlyloseweighthelper;
 
+import android.content.Intent;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -22,6 +23,8 @@ public class WeightFragment extends Fragment {
     private WeightData weightData;
     private EditText weightInput;
     private Button acceptButton;
+
+    private Button runChartButtonTest;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,17 @@ public class WeightFragment extends Fragment {
 
             }
 
+        });
+
+        runChartButtonTest = (Button) view.findViewById(R.id.schowChart_test);
+        runChartButtonTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(getActivity(),ChartActivity.class);
+                startActivity(i);
+
+            }
         });
 
         return view;

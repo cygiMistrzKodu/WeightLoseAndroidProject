@@ -36,6 +36,11 @@
         android:text="@string/ok_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/schowChart_test"
+        android:text="Show Chart TEST"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>
