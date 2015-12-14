@@ -34,13 +34,21 @@ public class ChartActivity extends AppCompatActivity {
 
         chart = (LineChart) findViewById(R.id.chart);
 
+        ReadDataForChart();
+        CreateChart();
+
+    }
+
+    private void ReadDataForChart() {
         Bundle extras = getIntent().getExtras();
 
         dateSeries = extras.getStringArrayList(WeightFragment.DATE_DATA);
         weight_units = extras.getIntegerArrayList(WeightFragment.WEIGHT_DATA);
+    }
+
+    private void CreateChart() {
 
         ArrayList<Entry> weightUnitEntrySet = new ArrayList<Entry>();
-
         int xindex = 0;
         for (Integer weight : weight_units) {
 
@@ -48,7 +56,8 @@ public class ChartActivity extends AppCompatActivity {
             weightUnitEntrySet.add(weightEntry);
         }
 
-        LineDataSet lineDataSet = new LineDataSet(weightUnitEntrySet, "Weight in Kg");
+        String weightUnitInChart = getResources().getString(R.string.chart_unit_kg);
+        LineDataSet lineDataSet = new LineDataSet(weightUnitEntrySet,weightUnitInChart);
         lineDataSet.setColor(Color.RED);
         lineDataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
 
@@ -59,7 +68,6 @@ public class ChartActivity extends AppCompatActivity {
 
         chart.setData(data);
         chart.invalidate();
-
     }
 
     @Override

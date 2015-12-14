@@ -100,6 +100,11 @@ public class WeightFragment extends Fragment {
     }
 
     private boolean checkIfNumber(String text) {
+
+        if(TextUtils.isEmpty(text)) {
+            return false;
+        }
+
         return  TextUtils.isDigitsOnly(text);
     }
 }

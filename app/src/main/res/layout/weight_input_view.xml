@@ -22,7 +22,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="30dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:inputType="number"/>
         <TextView
             android:text="@string/weight_units"
             android:layout_width="0dp"
