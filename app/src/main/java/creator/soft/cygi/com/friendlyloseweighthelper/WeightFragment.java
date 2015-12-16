@@ -32,6 +32,9 @@ public class WeightFragment extends Fragment {
 
     private Button runChartButtonTest;
 
+
+    private Button readResourceFromFileTestButton;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +48,7 @@ public class WeightFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.weight_input_view, null);
+
 
         weightInput = (EditText) view.findViewById(R.id.inputWeightField);
         acceptButton = (Button) view.findViewById(R.id.acceptButton);
@@ -92,6 +96,16 @@ public class WeightFragment extends Fragment {
                 i.putExtra(DATE_DATA,dateSeries);
 
                 startActivity(i);
+
+            }
+        });
+
+        readResourceFromFileTestButton = (Button) view.findViewById(R.id.testFileReadFromResource);
+        readResourceFromFileTestButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(getContext());
+                weightTrackDatabaseHelper.testReadFromResourcesFile();
 
             }
         });
