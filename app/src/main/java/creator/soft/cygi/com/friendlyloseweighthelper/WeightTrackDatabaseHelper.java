@@ -20,8 +20,18 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper {
     private static final int VERSION = 1;
     Context context;
 
+    private static final String TABLE_USERS = "users";
+    private static final String COLUMN_ID_USER = "id_user";
+    private static final String COLUMN_USER_NAME  = "user_name";
+
+    private static final String TABLE_MEASUREMENT_DATA = "measurement_data";
+    private static final String COLUMN_ID_USER_TABLE_MEASUREMENT_DATA = "id_user";
+    private static final String COLUMN_DATE_TIME  = "date_time";
+    private static final String COLUMN_WEIGHT  = "weight";
+
+
     WeightTrackDatabaseHelper(Context context){
-        super(context,DB_NAME,null,VERSION);
+        super(context, DB_NAME, null, VERSION);
         this.context = context;
     }
 
@@ -44,20 +54,27 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper {
         }
         IOUtils.closeQuietly(inputStream);
 
-        Log.i("WEIGHT_TRACK",sqlCommand);
+        Log.i("WEIGHT_TRACK", sqlCommand);
 
         return sqlCommand;
     }
 
-    public void testReadFromResourcesFile() {
-
-        readSqlFromResource(R.raw.crate_tabel_users);
-        readSqlFromResource(R.raw.create_table_mesurment_data);
-
-    }
-
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_MEASUREMENT_DATA);
+
+        Log.i("Baza", "Usunolem Baze danych");
+
+        onCreate(db);
+    }
+
+    public void deleteDatabase(){
+
+      boolean isDeleted =    context.deleteDatabase(DB_NAME);
+
+        Log.i("Baza kasowac","Czy baza skasowana  " + isDeleted );
 
     }
 }

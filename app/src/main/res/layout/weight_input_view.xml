@@ -44,8 +44,8 @@
         android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/testFileReadFromResource"
-        android:text="read From Resource"
+        android:id="@+id/testDatabaseButton"
+        android:text="Test Database"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

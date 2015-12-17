@@ -33,7 +33,7 @@ public class WeightFragment extends Fragment {
     private Button runChartButtonTest;
 
 
-    private Button readResourceFromFileTestButton;
+    private Button testDatabaseButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -100,12 +100,14 @@ public class WeightFragment extends Fragment {
             }
         });
 
-        readResourceFromFileTestButton = (Button) view.findViewById(R.id.testFileReadFromResource);
-        readResourceFromFileTestButton.setOnClickListener(new View.OnClickListener() {
+        testDatabaseButton = (Button) view.findViewById(R.id.testDatabaseButton);
+        testDatabaseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(getContext());
-                weightTrackDatabaseHelper.testReadFromResourcesFile();
+                weightTrackDatabaseHelper.getReadableDatabase();
+                weightTrackDatabaseHelper.deleteDatabase();
+
 
             }
         });
