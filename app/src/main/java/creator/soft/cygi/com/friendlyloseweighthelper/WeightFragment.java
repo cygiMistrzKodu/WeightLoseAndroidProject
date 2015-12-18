@@ -12,6 +12,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.math.NumberUtils;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -59,7 +63,7 @@ public class WeightFragment extends Fragment {
                 if (checkIfNumber(weightInput.getText().toString())) {
 
                     String numberInText = weightInput.getText().toString();
-                    weightData.setWeightWithCurrentDate(Integer.parseInt(numberInText));
+                    weightData.setWeightWithCurrentDate(Float.parseFloat(numberInText));
                 }
                 else {
                     Log.i(TAG,"Weight should be number");
@@ -77,22 +81,26 @@ public class WeightFragment extends Fragment {
                 Intent i = new Intent(getActivity(),ChartActivity.class);
 
                 ArrayList<String> dateSeries = new ArrayList<String>();
-                ArrayList<Integer> weight_units = new ArrayList<Integer>();
+                ArrayList<Float> weight_units = new ArrayList<Float>();
+
 
 
                 SimpleDateFormat dt = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 
-                for (Map.Entry<Date,Integer> entry : weightData.getWeightAndTimeData().entrySet()){
+                for (Map.Entry<Date,Float> entry : weightData.getWeightAndTimeData().entrySet()){
 
                     Date date = entry.getKey();
                     dateSeries.add(dt.format(date));
 
-                    Integer weight = entry.getValue();
+                    Float weight = entry.getValue();
                     weight_units.add(weight);
 
                 }
 
-               i.putExtra(WEIGHT_DATA,weight_units);
+                float [] weight_measurements = ArrayUtils
+                        .toPrimitive(weight_units.toArray(new Float[weight_units.size()]));
+
+                i.putExtra(WEIGHT_DATA,weight_measurements);
                 i.putExtra(DATE_DATA,dateSeries);
 
                 startActivity(i);
@@ -105,8 +113,8 @@ public class WeightFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(getContext());
-                weightTrackDatabaseHelper.getReadableDatabase();
-                weightTrackDatabaseHelper.deleteDatabase();
+              //  weightTrackDatabaseHelper.getReadableDatabase();
+             //   weightTrackDatabaseHelper.deleteDatabase();
 
 
             }
@@ -121,6 +129,6 @@ public class WeightFragment extends Fragment {
             return false;
         }
 
-        return  TextUtils.isDigitsOnly(text);
+        return NumberUtils.isNumber(text);
     }
 }

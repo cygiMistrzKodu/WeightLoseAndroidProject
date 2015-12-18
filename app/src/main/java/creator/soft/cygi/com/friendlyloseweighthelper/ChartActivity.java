@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -24,7 +25,7 @@ public class ChartActivity extends AppCompatActivity {
 
     LineChart chart;
     ArrayList<String> dateSeries;
-    ArrayList<Integer> weight_units;
+    ArrayList<Float> weight_units;
 
 
     @Override
@@ -43,15 +44,25 @@ public class ChartActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
 
         dateSeries = extras.getStringArrayList(WeightFragment.DATE_DATA);
-        weight_units = extras.getIntegerArrayList(WeightFragment.WEIGHT_DATA);
+
+        float [] weight_data = extras.getFloatArray(WeightFragment.WEIGHT_DATA);
+        weight_units = new ArrayList<Float>();
+
+        for(Float weight_measurement : weight_data){
+            weight_units.add(weight_measurement);
+        }
+
+
+
     }
 
     private void CreateChart() {
 
         ArrayList<Entry> weightUnitEntrySet = new ArrayList<Entry>();
         int xindex = 0;
-        for (Integer weight : weight_units) {
+        for (Float weight : weight_units) {
 
+            Log.i("ChartFloat", "Chart Float values : " + weight );  // to testing
             Entry weightEntry = new Entry(weight, xindex++);
             weightUnitEntrySet.add(weightEntry);
         }

@@ -1,13 +1,10 @@
 package creator.soft.cygi.com.friendlyloseweighthelper;
 
-import android.nfc.Tag;
 import android.util.Log;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,24 +13,45 @@ import java.util.Map;
 public class WeightData {
 
     private static String TAG = "WeightData";
-    private Map<Date,Integer> timeWeightPair = new LinkedHashMap<Date,Integer>();
+    private Map<Date,Float> timeWeightPair = new LinkedHashMap<Date,Float>();
+    private String latestDate;
+    private Float latestWeight;
 
 
-    public void setWeightWithCurrentDate(Integer weight){
+    public void setWeightWithCurrentDate(Float weight){
 
         Calendar cal = Calendar.getInstance();
         Date currentDate =  cal.getTime();
+        timeWeightPair.put(currentDate, weight);
 
-        Log.i(TAG,"current Date: "+ currentDate);
+        setLatestMeasurement(weight, currentDate);
 
-        timeWeightPair.put(currentDate,weight);
+        Log.i(TAG, "current Date: " + currentDate);
 
     }
 
-    public Map<Date,Integer> getWeightAndTimeData() {
+    private void setLatestMeasurement(Float weight, Date currentDate) {
+        latestWeight = weight;
+        latestDate =  currentDate.toString();
+    }
 
+    public Map<Date,Float> getWeightAndTimeData() {
         return timeWeightPair;
     }
+
+    public String getLatestDate(){
+        return latestDate;
+    }
+
+    public Float getLatestWeight() {
+        return latestWeight;
+    }
+
+
+
+
+
+
 
 
 

@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:textSize="30dp"
             android:layout_weight="1"
-            android:inputType="number"/>
+            android:inputType="numberDecimal"/>
         <TextView
             android:text="@string/weight_units"
             android:layout_width="0dp"

@@ -19,6 +19,11 @@ android {
     }
     productFlavors {
     }
+
+    packagingOptions{
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
 }
 
 repositories {
@@ -30,4 +35,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'com.github.PhilJay:MPAndroidChart:v2.1.6'
     compile 'commons-io:commons-io:2.4'
+    compile 'org.apache.commons:commons-lang3:3.4'
 }
