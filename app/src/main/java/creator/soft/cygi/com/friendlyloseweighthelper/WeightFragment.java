@@ -39,11 +39,14 @@ public class WeightFragment extends Fragment {
 
     private Button testDatabaseButton;
 
+    private WeightTrackDatabaseHelper weightTrackDatabaseHelper;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         weightData = new WeightData();
         setRetainInstance(true);
+        weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(getContext());
 
     }
 
@@ -64,6 +67,7 @@ public class WeightFragment extends Fragment {
 
                     String numberInText = weightInput.getText().toString();
                     weightData.setWeightWithCurrentDate(Float.parseFloat(numberInText));
+                    weightTrackDatabaseHelper.insertOneRecordIntoWeightTrackDatabase(weightData);
                 }
                 else {
                     Log.i(TAG,"Weight should be number");
@@ -112,7 +116,7 @@ public class WeightFragment extends Fragment {
         testDatabaseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(getContext());
+             //   WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(getContext());
               //  weightTrackDatabaseHelper.getReadableDatabase();
              //   weightTrackDatabaseHelper.deleteDatabase();
 

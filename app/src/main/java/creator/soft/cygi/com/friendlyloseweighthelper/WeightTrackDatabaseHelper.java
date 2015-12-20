@@ -2,6 +2,7 @@ package creator.soft.cygi.com.friendlyloseweighthelper;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -16,6 +17,8 @@ import java.io.InputStream;
  */
 public class WeightTrackDatabaseHelper extends SQLiteOpenHelper {
 
+    private static final String TAG = "WeightTrackDatabaseH";
+
     private static final String DB_NAME = "weightTrack.sgl";
     private static final int VERSION = 1;
     private static final String TABLE_USERS = "users";
@@ -28,7 +31,9 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_MEASUREMENT_DATA_WEIGHT = "weight";
     Context context;
 
-    private String CurrentUser = "JacekCygi";   // just for testing Will be more softicated latter
+    private String currentUser = "JacekCygi";   // just for testing Will be more softicated latter
+
+    private int existingUserID;
 
 
     WeightTrackDatabaseHelper(Context context) {
@@ -81,21 +86,41 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public WeightData getAllWightDataFromDatabase() {
+
+
+        return new WeightData();
+    }
+
+    public Cursor getMeasurementDataCursor() {
+
+        int idOfCurrentUser = getIdOfCurrentUser();
+
+        //// TODO: Create query To select all data in Mesurment Data by on User ID
+
+        return null;
+    }
+
+
     public long insertOneRecordIntoWeightTrackDatabase(WeightData weightData) {
 
         int currentUserId = getIdOfCurrentUser();
 
         ContentValues cv = new ContentValues();
-        cv.put(COLUMN_MEASUREMENT_DATA_ID_USER,currentUserId);
-        cv.put(COLUMN_MEASUREMENT_DATA_DATE_TIME,weightData.getLatestDate());
-        cv.put(COLUMN_MEASUREMENT_DATA_WEIGHT,weightData.getLatestWeight());
+        cv.put(COLUMN_MEASUREMENT_DATA_ID_USER, currentUserId);
+        cv.put(COLUMN_MEASUREMENT_DATA_DATE_TIME, weightData.getLatestDate());
+        cv.put(COLUMN_MEASUREMENT_DATA_WEIGHT, weightData.getLatestWeight());
 
-        return getWritableDatabase().insert(TABLE_MEASUREMENT_DATA,null,cv);
+        long insertedRowNumber = getWritableDatabase().insert(TABLE_MEASUREMENT_DATA, null, cv);
+
+        Log.i(TAG,"Row inserted on position: " + insertedRowNumber);
+
+        return insertedRowNumber;
     }
 
     private int getIdOfCurrentUser() {
 
-        if (checkIfUserExist()) {
+        if (checkIfUserExist(currentUser)) {
 
             int existingUserId = getExistingUserID();
 
@@ -109,20 +134,71 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    private boolean checkIfUserExist() {
+    private boolean checkIfUserExist(String userName) {
+
+        Cursor cursor = findUser(userName);
+        String userNameInDatabase="";
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+
+            if (cursor.getCount() >0) {
+                userNameInDatabase =
+                        cursor.getString(cursor.getColumnIndex(COLUMN_USERS_USER_NAME));
+            }
+        }
+
+        Log.i(TAG,"User name from database:  "+ userNameInDatabase );
+
+        if(userNameInDatabase.equals(userName))
+        {
+            saveExistingUserId(cursor);
+
+            return true;
+        }
+
         return false;
     }
 
+    private Cursor findUser(String userName) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_USERS,
+                new String[]{COLUMN_USERS_ID_USER,
+                        COLUMN_USERS_USER_NAME},
+                COLUMN_USERS_USER_NAME + "=?", new String[]{userName},
+                null, null, null);
+        cursor.moveToFirst();
+
+        return cursor;
+    }
+
+    private void saveExistingUserId(Cursor cursor) {
+
+        existingUserID = getUserId(cursor);
+        Log.i(TAG,"existingUserID : " +  existingUserID);
+    }
+
     private int getExistingUserID() {
-        return 0;
+        return existingUserID;
     }
 
     private void createNewUser() {
 
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_USERS_USER_NAME, currentUser);
+        getWritableDatabase().insert(TABLE_USERS, null, cv);
     }
 
     private int getNewUserId() {
-        return 0;
+
+        Cursor cursor =  findUser(currentUser);
+
+        return getUserId(cursor);
+    }
+
+    private int getUserId(Cursor cursor) {
+        return cursor.getInt(cursor.getColumnIndex(COLUMN_USERS_ID_USER));
     }
 
 
