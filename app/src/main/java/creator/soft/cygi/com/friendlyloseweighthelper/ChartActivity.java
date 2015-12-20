@@ -69,6 +69,8 @@ public class ChartActivity extends AppCompatActivity {
 
         String weightUnitInChart = getResources().getString(R.string.chart_unit_kg);
         LineDataSet lineDataSet = new LineDataSet(weightUnitEntrySet,weightUnitInChart);
+        lineDataSet.setValueFormatter(new ChartValueFormatter());
+        lineDataSet.setValueTextSize(17);
         lineDataSet.setColor(Color.RED);
         lineDataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
 
