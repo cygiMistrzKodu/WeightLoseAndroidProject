@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
@@ -44,9 +43,9 @@ public class WeightFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        weightData = new WeightData();
         setRetainInstance(true);
         weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(getContext());
+        weightData = weightTrackDatabaseHelper.getAllWeightDataFromDatabase();
 
     }
 

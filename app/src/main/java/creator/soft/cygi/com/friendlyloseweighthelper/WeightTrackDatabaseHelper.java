@@ -86,19 +86,48 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public WeightData getAllWightDataFromDatabase() {
+    public WeightData getAllWeightDataFromDatabase() {
 
+        Cursor cursor = getMeasurementDataCursor();
+        cursor.moveToFirst();
+        WeightData weightData = new WeightData();
 
-        return new WeightData();
+        String formatDate = "";
+        float weight;
+        DateTimeDTO dateTimeDTO = new DateTimeDTO();
+
+        if (cursor.getCount() > 0) {
+            do {
+
+                formatDate = cursor.getString(cursor.getColumnIndex(COLUMN_MEASUREMENT_DATA_DATE_TIME));
+                weight = cursor.getFloat(cursor.getColumnIndex(COLUMN_MEASUREMENT_DATA_WEIGHT));
+
+                Log.i(TAG, "Data From database : " + formatDate + " : " + weight);
+                dateTimeDTO.setDate(formatDate);
+                dateTimeDTO.setWeight(weight);
+
+                weightData.setTimeAndDate(dateTimeDTO);
+
+            } while (cursor.moveToNext());
+        }
+
+        return weightData;
     }
 
     public Cursor getMeasurementDataCursor() {
 
         int idOfCurrentUser = getIdOfCurrentUser();
 
-        //// TODO: Create query To select all data in Mesurment Data by on User ID
+        SQLiteDatabase db = this.getReadableDatabase();
 
-        return null;
+        Cursor cursor = db.query(TABLE_MEASUREMENT_DATA,
+                new String[]{COLUMN_MEASUREMENT_DATA_DATE_TIME,
+                        COLUMN_MEASUREMENT_DATA_WEIGHT},
+                COLUMN_MEASUREMENT_DATA_ID_USER + "=?", new String[]{String.valueOf(idOfCurrentUser)},
+                null, null, null);
+
+
+        return cursor;
     }
 
 
@@ -113,7 +142,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper {
 
         long insertedRowNumber = getWritableDatabase().insert(TABLE_MEASUREMENT_DATA, null, cv);
 
-        Log.i(TAG,"Row inserted on position: " + insertedRowNumber);
+        Log.i(TAG, "Row inserted on position: " + insertedRowNumber);
 
         return insertedRowNumber;
     }
@@ -137,21 +166,20 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper {
     private boolean checkIfUserExist(String userName) {
 
         Cursor cursor = findUser(userName);
-        String userNameInDatabase="";
+        String userNameInDatabase = "";
 
         if (cursor != null) {
             cursor.moveToFirst();
 
-            if (cursor.getCount() >0) {
+            if (cursor.getCount() > 0) {
                 userNameInDatabase =
                         cursor.getString(cursor.getColumnIndex(COLUMN_USERS_USER_NAME));
             }
         }
 
-        Log.i(TAG,"User name from database:  "+ userNameInDatabase );
+        Log.i(TAG, "User name from database:  " + userNameInDatabase);
 
-        if(userNameInDatabase.equals(userName))
-        {
+        if (userNameInDatabase.equals(userName)) {
             saveExistingUserId(cursor);
 
             return true;
@@ -169,6 +197,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_USERS_USER_NAME + "=?", new String[]{userName},
                 null, null, null);
         cursor.moveToFirst();
+        db.close();
 
         return cursor;
     }
@@ -176,7 +205,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper {
     private void saveExistingUserId(Cursor cursor) {
 
         existingUserID = getUserId(cursor);
-        Log.i(TAG,"existingUserID : " +  existingUserID);
+        Log.i(TAG, "existingUserID : " + existingUserID);
     }
 
     private int getExistingUserID() {
@@ -192,7 +221,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper {
 
     private int getNewUserId() {
 
-        Cursor cursor =  findUser(currentUser);
+        Cursor cursor = findUser(currentUser);
 
         return getUserId(cursor);
     }

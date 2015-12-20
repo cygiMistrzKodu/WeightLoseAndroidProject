@@ -47,6 +47,12 @@ public class WeightData {
         return latestWeight;
     }
 
+    public void setTimeAndDate(DateTimeDTO dateTimeDTO){
+
+        timeWeightPair.put(dateTimeDTO.getDate(),dateTimeDTO.getWeight());
+
+    }
+
 
 
 
