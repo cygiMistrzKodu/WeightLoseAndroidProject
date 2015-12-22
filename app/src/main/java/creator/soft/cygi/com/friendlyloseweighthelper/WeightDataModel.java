@@ -10,9 +10,9 @@ import java.util.Map;
 /**
  * Created by CygiMasterProgrammer on 2015-12-10.
  */
-public class WeightData {
+public class WeightDataModel {
 
-    private static String TAG = "WeightData";
+    private static String TAG = "WeightDataModel";
     private Map<Date,Float> timeWeightPair = new LinkedHashMap<Date,Float>();
     private String latestDate;
     private Float latestWeight;

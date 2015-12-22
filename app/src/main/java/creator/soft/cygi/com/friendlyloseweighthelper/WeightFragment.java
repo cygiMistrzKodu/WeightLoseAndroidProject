@@ -29,14 +29,14 @@ public class WeightFragment extends Fragment {
     public static final String WEIGHT_DATA = "weightTimeData";
     public static final String DATE_DATA = "dateData";
 
-    private WeightData weightData;
+    private WeightDataModel weightDataModel;
     private EditText weightInput;
     private Button acceptButton;
 
     private Button runChartButtonTest;
 
 
-    private Button testDatabaseButton;
+    private Button testDeleteStatementButton;
 
     private WeightTrackDatabaseHelper weightTrackDatabaseHelper;
 
@@ -45,7 +45,7 @@ public class WeightFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(getContext());
-        weightData = weightTrackDatabaseHelper.getAllWeightDataFromDatabase();
+        updateWeightDataModel();
 
     }
 
@@ -65,8 +65,8 @@ public class WeightFragment extends Fragment {
                 if (checkIfNumber(weightInput.getText().toString())) {
 
                     String numberInText = weightInput.getText().toString();
-                    weightData.setWeightWithCurrentDate(Float.parseFloat(numberInText));
-                    weightTrackDatabaseHelper.insertOneRecordIntoWeightTrackDatabase(weightData);
+                    weightDataModel.setWeightWithCurrentDate(Float.parseFloat(numberInText));
+                    weightTrackDatabaseHelper.insertOneRecordIntoWeightTrackDatabase(weightDataModel);
                 }
                 else {
                     Log.i(TAG,"Weight should be number");
@@ -90,7 +90,7 @@ public class WeightFragment extends Fragment {
 
                 SimpleDateFormat dt = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 
-                for (Map.Entry<Date,Float> entry : weightData.getWeightAndTimeData().entrySet()){
+                for (Map.Entry<Date,Float> entry : weightDataModel.getWeightAndTimeData().entrySet()){
 
                     Date date = entry.getKey();
                     dateSeries.add(dt.format(date));
@@ -111,19 +111,21 @@ public class WeightFragment extends Fragment {
             }
         });
 
-        testDatabaseButton = (Button) view.findViewById(R.id.testDatabaseButton);
-        testDatabaseButton.setOnClickListener(new View.OnClickListener() {
+        testDeleteStatementButton = (Button) view.findViewById(R.id.testDatabaseButton);
+        testDeleteStatementButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             //   WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(getContext());
-              //  weightTrackDatabaseHelper.getReadableDatabase();
-             //   weightTrackDatabaseHelper.deleteDatabase();
-
+               weightTrackDatabaseHelper.deleteLastMeasurement();
+                updateWeightDataModel();
 
             }
         });
 
         return view;
+    }
+
+    private void updateWeightDataModel() {
+        weightDataModel = weightTrackDatabaseHelper.getAllWeightDataFromDatabase();
     }
 
     private boolean checkIfNumber(String text) {

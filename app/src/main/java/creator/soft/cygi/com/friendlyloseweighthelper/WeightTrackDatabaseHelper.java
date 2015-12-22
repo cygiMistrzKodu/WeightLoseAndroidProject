@@ -70,12 +70,6 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
-//        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
-//        db.execSQL("DROP TABLE IF EXISTS " + TABLE_MEASUREMENT_DATA);
-//
-//        Log.i("Baza", "Usunolem Baze danych");
-//
-//        onCreate(db);
     }
 
     public void deleteDatabase() {
@@ -86,11 +80,13 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public WeightData getAllWeightDataFromDatabase() {
+
+
+    public WeightDataModel getAllWeightDataFromDatabase() {
 
         Cursor cursor = getMeasurementDataCursor();
         cursor.moveToFirst();
-        WeightData weightData = new WeightData();
+        WeightDataModel weightDataModel = new WeightDataModel();
 
         String formatDate = "";
         float weight;
@@ -106,12 +102,12 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper {
                 dateTimeDTO.setDate(formatDate);
                 dateTimeDTO.setWeight(weight);
 
-                weightData.setTimeAndDate(dateTimeDTO);
+                weightDataModel.setTimeAndDate(dateTimeDTO);
 
             } while (cursor.moveToNext());
         }
 
-        return weightData;
+        return weightDataModel;
     }
 
     public Cursor getMeasurementDataCursor() {
@@ -131,14 +127,14 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public long insertOneRecordIntoWeightTrackDatabase(WeightData weightData) {
+    public long insertOneRecordIntoWeightTrackDatabase(WeightDataModel weightDataModel) {
 
         int currentUserId = getIdOfCurrentUser();
 
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_MEASUREMENT_DATA_ID_USER, currentUserId);
-        cv.put(COLUMN_MEASUREMENT_DATA_DATE_TIME, weightData.getLatestDate());
-        cv.put(COLUMN_MEASUREMENT_DATA_WEIGHT, weightData.getLatestWeight());
+        cv.put(COLUMN_MEASUREMENT_DATA_DATE_TIME, weightDataModel.getLatestDate());
+        cv.put(COLUMN_MEASUREMENT_DATA_WEIGHT, weightDataModel.getLatestWeight());
 
         long insertedRowNumber = getWritableDatabase().insert(TABLE_MEASUREMENT_DATA, null, cv);
 
@@ -230,5 +226,15 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper {
         return cursor.getInt(cursor.getColumnIndex(COLUMN_USERS_ID_USER));
     }
 
+
+    public void deleteLastMeasurement() {
+
+        String whereStatement = readSqlCommandFromResource(R.raw.where_statment_last_entry_to_mesurement_data);
+        Integer currentIdUser = getIdOfCurrentUser();
+
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(TABLE_MEASUREMENT_DATA, whereStatement,new String[]{String.valueOf(currentIdUser)});
+
+    }
 
 }
