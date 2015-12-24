@@ -288,4 +288,23 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper {
             Log.d(TAG, "stack deleted");
         }
 
+    public void updatedMeasurement() {
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        int idCurrentUser = getExistingUserID();
+
+        ContentValues insertValues = new ContentValues();
+        insertValues.put(COLUMN_MEASUREMENT_DATA_DATE_TIME, "12-12-2015");
+        insertValues.put(COLUMN_MEASUREMENT_DATA_WEIGHT, 220);
+
+        String whereStatement = COLUMN_MEASUREMENT_DATA_ID_USER  +
+                " = ? and " + COLUMN_MEASUREMENT_DATA_MEASUREMENT_ID + " = ? " ;
+
+        String [] whereArgs  = new String[]{String.valueOf(idCurrentUser),"11"};
+
+        db.update(TABLE_MEASUREMENT_DATA,insertValues,whereStatement,whereArgs);
+
+    }
+
     }
