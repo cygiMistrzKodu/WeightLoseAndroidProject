@@ -20,6 +20,11 @@ public class DateTimeDTO {
 
     public void setDate(String date) {
 
+        if(date == null)
+        {
+            return;
+        }
+
         DateFormat formatDate = new SimpleDateFormat("EEE MMM d HH:mm:ss zzz yyyy", Locale.ENGLISH);
 
         try {
@@ -29,13 +34,17 @@ public class DateTimeDTO {
         }
     }
 
-    public void setWeight(Float weight) {
-        this.weight = weight;
-    }
-
     public Date getDate() {
 
     return date;
+    }
+
+    public String getDateInString() {
+        return date.toString();
+    }
+
+    public void setWeight(Float weight) {
+        this.weight = weight;
     }
 
     public Float getWeight(){

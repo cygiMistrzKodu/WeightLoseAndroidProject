@@ -11,6 +11,7 @@ import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Stack;
 
 /**
  * Created by CygiMasterProgrammer on 2015-12-14.
@@ -26,13 +27,13 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_USERS_USER_NAME = "user_name";
 
     private static final String TABLE_MEASUREMENT_DATA = "measurement_data";
+    private static final String COLUMN_MEASUREMENT_DATA_MEASUREMENT_ID = "measurement_id";
     private static final String COLUMN_MEASUREMENT_DATA_ID_USER = "id_user";
     private static final String COLUMN_MEASUREMENT_DATA_DATE_TIME = "date_time";
     private static final String COLUMN_MEASUREMENT_DATA_WEIGHT = "weight";
     Context context;
-
+    Stack<DateTimeDTO> lastMeasurementDeletionStack = new Stack<DateTimeDTO>();
     private String currentUser = "JacekCygi";   // just for testing Will be more softicated latter
-
     private int existingUserID;
 
 
@@ -79,7 +80,6 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper {
         Log.i("Baza kasowac", "Czy baza skasowana  " + isDeleted);
 
     }
-
 
 
     public WeightDataModel getAllWeightDataFromDatabase() {
@@ -139,7 +139,6 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper {
         long insertedRowNumber = getWritableDatabase().insert(TABLE_MEASUREMENT_DATA, null, cv);
 
         Log.i(TAG, "Row inserted on position: " + insertedRowNumber);
-
         return insertedRowNumber;
     }
 
@@ -231,10 +230,62 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper {
 
         String whereStatement = readSqlCommandFromResource(R.raw.where_statment_last_entry_to_mesurement_data);
         Integer currentIdUser = getIdOfCurrentUser();
-
         SQLiteDatabase db = getWritableDatabase();
-        db.delete(TABLE_MEASUREMENT_DATA, whereStatement,new String[]{String.valueOf(currentIdUser)});
+        saveLastDeletedData();
+        db.delete(TABLE_MEASUREMENT_DATA, whereStatement, new String[]{String.valueOf(currentIdUser)});
 
     }
 
-}
+    public void undoDeleteLastMeasurement() {
+
+
+        if (lastMeasurementDeletionStack.empty()) {
+            Log.d(TAG, "lastMeasurementDeletionStack is empty");
+            return;
+        }
+
+        WeightDataModel weightDataModel = new WeightDataModel();
+
+        DateTimeDTO dateTimeDTO = lastMeasurementDeletionStack.pop();
+
+        weightDataModel.setTimeAndDate(dateTimeDTO);
+        insertOneRecordIntoWeightTrackDatabase(weightDataModel);
+
+
+    }
+
+    private void saveLastDeletedData() {
+
+        Cursor latestMeasurementCursor = getLatestMeasurementCursor();
+        String date = latestMeasurementCursor.getString(latestMeasurementCursor.getColumnIndex(COLUMN_MEASUREMENT_DATA_DATE_TIME));
+        Float weight = latestMeasurementCursor.getFloat(latestMeasurementCursor.getColumnIndex(COLUMN_MEASUREMENT_DATA_WEIGHT));
+
+        Log.d(TAG, "Get Last Date : "+ date +" Weight: "+weight);
+
+        DateTimeDTO dateTimeDTO = new DateTimeDTO();
+        dateTimeDTO.setDate(date);
+        dateTimeDTO.setWeight(weight);
+
+        lastMeasurementDeletionStack.push(dateTimeDTO);
+
+            Log.d(TAG, "Push on stack  Date: " + dateTimeDTO.getDateInString() + " weight " + dateTimeDTO.getWeight());
+
+    }
+
+            private Cursor getLatestMeasurementCursor () {
+            int idCurrentUser = getExistingUserID();
+            Cursor latestMeasurementCursor = getReadableDatabase().query(TABLE_MEASUREMENT_DATA,
+                    new String[]{COLUMN_MEASUREMENT_DATA_MEASUREMENT_ID, COLUMN_MEASUREMENT_DATA_DATE_TIME,
+                            COLUMN_MEASUREMENT_DATA_WEIGHT}, COLUMN_MEASUREMENT_DATA_ID_USER + " = ?",
+                    new String[]{String.valueOf(idCurrentUser)},
+                    null, null, COLUMN_MEASUREMENT_DATA_MEASUREMENT_ID + " DESC", "1");
+            latestMeasurementCursor.moveToFirst();
+            return latestMeasurementCursor;
+        }
+
+        public void clearLastMeasurementStack () {
+            lastMeasurementDeletionStack.clear();
+            Log.d(TAG, "stack deleted");
+        }
+
+    }

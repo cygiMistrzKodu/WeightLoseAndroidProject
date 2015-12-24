@@ -38,6 +38,8 @@ public class WeightFragment extends Fragment {
 
     private Button testDeleteStatementButton;
 
+    private Button undoLastDeletionButton;
+
     private WeightTrackDatabaseHelper weightTrackDatabaseHelper;
 
     @Override
@@ -67,6 +69,7 @@ public class WeightFragment extends Fragment {
                     String numberInText = weightInput.getText().toString();
                     weightDataModel.setWeightWithCurrentDate(Float.parseFloat(numberInText));
                     weightTrackDatabaseHelper.insertOneRecordIntoWeightTrackDatabase(weightDataModel);
+                    weightTrackDatabaseHelper.clearLastMeasurementStack();
                 }
                 else {
                     Log.i(TAG,"Weight should be number");
@@ -108,6 +111,15 @@ public class WeightFragment extends Fragment {
 
                 startActivity(i);
 
+            }
+        });
+
+        undoLastDeletionButton = (Button) view.findViewById(R.id.undoLastDeletionButton);
+        undoLastDeletionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                weightTrackDatabaseHelper.undoDeleteLastMeasurement();
+                updateWeightDataModel();
             }
         });
 

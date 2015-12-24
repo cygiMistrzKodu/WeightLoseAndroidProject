@@ -50,6 +50,7 @@ public class WeightDataModel {
     public void setTimeAndDate(DateTimeDTO dateTimeDTO){
 
         timeWeightPair.put(dateTimeDTO.getDate(),dateTimeDTO.getWeight());
+        setLatestMeasurement(dateTimeDTO.getWeight(),dateTimeDTO.getDate());
 
     }
 
