@@ -295,7 +295,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper {
         int idCurrentUser = getExistingUserID();
 
         ContentValues insertValues = new ContentValues();
-        insertValues.put(COLUMN_MEASUREMENT_DATA_DATE_TIME, "12-12-2015");
+        insertValues.put(COLUMN_MEASUREMENT_DATA_DATE_TIME, "Thu Dec 24 01:22:00 GMT+01:00 2015");
         insertValues.put(COLUMN_MEASUREMENT_DATA_WEIGHT, 220);
 
         String whereStatement = COLUMN_MEASUREMENT_DATA_ID_USER  +

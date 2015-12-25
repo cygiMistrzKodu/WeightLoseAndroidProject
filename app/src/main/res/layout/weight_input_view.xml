@@ -54,4 +54,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <ToggleButton
+        android:id="@+id/modifyViewButton"
+        android:textOff="@string/modify_standard_view_text"
+        android:textOn="@string/modify_view_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="false"/>
+
 </LinearLayout>

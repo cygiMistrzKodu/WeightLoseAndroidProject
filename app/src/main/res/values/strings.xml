@@ -7,4 +7,6 @@
     <string name="weight_units">Kg</string>
     <string name="chart_unit_kg">Weight in Kg</string>
     <string name="undo_last_deletion_button">Undo deletion</string>
+    <string name="modify_standard_view_text">Go to Modify Mode</string>
+    <string name="modify_view_text">Back to Standard Mode</string>
 </resources>
