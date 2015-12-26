@@ -36,7 +36,7 @@ public class WeightFragment extends Fragment {
     private Button runChartButtonTest;
 
 
-    private Button testDeleteStatementButton;
+    private Button deleteLaatestEntryButton;
 
     private Button undoLastDeletionButton;
 
@@ -123,11 +123,11 @@ public class WeightFragment extends Fragment {
             }
         });
 
-        testDeleteStatementButton = (Button) view.findViewById(R.id.testDatabaseButton);
-        testDeleteStatementButton.setOnClickListener(new View.OnClickListener() {
+        deleteLaatestEntryButton = (Button) view.findViewById(R.id.deleteLatestEntryButton);
+        deleteLaatestEntryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               weightTrackDatabaseHelper.deleteLastMeasurement();
+                weightTrackDatabaseHelper.deleteLatestEntry();
                 updateWeightDataModel();
 
             }

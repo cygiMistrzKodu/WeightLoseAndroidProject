@@ -226,7 +226,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public void deleteLastMeasurement() {
+    public void deleteLatestEntry() {
 
         String whereStatement = readSqlCommandFromResource(R.raw.where_statment_last_entry_to_mesurement_data);
         Integer currentIdUser = getIdOfCurrentUser();
@@ -256,7 +256,15 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper {
 
     private void saveLastDeletedData() {
 
+
+
         Cursor latestMeasurementCursor = getLatestMeasurementCursor();
+
+        if (latestMeasurementCursor.getCount() <= 0)
+        {
+            return;
+        }
+
         String date = latestMeasurementCursor.getString(latestMeasurementCursor.getColumnIndex(COLUMN_MEASUREMENT_DATA_DATE_TIME));
         Float weight = latestMeasurementCursor.getFloat(latestMeasurementCursor.getColumnIndex(COLUMN_MEASUREMENT_DATA_WEIGHT));
 

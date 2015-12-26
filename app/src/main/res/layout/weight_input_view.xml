@@ -17,11 +17,30 @@
         android:orientation="horizontal"
         android:gravity="center">
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingRight="10dp"
+            android:paddingLeft="5dp"
+            android:layout_gravity="center">
+
+            <Button
+                android:id="@+id/undoLastDeletionButton"
+                android:text="@string/undo_last_deletion_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
         <EditText
             android:id="@+id/inputWeightField"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="30dp"
+            android:gravity="center"
+            android:maxLength="7"
+            android:minWidth="130dp"
             android:layout_weight="1"
             android:inputType="numberDecimal"/>
         <TextView
@@ -30,6 +49,35 @@
             android:layout_height="wrap_content"
             android:textSize="30dp"
             android:layout_weight="1"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:paddingRight="5dp"
+            android:paddingLeft="10dp"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/deleteLatestEntryButton"
+            android:text="@string/delete_last_entry_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
 
     <Button
@@ -40,17 +88,6 @@
     <Button
         android:id="@+id/schowChart_test"
         android:text="Show Chart TEST"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/testDatabaseButton"
-        android:text="Test DeleteStatement"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/undoLastDeletionButton"
-        android:text="@string/undo_last_deletion_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
