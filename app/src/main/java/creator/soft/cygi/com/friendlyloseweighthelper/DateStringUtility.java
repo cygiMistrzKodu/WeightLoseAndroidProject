@@ -46,4 +46,12 @@ public  class DateStringUtility {
 
         return currentDate.toString();
     }
+
+    public static String formatRawDate(String dateToFormat) {
+
+        Date nonFormatDate = changeToDate(dateToFormat);
+        String dateFormatPattern = "dd-MM-yyyy";
+
+        return new SimpleDateFormat(dateFormatPattern).format(nonFormatDate);
+    }
 }
