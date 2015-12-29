@@ -10,4 +10,5 @@
     <string name="modify_standard_view_text">Go to Modify Mode</string>
     <string name="modify_view_text">Back to Standard Mode</string>
     <string name="delete_last_entry_button">Delete</string>
+    <string name="date_picker_title">Measurement date</string>
 </resources>

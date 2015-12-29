@@ -2,7 +2,6 @@ package creator.soft.cygi.com.friendlyloseweighthelper;
 
 import android.util.Log;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -20,8 +19,8 @@ public class WeightDataModel {
 
     public void setWeightWithCurrentDate(Float weight){
 
-        Calendar cal = Calendar.getInstance();
-        Date currentDate =  cal.getTime();
+
+        Date currentDate =  DateStringUtility.getCurrentDate();
         timeWeightPair.put(currentDate, weight);
 
         setLatestMeasurement(weight, currentDate);
@@ -32,7 +31,7 @@ public class WeightDataModel {
 
     private void setLatestMeasurement(Float weight, Date currentDate) {
         latestWeight = weight;
-        latestDate =  currentDate.toString();
+        latestDate =  DateStringUtility.changeToStringRepresentation(currentDate);
     }
 
     public Map<Date,Float> getWeightAndTimeData() {

@@ -1,12 +1,6 @@
 package creator.soft.cygi.com.friendlyloseweighthelper;
 
-import android.util.Log;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 /**
  * Created by CygiMasterProgrammer on 2015-12-20.
@@ -25,13 +19,8 @@ public class DateTimeDTO {
             return;
         }
 
-        DateFormat formatDate = new SimpleDateFormat("EEE MMM d HH:mm:ss zzz yyyy", Locale.ENGLISH);
+        this.date = DateStringUtility.changeToDate(date);
 
-        try {
-            this.date = formatDate.parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
     }
 
     public Date getDate() {
@@ -40,7 +29,7 @@ public class DateTimeDTO {
     }
 
     public String getDateInString() {
-        return date.toString();
+        return DateStringUtility.changeToStringRepresentation(date);
     }
 
     public void setWeight(Float weight) {
