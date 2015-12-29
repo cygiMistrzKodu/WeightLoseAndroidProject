@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -25,10 +27,11 @@ import java.util.Map;
  */
 public class WeightFragment extends Fragment {
 
-    private static String TAG = "WeightFragment";
     public static final String WEIGHT_DATA = "weightTimeData";
     public static final String DATE_DATA = "dateData";
-
+    private static final String DIALOG_DATE = "date";
+    private static final int REQUEST_DATE = 0;
+    private static String TAG = "WeightFragment";
     private WeightDataModel weightDataModel;
     private EditText weightInput;
     private Button acceptButton;
@@ -41,6 +44,9 @@ public class WeightFragment extends Fragment {
     private Button undoLastDeletionButton;
 
     private WeightTrackDatabaseHelper weightTrackDatabaseHelper;
+
+    private TextView dateTextView;
+    private TextView timeTextView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,9 +76,8 @@ public class WeightFragment extends Fragment {
                     weightDataModel.setWeightWithCurrentDate(Float.parseFloat(numberInText));
                     weightTrackDatabaseHelper.insertOneRecordIntoWeightTrackDatabase(weightDataModel);
                     weightTrackDatabaseHelper.clearLastMeasurementStack();
-                }
-                else {
-                    Log.i(TAG,"Weight should be number");
+                } else {
+                    Log.i(TAG, "Weight should be number");
                 }
 
             }
@@ -84,16 +89,15 @@ public class WeightFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(getActivity(),ChartActivity.class);
+                Intent i = new Intent(getActivity(), ChartActivity.class);
 
                 ArrayList<String> dateSeries = new ArrayList<String>();
                 ArrayList<Float> weight_units = new ArrayList<Float>();
 
 
-
                 SimpleDateFormat dt = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 
-                for (Map.Entry<Date,Float> entry : weightDataModel.getWeightAndTimeData().entrySet()){
+                for (Map.Entry<Date, Float> entry : weightDataModel.getWeightAndTimeData().entrySet()) {
 
                     Date date = entry.getKey();
                     dateSeries.add(dt.format(date));
@@ -103,11 +107,11 @@ public class WeightFragment extends Fragment {
 
                 }
 
-                float [] weight_measurements = ArrayUtils
+                float[] weight_measurements = ArrayUtils
                         .toPrimitive(weight_units.toArray(new Float[weight_units.size()]));
 
-                i.putExtra(WEIGHT_DATA,weight_measurements);
-                i.putExtra(DATE_DATA,dateSeries);
+                i.putExtra(WEIGHT_DATA, weight_measurements);
+                i.putExtra(DATE_DATA, dateSeries);
 
                 startActivity(i);
 
@@ -133,6 +137,30 @@ public class WeightFragment extends Fragment {
             }
         });
 
+        dateTextView = (TextView) view.findViewById(R.id.dateTextView);
+        dateTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+
+                DatePickerFragment dateDialog = new DatePickerFragment();
+                dateDialog.setTargetFragment(WeightFragment.this,REQUEST_DATE );
+
+                dateDialog.show(fm,DIALOG_DATE);
+
+            }
+        });
+
+
+        timeTextView = (TextView) view.findViewById(R.id.timeTextView);
+        timeTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         return view;
     }
 
@@ -142,7 +170,7 @@ public class WeightFragment extends Fragment {
 
     private boolean checkIfNumber(String text) {
 
-        if(TextUtils.isEmpty(text)) {
+        if (TextUtils.isEmpty(text)) {
             return false;
         }
 

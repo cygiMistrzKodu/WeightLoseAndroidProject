@@ -38,4 +38,12 @@ public  class DateStringUtility {
 
         return currentDate;
     }
+
+    public static String getCurrentDateInStringRepresentation() {
+
+        Calendar cal = Calendar.getInstance();
+        Date currentDate =  cal.getTime();
+
+        return currentDate.toString();
+    }
 }

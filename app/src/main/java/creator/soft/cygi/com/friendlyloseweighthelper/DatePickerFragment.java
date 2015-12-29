@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 
@@ -21,15 +22,22 @@ import java.util.GregorianCalendar;
 public class DatePickerFragment extends DialogFragment {
 
     public static final String EXTRA_DATE = "creator.soft.cygi.com.frendlyLoseweighthelper.date";
+    private static String TAG = "DatePickerFragment";
 
     private Date mDate;
 
     public DatePickerFragment() {
 
-        mDate = DateStringUtility.getCurrentDate();
+        String CurrentDate = DateStringUtility.getCurrentDateInStringRepresentation();
+        Log.d(TAG,"Current Date : " + CurrentDate);
+        Bundle args = new Bundle();
+        args.putSerializable(EXTRA_DATE,CurrentDate);
+        this.setArguments(args);
+
     }
 
     public static DatePickerFragment newInstance(String date) {
+
 
         Bundle args = new Bundle();
         args.putSerializable(EXTRA_DATE, date);
@@ -63,7 +71,6 @@ public class DatePickerFragment extends DialogFragment {
             @Override
             public void onDateChanged(DatePicker view, int year, int month, int day) {
 
-
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(mDate);
 
@@ -72,7 +79,7 @@ public class DatePickerFragment extends DialogFragment {
 
                 mDate = new GregorianCalendar(year, month, day, hour, minutes).getTime();
 
-                getArguments().putSerializable(EXTRA_DATE, mDate);
+                getArguments().putSerializable(EXTRA_DATE, DateStringUtility.changeToStringRepresentation(mDate));
 
             }
         });
@@ -98,7 +105,7 @@ public class DatePickerFragment extends DialogFragment {
         }
 
         Intent i = new Intent();
-        i.putExtra(EXTRA_DATE, mDate);
+        i.putExtra(EXTRA_DATE, DateStringUtility.changeToStringRepresentation(mDate));
 
         getTargetFragment().onActivityResult(getTargetRequestCode(), resultCode, i);
     }
