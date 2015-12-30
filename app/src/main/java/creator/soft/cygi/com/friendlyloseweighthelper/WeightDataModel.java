@@ -20,7 +20,7 @@ public class WeightDataModel {
     public void setWeightWithCurrentDate(Float weight){
 
 
-        Date currentDate =  DateStringUtility.getCurrentDate();
+        Date currentDate =  DateTimeStringUtility.getCurrentDate();
         timeWeightPair.put(currentDate, weight);
 
         setLatestMeasurement(weight, currentDate);
@@ -31,7 +31,7 @@ public class WeightDataModel {
 
     private void setLatestMeasurement(Float weight, Date currentDate) {
         latestWeight = weight;
-        latestDate =  DateStringUtility.changeToStringRepresentation(currentDate);
+        latestDate =  DateTimeStringUtility.changeToStringRepresentation(currentDate);
     }
 
     public Map<Date,Float> getWeightAndTimeData() {

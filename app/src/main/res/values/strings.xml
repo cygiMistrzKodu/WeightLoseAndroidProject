@@ -11,4 +11,5 @@
     <string name="modify_view_text">Back to Standard Mode</string>
     <string name="delete_last_entry_button">Delete</string>
     <string name="date_picker_title">Pick a date</string>
+    <string name="time_picker_title">Pick a time</string>
 </resources>

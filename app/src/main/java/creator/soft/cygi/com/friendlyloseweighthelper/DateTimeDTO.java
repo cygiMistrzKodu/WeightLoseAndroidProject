@@ -19,7 +19,7 @@ public class DateTimeDTO {
             return;
         }
 
-        this.date = DateStringUtility.changeToDate(date);
+        this.date = DateTimeStringUtility.changeToDate(date);
 
     }
 
@@ -29,7 +29,7 @@ public class DateTimeDTO {
     }
 
     public String getDateInString() {
-        return DateStringUtility.changeToStringRepresentation(date);
+        return DateTimeStringUtility.changeToStringRepresentation(date);
     }
 
     public void setWeight(Float weight) {
