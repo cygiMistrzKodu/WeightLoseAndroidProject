@@ -1,11 +1,8 @@
 package creator.soft.cygi.com.friendlyloseweighthelper;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -21,7 +18,6 @@ import android.widget.TextView;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -44,7 +40,7 @@ public class WeightFragment extends Fragment {
     private Button acceptButton;
 
     private Button runChartButtonTest;
-    private Button deleteLaatestEntryButton;
+    private Button deleteLatestEntryButton;
     private Button undoLastDeletionButton;
 
     private WeightTrackDatabaseHelper weightTrackDatabaseHelper;
@@ -130,8 +126,8 @@ public class WeightFragment extends Fragment {
             }
         });
 
-        deleteLaatestEntryButton = (Button) view.findViewById(R.id.deleteLatestEntryButton);
-        deleteLaatestEntryButton.setOnClickListener(new View.OnClickListener() {
+        deleteLatestEntryButton = (Button) view.findViewById(R.id.deleteLatestEntryButton);
+        deleteLatestEntryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 weightTrackDatabaseHelper.deleteLatestEntry();
@@ -147,10 +143,12 @@ public class WeightFragment extends Fragment {
 
                 FragmentManager fm = getActivity().getSupportFragmentManager();
 
-                DatePickerFragment dateDialog = new DatePickerFragment();
-                dateDialog.setTargetFragment(WeightFragment.this,REQUEST_DATE );
+            //    DatePickerFragment dateDialog = new DatePickerFragment();
+                DatePickerFragment dateDialog = DatePickerFragment.newInstance(dateTextView.getText().toString());
 
-                dateDialog.show(fm,DIALOG_DATE);
+                dateDialog.setTargetFragment(WeightFragment.this, REQUEST_DATE);
+
+                dateDialog.show(fm, DIALOG_DATE);
 
             }
         });
@@ -164,12 +162,15 @@ public class WeightFragment extends Fragment {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
 
                 TimePickerFragment dateDialog = new TimePickerFragment();
-                dateDialog.setTargetFragment(WeightFragment.this,REQUEST_TIME );
+                dateDialog.setTargetFragment(WeightFragment.this, REQUEST_TIME);
 
-                dateDialog.show(fm,DIALOG_TIME);
+                dateDialog.show(fm, DIALOG_TIME);
 
             }
         });
+
+        dateTextView.setText(DateTimeStringUtility.getCurrentFormattedDateStringRepresentation());
+        timeTextView.setText(DateTimeStringUtility.getCurrentFormattedTimeStringRepresentation(getContext()));
 
         return view;
     }
@@ -198,7 +199,7 @@ public class WeightFragment extends Fragment {
 
             String rawDate = (String) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
 
-            String formattedDate = DateTimeStringUtility.formatRawDate(rawDate);
+            String formattedDate = DateTimeStringUtility.formatStringRawDate(rawDate);
 
             dateTextView.setText(formattedDate);
 

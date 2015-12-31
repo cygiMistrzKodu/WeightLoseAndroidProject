@@ -80,7 +80,8 @@
                 android:id="@+id/dateTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="15-14-2015"
+                android:freezesText="true"
+                android:hint="pick date"
                 android:textSize="30dp"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/rectangle_border"/>
@@ -93,7 +94,8 @@
                 android:id="@+id/timeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="02:10:35"
+                android:freezesText="true"
+                android:hint="pick time"
                 android:textSize="30dp"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/rectangle_border"/>

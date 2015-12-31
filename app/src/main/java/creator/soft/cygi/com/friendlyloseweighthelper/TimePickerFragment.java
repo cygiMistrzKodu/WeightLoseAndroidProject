@@ -5,9 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
@@ -29,7 +27,7 @@ public class TimePickerFragment extends DialogFragment {
 
     public TimePickerFragment() {
 
-        String CurrentTime = DateTimeStringUtility.getCurrentDateInStringRepresentation();
+        String CurrentTime = DateTimeStringUtility.getCurrentNonFormattedDateInStringRepresentation();
         Log.d(TAG, "Constructor Current Date : " + CurrentTime);
         Bundle args = new Bundle();
         args.putSerializable(EXTRA_TIME, CurrentTime);

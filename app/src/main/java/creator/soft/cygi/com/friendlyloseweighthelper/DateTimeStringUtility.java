@@ -1,6 +1,8 @@
 package creator.soft.cygi.com.friendlyloseweighthelper;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import java.text.DateFormat;
@@ -17,21 +19,13 @@ public class DateTimeStringUtility {
 
     private static String TAG = "DateTimeStringUtility";
 
-    private static DateFormat formatDate = new SimpleDateFormat("EEE MMM d HH:mm:ss zzz yyyy", Locale.ENGLISH);
+    private static DateFormat formatRawDatePattern = new SimpleDateFormat("EEE MMM d HH:mm:ss zzz yyyy", Locale.ENGLISH);
+    private static final String dateFormatPattern = "dd-MM-yyyy";
 
 
     public static Date changeToDate(String dateInString) {
 
-        Date date = null;
-        try {
-
-            date = formatDate.parse(dateInString);
-
-            Log.d(TAG, date.toString());
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        Date date = getRawDateBaseOnDatePattern(dateInString, formatRawDatePattern);
 
         return date;
     }
@@ -49,7 +43,7 @@ public class DateTimeStringUtility {
         return currentDate;
     }
 
-    public static String getCurrentDateInStringRepresentation() {
+    public static String getCurrentNonFormattedDateInStringRepresentation() {
 
         Calendar cal = Calendar.getInstance();
         Date currentDate = cal.getTime();
@@ -57,26 +51,61 @@ public class DateTimeStringUtility {
         return currentDate.toString();
     }
 
-    public static String formatRawDate(String dateToFormat) {
+    public static String getCurrentFormattedDateStringRepresentation() {
+
+        Date date = getCurrentDate();
+        String formattedCurrentDateString = formatDate(date);
+
+        return formattedCurrentDateString;
+    }
+
+    public static String getCurrentFormattedTimeStringRepresentation(Context context) {
+
+        Date time = getCurrentDate();
+        String formattedCurrentTimeString = formatTime(context, time);
+
+        return formattedCurrentTimeString;
+    }
+
+    public static String formatStringRawDate(String dateToFormat) {
 
         Date nonFormatDate = changeToDate(dateToFormat);
-        String dateFormatPattern = "dd-MM-yyyy";
+        String formattedDateInString = formatDate(nonFormatDate);
 
-        return new SimpleDateFormat(dateFormatPattern).format(nonFormatDate);
+        return formattedDateInString;
+    }
+
+    @NonNull
+    public static String formatDate(Date Date) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormatPattern);
+        return simpleDateFormat.format(Date);
     }
 
     public static String formatRawTime(Context context, String timeToFormat) {
 
         Date nonFormatTime = changeToDate(timeToFormat);
-        String timeFormatPattern = null;
 
+        String FormattedTime = formatTime(context, nonFormatTime);
+
+        return FormattedTime;
+    }
+
+    @NonNull
+    public static String formatTime(Context context, Date time) {
+        String timeFormatPattern = getTimePattern12or24(context);
+        SimpleDateFormat simpleTimeFormat = new SimpleDateFormat(timeFormatPattern);
+        return simpleTimeFormat.format(time);
+    }
+
+    @NonNull
+    private static String getTimePattern12or24(Context context) {
+        String timeFormatPattern;
         if (is24HourFormat(context)) {
             timeFormatPattern = "HH:mm:ss";
         } else {
             timeFormatPattern = "h:mm:ss a";
         }
-
-        return new SimpleDateFormat(timeFormatPattern).format(nonFormatTime);
+        return timeFormatPattern;
     }
 
     public static boolean is24HourFormat(Context context) {
@@ -93,11 +122,35 @@ public class DateTimeStringUtility {
 
         if (is24HourFormat(context)) {
 
-            simpleDateFormat.applyPattern("dd-MM-yyyy HH:mm:ss");
+        //    simpleDateFormat.applyPattern("dd-MM-yyyy HH:mm:ss");
+            simpleDateFormat.applyPattern(dateFormatPattern+" "+"HH:mm:ss");
         } else {
 
-            simpleDateFormat.applyPattern("dd-MM-yyyy h:mm:ss a");
+            simpleDateFormat.applyPattern(dateFormatPattern+" "+"h:mm:ss a");
+//            simpleDateFormat.applyPattern("dd-MM-yyyy h:mm:ss a");
         }
         return simpleDateFormat;
     }
+
+    public static String convertToRawDate(String formattedDate) {
+
+        SimpleDateFormat formattedDatePattern = new SimpleDateFormat(dateFormatPattern);
+
+        Date rawDate = getRawDateBaseOnDatePattern(formattedDate, formattedDatePattern);
+
+        return rawDate.toString();
+    }
+
+    @Nullable
+    private static Date getRawDateBaseOnDatePattern(String formattedDate, DateFormat datePattern) {
+        Date date = null;
+        try {
+            date = datePattern.parse(formattedDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
+    }
+
+
 }

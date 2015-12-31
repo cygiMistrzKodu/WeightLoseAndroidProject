@@ -28,7 +28,7 @@ public class DatePickerFragment extends DialogFragment {
 
     public DatePickerFragment() {
 
-        String CurrentDate = DateTimeStringUtility.getCurrentDateInStringRepresentation();
+        String CurrentDate = DateTimeStringUtility.getCurrentNonFormattedDateInStringRepresentation();
         Log.d(TAG,"Current Date : " + CurrentDate);
         Bundle args = new Bundle();
         args.putSerializable(EXTRA_DATE,CurrentDate);
@@ -40,7 +40,10 @@ public class DatePickerFragment extends DialogFragment {
 
 
         Bundle args = new Bundle();
-        args.putSerializable(EXTRA_DATE, date);
+
+        String nonFormattedDate = DateTimeStringUtility.convertToRawDate(date);
+
+        args.putSerializable(EXTRA_DATE, nonFormattedDate);
 
         DatePickerFragment fragment = new DatePickerFragment();
         fragment.setArguments(args);
