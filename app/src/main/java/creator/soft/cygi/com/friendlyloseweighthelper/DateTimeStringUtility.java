@@ -21,7 +21,17 @@ public class DateTimeStringUtility {
 
     private static DateFormat formatRawDatePattern = new SimpleDateFormat("EEE MMM d HH:mm:ss zzz yyyy", Locale.ENGLISH);
     private static final String dateFormatPattern = "dd-MM-yyyy";
+    private static final String time24hourPattern = "HH:mm:ss";
+    private static final String time12hourPattern = "h:mm:ss a";
 
+
+    public static String getTime12hourPattern() {
+        return time12hourPattern;
+    }
+
+    public static String getTime24hourPattern() {
+        return time24hourPattern;
+    }
 
     public static Date changeToDate(String dateInString) {
 
@@ -98,7 +108,7 @@ public class DateTimeStringUtility {
     }
 
     @NonNull
-    private static String getTimePattern12or24(Context context) {
+    public static String getTimePattern12or24(Context context) {
         String timeFormatPattern;
         if (is24HourFormat(context)) {
             timeFormatPattern = "HH:mm:ss";
@@ -141,8 +151,17 @@ public class DateTimeStringUtility {
         return rawDate.toString();
     }
 
+    public static String convertToRawTime(Context context, String formattedTIme){
+
+        SimpleDateFormat formattedDatePattern = new SimpleDateFormat(getTimePattern12or24(context));
+
+        Date rawTime = getRawDateBaseOnDatePattern(formattedTIme,formattedDatePattern);
+
+        return rawTime.toString();
+    }
+
     @Nullable
-    private static Date getRawDateBaseOnDatePattern(String formattedDate, DateFormat datePattern) {
+    public static Date getRawDateBaseOnDatePattern(String formattedDate, DateFormat datePattern) {
         Date date = null;
         try {
             date = datePattern.parse(formattedDate);

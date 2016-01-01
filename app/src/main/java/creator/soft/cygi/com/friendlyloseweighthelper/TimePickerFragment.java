@@ -3,6 +3,7 @@ package creator.soft.cygi.com.friendlyloseweighthelper;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -36,9 +37,12 @@ public class TimePickerFragment extends DialogFragment {
     }
 
 
-    public static TimePickerFragment newInstance(String date) {
+    public static TimePickerFragment newInstance(Context context, String date) {
         Bundle args = new Bundle();
-        args.putSerializable(EXTRA_TIME, date);
+
+        String nonFormattedTime = DateTimeStringUtility.convertToRawTime(context, date);
+
+        args.putSerializable(EXTRA_TIME, nonFormattedTime);
 
         TimePickerFragment fragment = new TimePickerFragment();
         fragment.setArguments(args);

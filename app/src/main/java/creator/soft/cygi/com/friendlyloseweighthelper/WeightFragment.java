@@ -1,7 +1,10 @@
 package creator.soft.cygi.com.friendlyloseweighthelper;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -21,6 +24,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -47,6 +51,51 @@ public class WeightFragment extends Fragment {
 
     private TextView dateTextView;
     private TextView timeTextView;
+
+    private static IntentFilter intentFilter;
+
+    static {
+        intentFilter = new IntentFilter();
+        intentFilter.addAction(Intent.ACTION_TIME_CHANGED);
+    }
+
+    private final BroadcastReceiver timeChangeReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            final String action = intent.getAction();
+
+            if(action.equals(Intent.ACTION_TIME_CHANGED)) {
+
+                String Time12HourPattern = DateTimeStringUtility.getTime12hourPattern();
+                String Time24HourPattern = DateTimeStringUtility.getTime24hourPattern();
+                String currentTime = timeTextView.getText().toString();  // starty format jeszcze
+
+                if (DateTimeStringUtility.is24HourFormat(getContext())){    //TODO Need to refactor this hard
+
+
+                    SimpleDateFormat time12hourSimpleDateFormat = new SimpleDateFormat(Time12HourPattern);
+                    Date rawTime = DateTimeStringUtility.getRawDateBaseOnDatePattern(currentTime,time12hourSimpleDateFormat);
+
+                    String formatted24HourTime = DateTimeStringUtility.formatTime(getContext(),rawTime);
+
+                    timeTextView.setText(formatted24HourTime);
+
+                }else {
+
+                    SimpleDateFormat time24hourSimpleDateFormat = new SimpleDateFormat(Time24HourPattern);
+                    Date rawTime = DateTimeStringUtility.getRawDateBaseOnDatePattern(currentTime,time24hourSimpleDateFormat);
+
+                    String formatted12HourTime  = DateTimeStringUtility.formatTime(getContext(),rawTime);
+                    timeTextView.setText(formatted12HourTime);
+                }
+
+
+                Log.i(TAG, "Something change");
+            }
+
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -143,7 +192,6 @@ public class WeightFragment extends Fragment {
 
                 FragmentManager fm = getActivity().getSupportFragmentManager();
 
-            //    DatePickerFragment dateDialog = new DatePickerFragment();
                 DatePickerFragment dateDialog = DatePickerFragment.newInstance(dateTextView.getText().toString());
 
                 dateDialog.setTargetFragment(WeightFragment.this, REQUEST_DATE);
@@ -161,7 +209,10 @@ public class WeightFragment extends Fragment {
 
                 FragmentManager fm = getActivity().getSupportFragmentManager();
 
-                TimePickerFragment dateDialog = new TimePickerFragment();
+//                TimePickerFragment dateDialog = new TimePickerFragment();
+//
+                TimePickerFragment dateDialog = TimePickerFragment.newInstance(getContext(), timeTextView.getText().toString());
+
                 dateDialog.setTargetFragment(WeightFragment.this, REQUEST_TIME);
 
                 dateDialog.show(fm, DIALOG_TIME);
@@ -211,5 +262,17 @@ public class WeightFragment extends Fragment {
             String formattedTime = DateTimeStringUtility.formatRawTime(getContext(),rawTime);
             timeTextView.setText(formattedTime);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().registerReceiver(timeChangeReceiver,intentFilter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(timeChangeReceiver);
     }
 }
