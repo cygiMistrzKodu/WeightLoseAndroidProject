@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -70,6 +71,7 @@ public class WeightFragment extends Fragment {
 
         }
     };
+    private CheckBox autoCheckBox;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,23 +88,13 @@ public class WeightFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.weight_input_view, null);
 
-
         weightInput = (EditText) view.findViewById(R.id.inputWeightField);
+
         acceptButton = (Button) view.findViewById(R.id.acceptButton);
         acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (checkIfNumber(weightInput.getText().toString())) {
-
-                    String numberInText = weightInput.getText().toString();
-                    weightDataModel.setWeightWithCurrentDate(Float.parseFloat(numberInText));
-                    weightTrackDatabaseHelper.insertOneRecordIntoWeightTrackDatabase(weightDataModel);
-                    weightTrackDatabaseHelper.clearLastMeasurementStack();
-                } else {
-                    Log.i(TAG, "Weight should be number");
-                }
-
+                processUserMeasurementInput();
             }
 
         });
@@ -183,8 +175,6 @@ public class WeightFragment extends Fragment {
 
                 FragmentManager fm = getActivity().getSupportFragmentManager();
 
-//                TimePickerFragment dateDialog = new TimePickerFragment();
-//
                 TimePickerFragment dateDialog = TimePickerFragment.newInstance(getContext(), timeTextView.getText().toString());
 
                 dateDialog.setTargetFragment(WeightFragment.this, REQUEST_TIME);
@@ -197,7 +187,67 @@ public class WeightFragment extends Fragment {
         dateTextView.setText(DateTimeStringUtility.getCurrentFormattedDateStringRepresentation());
         timeTextView.setText(DateTimeStringUtility.getCurrentFormattedTimeStringRepresentation(getContext()));
 
+        autoCheckBox = (CheckBox) view.findViewById(R.id.autoCheckBox);
+        autoCheckBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (isDateGeneratedAutomatically()) {
+                    dateTextView.setEnabled(false);
+                    timeTextView.setEnabled(false);
+                } else {
+                    dateTextView.setEnabled(true);
+                    timeTextView.setEnabled(true);
+                }
+            }
+        });
+
         return view;
+    }
+
+    private void processUserMeasurementInput() {
+        if (checkIfNumber(weightInput.getText().toString())) {
+
+            String numberInText = weightInput.getText().toString();
+
+            if (isDateGeneratedAutomatically()) {
+                weightDataModel.setWeightWithCurrentDate(Float.parseFloat(numberInText));
+            } else {
+                prepareDataToSave(numberInText);
+            }
+
+            saveData();
+            clearAllValuesInUndoStack();
+        } else {
+            Log.i(TAG, "Weight should be number");
+        }
+    }
+
+    private boolean isDateGeneratedAutomatically() {
+        return autoCheckBox.isChecked();
+    }
+
+    private void prepareDataToSave(String numberInText) {
+
+        DateTimeDTO dateTimeDTO = new DateTimeDTO();
+
+        String time = timeTextView.getText().toString();
+        String date = dateTextView.getText().toString();
+
+        String measurementDate = DateTimeStringUtility.combineTwoDates(getContext(), date, time);
+
+        dateTimeDTO.setWeight(Float.parseFloat(numberInText));
+        dateTimeDTO.setDate(measurementDate);
+
+        weightDataModel.setTimeAndDate(dateTimeDTO);
+    }
+
+    private void saveData() {
+        weightTrackDatabaseHelper.insertOneRecordIntoWeightTrackDatabase(weightDataModel);
+    }
+
+    private void clearAllValuesInUndoStack() {
+        weightTrackDatabaseHelper.clearLastMeasurementStack();
     }
 
     private void updateWeightDataModel() {
@@ -244,9 +294,12 @@ public class WeightFragment extends Fragment {
         getActivity().registerReceiver(timeChangeReceiver, intentFilter);
     }
 
+
     @Override
     public void onDestroy() {
         super.onDestroy();
         getActivity().unregisterReceiver(timeChangeReceiver);
     }
+
+
 }

@@ -185,4 +185,33 @@ public class DateTimeStringUtility {
     }
 
 
+    public static String combineTwoDates(Context context, String date, String time) {
+
+        String dateRawString = convertToRawDate(date);
+        String timeRawString = convertToRawTime(context, time);
+
+        Log.i(TAG," date raw Stamp : "+ dateRawString);
+        Log.i(TAG,"time raw Stamp:  "+ timeRawString);
+
+        Date dateRaw = changeToDate(dateRawString);
+        Date timeRaw = changeToDate(timeRawString);
+
+        Calendar dateRawCalendar = Calendar.getInstance();
+        dateRawCalendar.setTime(dateRaw);
+
+        Calendar timeRawCalendar = Calendar.getInstance();
+        timeRawCalendar.setTime(timeRaw);
+
+        dateRawCalendar.set(Calendar.HOUR_OF_DAY, timeRawCalendar.get(Calendar.HOUR_OF_DAY));
+        dateRawCalendar.set(Calendar.MINUTE,timeRawCalendar.get(Calendar.MINUTE));
+        dateRawCalendar.set(Calendar.SECOND,timeRawCalendar.get(Calendar.SECOND));
+
+        Date dateAndTimeCombine = dateRawCalendar.getTime();
+
+        Log.i(TAG, "Combine Dates: " + dateAndTimeCombine.toString());
+
+
+
+        return changeToStringRepresentation(dateAndTimeCombine);
+    }
 }

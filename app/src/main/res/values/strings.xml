@@ -12,4 +12,5 @@
     <string name="delete_last_entry_button">Delete</string>
     <string name="date_picker_title">Pick a date</string>
     <string name="time_picker_title">Pick a time</string>
+    <string name="auto_checkbox_text">Auto</string>
 </resources>
