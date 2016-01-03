@@ -17,21 +17,11 @@ import java.util.Locale;
  */
 public class DateTimeStringUtility {
 
-    private static String TAG = "DateTimeStringUtility";
-
-    private static DateFormat formatRawDatePattern = new SimpleDateFormat("EEE MMM d HH:mm:ss zzz yyyy", Locale.ENGLISH);
     private static final String dateFormatPattern = "dd-MM-yyyy";
     private static final String time24hourPattern = "HH:mm:ss";
     private static final String time12hourPattern = "h:mm:ss a";
-
-
-    public static String getTime12hourPattern() {
-        return time12hourPattern;
-    }
-
-    public static String getTime24hourPattern() {
-        return time24hourPattern;
-    }
+    private static String TAG = "DateTimeStringUtility";
+    private static DateFormat formatRawDatePattern = new SimpleDateFormat("EEE MMM d HH:mm:ss zzz yyyy", Locale.ENGLISH);
 
     public static Date changeToDate(String dateInString) {
 
@@ -132,12 +122,11 @@ public class DateTimeStringUtility {
 
         if (is24HourFormat(context)) {
 
-        //    simpleDateFormat.applyPattern("dd-MM-yyyy HH:mm:ss");
-            simpleDateFormat.applyPattern(dateFormatPattern+" "+"HH:mm:ss");
+
+            simpleDateFormat.applyPattern(dateFormatPattern + " " + time24hourPattern);
         } else {
 
-            simpleDateFormat.applyPattern(dateFormatPattern+" "+"h:mm:ss a");
-//            simpleDateFormat.applyPattern("dd-MM-yyyy h:mm:ss a");
+            simpleDateFormat.applyPattern(dateFormatPattern + " " + time12hourPattern);
         }
         return simpleDateFormat;
     }
@@ -151,17 +140,17 @@ public class DateTimeStringUtility {
         return rawDate.toString();
     }
 
-    public static String convertToRawTime(Context context, String formattedTIme){
+    public static String convertToRawTime(Context context, String formattedTIme) {
 
         SimpleDateFormat formattedDatePattern = new SimpleDateFormat(getTimePattern12or24(context));
 
-        Date rawTime = getRawDateBaseOnDatePattern(formattedTIme,formattedDatePattern);
+        Date rawTime = getRawDateBaseOnDatePattern(formattedTIme, formattedDatePattern);
 
         return rawTime.toString();
     }
 
     @Nullable
-    public static Date getRawDateBaseOnDatePattern(String formattedDate, DateFormat datePattern) {
+    private static Date getRawDateBaseOnDatePattern(String formattedDate, DateFormat datePattern) {
         Date date = null;
         try {
             date = datePattern.parse(formattedDate);
@@ -169,6 +158,30 @@ public class DateTimeStringUtility {
             e.printStackTrace();
         }
         return date;
+    }
+
+    public static String convertTimeBaseOnDeviceFormat12or24(Context context, String currentTime) {
+
+        if (is24HourFormat(context)) {
+
+            String formatted24HourTime = performFormattingOperation(context, currentTime, time12hourPattern);
+            return formatted24HourTime;
+
+        } else {
+
+            String formatted12HourTime = performFormattingOperation(context, currentTime, time24hourPattern);
+            return formatted12HourTime;
+        }
+    }
+
+    @NonNull
+    private static String performFormattingOperation(Context context, String currentTime, String formattingTimePattern) {
+
+        SimpleDateFormat timeSimpleDateFormat = new SimpleDateFormat(formattingTimePattern);
+        Date rawTime = getRawDateBaseOnDatePattern(currentTime, timeSimpleDateFormat);
+        String formatted24or12HourTime = DateTimeStringUtility.formatTime(context, rawTime);
+
+        return formatted24or12HourTime;
     }
 
 

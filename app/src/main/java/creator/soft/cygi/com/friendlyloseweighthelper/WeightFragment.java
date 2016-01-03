@@ -24,7 +24,6 @@ import org.apache.commons.lang3.math.NumberUtils;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -37,20 +36,8 @@ public class WeightFragment extends Fragment {
     private static final String DIALOG_DATE = "date";
     private static final int REQUEST_DATE = 0;
     private static final int REQUEST_TIME = 1;
-    private static final String DIALOG_TIME = "time" ;
+    private static final String DIALOG_TIME = "time";
     private static String TAG = "WeightFragment";
-    private WeightDataModel weightDataModel;
-    private EditText weightInput;
-    private Button acceptButton;
-
-    private Button runChartButtonTest;
-    private Button deleteLatestEntryButton;
-    private Button undoLastDeletionButton;
-
-    private WeightTrackDatabaseHelper weightTrackDatabaseHelper;
-
-    private TextView dateTextView;
-    private TextView timeTextView;
 
     private static IntentFilter intentFilter;
 
@@ -59,39 +46,26 @@ public class WeightFragment extends Fragment {
         intentFilter.addAction(Intent.ACTION_TIME_CHANGED);
     }
 
+    private WeightDataModel weightDataModel;
+    private EditText weightInput;
+    private Button acceptButton;
+    private Button runChartButtonTest;
+    private Button deleteLatestEntryButton;
+    private Button undoLastDeletionButton;
+    private WeightTrackDatabaseHelper weightTrackDatabaseHelper;
+    private TextView dateTextView;
+    private TextView timeTextView;
     private final BroadcastReceiver timeChangeReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
 
             final String action = intent.getAction();
 
-            if(action.equals(Intent.ACTION_TIME_CHANGED)) {
+            if (action.equals(Intent.ACTION_TIME_CHANGED)) {
 
-                String Time12HourPattern = DateTimeStringUtility.getTime12hourPattern();
-                String Time24HourPattern = DateTimeStringUtility.getTime24hourPattern();
-                String currentTime = timeTextView.getText().toString();  // starty format jeszcze
-
-                if (DateTimeStringUtility.is24HourFormat(getContext())){    //TODO Need to refactor this hard
-
-
-                    SimpleDateFormat time12hourSimpleDateFormat = new SimpleDateFormat(Time12HourPattern);
-                    Date rawTime = DateTimeStringUtility.getRawDateBaseOnDatePattern(currentTime,time12hourSimpleDateFormat);
-
-                    String formatted24HourTime = DateTimeStringUtility.formatTime(getContext(),rawTime);
-
-                    timeTextView.setText(formatted24HourTime);
-
-                }else {
-
-                    SimpleDateFormat time24hourSimpleDateFormat = new SimpleDateFormat(Time24HourPattern);
-                    Date rawTime = DateTimeStringUtility.getRawDateBaseOnDatePattern(currentTime,time24hourSimpleDateFormat);
-
-                    String formatted12HourTime  = DateTimeStringUtility.formatTime(getContext(),rawTime);
-                    timeTextView.setText(formatted12HourTime);
-                }
-
-
-                Log.i(TAG, "Something change");
+                String currentTime = timeTextView.getText().toString();
+                String formattedTime12Or24 = DateTimeStringUtility.convertTimeBaseOnDeviceFormat12or24(getContext(), currentTime);
+                timeTextView.setText(formattedTime12Or24);
             }
 
         }
@@ -242,11 +216,11 @@ public class WeightFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if(resultCode  != Activity.RESULT_OK){
+        if (resultCode != Activity.RESULT_OK) {
             return;
         }
 
-        if(requestCode == REQUEST_DATE) {
+        if (requestCode == REQUEST_DATE) {
 
             String rawDate = (String) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
 
@@ -256,10 +230,10 @@ public class WeightFragment extends Fragment {
 
         }
 
-        if(requestCode == REQUEST_TIME){
+        if (requestCode == REQUEST_TIME) {
 
             String rawTime = (String) data.getSerializableExtra(TimePickerFragment.EXTRA_TIME);
-            String formattedTime = DateTimeStringUtility.formatRawTime(getContext(),rawTime);
+            String formattedTime = DateTimeStringUtility.formatRawTime(getContext(), rawTime);
             timeTextView.setText(formattedTime);
         }
     }
@@ -267,7 +241,7 @@ public class WeightFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().registerReceiver(timeChangeReceiver,intentFilter);
+        getActivity().registerReceiver(timeChangeReceiver, intentFilter);
     }
 
     @Override
