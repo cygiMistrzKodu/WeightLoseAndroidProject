@@ -106,6 +106,7 @@
 
             <CheckBox
                 android:id="@+id/autoCheckBox"
+                android:saveEnabled="false"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/auto_checkbox_text"

@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -34,10 +35,12 @@ public class WeightFragment extends Fragment {
 
     public static final String WEIGHT_DATA = "weightTimeData";
     public static final String DATE_DATA = "dateData";
+    private static final String AUTO_CHECK_BOX = "autoCheckBoxState";
     private static final String DIALOG_DATE = "date";
     private static final int REQUEST_DATE = 0;
     private static final int REQUEST_TIME = 1;
     private static final String DIALOG_TIME = "time";
+    private static final String UNDO_LAST_DELETION_BUTTON_STATE = "undoLastDeletionButtonState" ;
     private static String TAG = "WeightFragment";
 
     private static IntentFilter intentFilter;
@@ -72,14 +75,23 @@ public class WeightFragment extends Fragment {
         }
     };
     private CheckBox autoCheckBox;
+    private boolean autoCheckBoxStateBeforeShutDown;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setRetainInstance(true);
         weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(getContext());
+        restoreApplicationState();
+
         updateWeightDataModel();
 
+    }
+
+    private void restoreApplicationState() {
+        SharedPreferences preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        autoCheckBoxStateBeforeShutDown = preferences.getBoolean(AUTO_CHECK_BOX,false);
     }
 
     @Nullable
@@ -133,10 +145,16 @@ public class WeightFragment extends Fragment {
         });
 
         undoLastDeletionButton = (Button) view.findViewById(R.id.undoLastDeletionButton);
+        undoLastDeletionButton.setEnabled(false);
         undoLastDeletionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                weightTrackDatabaseHelper.undoDeleteLastMeasurement();
+             boolean isUndoStackEmpty =  weightTrackDatabaseHelper.undoDeleteLastMeasurement();
+                if(isUndoStackEmpty){
+                    undoLastDeletionButton.setEnabled(false);
+                } else {
+                    undoLastDeletionButton.setEnabled(true);
+                }
                 updateWeightDataModel();
             }
         });
@@ -146,6 +164,7 @@ public class WeightFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 weightTrackDatabaseHelper.deleteLatestEntry();
+                undoLastDeletionButton.setEnabled(true);
                 updateWeightDataModel();
 
             }
@@ -192,17 +211,32 @@ public class WeightFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if (isDateGeneratedAutomatically()) {
-                    dateTextView.setEnabled(false);
-                    timeTextView.setEnabled(false);
-                } else {
-                    dateTextView.setEnabled(true);
-                    timeTextView.setEnabled(true);
-                }
+                ifDateAndTimeIsGenerateAutomaticallyDisableDateAndTimeTextView();
             }
         });
 
+        if(savedInstanceState != null) {
+            autoCheckBox.setChecked(savedInstanceState.getBoolean(AUTO_CHECK_BOX));
+            undoLastDeletionButton.setEnabled(savedInstanceState.getBoolean(UNDO_LAST_DELETION_BUTTON_STATE));
+        }else {
+
+            autoCheckBox.setChecked(autoCheckBoxStateBeforeShutDown);
+        }
+
+
+        ifDateAndTimeIsGenerateAutomaticallyDisableDateAndTimeTextView();
+
         return view;
+    }
+
+    private void ifDateAndTimeIsGenerateAutomaticallyDisableDateAndTimeTextView() {
+        if (isDateGeneratedAutomatically()) {
+            dateTextView.setEnabled(false);
+            timeTextView.setEnabled(false);
+        } else {
+            dateTextView.setEnabled(true);
+            timeTextView.setEnabled(true);
+        }
     }
 
     private void processUserMeasurementInput() {
@@ -289,16 +323,38 @@ public class WeightFragment extends Fragment {
     }
 
     @Override
+    public void onSaveInstanceState(Bundle saveInstanceState) {
+        super.onSaveInstanceState(saveInstanceState);
+
+        saveInstanceState.putBoolean(AUTO_CHECK_BOX, autoCheckBox.isChecked());
+        saveInstanceState.putBoolean(UNDO_LAST_DELETION_BUTTON_STATE,undoLastDeletionButton.isEnabled());
+
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         getActivity().registerReceiver(timeChangeReceiver, intentFilter);
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        saveApplicationState();
+    }
+
+    private void saveApplicationState() {
+        SharedPreferences.Editor editor = getActivity().getPreferences(Context.MODE_PRIVATE).edit();
+        editor.putBoolean(AUTO_CHECK_BOX,autoCheckBox.isChecked());
+        editor.apply();
+        Log.i(TAG, "Zapisałem stan przycisku");
+    }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         getActivity().unregisterReceiver(timeChangeReceiver);
+
     }
 
 

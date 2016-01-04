@@ -236,12 +236,12 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public void undoDeleteLastMeasurement() {
+    public boolean undoDeleteLastMeasurement() {
 
 
         if (lastMeasurementDeletionStack.empty()) {
             Log.d(TAG, "lastMeasurementDeletionStack is empty");
-            return;
+            return true;
         }
 
         WeightDataModel weightDataModel = new WeightDataModel();
@@ -251,7 +251,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper {
         weightDataModel.setTimeAndDate(dateTimeDTO);
         insertOneRecordIntoWeightTrackDatabase(weightDataModel);
 
-
+        return false;
     }
 
     private void saveLastDeletedData() {
