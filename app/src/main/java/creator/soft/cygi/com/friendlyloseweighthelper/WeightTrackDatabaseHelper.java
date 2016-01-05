@@ -11,12 +11,14 @@ import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 /**
  * Created by CygiMasterProgrammer on 2015-12-14.
  */
-public class WeightTrackDatabaseHelper extends SQLiteOpenHelper {
+public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements DatabaseNotificationSubject {
 
     private static final String TAG = "WeightTrackDatabaseH";
 
@@ -35,6 +37,8 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper {
     Stack<DateTimeDTO> lastMeasurementDeletionStack = new Stack<DateTimeDTO>();
     private String currentUser = "JacekCygi";   // just for testing Will be more softicated latter
     private int existingUserID;
+
+    private List<NotificationObserver> notificationObservers = new ArrayList<NotificationObserver>();
 
 
     WeightTrackDatabaseHelper(Context context) {
@@ -236,12 +240,13 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public boolean undoDeleteLastMeasurement() {
+    public void undoDeleteLastMeasurement() {
 
 
         if (lastMeasurementDeletionStack.empty()) {
             Log.d(TAG, "lastMeasurementDeletionStack is empty");
-            return true;
+            notifyNoMeasurementToUndo();
+            return;
         }
 
         WeightDataModel weightDataModel = new WeightDataModel();
@@ -250,25 +255,25 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper {
 
         weightDataModel.setTimeAndDate(dateTimeDTO);
         insertOneRecordIntoWeightTrackDatabase(weightDataModel);
+        notifyDatabaseNotEmpty();
 
-        return false;
+      //  return false;
     }
 
     private void saveLastDeletedData() {
-
-
 
         Cursor latestMeasurementCursor = getLatestMeasurementCursor();
 
         if (latestMeasurementCursor.getCount() <= 0)
         {
+            notifyDatabaseIsEmpty();
             return;
         }
 
         String date = latestMeasurementCursor.getString(latestMeasurementCursor.getColumnIndex(COLUMN_MEASUREMENT_DATA_DATE_TIME));
         Float weight = latestMeasurementCursor.getFloat(latestMeasurementCursor.getColumnIndex(COLUMN_MEASUREMENT_DATA_WEIGHT));
 
-        Log.d(TAG, "Get Last Date : "+ date +" Weight: "+weight);
+        Log.d(TAG, "Get Last Date : " + date + " Weight: " + weight);
 
         DateTimeDTO dateTimeDTO = new DateTimeDTO();
         dateTimeDTO.setDate(date);
@@ -276,11 +281,15 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper {
 
         lastMeasurementDeletionStack.push(dateTimeDTO);
 
-            Log.d(TAG, "Push on stack  Date: " + dateTimeDTO.getDateInString() + " weight " + dateTimeDTO.getWeight());
+        Log.d(TAG, "Push on stack  Date: " + dateTimeDTO.getDateInString() + " weight " + dateTimeDTO.getWeight());
+
+        notifyUndoStackIsNotEmpty();
 
     }
 
-            private Cursor getLatestMeasurementCursor () {
+
+
+    private Cursor getLatestMeasurementCursor () {
             int idCurrentUser = getExistingUserID();
             Cursor latestMeasurementCursor = getReadableDatabase().query(TABLE_MEASUREMENT_DATA,
                     new String[]{COLUMN_MEASUREMENT_DATA_MEASUREMENT_ID, COLUMN_MEASUREMENT_DATA_DATE_TIME,
@@ -293,6 +302,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper {
 
         public void clearLastMeasurementStack () {
             lastMeasurementDeletionStack.clear();
+            notifyNoMeasurementToUndo();
             Log.d(TAG, "stack deleted");
         }
 
@@ -311,8 +321,63 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper {
 
         String [] whereArgs  = new String[]{String.valueOf(idCurrentUser),"11"};
 
-        db.update(TABLE_MEASUREMENT_DATA,insertValues,whereStatement,whereArgs);
+        db.update(TABLE_MEASUREMENT_DATA, insertValues, whereStatement, whereArgs);
 
     }
 
+    @Override
+    public void addNotificationObserver(NotificationObserver notificationObserver) {
+        notificationObservers.add(notificationObserver);
+
     }
+
+    @Override
+    public void removeNotificationObserver(NotificationObserver notificationObserver) {
+        notificationObservers.remove(notificationObserver);
+    }
+
+    @Override
+    public void notifyDatabaseIsEmpty() {
+
+        notifyDatabaseObserver("DatabaseEmpty");
+    }
+
+    @Override
+    public void notifyDatabaseNotEmpty() {
+
+        notifyDatabaseObserver("DatabaseNotEmpty");
+    }
+
+    @Override
+    public void notifyNoMeasurementToUndo() {
+       notifyDatabaseObserver("NoMeasurementToUndo");
+    }
+
+    @Override
+    public void notifyUndoStackIsNotEmpty() {
+        notifyDatabaseObserver("UndoStackIsNotEmpty");
+    }
+
+    private void notifyDatabaseObserver(String observersType){
+
+        for (NotificationObserver notificationObserver : notificationObservers){
+
+           if(observersType.equals("DatabaseEmpty")) {
+               notificationObserver.onDatabaseIsEmpty();
+           }
+
+            if(observersType.equals("DatabaseNotEmpty")){
+                notificationObserver.onDatabaseNotEmpty();
+            }
+
+            if(observersType.equals("NoMeasurementToUndo")){
+                notificationObserver.onNoMeasurementToUndo();
+            }
+
+            if(observersType.equals("UndoStackIsNotEmpty")){
+                notificationObserver.onUndoStackNotEmpty();
+            }
+        }
+    }
+
+}

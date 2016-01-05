@@ -31,7 +31,7 @@ import java.util.Map;
 /**
  * Created by CygiMasterProgrammer on 2015-12-09.
  */
-public class WeightFragment extends Fragment {
+public class WeightFragment extends Fragment implements NotificationObserver {
 
     public static final String WEIGHT_DATA = "weightTimeData";
     public static final String DATE_DATA = "dateData";
@@ -57,6 +57,7 @@ public class WeightFragment extends Fragment {
     private Button deleteLatestEntryButton;
     private Button undoLastDeletionButton;
     private WeightTrackDatabaseHelper weightTrackDatabaseHelper;
+    private DatabaseNotificationSubject databaseNotificationSubject;
     private TextView dateTextView;
     private TextView timeTextView;
     private final BroadcastReceiver timeChangeReceiver = new BroadcastReceiver() {
@@ -83,6 +84,8 @@ public class WeightFragment extends Fragment {
 
         setRetainInstance(true);
         weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(getContext());
+        databaseNotificationSubject = weightTrackDatabaseHelper;
+        databaseNotificationSubject.addNotificationObserver(this);
         restoreApplicationState();
 
         updateWeightDataModel();
@@ -149,12 +152,9 @@ public class WeightFragment extends Fragment {
         undoLastDeletionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             boolean isUndoStackEmpty =  weightTrackDatabaseHelper.undoDeleteLastMeasurement();
-                if(isUndoStackEmpty){
-                    undoLastDeletionButton.setEnabled(false);
-                } else {
-                    undoLastDeletionButton.setEnabled(true);
-                }
+
+                weightTrackDatabaseHelper.undoDeleteLastMeasurement();
+
                 updateWeightDataModel();
             }
         });
@@ -164,7 +164,6 @@ public class WeightFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 weightTrackDatabaseHelper.deleteLatestEntry();
-                undoLastDeletionButton.setEnabled(true);
                 updateWeightDataModel();
 
             }
@@ -358,4 +357,26 @@ public class WeightFragment extends Fragment {
     }
 
 
+    @Override
+    public void onDatabaseIsEmpty() {
+
+        deleteLatestEntryButton.setEnabled(false);
+
+    }
+
+    @Override
+    public void onDatabaseNotEmpty() {
+        deleteLatestEntryButton.setEnabled(true);
+    }
+
+    @Override
+    public void onNoMeasurementToUndo() {
+        undoLastDeletionButton.setEnabled(false);
+        Log.i(TAG, "Stack is empty one more time hi hi");
+    }
+
+    @Override
+    public void onUndoStackNotEmpty() {
+        undoLastDeletionButton.setEnabled(true);
+    }
 }
