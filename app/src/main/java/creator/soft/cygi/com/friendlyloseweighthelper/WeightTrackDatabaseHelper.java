@@ -283,6 +283,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
         Log.d(TAG, "Push on stack  Date: " + dateTimeDTO.getDateInString() + " weight " + dateTimeDTO.getWeight());
 
+        notifyMeasurementDeletion(dateTimeDTO);
         notifyUndoStackIsNotEmpty();
 
     }
@@ -377,7 +378,17 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
             if(observersType.equals("UndoStackIsNotEmpty")){
                 notificationObserver.onUndoStackNotEmpty();
             }
+
         }
+    }
+
+    @Override
+    public void notifyMeasurementDeletion(DateTimeDTO dateTimeDTO) {
+
+        for (NotificationObserver notificationObserver : notificationObservers){
+            notificationObserver.onMeasurementDeletion(dateTimeDTO);
+        }
+
     }
 
 }

@@ -10,6 +10,8 @@ public class DateTimeDTO {
 
     private static final String TAG = "DateTimeDTO";
     Date date;
+    String formattedTime;
+    String formattedDate;
     Float weight;
 
     public void setDate(String date) {

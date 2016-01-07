@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -70,8 +71,14 @@ public class TimePickerFragment extends DialogFragment {
         TimePicker timePicker = (TimePicker) timePickierView.findViewById(R.id.dialog_time_picker);
 
 
-        timePicker.setHour(hour);
-        timePicker.setMinute(minutes);
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            timePicker.setCurrentHour(hour);
+            timePicker.setCurrentMinute(minutes);
+        }else {
+
+            timePicker.setHour(hour);
+            timePicker.setMinute(minutes);
+        }
 
         if (DateTimeStringUtility.is24HourFormat(getContext())) {
             timePicker.setIs24HourView(true);

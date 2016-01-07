@@ -326,7 +326,7 @@ public class WeightFragment extends Fragment implements NotificationObserver {
         super.onSaveInstanceState(saveInstanceState);
 
         saveInstanceState.putBoolean(AUTO_CHECK_BOX, autoCheckBox.isChecked());
-        saveInstanceState.putBoolean(UNDO_LAST_DELETION_BUTTON_STATE,undoLastDeletionButton.isEnabled());
+        saveInstanceState.putBoolean(UNDO_LAST_DELETION_BUTTON_STATE, undoLastDeletionButton.isEnabled());
 
     }
 
@@ -379,4 +379,15 @@ public class WeightFragment extends Fragment implements NotificationObserver {
     public void onUndoStackNotEmpty() {
         undoLastDeletionButton.setEnabled(true);
     }
+
+    @Override
+    public void onMeasurementDeletion(DateTimeDTO dateTimeDTO) {
+
+       Float weight =  dateTimeDTO.getWeight();
+
+       weightInput.setText(weight.toString());
+
+    }
+
+
 }
