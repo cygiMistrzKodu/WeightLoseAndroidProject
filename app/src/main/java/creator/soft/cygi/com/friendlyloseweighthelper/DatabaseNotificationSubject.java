@@ -16,5 +16,6 @@ public interface DatabaseNotificationSubject {
     public void notifyNoMeasurementToUndo();
     public void notifyUndoStackIsNotEmpty();
     public void notifyMeasurementDeletion(DateTimeDTO dateTimeDTO);
+    public void notifyMeasurementUndoDeletion(DateTimeDTO dateTimeDTO);
 
 }

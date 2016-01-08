@@ -1,18 +1,17 @@
 package creator.soft.cygi.com.friendlyloseweighthelper;
 
+import android.content.Context;
+
 import java.util.Date;
 
 /**
  * Created by CygiMasterProgrammer on 2015-12-20.
  */
 public class DateTimeDTO {
-
-
     private static final String TAG = "DateTimeDTO";
     Date date;
-    String formattedTime;
-    String formattedDate;
     Float weight;
+    Context context;
 
     public void setDate(String date) {
 
@@ -30,7 +29,7 @@ public class DateTimeDTO {
     return date;
     }
 
-    public String getDateInString() {
+    public String getDateWithoutFormatting() {
         return DateTimeStringUtility.changeToStringRepresentation(date);
     }
 
@@ -40,6 +39,20 @@ public class DateTimeDTO {
 
     public Float getWeight(){
         return weight;
+    }
+
+    public String getFormattedDate() {
+
+      return DateTimeStringUtility.formatDate(date);
+    }
+
+    public String getFormattedTime() {
+
+      return  DateTimeStringUtility.formatTime(context,date);
+    }
+
+    public void setAndroidContext(Context context){
+        this.context = context;
     }
 
 }

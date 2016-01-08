@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -40,7 +41,7 @@ public class WeightFragment extends Fragment implements NotificationObserver {
     private static final int REQUEST_DATE = 0;
     private static final int REQUEST_TIME = 1;
     private static final String DIALOG_TIME = "time";
-    private static final String UNDO_LAST_DELETION_BUTTON_STATE = "undoLastDeletionButtonState" ;
+    private static final String UNDO_LAST_DELETION_BUTTON_STATE = "undoLastDeletionButtonState";
     private static String TAG = "WeightFragment";
 
     private static IntentFilter intentFilter;
@@ -77,10 +78,14 @@ public class WeightFragment extends Fragment implements NotificationObserver {
     };
     private CheckBox autoCheckBox;
     private boolean autoCheckBoxStateBeforeShutDown;
+    private ToggleButton modifyModeToggleButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Log.d(TAG,"ON CREATE URUCHOMILEM SIE BLA BLA ");
+
 
         setRetainInstance(true);
         weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(getContext());
@@ -94,14 +99,16 @@ public class WeightFragment extends Fragment implements NotificationObserver {
 
     private void restoreApplicationState() {
         SharedPreferences preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
-        autoCheckBoxStateBeforeShutDown = preferences.getBoolean(AUTO_CHECK_BOX,false);
+        autoCheckBoxStateBeforeShutDown = preferences.getBoolean(AUTO_CHECK_BOX, false);
     }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, final Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.weight_input_view, null);
+        Log.d(TAG,"ON CREATE VIEW URUCHOMILEM SIE BLA BLA ");
+
+        final View view = inflater.inflate(R.layout.weight_input_view, null);
 
         weightInput = (EditText) view.findViewById(R.id.inputWeightField);
 
@@ -214,16 +221,67 @@ public class WeightFragment extends Fragment implements NotificationObserver {
             }
         });
 
-        if(savedInstanceState != null) {
+        if (savedInstanceState != null) {
             autoCheckBox.setChecked(savedInstanceState.getBoolean(AUTO_CHECK_BOX));
             undoLastDeletionButton.setEnabled(savedInstanceState.getBoolean(UNDO_LAST_DELETION_BUTTON_STATE));
-        }else {
+        } else {
 
             autoCheckBox.setChecked(autoCheckBoxStateBeforeShutDown);
         }
 
 
         ifDateAndTimeIsGenerateAutomaticallyDisableDateAndTimeTextView();
+
+
+        modifyModeToggleButton = (ToggleButton) view.findViewById(R.id.modifyViewButton);
+        modifyModeToggleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(modifyModeToggleButton.isChecked()){
+
+//                    Log.d(TAG,"Modyfi button is ON");
+//
+//                    View layoutToReplace = view.findViewById(R.id.reaplyacableLayout);
+//                    ViewGroup parent = (ViewGroup) layoutToReplace.getParent();
+//                    int index = parent.indexOfChild(layoutToReplace);
+//                    parent.removeView(layoutToReplace);
+//                    layoutToReplace = getActivity().getLayoutInflater().inflate(R.layout.weight_modification_view,parent,false);
+//                    parent.addView(layoutToReplace,index);
+
+                    final android.support.v4.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+
+
+                   // final FragmentManager fm  = getFragmentManager();
+
+
+                  //  ft.replace(R.id.reaplyacableLayout,new ModificationFragment());
+                    ft.add(R.id.weight_input_layout_root, new ModificationFragment());
+                  //  ft.replace(R.id.fragmentContainer, new ModificationFragment());
+                    ft.commit();
+
+
+                }else {
+
+//                    Log.d(TAG,"Modyfi button is OFF");
+//
+//                    View layoutToReplace = view.findViewById(R.id.wieght_modification_id);
+//                    ViewGroup parent = (ViewGroup) layoutToReplace.getParent();
+//                    int index = parent.indexOfChild(layoutToReplace);
+//                    parent.removeView(layoutToReplace);
+//                    layoutToReplace = getActivity().getLayoutInflater().inflate(R.layout.weight_input_view,parent,false);
+//                    parent.addView(layoutToReplace, index);
+//
+//                    onCreateView(getActivity().getLayoutInflater(), parent, savedInstanceState);
+
+                    final android.support.v4.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+
+                    ft.replace(R.id.fragmentContainer,new WeightFragment());
+                    ft.commit();
+
+
+                }
+            }
+        });
 
         return view;
     }
@@ -344,7 +402,7 @@ public class WeightFragment extends Fragment implements NotificationObserver {
 
     private void saveApplicationState() {
         SharedPreferences.Editor editor = getActivity().getPreferences(Context.MODE_PRIVATE).edit();
-        editor.putBoolean(AUTO_CHECK_BOX,autoCheckBox.isChecked());
+        editor.putBoolean(AUTO_CHECK_BOX, autoCheckBox.isChecked());
         editor.apply();
         Log.i(TAG, "Zapisałem stan przycisku");
     }
@@ -383,11 +441,27 @@ public class WeightFragment extends Fragment implements NotificationObserver {
     @Override
     public void onMeasurementDeletion(DateTimeDTO dateTimeDTO) {
 
-       Float weight =  dateTimeDTO.getWeight();
-
-       weightInput.setText(weight.toString());
+        putDataToInputView(dateTimeDTO);
 
     }
 
+    @Override
+    public void onUndoMeasurementDeletion(DateTimeDTO dateTimeDTO) {
+
+        putDataToInputView(dateTimeDTO);
+
+
+    }
+
+    private void putDataToInputView(DateTimeDTO dateTimeDTO) {
+        Float weight = dateTimeDTO.getWeight();
+
+        String date = dateTimeDTO.getFormattedDate();
+        String time = dateTimeDTO.getFormattedTime();
+
+        weightInput.setText(weight.toString());
+        dateTextView.setText(date);
+        timeTextView.setText(time);
+    }
 
 }

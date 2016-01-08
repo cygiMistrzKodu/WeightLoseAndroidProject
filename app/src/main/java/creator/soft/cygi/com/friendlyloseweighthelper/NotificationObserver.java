@@ -12,6 +12,7 @@ public interface NotificationObserver {
     public void onUndoStackNotEmpty();
 
     public void onMeasurementDeletion(DateTimeDTO dateTimeDTO);
+    public void onUndoMeasurementDeletion(DateTimeDTO dateTimeDTO);
 
 
 }

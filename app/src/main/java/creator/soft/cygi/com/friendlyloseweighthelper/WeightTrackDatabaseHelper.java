@@ -252,9 +252,12 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
         WeightDataModel weightDataModel = new WeightDataModel();
 
         DateTimeDTO dateTimeDTO = lastMeasurementDeletionStack.pop();
+        dateTimeDTO.setAndroidContext(context);
 
         weightDataModel.setTimeAndDate(dateTimeDTO);
         insertOneRecordIntoWeightTrackDatabase(weightDataModel);
+
+        notifyMeasurementUndoDeletion(dateTimeDTO);
         notifyDatabaseNotEmpty();
 
       //  return false;
@@ -278,10 +281,11 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
         DateTimeDTO dateTimeDTO = new DateTimeDTO();
         dateTimeDTO.setDate(date);
         dateTimeDTO.setWeight(weight);
+        dateTimeDTO.setAndroidContext(context);
 
         lastMeasurementDeletionStack.push(dateTimeDTO);
 
-        Log.d(TAG, "Push on stack  Date: " + dateTimeDTO.getDateInString() + " weight " + dateTimeDTO.getWeight());
+        Log.d(TAG, "Push on stack  Date: " + dateTimeDTO.getDateWithoutFormatting() + " weight " + dateTimeDTO.getWeight());
 
         notifyMeasurementDeletion(dateTimeDTO);
         notifyUndoStackIsNotEmpty();
@@ -389,6 +393,14 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
             notificationObserver.onMeasurementDeletion(dateTimeDTO);
         }
 
+    }
+
+    @Override
+    public void notifyMeasurementUndoDeletion(DateTimeDTO dateTimeDTO) {
+
+        for (NotificationObserver notificationObserver : notificationObservers){
+            notificationObserver.onUndoMeasurementDeletion(dateTimeDTO);
+        }
     }
 
 }
