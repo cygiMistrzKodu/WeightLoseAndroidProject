@@ -1,23 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/weight_input_layout_root"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center">
-
-    <LinearLayout
-        android:id="@+id/reaplyacableLayout"
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center">
+    style="@style/MainRootStyle">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/weight_enter"
-        android:textSize="32dp" />
+        style="@style/LabelTitleTextStyle"
+        android:text="@string/weight_enter" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -25,123 +11,24 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:orientation="horizontal"
-            android:paddingLeft="5dp"
-            android:paddingRight="10dp">
+        <include layout="@layout/left_button_container_standard_view_element" />
 
-            <Button
-                android:id="@+id/undoLastDeletionButton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/undo_last_deletion_button" />
+        <include layout="@layout/input_weight_element_with_unit" />
 
-        </LinearLayout>
-
-        <EditText
-            android:id="@+id/inputWeightField"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:inputType="numberDecimal"
-            android:maxLength="7"
-            android:minWidth="130dp"
-            android:textSize="30dp" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/weight_units"
-            android:textSize="30dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:orientation="horizontal"
-            android:paddingLeft="10dp"
-            android:paddingRight="5dp">
-
-            <Button
-                android:id="@+id/deleteLatestEntryButton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/delete_last_entry_button" />
-
-        </LinearLayout>
+        <include layout="@layout/right_button_container_standard_view_element" />
 
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="80dp"
-        android:orientation="horizontal">
+    <include layout="@layout/date_element"></include>
 
+    <include layout="@layout/buttons_element"></include>
 
-            <TextView
-                android:id="@+id/dateTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:freezesText="true"
-                android:hint="pick date"
-                android:textSize="30dp"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/rectangle_border"/>
-
-            <Space
-                android:layout_width="20dp"
-                android:layout_height="match_parent" />
-
-            <TextView
-                android:id="@+id/timeTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:freezesText="true"
-                android:hint="pick time"
-                android:textSize="30dp"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/rectangle_border"/>
-
-        <Space
-            android:layout_width="20dp"
-            android:layout_height="match_parent" />
-
-            <CheckBox
-                android:id="@+id/autoCheckBox"
-                android:saveEnabled="false"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/auto_checkbox_text"
-                android:layout_gravity="center_vertical" />
-
-    </LinearLayout>
 
     <Button
-        android:id="@+id/acceptButton"
+        android:id="@+id/goToModifyViewButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/ok_button" />
-
-    <Button
-        android:id="@+id/schowChart_test"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Show Chart TEST" />
-
-    </LinearLayout>
-
-    <ToggleButton
-        android:id="@+id/modifyViewButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:checked="false"
-        android:textOff="@string/modify_standard_view_text"
-        android:textOn="@string/modify_view_text" />
+        android:text="@string/modify_standard_view_button" />
 
 </LinearLayout>

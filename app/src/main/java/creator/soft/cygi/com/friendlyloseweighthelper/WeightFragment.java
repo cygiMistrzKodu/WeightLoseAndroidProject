@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -78,7 +79,7 @@ public class WeightFragment extends Fragment implements NotificationObserver {
     };
     private CheckBox autoCheckBox;
     private boolean autoCheckBoxStateBeforeShutDown;
-    private ToggleButton modifyModeToggleButton;
+    private Button modifyModeToggleButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -233,53 +234,23 @@ public class WeightFragment extends Fragment implements NotificationObserver {
         ifDateAndTimeIsGenerateAutomaticallyDisableDateAndTimeTextView();
 
 
-        modifyModeToggleButton = (ToggleButton) view.findViewById(R.id.modifyViewButton);
+        modifyModeToggleButton = (Button) view.findViewById(R.id.goToModifyViewButton);
         modifyModeToggleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(modifyModeToggleButton.isChecked()){
 
-//                    Log.d(TAG,"Modyfi button is ON");
-//
-//                    View layoutToReplace = view.findViewById(R.id.reaplyacableLayout);
-//                    ViewGroup parent = (ViewGroup) layoutToReplace.getParent();
-//                    int index = parent.indexOfChild(layoutToReplace);
-//                    parent.removeView(layoutToReplace);
-//                    layoutToReplace = getActivity().getLayoutInflater().inflate(R.layout.weight_modification_view,parent,false);
-//                    parent.addView(layoutToReplace,index);
-
-                    final android.support.v4.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
-
-
-                   // final FragmentManager fm  = getFragmentManager();
-
-
-                  //  ft.replace(R.id.reaplyacableLayout,new ModificationFragment());
-                    ft.add(R.id.weight_input_layout_root, new ModificationFragment());
-                  //  ft.replace(R.id.fragmentContainer, new ModificationFragment());
+                    final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                    ft.replace(R.id.fragmentContainer, new ModificationFragment());
                     ft.commit();
 
-
-                }else {
-
-//                    Log.d(TAG,"Modyfi button is OFF");
+//                }else {
 //
-//                    View layoutToReplace = view.findViewById(R.id.wieght_modification_id);
-//                    ViewGroup parent = (ViewGroup) layoutToReplace.getParent();
-//                    int index = parent.indexOfChild(layoutToReplace);
-//                    parent.removeView(layoutToReplace);
-//                    layoutToReplace = getActivity().getLayoutInflater().inflate(R.layout.weight_input_view,parent,false);
-//                    parent.addView(layoutToReplace, index);
+//                    final FragmentTransaction ft = getFragmentManager().beginTransaction();
 //
-//                    onCreateView(getActivity().getLayoutInflater(), parent, savedInstanceState);
-
-                    final android.support.v4.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
-
-                    ft.replace(R.id.fragmentContainer,new WeightFragment());
-                    ft.commit();
-
-
-                }
+//                    ft.replace(R.id.fragmentContainer,new WeightFragment());
+//                    ft.commit();
+//
+//                }
             }
         });
 

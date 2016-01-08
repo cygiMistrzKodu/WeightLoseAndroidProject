@@ -1,13 +1,31 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/wieght_modification_id"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:gravity="center"
-    android:orientation="vertical">
+    style="@style/MainRootStyle">
 
     <TextView
+        style="@style/LabelTitleTextStyle"
+        android:text="@string/weight_modify"/>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="LALALALA" />
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <include layout="@layout/left_button_container_modify_view_element"/>
+
+        <include layout="@layout/input_weight_element_with_unit"></include>
+
+        <include layout="@layout/right_button_container_modify_view_element"/>
+
+
+    </LinearLayout>
+    <include layout="@layout/date_element"></include>
+    <include layout="@layout/buttons_element"></include>
+
+    <Button
+        android:id="@+id/backToStandardModeButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/modify_modification_view_button" />
+
 </LinearLayout>
