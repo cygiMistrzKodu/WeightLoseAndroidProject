@@ -12,7 +12,9 @@ import org.apache.commons.io.IOUtils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 
 /**
@@ -23,7 +25,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
     private static final String TAG = "WeightTrackDatabaseH";
 
     private static final String DB_NAME = "weightTrack.sgl";
-    private static final int VERSION = 1;
+    private static final int VERSION = 3;
     private static final String TABLE_USERS = "users";
     private static final String COLUMN_USERS_ID_USER = "id_user";
     private static final String COLUMN_USERS_USER_NAME = "user_name";
@@ -33,6 +35,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
     private static final String COLUMN_MEASUREMENT_DATA_ID_USER = "id_user";
     private static final String COLUMN_MEASUREMENT_DATA_DATE_TIME = "date_time";
     private static final String COLUMN_MEASUREMENT_DATA_WEIGHT = "weight";
+    public static final int ROW_NOT_INSERTED = -1;
     Context context;
     Stack<DateTimeDTO> lastMeasurementDeletionStack = new Stack<DateTimeDTO>();
     private String currentUser = "JacekCygi";   // just for testing Will be more softicated latter
@@ -75,6 +78,8 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
+        Log.d(TAG,"Database should be deleted : "+ DB_NAME);
+        context.deleteDatabase(DB_NAME);
     }
 
     public void deleteDatabase() {
@@ -102,7 +107,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
                 formatDate = cursor.getString(cursor.getColumnIndex(COLUMN_MEASUREMENT_DATA_DATE_TIME));
                 weight = cursor.getFloat(cursor.getColumnIndex(COLUMN_MEASUREMENT_DATA_WEIGHT));
 
-                Log.i(TAG, "Data From database : " + formatDate + " : " + weight);
+                Log.d(TAG, "Data From database : " + formatDate + " : " + weight);
                 dateTimeDTO.setDate(formatDate);
                 dateTimeDTO.setWeight(weight);
 
@@ -143,6 +148,12 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
         long insertedRowNumber = getWritableDatabase().insert(TABLE_MEASUREMENT_DATA, null, cv);
 
         Log.i(TAG, "Row inserted on position: " + insertedRowNumber);
+
+        if(insertedRowNumber == ROW_NOT_INSERTED){
+
+            notifyMeasurementNotInserted();
+        }
+
         return insertedRowNumber;
     }
 
@@ -400,6 +411,13 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
         for (NotificationObserver notificationObserver : notificationObservers){
             notificationObserver.onUndoMeasurementDeletion(dateTimeDTO);
+        }
+    }
+
+    @Override
+    public void notifyMeasurementNotInserted() {
+        for (NotificationObserver notificationObserver : notificationObservers){
+            notificationObserver.onMeasurementFailToInsertToDatabase();
         }
     }
 

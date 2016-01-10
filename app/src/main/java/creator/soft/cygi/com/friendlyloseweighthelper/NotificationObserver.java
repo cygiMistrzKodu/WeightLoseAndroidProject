@@ -14,5 +14,7 @@ public interface NotificationObserver {
     public void onMeasurementDeletion(DateTimeDTO dateTimeDTO);
     public void onUndoMeasurementDeletion(DateTimeDTO dateTimeDTO);
 
+    public void onMeasurementFailToInsertToDatabase();
+
 
 }

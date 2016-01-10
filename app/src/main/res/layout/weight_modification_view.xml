@@ -7,6 +7,25 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <TextView
+       android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="32dp"
+        android:text="No"/>
+        <Space
+            android:layout_width="20dp"
+            android:layout_height="match_parent" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="32dp"
+        android:text="123"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal">
@@ -19,7 +38,7 @@
 
 
     </LinearLayout>
-    <include layout="@layout/date_element"></include>
+    <include layout="@layout/date_modification_element"></include>
     <include layout="@layout/buttons_element"></include>
 
     <Button

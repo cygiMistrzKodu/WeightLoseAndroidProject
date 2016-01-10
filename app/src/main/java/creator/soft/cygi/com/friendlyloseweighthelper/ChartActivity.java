@@ -43,9 +43,9 @@ public class ChartActivity extends AppCompatActivity {
     private void ReadDataForChart() {
         Bundle extras = getIntent().getExtras();
 
-        dateSeries = extras.getStringArrayList(WeightFragment.DATE_DATA);
+        dateSeries = extras.getStringArrayList(ChartHelper.DATE_DATA);
 
-        float [] weight_data = extras.getFloatArray(WeightFragment.WEIGHT_DATA);
+        float [] weight_data = extras.getFloatArray(ChartHelper.WEIGHT_DATA);
         weight_units = new ArrayList<Float>();
 
         for(Float weight_measurement : weight_data){
