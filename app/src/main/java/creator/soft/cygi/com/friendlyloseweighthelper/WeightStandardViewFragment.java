@@ -11,8 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.TextView;
 
 /**
  * Created by CygiMasterProgrammer on 2015-12-09.
@@ -23,13 +21,9 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
     private static final String UNDO_LAST_DELETION_BUTTON_STATE = "undoLastDeletionButtonState";
     private static String TAG = "WeightStandardViewFragment";
 
- //   private EditText weightInput;
     private Button deleteLatestEntryButton;
     private Button undoLastDeletionButton;
     private DatabaseNotificationSubject databaseNotificationSubject;
-
-//    private TextView dateTextView;
-//    private TextView timeTextView;
 
     private CheckBox autoCheckBox;
     private boolean autoCheckBoxStateBeforeShutDown;
@@ -38,8 +32,6 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        Log.d(TAG, "ON CREATE URUCHOMILEM SIE BLA BLA ");
 
         setRetainInstance(true);
         databaseNotificationSubject = weightTrackDatabaseHelper;
@@ -57,11 +49,7 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, final Bundle savedInstanceState) {
 
-        Log.d(TAG,"ON CREATE VIEW URUCHOMILEM SIE BLA BLA ");
-
         View view = super.onCreateView(inflater,container,savedInstanceState);
-
-      //  weightInput = (EditText) view.findViewById(R.id.inputWeightField);
 
         undoLastDeletionButton = (Button) view.findViewById(R.id.undoLastDeletionButton);
         undoLastDeletionButton.setEnabled(false);
@@ -84,10 +72,6 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
 
             }
         });
-
-//        dateTextView = (TextView) view.findViewById(R.id.dateTextView);
-//
-//        timeTextView = (TextView) view.findViewById(R.id.timeTextView);
 
         dateTextView.setText(DateTimeStringUtility.getCurrentFormattedDateStringRepresentation());
         timeTextView.setText(DateTimeStringUtility.getCurrentFormattedTimeStringRepresentation(getContext()));

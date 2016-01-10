@@ -12,9 +12,7 @@ import org.apache.commons.io.IOUtils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.Stack;
 
 /**
@@ -78,7 +76,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
-        Log.d(TAG,"Database should be deleted : "+ DB_NAME);
+        Log.d(TAG, "Database should be deleted : " + DB_NAME);
         context.deleteDatabase(DB_NAME);
     }
 
@@ -321,6 +319,21 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
             notifyNoMeasurementToUndo();
             Log.d(TAG, "stack deleted");
         }
+
+    public DateTimeDTO readLatestMeasurement(){
+
+        Cursor latestMeasurementCursor = getLatestMeasurementCursor();
+
+        String date = latestMeasurementCursor.getString(latestMeasurementCursor.getColumnIndex(COLUMN_MEASUREMENT_DATA_DATE_TIME));
+        Float weight = latestMeasurementCursor.getFloat(latestMeasurementCursor.getColumnIndex(COLUMN_MEASUREMENT_DATA_WEIGHT));
+
+        DateTimeDTO dateTimeDTO = new DateTimeDTO();
+        dateTimeDTO.setDate(date);
+        dateTimeDTO.setWeight(weight);
+        dateTimeDTO.setAndroidContext(context);
+
+        return dateTimeDTO;
+    }
 
     public void updatedMeasurement() {
 

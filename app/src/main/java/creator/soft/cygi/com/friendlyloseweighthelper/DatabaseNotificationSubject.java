@@ -1,7 +1,5 @@
 package creator.soft.cygi.com.friendlyloseweighthelper;
 
-import java.util.List;
-
 /**
  * Created by CygiMasterProgrammer on 2016-01-05.
  */

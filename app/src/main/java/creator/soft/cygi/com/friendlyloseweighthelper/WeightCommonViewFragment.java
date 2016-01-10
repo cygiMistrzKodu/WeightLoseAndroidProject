@@ -21,9 +21,6 @@ import android.widget.TextView;
 
 import org.apache.commons.lang3.math.NumberUtils;
 
-import java.util.Date;
-import java.util.Map;
-
 /**
  * Created by CygiMasterProgrammer on 2016-01-09.
  */

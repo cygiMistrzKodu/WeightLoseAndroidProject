@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 /**
  * Created by CygiMasterProgrammer on 2016-01-08.
@@ -16,12 +17,15 @@ public class WeightModificationViewFragment extends WeightCommonViewFragment {
 
     public static final String TAG = "WeightModificationViewFragment";
     private Button standardModeButton;
+    private Button goPreviousButton;
+    private Button goNextButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+
 
     }
 
@@ -41,6 +45,21 @@ public class WeightModificationViewFragment extends WeightCommonViewFragment {
                 ft.commit();
             }
         });
+
+        goPreviousButton = (Button) view.findViewById(R.id.goToPreviousMeasurement);
+
+        goNextButton = (Button) view.findViewById(R.id.goToNextMeasurement);
+
+        DateTimeDTO dateTimeDTO = weightTrackDatabaseHelper.readLatestMeasurement();
+        String weight = dateTimeDTO.getWeight().toString();
+        weightInput.setText(weight);
+
+        String formattedTime =   dateTimeDTO.getFormattedTime();
+        String formattedDate = dateTimeDTO.getFormattedDate();
+
+        dateTextView.setText(formattedDate);
+        timeTextView.setText(formattedTime);
+
 
         return view;
     }
