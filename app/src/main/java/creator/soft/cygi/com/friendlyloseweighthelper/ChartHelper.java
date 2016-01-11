@@ -33,12 +33,12 @@ public class ChartHelper {
 
         SimpleDateFormat dt = DateTimeStringUtility.getDateFormattingPattern(context);
 
-        for (Map.Entry<Date, Float> entry : weightDataModel.getWeightAndTimeData().entrySet()) {
+        for (DateTimeDTO dateTimeDTO : weightDataModel.getDatabaseData()){
 
-            Date date = entry.getKey();
+            Date date = dateTimeDTO.getDate();
             dateSeries.add(dt.format(date));
 
-            Float weight = entry.getValue();
+            Float weight = dateTimeDTO.getWeight();
             weight_units.add(weight);
 
         }

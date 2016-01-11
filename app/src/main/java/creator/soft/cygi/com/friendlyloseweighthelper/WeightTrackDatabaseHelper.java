@@ -97,17 +97,20 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
         String formatDate = "";
         float weight;
-        DateTimeDTO dateTimeDTO = new DateTimeDTO();
+        int measurementID;
 
         if (cursor.getCount() > 0) {
             do {
 
+                measurementID = cursor.getInt(cursor.getColumnIndex(COLUMN_MEASUREMENT_DATA_MEASUREMENT_ID));
                 formatDate = cursor.getString(cursor.getColumnIndex(COLUMN_MEASUREMENT_DATA_DATE_TIME));
                 weight = cursor.getFloat(cursor.getColumnIndex(COLUMN_MEASUREMENT_DATA_WEIGHT));
 
-                Log.d(TAG, "Data From database : " + formatDate + " : " + weight);
+                Log.d(TAG, "Data From database : "+ "MeasurementID: "+ measurementID+" Date: "  + formatDate + " Weight: " + weight);
+                DateTimeDTO dateTimeDTO = new DateTimeDTO();
                 dateTimeDTO.setDate(formatDate);
                 dateTimeDTO.setWeight(weight);
+                dateTimeDTO.setMeasurementID(measurementID);
 
                 weightDataModel.setTimeAndDate(dateTimeDTO);
 
@@ -124,7 +127,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_MEASUREMENT_DATA,
-                new String[]{COLUMN_MEASUREMENT_DATA_DATE_TIME,
+                new String[]{COLUMN_MEASUREMENT_DATA_MEASUREMENT_ID,COLUMN_MEASUREMENT_DATA_DATE_TIME,
                         COLUMN_MEASUREMENT_DATA_WEIGHT},
                 COLUMN_MEASUREMENT_DATA_ID_USER + "=?", new String[]{String.valueOf(idOfCurrentUser)},
                 null, null, null);

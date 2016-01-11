@@ -11,6 +11,16 @@ public class DateTimeDTO {
     private static final String TAG = "DateTimeDTO";
     Date date;
     Float weight;
+
+    public Integer getMeasurementID() {
+        return measurementID;
+    }
+
+    public void setMeasurementID(Integer measurementID) {
+        this.measurementID = measurementID;
+    }
+
+    Integer measurementID;
     Context context;
 
     public void setDate(String date) {

@@ -3,8 +3,8 @@ package creator.soft.cygi.com.friendlyloseweighthelper;
 import android.util.Log;
 
 import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by CygiMasterProgrammer on 2015-12-10.
@@ -12,16 +12,20 @@ import java.util.Map;
 public class WeightDataModel {
 
     private static String TAG = "WeightDataModel";
-    private Map<Date,Float> timeWeightPair = new LinkedHashMap<Date,Float>();
     private String latestDate;
     private Float latestWeight;
+
+    private List<DateTimeDTO> databaseData = new LinkedList<DateTimeDTO>();
 
 
     public void setWeightWithCurrentDate(Float weight){
 
-
         Date currentDate =  DateTimeStringUtility.getCurrentDate();
-        timeWeightPair.put(currentDate, weight);
+
+        DateTimeDTO dateTimeDTO = new DateTimeDTO();
+        dateTimeDTO.setDate(currentDate.toString());
+        dateTimeDTO.setWeight(weight);
+        databaseData.add(dateTimeDTO);
 
         setLatestMeasurement(weight, currentDate);
 
@@ -34,8 +38,8 @@ public class WeightDataModel {
         latestDate =  DateTimeStringUtility.changeToStringRepresentation(currentDate);
     }
 
-    public Map<Date,Float> getWeightAndTimeData() {
-        return timeWeightPair;
+    public List<DateTimeDTO> getDatabaseData(){
+        return databaseData;
     }
 
     public String getLatestDate(){
@@ -48,18 +52,24 @@ public class WeightDataModel {
 
     public void setTimeAndDate(DateTimeDTO dateTimeDTO){
 
-        timeWeightPair.put(dateTimeDTO.getDate(),dateTimeDTO.getWeight());
-        setLatestMeasurement(dateTimeDTO.getWeight(),dateTimeDTO.getDate());
+        if(isDateSame(dateTimeDTO)){
+            return;
+        }
+
+       setLatestMeasurement(dateTimeDTO.getWeight(), dateTimeDTO.getDate());
+
+        databaseData.add(dateTimeDTO);
 
     }
 
+    private boolean isDateSame(DateTimeDTO dateTimeDTO) {
 
+        if(latestDate == null){
+            return false;
+        }
 
-
-
-
-
-
+        return latestDate.equals(dateTimeDTO.getDateWithoutFormatting());
+    }
 
 
 }
