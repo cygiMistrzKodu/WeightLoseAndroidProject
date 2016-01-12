@@ -26,7 +26,7 @@ import org.apache.commons.lang3.math.NumberUtils;
  */
 public abstract class WeightCommonViewFragment extends Fragment {
 
-    private WeightDataModel weightDataModel;
+    protected WeightDataModel weightDataModel;
     private Button chartButton;
     protected WeightTrackDatabaseHelper weightTrackDatabaseHelper;
     protected TextView dateTextView;

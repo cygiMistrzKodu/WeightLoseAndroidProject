@@ -2,13 +2,11 @@ package creator.soft.cygi.com.friendlyloseweighthelper;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 
 /**
  * Created by CygiMasterProgrammer on 2016-01-08.
@@ -17,8 +15,8 @@ public class WeightModificationViewFragment extends WeightCommonViewFragment {
 
     public static final String TAG = "WeightModificationViewFragment";
     private Button standardModeButton;
-    private Button goPreviousButton;
-    private Button goNextButton;
+    private Button previousButton;
+    private Button nextButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,11 +44,37 @@ public class WeightModificationViewFragment extends WeightCommonViewFragment {
             }
         });
 
-        goPreviousButton = (Button) view.findViewById(R.id.goToPreviousMeasurement);
+        previousButton = (Button) view.findViewById(R.id.goToPreviousMeasurement);
+        previousButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              DateTimeDTO dateTimeDTO =  weightDataModel.getPreviousMeasurement();
 
-        goNextButton = (Button) view.findViewById(R.id.goToNextMeasurement);
+                weightInput.setText(dateTimeDTO.getWeight().toString());
+                timeTextView.setText(dateTimeDTO.getFormattedTime());
+                dateTextView.setText(dateTimeDTO.getFormattedDate());
 
-        DateTimeDTO dateTimeDTO = weightTrackDatabaseHelper.readLatestMeasurement();
+            }
+        });
+
+        nextButton = (Button) view.findViewById(R.id.goToNextMeasurement);
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                DateTimeDTO dateTimeDTO =  weightDataModel.getNextMeasurement();
+
+                weightInput.setText(dateTimeDTO.getWeight().toString());
+                timeTextView.setText(dateTimeDTO.getFormattedTime());
+                dateTextView.setText(dateTimeDTO.getFormattedDate());
+
+
+            }
+        });
+
+
+
+        DateTimeDTO dateTimeDTO = weightDataModel.readDataOnLastPosition();
         String weight = dateTimeDTO.getWeight().toString();
         weightInput.setText(weight);
 

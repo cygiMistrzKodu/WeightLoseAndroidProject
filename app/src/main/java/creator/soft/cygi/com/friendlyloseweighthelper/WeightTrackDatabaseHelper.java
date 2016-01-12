@@ -34,7 +34,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
     private static final String COLUMN_MEASUREMENT_DATA_DATE_TIME = "date_time";
     private static final String COLUMN_MEASUREMENT_DATA_WEIGHT = "weight";
     public static final int ROW_NOT_INSERTED = -1;
-    Context context;
+    private Context context;
     Stack<DateTimeDTO> lastMeasurementDeletionStack = new Stack<DateTimeDTO>();
     private String currentUser = "JacekCygi";   // just for testing Will be more softicated latter
     private int existingUserID;
@@ -93,8 +93,8 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
         Cursor cursor = getMeasurementDataCursor();
         cursor.moveToFirst();
-        WeightDataModel weightDataModel = new WeightDataModel();
-
+        WeightDataModel weightDataModel = new WeightDataModel(context);
+        
         String formatDate = "";
         float weight;
         int measurementID;
@@ -111,6 +111,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
                 dateTimeDTO.setDate(formatDate);
                 dateTimeDTO.setWeight(weight);
                 dateTimeDTO.setMeasurementID(measurementID);
+                dateTimeDTO.setAndroidContext(context);
 
                 weightDataModel.setTimeAndDate(dateTimeDTO);
 
@@ -261,7 +262,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
             return;
         }
 
-        WeightDataModel weightDataModel = new WeightDataModel();
+        WeightDataModel weightDataModel = new WeightDataModel(context);
 
         DateTimeDTO dateTimeDTO = lastMeasurementDeletionStack.pop();
         dateTimeDTO.setAndroidContext(context);
@@ -322,21 +323,6 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
             notifyNoMeasurementToUndo();
             Log.d(TAG, "stack deleted");
         }
-
-    public DateTimeDTO readLatestMeasurement(){
-
-        Cursor latestMeasurementCursor = getLatestMeasurementCursor();
-
-        String date = latestMeasurementCursor.getString(latestMeasurementCursor.getColumnIndex(COLUMN_MEASUREMENT_DATA_DATE_TIME));
-        Float weight = latestMeasurementCursor.getFloat(latestMeasurementCursor.getColumnIndex(COLUMN_MEASUREMENT_DATA_WEIGHT));
-
-        DateTimeDTO dateTimeDTO = new DateTimeDTO();
-        dateTimeDTO.setDate(date);
-        dateTimeDTO.setWeight(weight);
-        dateTimeDTO.setAndroidContext(context);
-
-        return dateTimeDTO;
-    }
 
     public void updatedMeasurement() {
 
