@@ -1,28 +1,33 @@
 package creator.soft.cygi.com.friendlyloseweighthelper;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 /**
  * Created by CygiMasterProgrammer on 2016-01-08.
  */
-public class WeightModificationViewFragment extends WeightCommonViewFragment {
+public class WeightModificationViewFragment extends WeightCommonViewFragment implements WeightDataObserver {
 
-    public static final String TAG = "WeightModificationViewFragment";
+    public static final String TAG = "WeightModificationVF";
     private Button standardModeButton;
     private Button previousButton;
     private Button nextButton;
+    private TextView positionNumberTextView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+        weightDataModel.addWightDataObserver(this);
 
 
     }
@@ -72,6 +77,8 @@ public class WeightModificationViewFragment extends WeightCommonViewFragment {
             }
         });
 
+        positionNumberTextView = (TextView) view.findViewById(R.id.positionNumberTextView);
+
 
 
         DateTimeDTO dateTimeDTO = weightDataModel.readDataOnLastPosition();
@@ -98,4 +105,12 @@ public class WeightModificationViewFragment extends WeightCommonViewFragment {
         return TAG;
     }
 
+    @Override
+    public void notifyPositionChanged(Integer position) {
+
+        Resources res = getResources();
+        String positionText = String.format(res.getString(R.string.position_number),position);
+
+        positionNumberTextView.setText(positionText);
+    }
 }

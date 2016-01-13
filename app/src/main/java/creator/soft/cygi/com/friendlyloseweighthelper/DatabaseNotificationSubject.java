@@ -5,9 +5,9 @@ package creator.soft.cygi.com.friendlyloseweighthelper;
  */
 public interface DatabaseNotificationSubject {
 
-    public void addNotificationObserver(NotificationObserver notificationObserver);
+    public void addNotificationObserver(DatabaseNotificationObserver notificationObserver);
 
-    public void removeNotificationObserver(NotificationObserver notificationObserver);
+    public void removeNotificationObserver(DatabaseNotificationObserver notificationObserver);
 
     public void notifyDatabaseIsEmpty() ;
     public void notifyDatabaseNotEmpty();

@@ -15,5 +15,6 @@
     <string name="auto_checkbox_text">Auto</string>
     <string name="weight_modify">Modify measurement</string>
     <string name="left_Arrow"><![CDATA[<]]></string>
-    <string name="Right_Arrow"><![CDATA[>]]></string>
+    <string name="right_Arrow"><![CDATA[>]]></string>
+    <string name="position_number">Position: %d</string>
 </resources>

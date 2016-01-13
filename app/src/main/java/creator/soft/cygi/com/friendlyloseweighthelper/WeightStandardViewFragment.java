@@ -15,7 +15,7 @@ import android.widget.CheckBox;
 /**
  * Created by CygiMasterProgrammer on 2015-12-09.
  */
-public class WeightStandardViewFragment extends WeightCommonViewFragment implements NotificationObserver {
+public class WeightStandardViewFragment extends WeightCommonViewFragment implements DatabaseNotificationObserver {
 
     private static final String AUTO_CHECK_BOX = "autoCheckBoxState";
     private static final String UNDO_LAST_DELETION_BUTTON_STATE = "undoLastDeletionButtonState";

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 /**
  * Created by CygiMasterProgrammer on 2015-12-10.
  */
-public class WeightDataModel {
+public class WeightDataModel implements WeightDataSubject {
 
     private static final String USER_POSITION = "user_position";
     private static final String USER_POSITION_PREFERENCES = "user_position_preferences";
@@ -22,6 +23,8 @@ public class WeightDataModel {
 
     private List<DateTimeDTO> databaseData = new LinkedList<DateTimeDTO>();
     private Context context;
+
+    private List<WeightDataObserver> weightDataModelObservers = new ArrayList<WeightDataObserver>();
 
 
     public WeightDataModel(Context context) {
@@ -99,6 +102,7 @@ public class WeightDataModel {
         }
 
         rememberOnWhatPositionUserFinished();
+        notifyPositionChanged();
 
         return dateTimeDTO;
     }
@@ -118,7 +122,7 @@ public class WeightDataModel {
         }
 
         rememberOnWhatPositionUserFinished();
-
+        notifyPositionChanged();
 
         return dateTimeDTO;
     }
@@ -154,6 +158,31 @@ public class WeightDataModel {
             userPosition = getLatestMeasurementPosition();
         }
 
+        notifyPositionChanged();
         return databaseData.get(userPosition);
     }
+
+    @Override
+    public void addWightDataObserver(WeightDataObserver weightDataObserver) {
+
+        weightDataModelObservers.add(weightDataObserver);
+    }
+
+    @Override
+    public void removeWightDataObserver(WeightDataObserver weightDataObserver) {
+
+        weightDataModelObservers.remove(weightDataObserver);
+    }
+
+    @Override
+    public void notifyPositionChanged() {
+
+        for (WeightDataObserver weightDataObserver : weightDataModelObservers){
+
+            weightDataObserver.notifyPositionChanged(userPosition);
+        }
+
+    }
+
+
 }

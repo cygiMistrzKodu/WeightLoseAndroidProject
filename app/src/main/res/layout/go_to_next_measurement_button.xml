@@ -5,6 +5,6 @@
         android:id="@+id/goToNextMeasurement"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/Right_Arrow" />
+        android:text="@string/right_Arrow" />
 
 </merge>

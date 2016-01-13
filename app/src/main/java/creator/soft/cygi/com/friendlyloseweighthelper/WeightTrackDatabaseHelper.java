@@ -39,7 +39,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
     private String currentUser = "JacekCygi";   // just for testing Will be more softicated latter
     private int existingUserID;
 
-    private List<NotificationObserver> notificationObservers = new ArrayList<NotificationObserver>();
+    private List<DatabaseNotificationObserver> DatabaseNotificationObservers = new ArrayList<DatabaseNotificationObserver>();
 
 
     WeightTrackDatabaseHelper(Context context) {
@@ -94,7 +94,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
         Cursor cursor = getMeasurementDataCursor();
         cursor.moveToFirst();
         WeightDataModel weightDataModel = new WeightDataModel(context);
-        
+
         String formatDate = "";
         float weight;
         int measurementID;
@@ -344,14 +344,14 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
     }
 
     @Override
-    public void addNotificationObserver(NotificationObserver notificationObserver) {
-        notificationObservers.add(notificationObserver);
+    public void addNotificationObserver(DatabaseNotificationObserver notificationObserver) {
+        DatabaseNotificationObservers.add(notificationObserver);
 
     }
 
     @Override
-    public void removeNotificationObserver(NotificationObserver notificationObserver) {
-        notificationObservers.remove(notificationObserver);
+    public void removeNotificationObserver(DatabaseNotificationObserver notificationObserver) {
+        DatabaseNotificationObservers.remove(notificationObserver);
     }
 
     @Override
@@ -378,7 +378,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
     private void notifyDatabaseObserver(String observersType){
 
-        for (NotificationObserver notificationObserver : notificationObservers){
+        for (DatabaseNotificationObserver notificationObserver : DatabaseNotificationObservers){
 
            if(observersType.equals("DatabaseEmpty")) {
                notificationObserver.onDatabaseIsEmpty();
@@ -402,7 +402,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
     @Override
     public void notifyMeasurementDeletion(DateTimeDTO dateTimeDTO) {
 
-        for (NotificationObserver notificationObserver : notificationObservers){
+        for (DatabaseNotificationObserver notificationObserver : DatabaseNotificationObservers){
             notificationObserver.onMeasurementDeletion(dateTimeDTO);
         }
 
@@ -411,14 +411,14 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
     @Override
     public void notifyMeasurementUndoDeletion(DateTimeDTO dateTimeDTO) {
 
-        for (NotificationObserver notificationObserver : notificationObservers){
+        for (DatabaseNotificationObserver notificationObserver : DatabaseNotificationObservers){
             notificationObserver.onUndoMeasurementDeletion(dateTimeDTO);
         }
     }
 
     @Override
     public void notifyMeasurementNotInserted() {
-        for (NotificationObserver notificationObserver : notificationObservers){
+        for (DatabaseNotificationObserver notificationObserver : DatabaseNotificationObservers){
             notificationObserver.onMeasurementFailToInsertToDatabase();
         }
     }

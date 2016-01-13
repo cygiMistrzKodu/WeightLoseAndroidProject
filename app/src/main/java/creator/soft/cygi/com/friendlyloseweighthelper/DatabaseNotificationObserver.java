@@ -3,7 +3,7 @@ package creator.soft.cygi.com.friendlyloseweighthelper;
 /**
  * Created by CygiMasterProgrammer on 2016-01-05.
  */
-public interface NotificationObserver {
+public interface DatabaseNotificationObserver {
 
 
     public void onDatabaseIsEmpty();
