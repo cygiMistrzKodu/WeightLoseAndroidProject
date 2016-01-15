@@ -39,7 +39,7 @@ public abstract class WeightCommonViewFragment extends Fragment {
     private static final int REQUEST_DATE = 0;
     private static final int REQUEST_TIME = 1;
 
-    private Button acceptButton;
+    protected Button acceptButton;
     protected EditText weightInput;
 
     private CheckBox autoCheckBox;
@@ -62,6 +62,13 @@ public abstract class WeightCommonViewFragment extends Fragment {
             if (action.equals(Intent.ACTION_TIME_CHANGED)) {
 
                 String currentTime = timeTextView.getText().toString();
+                Log.d(TAG,"Broadcast receiver currentTime: "+ currentTime);
+                Context whatIsContextState = getContext();
+                if(whatIsContextState == null){
+                    Log.d(TAG,"Boradcast Context is NULL");
+                }else {
+                    Log.d(TAG,"Broadcast Context is  NOT NULL");
+                }
                 String formattedTime12Or24 = DateTimeStringUtility.convertTimeBaseOnDeviceFormat12or24(getContext(), currentTime);
                 timeTextView.setText(formattedTime12Or24);
             }

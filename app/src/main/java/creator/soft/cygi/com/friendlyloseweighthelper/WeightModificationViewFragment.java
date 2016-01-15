@@ -79,6 +79,38 @@ public class WeightModificationViewFragment extends WeightCommonViewFragment imp
 
         positionNumberTextView = (TextView) view.findViewById(R.id.positionNumberTextView);
 
+        acceptButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Log.d(TAG, " I clicked on AccpetButton in Weight Modification View");
+                DateTimeDTO dateTimeDTOExistingMeasurement = weightDataModel.readDataOnLastPosition();
+
+                DateTimeDTO dateTimeDTOUpdateMeasurement = new DateTimeDTO();
+                dateTimeDTOUpdateMeasurement.setMeasurementID(dateTimeDTOExistingMeasurement.getMeasurementID());
+                dateTimeDTOUpdateMeasurement.setWeight(Float.parseFloat(weightInput.getText().toString()));
+                dateTimeDTOUpdateMeasurement.setAndroidContext(getContext());
+
+               String dateString =  DateTimeStringUtility
+                       .combineTwoDates(getContext(), dateTextView.getText().toString(), timeTextView.getText().toString());
+                dateString = DateTimeStringUtility.changeSecondsToZero(dateString);
+
+                dateTimeDTOUpdateMeasurement.setDate(dateString);
+
+                if(weightDataModel.isDateNotRepeated(dateTimeDTOUpdateMeasurement)) {
+                    weightTrackDatabaseHelper.updatedMeasurement(dateTimeDTOUpdateMeasurement);
+
+                    weightDataModel.updateMeasurementInModel(dateTimeDTOUpdateMeasurement);
+
+
+                    String newFormattedTime = dateTimeDTOUpdateMeasurement.getFormattedTime();
+
+                    timeTextView.setText(newFormattedTime);
+                }else {
+                    Log.d(TAG,"New Date is Repeated");
+                }
+            }
+        });
 
 
         DateTimeDTO dateTimeDTO = weightDataModel.readDataOnLastPosition();
@@ -108,8 +140,9 @@ public class WeightModificationViewFragment extends WeightCommonViewFragment imp
     @Override
     public void notifyPositionChanged(Integer position) {
 
+        Integer positionOnView = ++position;
         Resources res = getResources();
-        String positionText = String.format(res.getString(R.string.position_number),position);
+        String positionText = String.format(res.getString(R.string.position_number),positionOnView);
 
         positionNumberTextView.setText(positionText);
     }

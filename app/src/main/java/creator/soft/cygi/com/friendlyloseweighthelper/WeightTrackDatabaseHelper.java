@@ -324,22 +324,28 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
             Log.d(TAG, "stack deleted");
         }
 
-    public void updatedMeasurement() {
+    public void updatedMeasurement(DateTimeDTO dateTimeDTO) {
 
         SQLiteDatabase db = getWritableDatabase();
 
         int idCurrentUser = getExistingUserID();
 
+        String dateString = dateTimeDTO.getDateWithoutFormatting();
+        float weight = dateTimeDTO.getWeight();
+        Integer measurementID = dateTimeDTO.getMeasurementID();
+
+
         ContentValues insertValues = new ContentValues();
-        insertValues.put(COLUMN_MEASUREMENT_DATA_DATE_TIME, "Thu Dec 24 01:22:00 GMT+01:00 2015");
-        insertValues.put(COLUMN_MEASUREMENT_DATA_WEIGHT, 220);
+        insertValues.put(COLUMN_MEASUREMENT_DATA_DATE_TIME, dateString);
+        insertValues.put(COLUMN_MEASUREMENT_DATA_WEIGHT, weight);
 
         String whereStatement = COLUMN_MEASUREMENT_DATA_ID_USER  +
                 " = ? and " + COLUMN_MEASUREMENT_DATA_MEASUREMENT_ID + " = ? " ;
 
-        String [] whereArgs  = new String[]{String.valueOf(idCurrentUser),"11"};
+        String [] whereArgs  = new String[]{String.valueOf(idCurrentUser),measurementID.toString()};
 
         db.update(TABLE_MEASUREMENT_DATA, insertValues, whereStatement, whereArgs);
+        Log.d(TAG,"Measurement in database updated");
 
     }
 

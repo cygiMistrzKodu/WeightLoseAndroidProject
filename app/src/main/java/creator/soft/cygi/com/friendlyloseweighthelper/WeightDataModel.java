@@ -66,7 +66,7 @@ public class WeightDataModel implements WeightDataSubject {
 
     public void setTimeAndDate(DateTimeDTO dateTimeDTO) {
 
-        if (isDateSame(dateTimeDTO)) {
+        if (isLatestDateInModelSameWithCurrentDate(dateTimeDTO)) {
             return;
         }
 
@@ -76,7 +76,7 @@ public class WeightDataModel implements WeightDataSubject {
 
     }
 
-    private boolean isDateSame(DateTimeDTO dateTimeDTO) {
+    private boolean isLatestDateInModelSameWithCurrentDate(DateTimeDTO dateTimeDTO) {
 
         if (latestDate == null) {
             return false;
@@ -105,6 +105,25 @@ public class WeightDataModel implements WeightDataSubject {
         notifyPositionChanged();
 
         return dateTimeDTO;
+    }
+
+    public void updateMeasurementInModel(DateTimeDTO dateTimeDTO){
+
+           databaseData.set(userPosition,dateTimeDTO);
+    }
+
+    public boolean isDateNotRepeated(DateTimeDTO updatedDateTimeDto) {
+
+        for(DateTimeDTO dateTimeDTO : databaseData ) {
+
+            if(!dateTimeDTO.getMeasurementID().equals(updatedDateTimeDto.getMeasurementID())) {
+                if (dateTimeDTO.getDateWithoutFormatting().equals(updatedDateTimeDto.getDateWithoutFormatting())) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
     public DateTimeDTO getNextMeasurement() {
@@ -183,6 +202,8 @@ public class WeightDataModel implements WeightDataSubject {
         }
 
     }
+
+
 
 
 }

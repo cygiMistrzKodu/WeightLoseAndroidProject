@@ -92,6 +92,7 @@ public class DateTimeStringUtility {
 
     @NonNull
     public static String formatTime(Context context, Date time) {
+
         String timeFormatPattern = getTimePattern12or24(context);
         SimpleDateFormat simpleTimeFormat = new SimpleDateFormat(timeFormatPattern);
         return simpleTimeFormat.format(time);
@@ -164,6 +165,8 @@ public class DateTimeStringUtility {
 
         if (is24HourFormat(context)) {
 
+            Log.d(TAG,"Inside convertTimeBaseOnDeviceFormat12or14  Current TIME: " + currentTime);
+
             String formatted24HourTime = performFormattingOperation(context, currentTime, time12hourPattern);
             return formatted24HourTime;
 
@@ -213,5 +216,18 @@ public class DateTimeStringUtility {
 
 
         return changeToStringRepresentation(dateAndTimeCombine);
+    }
+
+    public static String changeSecondsToZero(String dateRawString){
+
+        Date dateRaw = changeToDate(dateRawString);
+
+        Calendar dateRawCalender = Calendar.getInstance();
+        dateRawCalender.setTime(dateRaw);
+        dateRawCalender.set(Calendar.SECOND, 0);
+
+        String dateWithZeroSeconds = dateRawCalender.getTime().toString();
+
+        return dateWithZeroSeconds;
     }
 }
