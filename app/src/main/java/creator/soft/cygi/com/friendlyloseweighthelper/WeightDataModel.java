@@ -73,6 +73,9 @@ public class WeightDataModel implements WeightDataSubject {
         setLatestMeasurement(dateTimeDTO.getWeight(), dateTimeDTO.getDate());
 
         databaseData.add(dateTimeDTO);
+        if(userPosition == null){
+            userPosition = getLatestMeasurementPosition();
+        }
 
     }
 
@@ -160,9 +163,14 @@ public class WeightDataModel implements WeightDataSubject {
 
     private void readLastUserPosition() {
 
+
+        Log.d(TAG,"readLastUserPosition: "+userPosition);
+
             SharedPreferences sharedPreferences =
                     context.getSharedPreferences(USER_POSITION_PREFERENCES, Context.MODE_PRIVATE);
-            userPosition = sharedPreferences.getInt(USER_POSITION, getLatestMeasurementPosition());
+            userPosition = sharedPreferences.getInt(USER_POSITION, 0);
+
+        Log.d(TAG,"readLastUserPosition After Read from preferences: "+userPosition);
 
     }
 
@@ -172,13 +180,38 @@ public class WeightDataModel implements WeightDataSubject {
 
     public DateTimeDTO readDataOnLastPosition() {
 
-        if(getLatestMeasurementPosition() < userPosition){
 
-            userPosition = getLatestMeasurementPosition();
+        DateTimeDTO dateTimeDTO = null;
+
+            if (getLatestMeasurementPosition() < userPosition) {
+
+                userPosition = getLatestMeasurementPosition();
+                Log.d(TAG, "User Position first IF: " + userPosition);
+            }
+
+            if (userPosition == null) {
+
+                userPosition = getLatestMeasurementPosition();
+                Log.d(TAG, "User position null check if: " + userPosition);
+            }
+
+
+            notifyPositionChanged();
+
+            Log.d(TAG, "User position: " + userPosition);
+
+             dateTimeDTO = databaseData.get(userPosition);
+
+        return dateTimeDTO;
+    }
+
+    public boolean isDatabaseIsEmpty(){
+
+        if(databaseData.isEmpty()){
+            return true;
+        } else {
+            return false;
         }
-
-        notifyPositionChanged();
-        return databaseData.get(userPosition);
     }
 
     @Override

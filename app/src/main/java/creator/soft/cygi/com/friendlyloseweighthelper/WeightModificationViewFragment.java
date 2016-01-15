@@ -114,14 +114,15 @@ public class WeightModificationViewFragment extends WeightCommonViewFragment imp
 
 
         DateTimeDTO dateTimeDTO = weightDataModel.readDataOnLastPosition();
-        String weight = dateTimeDTO.getWeight().toString();
-        weightInput.setText(weight);
 
-        String formattedTime =   dateTimeDTO.getFormattedTime();
-        String formattedDate = dateTimeDTO.getFormattedDate();
+            String weight = dateTimeDTO.getWeight().toString();
+            weightInput.setText(weight);
 
-        dateTextView.setText(formattedDate);
-        timeTextView.setText(formattedTime);
+            String formattedTime = dateTimeDTO.getFormattedTime();
+            String formattedDate = dateTimeDTO.getFormattedDate();
+
+            dateTextView.setText(formattedDate);
+            timeTextView.setText(formattedTime);
 
 
         return view;

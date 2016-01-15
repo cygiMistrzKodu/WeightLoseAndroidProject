@@ -6,8 +6,8 @@ package creator.soft.cygi.com.friendlyloseweighthelper;
 public interface DatabaseNotificationObserver {
 
 
-    public void onDatabaseIsEmpty();
-    public void onDatabaseNotEmpty();
+    public void onTableMeasurementIsEmpty();
+    public void onTableMeasurementNotEmpty();
     public void onNoMeasurementToUndo();
     public void onUndoStackNotEmpty();
 
@@ -17,4 +17,5 @@ public interface DatabaseNotificationObserver {
     public void onMeasurementFailToInsertToDatabase();
 
 
+    void onMeasurementInsertedToDatabase();
 }

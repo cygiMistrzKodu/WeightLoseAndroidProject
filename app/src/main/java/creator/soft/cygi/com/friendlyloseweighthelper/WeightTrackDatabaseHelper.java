@@ -87,7 +87,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
         Log.i("Baza kasowac", "Czy baza skasowana  " + isDeleted);
 
     }
-
+    
 
     public WeightDataModel getAllWeightDataFromDatabase() {
 
@@ -154,6 +154,9 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
         if(insertedRowNumber == ROW_NOT_INSERTED){
 
             notifyMeasurementNotInserted();
+        }else {
+
+            notifyMeasurementInserted();
         }
 
         return insertedRowNumber;
@@ -242,7 +245,6 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
         return cursor.getInt(cursor.getColumnIndex(COLUMN_USERS_ID_USER));
     }
 
-
     public void deleteLatestEntry() {
 
         String whereStatement = readSqlCommandFromResource(R.raw.where_statment_last_entry_to_mesurement_data);
@@ -250,8 +252,24 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
         SQLiteDatabase db = getWritableDatabase();
         saveLastDeletedData();
         db.delete(TABLE_MEASUREMENT_DATA, whereStatement, new String[]{String.valueOf(currentIdUser)});
+        checkIfMeasurementTableEmpty();
 
     }
+
+    public void checkIfMeasurementTableEmpty() {
+
+        SQLiteDatabase db = getReadableDatabase();
+        String count = "SELECT count(*) FROM "+TABLE_MEASUREMENT_DATA ;
+        Cursor cursor = db.rawQuery(count, null);
+        cursor.moveToFirst();
+        int rowCount =  cursor.getInt(0);
+
+        if(rowCount <= 0) {
+            Log.d(TAG, "Table Measurement is Empty : " + rowCount);
+            notifyTableMeasurementIsEmpty();
+        }
+    }
+
 
     public void undoDeleteLastMeasurement() {
 
@@ -271,18 +289,18 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
         insertOneRecordIntoWeightTrackDatabase(weightDataModel);
 
         notifyMeasurementUndoDeletion(dateTimeDTO);
-        notifyDatabaseNotEmpty();
+        notifyTableMeasurementIsNotEmpty();
 
-      //  return false;
     }
 
     private void saveLastDeletedData() {
 
         Cursor latestMeasurementCursor = getLatestMeasurementCursor();
 
+        Log.d(TAG,"Number fo Row in Cursor "+ latestMeasurementCursor.getCount());
+
         if (latestMeasurementCursor.getCount() <= 0)
         {
-            notifyDatabaseIsEmpty();
             return;
         }
 
@@ -305,8 +323,6 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
     }
 
-
-
     private Cursor getLatestMeasurementCursor () {
             int idCurrentUser = getExistingUserID();
             Cursor latestMeasurementCursor = getReadableDatabase().query(TABLE_MEASUREMENT_DATA,
@@ -317,6 +333,8 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
             latestMeasurementCursor.moveToFirst();
             return latestMeasurementCursor;
         }
+
+
 
         public void clearLastMeasurementStack () {
             lastMeasurementDeletionStack.clear();
@@ -345,7 +363,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
         String [] whereArgs  = new String[]{String.valueOf(idCurrentUser),measurementID.toString()};
 
         db.update(TABLE_MEASUREMENT_DATA, insertValues, whereStatement, whereArgs);
-        Log.d(TAG,"Measurement in database updated");
+        Log.d(TAG, "Measurement in database updated");
 
     }
 
@@ -361,15 +379,15 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
     }
 
     @Override
-    public void notifyDatabaseIsEmpty() {
+    public void notifyTableMeasurementIsEmpty() {
 
-        notifyDatabaseObserver("DatabaseEmpty");
+        notifyDatabaseObserver("TableMeasurementIsEmpty");
     }
 
     @Override
-    public void notifyDatabaseNotEmpty() {
+    public void notifyTableMeasurementIsNotEmpty() {
 
-        notifyDatabaseObserver("DatabaseNotEmpty");
+        notifyDatabaseObserver("TableMeasurementNotEmpty");
     }
 
     @Override
@@ -386,12 +404,12 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
         for (DatabaseNotificationObserver notificationObserver : DatabaseNotificationObservers){
 
-           if(observersType.equals("DatabaseEmpty")) {
-               notificationObserver.onDatabaseIsEmpty();
+           if(observersType.equals("TableMeasurementIsEmpty")) {
+               notificationObserver.onTableMeasurementIsEmpty();
            }
 
-            if(observersType.equals("DatabaseNotEmpty")){
-                notificationObserver.onDatabaseNotEmpty();
+            if(observersType.equals("TableMeasurementNotEmpty")){
+                notificationObserver.onTableMeasurementNotEmpty();
             }
 
             if(observersType.equals("NoMeasurementToUndo")){
@@ -427,6 +445,15 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
         for (DatabaseNotificationObserver notificationObserver : DatabaseNotificationObservers){
             notificationObserver.onMeasurementFailToInsertToDatabase();
         }
+    }
+
+    @Override
+    public void notifyMeasurementInserted() {
+
+        for (DatabaseNotificationObserver notificationObserver : DatabaseNotificationObservers){
+            notificationObserver.onMeasurementInsertedToDatabase();
+        }
+
     }
 
 }

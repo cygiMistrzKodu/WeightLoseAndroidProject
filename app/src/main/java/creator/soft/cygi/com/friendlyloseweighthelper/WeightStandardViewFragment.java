@@ -107,6 +107,8 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
             }
         });
 
+        weightTrackDatabaseHelper.checkIfMeasurementTableEmpty();
+
         return view;
     }
 
@@ -157,15 +159,17 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
     }
 
     @Override
-    public void onDatabaseIsEmpty() {
+    public void onTableMeasurementIsEmpty() {
 
         deleteLatestEntryButton.setEnabled(false);
+        modifyModeButton.setEnabled(false);
 
     }
 
     @Override
-    public void onDatabaseNotEmpty() {
+    public void onTableMeasurementNotEmpty() {
         deleteLatestEntryButton.setEnabled(true);
+        modifyModeButton.setEnabled(true);
     }
 
     @Override
@@ -197,6 +201,12 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
     @Override
     public void onMeasurementFailToInsertToDatabase() {
         Log.d(TAG,"**Duplicate Date Value**");
+    }
+
+    @Override
+    public void onMeasurementInsertedToDatabase() {
+        deleteLatestEntryButton.setEnabled(true);
+        modifyModeButton.setEnabled(true);
     }
 
     private void putDataToInputView(DateTimeDTO dateTimeDTO) {

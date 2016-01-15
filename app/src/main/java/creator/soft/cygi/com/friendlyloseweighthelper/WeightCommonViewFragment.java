@@ -152,7 +152,6 @@ public abstract class WeightCommonViewFragment extends Fragment {
 
         autoCheckBox = (CheckBox) view.findViewById(R.id.autoCheckBox);
 
-
         return view;
     }
 

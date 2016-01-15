@@ -9,12 +9,13 @@ public interface DatabaseNotificationSubject {
 
     public void removeNotificationObserver(DatabaseNotificationObserver notificationObserver);
 
-    public void notifyDatabaseIsEmpty() ;
-    public void notifyDatabaseNotEmpty();
+    public void notifyTableMeasurementIsEmpty() ;
+    public void notifyTableMeasurementIsNotEmpty();
     public void notifyNoMeasurementToUndo();
     public void notifyUndoStackIsNotEmpty();
     public void notifyMeasurementDeletion(DateTimeDTO dateTimeDTO);
     public void notifyMeasurementUndoDeletion(DateTimeDTO dateTimeDTO);
     public void notifyMeasurementNotInserted();
+    public void notifyMeasurementInserted();
 
 }
