@@ -165,7 +165,14 @@ public class DateTimeStringUtility {
 
         if (is24HourFormat(context)) {
 
-            Log.d(TAG,"Inside convertTimeBaseOnDeviceFormat12or14  Current TIME: " + currentTime);
+            String pattern24hourPatternRegex = "..:..:..";
+
+            if(currentTime.matches(pattern24hourPatternRegex)){
+
+                Log.d(TAG,"Time format not 12 hour format return current time: " + currentTime);
+                return currentTime;
+
+            }
 
             String formatted24HourTime = performFormattingOperation(context, currentTime, time12hourPattern);
             return formatted24HourTime;
