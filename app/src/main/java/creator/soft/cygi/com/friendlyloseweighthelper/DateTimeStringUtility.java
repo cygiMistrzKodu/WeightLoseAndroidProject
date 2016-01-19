@@ -165,7 +165,7 @@ public class DateTimeStringUtility {
 
         if (is24HourFormat(context)) {
 
-            String pattern24hourPatternRegex = "..:..:..";
+            String pattern24hourPatternRegex = "\\d{1,2}:\\d{2}:\\d{2}";
 
             if(currentTime.matches(pattern24hourPatternRegex)){
 
@@ -178,6 +178,15 @@ public class DateTimeStringUtility {
             return formatted24HourTime;
 
         } else {
+
+            String pattern12hourPatternRegex = "\\d{1,2}:\\d{2}:\\d{2} [AP][M]";
+
+            if(currentTime.matches(pattern12hourPatternRegex)){
+
+                Log.d(TAG,"Time format not 24 hour format return current time: " + currentTime);
+                return currentTime;
+
+            }
 
             String formatted12HourTime = performFormattingOperation(context, currentTime, time24hourPattern);
             return formatted12HourTime;
