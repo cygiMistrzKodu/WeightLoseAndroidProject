@@ -229,8 +229,6 @@ public class DateTimeStringUtility {
 
         Log.i(TAG, "Combine Dates: " + dateAndTimeCombine.toString());
 
-
-
         return changeToStringRepresentation(dateAndTimeCombine);
     }
 

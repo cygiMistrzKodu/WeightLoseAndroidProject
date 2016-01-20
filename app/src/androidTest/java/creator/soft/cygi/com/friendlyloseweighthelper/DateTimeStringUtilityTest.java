@@ -14,9 +14,11 @@ import org.junit.runner.RunWith;
  * Created by CygiMasterProgrammer on 2016-01-17.
  */
 
+import static org.junit.Assert.*;
+
 @RunWith(AndroidJUnit4.class)
 @MediumTest
-public class DateTimeStringUtilityTest  {
+public class DateTimeStringUtilityTest {
 
     private String TAG = "DateTimeStringUtilityTest";
 
@@ -28,18 +30,18 @@ public class DateTimeStringUtilityTest  {
     }
 
     @Test
-   public void convertTimeBaseOnDeviceFormat12or24(){
+    public void convertTimeBaseOnDeviceFormat12or24() {
 
-//        String time24hFormat = "12:32:20";
+
+        // for a sake of example leave here. But not working
+        String timeExpected = "00:32:20";
 
         String time12hFormat = "12:32:20 PM";
 
-      String timeReturn =  DateTimeStringUtility.convertTimeBaseOnDeviceFormat12or24(instrumentationContext, time12hFormat);
+        String timeReturn = DateTimeStringUtility.convertTimeBaseOnDeviceFormat12or24(instrumentationContext, time12hFormat);
 
-        System.out.println(timeReturn);
 
-        Log.d(TAG,timeReturn);
-
-   }
+      assertEquals(timeExpected,timeReturn);
+    }
 
 }
