@@ -9,8 +9,10 @@ import java.util.Date;
  */
 public class DateTimeDTO {
     private static final String TAG = "DateTimeDTO";
-    Date date;
-    Float weight;
+    private Integer measurementID;
+    private Context context;
+    private Date date;
+    private Float weight;
 
     public Integer getMeasurementID() {
         return measurementID;
@@ -20,13 +22,14 @@ public class DateTimeDTO {
         this.measurementID = measurementID;
     }
 
-    Integer measurementID;
-    Context context;
+    public Date getDate() {
+
+        return date;
+    }
 
     public void setDate(String date) {
 
-        if(date == null)
-        {
+        if (date == null) {
             return;
         }
 
@@ -34,34 +37,29 @@ public class DateTimeDTO {
 
     }
 
-    public Date getDate() {
-
-    return date;
-    }
-
     public String getDateWithoutFormatting() {
         return DateTimeStringUtility.changeToStringRepresentation(date);
+    }
+
+    public Float getWeight() {
+        return weight;
     }
 
     public void setWeight(Float weight) {
         this.weight = weight;
     }
 
-    public Float getWeight(){
-        return weight;
-    }
-
     public String getFormattedDate() {
 
-      return DateTimeStringUtility.formatDate(date);
+        return DateTimeStringUtility.formatDate(date);
     }
 
     public String getFormattedTime() {
 
-      return  DateTimeStringUtility.formatTime(context,date);
+        return DateTimeStringUtility.formatTime(context, date);
     }
 
-    public void setAndroidContext(Context context){
+    public void setAndroidContext(Context context) {
         this.context = context;
     }
 

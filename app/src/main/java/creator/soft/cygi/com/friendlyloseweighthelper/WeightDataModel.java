@@ -26,6 +26,9 @@ public class WeightDataModel implements WeightDataSubject {
 
     private List<WeightDataObserver> weightDataModelObservers = new ArrayList<WeightDataObserver>();
 
+    public WeightDataModel(){
+        super();
+    }
 
     public WeightDataModel(Context context) {
         this.context = context;
