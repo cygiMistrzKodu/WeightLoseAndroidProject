@@ -32,6 +32,10 @@ public class WeightDataModel implements WeightDataSubject {
         readLastUserPosition();
     }
 
+    public Integer getUserPosition() {
+        return userPosition;
+    }
+
     public void setWeightWithCurrentDate(Float weight) {
 
         Date currentDate = DateTimeStringUtility.getCurrentDate();
@@ -168,7 +172,9 @@ public class WeightDataModel implements WeightDataSubject {
 
             SharedPreferences sharedPreferences =
                     context.getSharedPreferences(USER_POSITION_PREFERENCES, Context.MODE_PRIVATE);
+        if(sharedPreferences != null) {
             userPosition = sharedPreferences.getInt(USER_POSITION, 0);
+        }
 
         Log.d(TAG,"readLastUserPosition After Read from preferences: "+userPosition);
 
