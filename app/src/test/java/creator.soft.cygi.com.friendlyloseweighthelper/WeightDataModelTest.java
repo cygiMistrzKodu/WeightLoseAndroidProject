@@ -17,6 +17,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by CygiMasterProgrammer on 2016-01-21.
@@ -137,6 +138,96 @@ public class WeightDataModelTest {
         List<DateTimeDTO> databaseData = weightDataModel.getDatabaseData();
 
         assertFalse(databaseData.contains(dateTimeDTOMeasurementWithSameDateAsPrevious));
+    }
+
+    @Test
+    public void checkReplaceMeasurementDataIsReallyUpdated() {
+
+        String date = "Wed Jan 20 01:22:00 CET 2016";
+
+        WeightDataModel weightDataModel = new WeightDataModel();
+
+        DateTimeDTO dateTimeMeasurementInserted =
+                createTimeDateObject(110f, date);
+
+        weightDataModel.setTimeAndDate(dateTimeMeasurementInserted);
+
+        DateTimeDTO dateTimeMeasurementUpdate =
+                createTimeDateObject(230f,date);
+
+
+        weightDataModel.updateMeasurementInModel(dateTimeMeasurementUpdate);
+
+        List<DateTimeDTO> databaseData = weightDataModel.getDatabaseData();
+
+        assertEquals(dateTimeMeasurementUpdate.getWeight(), databaseData.get(0).getWeight());
+    }
+
+    @Test
+    public void ifNewMeasurementHaveSameDateWithAnyExistingMeasurementAndDifferentMeasurementIDThenReturnFalse() {
+
+        String duplicateDateWithExistingMeasurementDate = "Wed Feb 12 01:10:00 CET 2016";
+        Integer newMeasurementId = 6;
+
+        WeightDataModel weightDataModel = new WeightDataModel();
+        fillDataModelWithMeasurement(weightDataModel);
+
+        DateTimeDTO dateTimeNewMeasurementAboutToBeInserted =
+                createTimeDateObject(500f, duplicateDateWithExistingMeasurementDate);
+        dateTimeNewMeasurementAboutToBeInserted.setMeasurementID(newMeasurementId);
+
+        boolean isDateNotRepeated = weightDataModel
+                .isDateNotRepeated(dateTimeNewMeasurementAboutToBeInserted);
+
+      assertFalse(isDateNotRepeated);
+    }
+
+    @Test
+    public void ifNewMeasurementHaveSameDateWithExistingAndSameMeasurementIDThenReturnTrue() {
+
+        String sameDate = "Wed Feb 12 01:10:00 CET 2016";
+        Integer sameMeasurementId = 3;
+
+        WeightDataModel weightDataModel = new WeightDataModel();
+        fillDataModelWithMeasurement(weightDataModel);
+
+        DateTimeDTO dateTimeNewMeasurementAboutToBeInserted =
+                createTimeDateObject(500f, sameDate);
+        dateTimeNewMeasurementAboutToBeInserted.setMeasurementID(sameMeasurementId);
+
+        boolean isDateNotRepeated = weightDataModel
+                .isDateNotRepeated(dateTimeNewMeasurementAboutToBeInserted);
+
+        assertTrue(isDateNotRepeated);
+    }
+
+
+    private void fillDataModelWithMeasurement(WeightDataModel weightDataModel){
+
+        DateTimeDTO dateTimeMeasurementOne =
+                createTimeDateObject(110f, "Wed Jan 20 01:22:00 CET 2016");
+        dateTimeMeasurementOne.setMeasurementID(1);
+
+        weightDataModel.setTimeAndDate(dateTimeMeasurementOne);
+
+        DateTimeDTO dateTimeMeasurementTwo =
+                createTimeDateObject(230f,"Wed Jan 25 01:22:00 CET 2016");
+        dateTimeMeasurementTwo.setMeasurementID(2);
+
+        weightDataModel.setTimeAndDate(dateTimeMeasurementTwo);
+
+        DateTimeDTO dateTimeMeasurementThree =
+                createTimeDateObject(260f,"Wed Feb 12 01:10:00 CET 2016");
+        dateTimeMeasurementThree.setMeasurementID(3);
+
+        weightDataModel.setTimeAndDate(dateTimeMeasurementThree);
+
+        DateTimeDTO dateTimeMeasurementFour =
+                createTimeDateObject(90f,"Wed Feb 12 01:10:00 CET 2015");
+        dateTimeMeasurementFour.setMeasurementID(4);
+
+        weightDataModel.setTimeAndDate(dateTimeMeasurementFour);
+
     }
 
 
