@@ -17,13 +17,14 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 /**
  * Created by CygiMasterProgrammer on 2016-01-21.
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(Log.class)
+@PrepareForTest({Log.class,WeightDataModel.class})
 public class WeightDataModelTest {
 
     private static final String USER_POSITION_PREFERENCES = "user_position_preferences";
@@ -63,6 +64,8 @@ public class WeightDataModelTest {
                 .thenReturn(mocSharedPreferences);
 
         WeightDataModel weightDataModel = new WeightDataModel(mocContext);
+
+        fillDataModelWithMeasurement(weightDataModel);
 
         Integer expectedUserPosition = 5;
 
@@ -153,7 +156,7 @@ public class WeightDataModelTest {
         weightDataModel.setTimeAndDate(dateTimeMeasurementInserted);
 
         DateTimeDTO dateTimeMeasurementUpdate =
-                createTimeDateObject(230f,date);
+                createTimeDateObject(230f, date);
 
 
         weightDataModel.updateMeasurementInModel(dateTimeMeasurementUpdate);
@@ -179,7 +182,7 @@ public class WeightDataModelTest {
         boolean isDateNotRepeated = weightDataModel
                 .isDateNotRepeated(dateTimeNewMeasurementAboutToBeInserted);
 
-      assertFalse(isDateNotRepeated);
+        assertFalse(isDateNotRepeated);
     }
 
     @Test
@@ -201,8 +204,77 @@ public class WeightDataModelTest {
         assertTrue(isDateNotRepeated);
     }
 
+    @Test
+    public void whenDatabaseModelHasNoDataAndPositionIsNullThenReturnNull() {
 
-    private void fillDataModelWithMeasurement(WeightDataModel weightDataModel){
+        WeightDataModel weightDataModelNoData = new WeightDataModel();
+
+        DateTimeDTO dateTimeDTO = weightDataModelNoData.readDataOnLastPosition();
+
+        assertNull(dateTimeDTO);
+    }
+
+    @Test
+    public void whenDatabaseModelHasDataAndPositionIsNullThenReturnFirstPositionInModel() {
+
+        WeightDataModel weightDataModelWithData = new WeightDataModel();
+        fillDataModelWithMeasurement(weightDataModelWithData);
+
+        DateTimeDTO dateTimeDTOReturned = weightDataModelWithData.readDataOnLastPosition();
+
+        DateTimeDTO dateTimeTheLastEntryToDataModelExpected =
+                createTimeDateObject(110f, "Wed Jan 20 01:22:00 CET 2016");
+        dateTimeTheLastEntryToDataModelExpected.setMeasurementID(4);
+
+        assertEquals(dateTimeTheLastEntryToDataModelExpected.getWeight(), dateTimeDTOReturned.getWeight());
+    }
+
+    @Test
+    public void whenSaveUserPositionNumberIsBiggerThanNumberOfElementInDataModelThenReturnLastElement() {
+
+        WeightDataModel weightDataWithData = new WeightDataModel();
+        fillDataModelWithMeasurement(weightDataWithData);
+
+       Integer userPositionBiggerThanAllElementsCountInDataModel = 50;
+
+        weightDataWithData.setUserPosition(userPositionBiggerThanAllElementsCountInDataModel);
+
+        DateTimeDTO dateTimeDTOReturned = weightDataWithData.readDataOnLastPosition();
+
+        DateTimeDTO dateTimeTheLastEntryToDataModelExpected =
+                createTimeDateObject(90f, "Wed Feb 12 01:10:00 CET 2015");
+        dateTimeTheLastEntryToDataModelExpected.setMeasurementID(4);
+
+        assertEquals(dateTimeTheLastEntryToDataModelExpected.getWeight(),dateTimeDTOReturned.getWeight());
+    }
+
+
+
+    @Test
+    public void whenGetNextMeasurementCallThenNextDateTimeMeasurementIsReturnAndPositionIsIncrementedBy1() throws Exception{
+
+        WeightDataModel weightDataWithDataSpy = PowerMockito.spy(new WeightDataModel());
+        fillDataModelWithMeasurement(weightDataWithDataSpy);
+        Integer userPosition = 2;
+        weightDataWithDataSpy.setUserPosition(userPosition);
+
+        PowerMockito.doNothing().when(weightDataWithDataSpy, "rememberOnWhatPositionUserFinished");
+
+        DateTimeDTO dateTimeExpected =
+                createTimeDateObject(90f, "Wed Feb 12 01:10:00 CET 2015");
+        dateTimeExpected.setMeasurementID(4);
+        Integer expectedPosition = 3;
+
+        weightDataWithDataSpy.getNextMeasurement();
+
+        DateTimeDTO dateTimeDTOReturned = weightDataWithDataSpy.getNextMeasurement();
+
+        assertEquals(expectedPosition,weightDataWithDataSpy.getUserPosition());
+        assertEquals(dateTimeExpected.getWeight(),dateTimeDTOReturned.getWeight());
+    }
+
+
+    private void fillDataModelWithMeasurement(WeightDataModel weightDataModel) {
 
         DateTimeDTO dateTimeMeasurementOne =
                 createTimeDateObject(110f, "Wed Jan 20 01:22:00 CET 2016");
@@ -211,19 +283,19 @@ public class WeightDataModelTest {
         weightDataModel.setTimeAndDate(dateTimeMeasurementOne);
 
         DateTimeDTO dateTimeMeasurementTwo =
-                createTimeDateObject(230f,"Wed Jan 25 01:22:00 CET 2016");
+                createTimeDateObject(230f, "Wed Jan 25 01:22:00 CET 2016");
         dateTimeMeasurementTwo.setMeasurementID(2);
 
         weightDataModel.setTimeAndDate(dateTimeMeasurementTwo);
 
         DateTimeDTO dateTimeMeasurementThree =
-                createTimeDateObject(260f,"Wed Feb 12 01:10:00 CET 2016");
+                createTimeDateObject(260f, "Wed Feb 12 01:10:00 CET 2016");
         dateTimeMeasurementThree.setMeasurementID(3);
 
         weightDataModel.setTimeAndDate(dateTimeMeasurementThree);
 
         DateTimeDTO dateTimeMeasurementFour =
-                createTimeDateObject(90f,"Wed Feb 12 01:10:00 CET 2015");
+                createTimeDateObject(90f, "Wed Feb 12 01:10:00 CET 2015");
         dateTimeMeasurementFour.setMeasurementID(4);
 
         weightDataModel.setTimeAndDate(dateTimeMeasurementFour);

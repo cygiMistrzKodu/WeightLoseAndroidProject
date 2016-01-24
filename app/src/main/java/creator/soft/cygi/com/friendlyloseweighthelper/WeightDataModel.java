@@ -26,7 +26,7 @@ public class WeightDataModel implements WeightDataSubject {
 
     private List<WeightDataObserver> weightDataModelObservers = new ArrayList<WeightDataObserver>();
 
-    public WeightDataModel(){
+    public WeightDataModel() {
         super();
     }
 
@@ -37,6 +37,10 @@ public class WeightDataModel implements WeightDataSubject {
 
     public Integer getUserPosition() {
         return userPosition;
+    }
+
+    public void setUserPosition(Integer userPosition) {
+        this.userPosition = userPosition;
     }
 
     public void setWeightWithCurrentDate(Float weight) {
@@ -80,7 +84,7 @@ public class WeightDataModel implements WeightDataSubject {
         setLatestMeasurement(dateTimeDTO.getWeight(), dateTimeDTO.getDate());
 
         databaseData.add(dateTimeDTO);
-        if(userPosition == null){
+        if (userPosition == null) {
             userPosition = getLatestMeasurementPosition();
         }
 
@@ -117,16 +121,16 @@ public class WeightDataModel implements WeightDataSubject {
         return dateTimeDTO;
     }
 
-    public void updateMeasurementInModel(DateTimeDTO dateTimeDTO){
+    public void updateMeasurementInModel(DateTimeDTO dateTimeDTO) {
 
-           databaseData.set(userPosition,dateTimeDTO);
+        databaseData.set(userPosition, dateTimeDTO);
     }
 
     public boolean isDateNotRepeated(DateTimeDTO updatedDateTimeDto) {
 
-        for(DateTimeDTO dateTimeDTO : databaseData ) {
+        for (DateTimeDTO dateTimeDTO : databaseData) {
 
-            if(!dateTimeDTO.getMeasurementID().equals(updatedDateTimeDto.getMeasurementID())) {
+            if (!dateTimeDTO.getMeasurementID().equals(updatedDateTimeDto.getMeasurementID())) {
                 if (dateTimeDTO.getDateWithoutFormatting().equals(updatedDateTimeDto.getDateWithoutFormatting())) {
                     return false;
                 }
@@ -161,9 +165,9 @@ public class WeightDataModel implements WeightDataSubject {
         SharedPreferences sharedPreferences =
                 context.getSharedPreferences(USER_POSITION_PREFERENCES, Context.MODE_PRIVATE);
 
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putInt(USER_POSITION, userPosition);
-            editor.commit();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(USER_POSITION, userPosition);
+        editor.commit();
 
 
     }
@@ -171,15 +175,15 @@ public class WeightDataModel implements WeightDataSubject {
     private void readLastUserPosition() {
 
 
-        Log.d(TAG,"readLastUserPosition: "+userPosition);
+        Log.d(TAG, "readLastUserPosition: " + userPosition);
 
-            SharedPreferences sharedPreferences =
-                    context.getSharedPreferences(USER_POSITION_PREFERENCES, Context.MODE_PRIVATE);
-        if(sharedPreferences != null) {
-            userPosition = sharedPreferences.getInt(USER_POSITION, 0);
+        SharedPreferences sharedPreferences =
+                context.getSharedPreferences(USER_POSITION_PREFERENCES, Context.MODE_PRIVATE);
+        if (sharedPreferences != null) {
+           userPosition = sharedPreferences.getInt(USER_POSITION, 0);
         }
 
-        Log.d(TAG,"readLastUserPosition After Read from preferences: "+userPosition);
+        Log.d(TAG, "readLastUserPosition After Read from preferences: " + userPosition);
 
     }
 
@@ -189,34 +193,30 @@ public class WeightDataModel implements WeightDataSubject {
 
     public DateTimeDTO readDataOnLastPosition() {
 
-
         DateTimeDTO dateTimeDTO = null;
 
-            if (getLatestMeasurementPosition() < userPosition) {
+        if(databaseData.isEmpty()){
+            return dateTimeDTO;
+        }
 
-                userPosition = getLatestMeasurementPosition();
-                Log.d(TAG, "User Position first IF: " + userPosition);
-            }
+        if (getLatestMeasurementPosition() < userPosition) {
 
-            if (userPosition == null) {
+            userPosition = getLatestMeasurementPosition();
+            Log.d(TAG, "User Position first IF: " + userPosition);
+        }
 
-                userPosition = getLatestMeasurementPosition();
-                Log.d(TAG, "User position null check if: " + userPosition);
-            }
+        notifyPositionChanged();
 
+        Log.d(TAG, "User position: " + userPosition);
 
-            notifyPositionChanged();
-
-            Log.d(TAG, "User position: " + userPosition);
-
-             dateTimeDTO = databaseData.get(userPosition);
+        dateTimeDTO = databaseData.get(userPosition);
 
         return dateTimeDTO;
     }
 
-    public boolean isDatabaseIsEmpty(){
+    public boolean isDatabaseIsEmpty() {
 
-        if(databaseData.isEmpty()){
+        if (databaseData.isEmpty()) {
             return true;
         } else {
             return false;
@@ -238,14 +238,12 @@ public class WeightDataModel implements WeightDataSubject {
     @Override
     public void notifyPositionChanged() {
 
-        for (WeightDataObserver weightDataObserver : weightDataModelObservers){
+        for (WeightDataObserver weightDataObserver : weightDataModelObservers) {
 
             weightDataObserver.notifyPositionChanged(userPosition);
         }
 
     }
-
-
 
 
 }
