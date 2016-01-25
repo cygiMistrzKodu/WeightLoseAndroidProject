@@ -5,7 +5,7 @@ package creator.soft.cygi.com.friendlyloseweighthelper;
  */
 public interface WeightDataSubject {
 
-    public void addWightDataObserver(WeightDataObserver weightDataObserver);
+    public void addWeightDataObserver(WeightDataObserver weightDataObserver);
 
     public void removeWightDataObserver(WeightDataObserver weightDataObserver);
 

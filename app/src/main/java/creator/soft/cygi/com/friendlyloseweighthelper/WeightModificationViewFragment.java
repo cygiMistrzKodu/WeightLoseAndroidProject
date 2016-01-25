@@ -27,7 +27,7 @@ public class WeightModificationViewFragment extends WeightCommonViewFragment imp
 
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-        weightDataModel.addWightDataObserver(this);
+        weightDataModel.addWeightDataObserver(this);
 
 
     }

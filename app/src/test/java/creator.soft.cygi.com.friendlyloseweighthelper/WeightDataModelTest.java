@@ -24,7 +24,7 @@ import static org.junit.Assert.assertTrue;
  * Created by CygiMasterProgrammer on 2016-01-21.
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({Log.class,WeightDataModel.class})
+@PrepareForTest({Log.class, WeightDataModel.class})
 public class WeightDataModelTest {
 
     private static final String USER_POSITION_PREFERENCES = "user_position_preferences";
@@ -235,7 +235,7 @@ public class WeightDataModelTest {
         WeightDataModel weightDataWithData = new WeightDataModel();
         fillDataModelWithMeasurement(weightDataWithData);
 
-       Integer userPositionBiggerThanAllElementsCountInDataModel = 50;
+        Integer userPositionBiggerThanAllElementsCountInDataModel = 50;
 
         weightDataWithData.setUserPosition(userPositionBiggerThanAllElementsCountInDataModel);
 
@@ -245,32 +245,132 @@ public class WeightDataModelTest {
                 createTimeDateObject(90f, "Wed Feb 12 01:10:00 CET 2015");
         dateTimeTheLastEntryToDataModelExpected.setMeasurementID(4);
 
-        assertEquals(dateTimeTheLastEntryToDataModelExpected.getWeight(),dateTimeDTOReturned.getWeight());
+        assertEquals(dateTimeTheLastEntryToDataModelExpected.getWeight(), dateTimeDTOReturned.getWeight());
     }
 
 
-
     @Test
-    public void whenGetNextMeasurementCallThenNextDateTimeMeasurementIsReturnAndPositionIsIncrementedBy1() throws Exception{
+    public void whenGetNextMeasurementThenNextDateTimeMeasurementIsReturnAndPositionIsIncrementedBy1() throws Exception {
 
         WeightDataModel weightDataWithDataSpy = PowerMockito.spy(new WeightDataModel());
-        fillDataModelWithMeasurement(weightDataWithDataSpy);
-        Integer userPosition = 2;
-        weightDataWithDataSpy.setUserPosition(userPosition);
-
-        PowerMockito.doNothing().when(weightDataWithDataSpy, "rememberOnWhatPositionUserFinished");
+        Integer startUserPosition = 2;
+        initializeDataAndSetUserPosition(weightDataWithDataSpy, startUserPosition);
 
         DateTimeDTO dateTimeExpected =
                 createTimeDateObject(90f, "Wed Feb 12 01:10:00 CET 2015");
         dateTimeExpected.setMeasurementID(4);
         Integer expectedPosition = 3;
 
+        DateTimeDTO dateTimeDTOReturned = weightDataWithDataSpy.getNextMeasurement();
+
+        assertEquals(expectedPosition, weightDataWithDataSpy.getUserPosition());
+        assertEquals(dateTimeExpected.getWeight(), dateTimeDTOReturned.getWeight());
+    }
+
+    @Test
+    public void whenGetPreviousMeasurementThenPreviousDateTimeMeasurementIsReturnAndPositionIsDecrementBy1() throws Exception {
+
+        WeightDataModel weightDataWithDataSpy = PowerMockito.spy(new WeightDataModel());
+        Integer startUserPosition = 2;
+        initializeDataAndSetUserPosition(weightDataWithDataSpy, startUserPosition);
+
+        DateTimeDTO dateTimeExpected =
+                createTimeDateObject(230f, "Wed Jan 25 01:22:00 CET 2016");
+        dateTimeExpected.setMeasurementID(2);
+        Integer expectedPosition = 1;
+
+        DateTimeDTO dateTimeDTOReturned = weightDataWithDataSpy.getPreviousMeasurement();
+
+        assertEquals(expectedPosition, weightDataWithDataSpy.getUserPosition());
+        assertEquals(dateTimeExpected.getWeight(), dateTimeDTOReturned.getWeight());
+    }
+
+    @Test
+    public void whenReachFirstPositionThenAlwaysReturnMeasurementOnThisPosition() throws Exception {
+
+        WeightDataModel weightDataWithDataSpy = PowerMockito.spy(new WeightDataModel());
+        Integer startUserPosition = 0;
+        initializeDataAndSetUserPosition(weightDataWithDataSpy, startUserPosition);
+
+        DateTimeDTO dateTimeExpected =
+                createTimeDateObject(110f, "Wed Jan 20 01:22:00 CET 2016");
+        dateTimeExpected.setMeasurementID(1);
+
+        Integer expectedPosition = 0;
+
+        weightDataWithDataSpy.getPreviousMeasurement();
+        weightDataWithDataSpy.getPreviousMeasurement();
+
+        DateTimeDTO dateTimeDTOReturned = weightDataWithDataSpy.getPreviousMeasurement();
+
+        assertEquals(expectedPosition, weightDataWithDataSpy.getUserPosition());
+        assertEquals(dateTimeExpected.getWeight(), dateTimeDTOReturned.getWeight());
+    }
+
+    @Test
+    public void whenReachLastPositionThenAlwaysReturnMeasurementOnThisPosition() throws Exception {
+
+        WeightDataModel weightDataWithDataSpy = PowerMockito.spy(new WeightDataModel());
+        Integer lastUserPosition = 3;
+        initializeDataAndSetUserPosition(weightDataWithDataSpy, lastUserPosition);
+
+        DateTimeDTO dateTimeExpected =
+                createTimeDateObject(90f, "Wed Feb 12 01:10:00 CET 2015");
+        dateTimeExpected.setMeasurementID(4);
+
+        Integer expectedPosition = 3;
+
+        weightDataWithDataSpy.getNextMeasurement();
         weightDataWithDataSpy.getNextMeasurement();
 
         DateTimeDTO dateTimeDTOReturned = weightDataWithDataSpy.getNextMeasurement();
 
-        assertEquals(expectedPosition,weightDataWithDataSpy.getUserPosition());
-        assertEquals(dateTimeExpected.getWeight(),dateTimeDTOReturned.getWeight());
+        assertEquals(expectedPosition, weightDataWithDataSpy.getUserPosition());
+        assertEquals(dateTimeExpected.getWeight(), dateTimeDTOReturned.getWeight());
+    }
+
+    @Test
+    public void weightDataSubjectPositionTest() throws Exception {
+
+        final Integer[] returnPosition = new Integer[1];
+
+          WeightDataObserver weightDataObserverTest = new WeightDataObserver() {
+              @Override
+              public void notifyPositionChanged(Integer position) {
+                  returnPosition[0] = position;
+              }
+          };
+
+        WeightDataModel weightDataModel = PowerMockito.spy(new WeightDataModel());
+        weightDataModel.addWeightDataObserver(weightDataObserverTest);
+        Integer initPosition = 2;
+       initializeDataAndSetUserPosition(weightDataModel,initPosition);
+
+
+        weightDataModel.readDataOnLastPosition();
+
+        Integer expectedPosition = 2;
+
+        assertEquals(expectedPosition, returnPosition[0]);
+
+        weightDataModel.getNextMeasurement();
+
+        expectedPosition = 3;
+        assertEquals(expectedPosition, returnPosition[0]);
+
+        weightDataModel.getPreviousMeasurement();
+        weightDataModel.getPreviousMeasurement();
+
+        expectedPosition = 1;
+        assertEquals(expectedPosition,returnPosition[0]);
+    }
+
+
+    private void initializeDataAndSetUserPosition(WeightDataModel weightDataWithDataSpy, Integer userPosition) throws Exception {
+        fillDataModelWithMeasurement(weightDataWithDataSpy);
+        weightDataWithDataSpy.setUserPosition(userPosition);
+
+        PowerMockito.doNothing().when(weightDataWithDataSpy, "rememberOnWhatPositionUserFinished");
     }
 
 

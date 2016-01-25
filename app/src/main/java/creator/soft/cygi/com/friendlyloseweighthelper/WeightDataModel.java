@@ -224,7 +224,7 @@ public class WeightDataModel implements WeightDataSubject {
     }
 
     @Override
-    public void addWightDataObserver(WeightDataObserver weightDataObserver) {
+    public void addWeightDataObserver(WeightDataObserver weightDataObserver) {
 
         weightDataModelObservers.add(weightDataObserver);
     }
