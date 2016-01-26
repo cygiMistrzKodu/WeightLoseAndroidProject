@@ -367,6 +367,10 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
     }
 
+    public void clearAllMeasurementData() {
+
+    }
+
     @Override
     public void addNotificationObserver(DatabaseNotificationObserver notificationObserver) {
         DatabaseNotificationObservers.add(notificationObserver);
