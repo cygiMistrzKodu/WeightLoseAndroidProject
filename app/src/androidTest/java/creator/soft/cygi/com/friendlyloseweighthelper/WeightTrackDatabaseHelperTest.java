@@ -1,24 +1,22 @@
 package creator.soft.cygi.com.friendlyloseweighthelper;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
-import android.test.mock.MockContext;
 import android.test.suitebuilder.annotation.MediumTest;
-import android.util.Log;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 /**
  * Created by CygiMasterProgrammer on 2016-01-17.
  */
-
-import java.util.List;
-
-import static org.junit.Assert.*;
 
 @RunWith(AndroidJUnit4.class)
 @MediumTest
@@ -31,40 +29,76 @@ public class WeightTrackDatabaseHelperTest {
     @Before
     public void setup() {
         instrumentationContext = InstrumentationRegistry.getTargetContext();
+
     }
 
     @Test
-    public void checkIfWhenInsertOneMeasurementToDatabaseTheyAreThere() {
+    public void checkInsertionToDatabase() {
 
+        clearDataInMeasurementTable();
 
-        //TODO Czyszcenie bazy istniejacej
-
-
-        Float expectedWeight = 1450f;
+        Float expectedWeight = 1600f;
 
         WeightDataModel weightDataModel = new WeightDataModel(instrumentationContext);
-        weightDataModel.setWeightWithCurrentDate(1450f);
-
-        WeightTrackDatabaseHelper weightTrackDatabaseHelper2 = new WeightTrackDatabaseHelper(instrumentationContext);
-        weightTrackDatabaseHelper2.deleteDatabase(); // wole zeby czyscil tabele Pomiaru (dorobie potem)
-
+        weightDataModel.setWeightWithCurrentDate(1600f);
 
         WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(instrumentationContext);
         weightTrackDatabaseHelper.insertOneRecordIntoWeightTrackDatabase(weightDataModel);
-
-       WeightDataModel weightDataModelReturnFromDatabase = new WeightDataModel(instrumentationContext);
-
-        weightDataModelReturnFromDatabase = weightTrackDatabaseHelper.getAllWeightDataFromDatabase();
-
-       List<DateTimeDTO> measurementInDataBase = weightDataModelReturnFromDatabase.getDatabaseData();
-
+        WeightDataModel weightDataModelReturnFromDatabase = weightTrackDatabaseHelper.getAllWeightDataFromDatabase();
+        List<DateTimeDTO> measurementInDataBase = weightDataModelReturnFromDatabase.getDatabaseData();
         DateTimeDTO returnMeasurementDateTimeDTO = measurementInDataBase.get(0);
 
-        weightTrackDatabaseHelper2.deleteDatabase();  // kasuje baze drugi raz po tescie (to do zmiany będize tylko sie bawie )
+        assertEquals(expectedWeight, returnMeasurementDateTimeDTO.getWeight());
 
-        assertEquals(expectedWeight,returnMeasurementDateTimeDTO.getWeight());
+    }
 
+    @Test
+    public void checkWhenMeasurementClearThenMeasurementTableIsEmpty() {
+        fillDatabase();
+        clearDataInMeasurementTable();
 
+        WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(instrumentationContext);
+        assertTrue(weightTrackDatabaseHelper.isMeasurementTableEmpty());
+    }
+
+    @Test
+    public void insertThreeMeasurementThenCountIsAlsoThree() {
+        clearDataInMeasurementTable();
+        fillDatabase();
+        Long expectedCount = 3l;
+        WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(instrumentationContext);
+
+        assertEquals(expectedCount, weightTrackDatabaseHelper.numberOfMeasurementDataForCurrentUser());
+    }
+
+    private void clearDataInMeasurementTable() {
+        WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(instrumentationContext);
+        weightTrackDatabaseHelper.clearAllMeasurementData();
+    }
+
+    private void fillDatabase() {
+
+        WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(instrumentationContext);
+
+        clearDataInMeasurementTable();
+
+        try {
+
+            WeightDataModel weightDataModel = new WeightDataModel(instrumentationContext);
+            weightDataModel.setWeightWithCurrentDate(120f);
+            weightTrackDatabaseHelper.insertOneRecordIntoWeightTrackDatabase(weightDataModel);
+            Thread.sleep(1000);
+            weightDataModel = new WeightDataModel(instrumentationContext);
+            weightDataModel.setWeightWithCurrentDate(130f);
+            weightTrackDatabaseHelper.insertOneRecordIntoWeightTrackDatabase(weightDataModel);
+            Thread.sleep(1000);
+            weightDataModel.setWeightWithCurrentDate(155f);
+            weightTrackDatabaseHelper.insertOneRecordIntoWeightTrackDatabase(weightDataModel);
+            Thread.sleep(1000);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 }

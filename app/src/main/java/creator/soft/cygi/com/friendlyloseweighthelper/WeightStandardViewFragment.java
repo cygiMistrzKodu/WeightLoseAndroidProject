@@ -107,7 +107,7 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
             }
         });
 
-        weightTrackDatabaseHelper.checkIfMeasurementTableEmpty();
+        weightTrackDatabaseHelper.isMeasurementTableEmpty();
 
         return view;
     }

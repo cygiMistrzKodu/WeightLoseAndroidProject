@@ -3,6 +3,7 @@ package creator.soft.cygi.com.friendlyloseweighthelper;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -147,7 +148,18 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
         cv.put(COLUMN_MEASUREMENT_DATA_DATE_TIME, weightDataModel.getLatestDate());
         cv.put(COLUMN_MEASUREMENT_DATA_WEIGHT, weightDataModel.getLatestWeight());
 
-        long insertedRowNumber = getWritableDatabase().insert(TABLE_MEASUREMENT_DATA, null, cv);
+
+        SQLiteDatabase db =  this.getWritableDatabase();
+
+        long insertedRowNumber;
+
+        try {
+            db.beginTransaction();
+            insertedRowNumber = db.insert(TABLE_MEASUREMENT_DATA, null, cv);
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
 
         Log.i(TAG, "Row inserted on position: " + insertedRowNumber);
 
@@ -212,7 +224,6 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
                 COLUMN_USERS_USER_NAME + "=?", new String[]{userName},
                 null, null, null);
         cursor.moveToFirst();
-        db.close();
 
         return cursor;
     }
@@ -252,24 +263,9 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
         SQLiteDatabase db = getWritableDatabase();
         saveLastDeletedData();
         db.delete(TABLE_MEASUREMENT_DATA, whereStatement, new String[]{String.valueOf(currentIdUser)});
-        checkIfMeasurementTableEmpty();
+        isMeasurementTableEmpty();
 
     }
-
-    public void checkIfMeasurementTableEmpty() {
-
-        SQLiteDatabase db = getReadableDatabase();
-        String count = "SELECT count(*) FROM "+TABLE_MEASUREMENT_DATA ;
-        Cursor cursor = db.rawQuery(count, null);
-        cursor.moveToFirst();
-        int rowCount =  cursor.getInt(0);
-
-        if(rowCount <= 0) {
-            Log.d(TAG, "Table Measurement is Empty : " + rowCount);
-            notifyTableMeasurementIsEmpty();
-        }
-    }
-
 
     public void undoDeleteLastMeasurement() {
 
@@ -369,6 +365,19 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
     public void clearAllMeasurementData() {
 
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String whereStatement = COLUMN_MEASUREMENT_DATA_ID_USER + " = ?";
+        String [] whereArgs = new String[]{String.valueOf(getIdOfCurrentUser())};
+        
+        db.beginTransaction();
+        try {
+            db.delete(TABLE_MEASUREMENT_DATA, whereStatement, whereArgs);
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+
     }
 
     @Override
@@ -460,4 +469,31 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
     }
 
+    public boolean isMeasurementTableEmpty() {
+
+      Long rowCount = numberOfMeasurementDataForCurrentUser();
+
+        if(rowCount > 0)
+        {
+            return false;
+        }
+
+        notifyTableMeasurementIsEmpty();
+        return true;
+    }
+
+    public Long numberOfMeasurementDataForCurrentUser(){
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String whereStatement = COLUMN_MEASUREMENT_DATA_ID_USER + " = ?";
+
+        Integer idOfCurrentUser = getIdOfCurrentUser();
+
+        String [] whereArgs = new String[]{idOfCurrentUser.toString()};
+
+        long rowCount = DatabaseUtils.queryNumEntries(db,TABLE_MEASUREMENT_DATA,whereStatement,whereArgs);
+
+        return rowCount;
+    }
 }
