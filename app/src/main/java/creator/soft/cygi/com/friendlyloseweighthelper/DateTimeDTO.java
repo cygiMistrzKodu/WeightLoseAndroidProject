@@ -63,4 +63,25 @@ public class DateTimeDTO {
         this.context = context;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof DateTimeDTO)) return false;
+
+        DateTimeDTO that = (DateTimeDTO) o;
+
+        if (measurementID != null ? !measurementID.equals(that.measurementID) : that.measurementID != null)
+            return false;
+        if (!date.equals(that.date)) return false;
+        return weight.equals(that.weight);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = measurementID != null ? measurementID.hashCode() : 0;
+        result = 31 * result + date.hashCode();
+        result = 31 * result + weight.hashCode();
+        return result;
+    }
 }

@@ -369,7 +369,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
         String whereStatement = COLUMN_MEASUREMENT_DATA_ID_USER + " = ?";
         String [] whereArgs = new String[]{String.valueOf(getIdOfCurrentUser())};
-        
+
         db.beginTransaction();
         try {
             db.delete(TABLE_MEASUREMENT_DATA, whereStatement, whereArgs);
