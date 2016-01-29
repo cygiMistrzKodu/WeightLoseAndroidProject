@@ -37,6 +37,13 @@ public class TestingBook {
         assertEquals(fewHasCodeTest, fewHasCodeTest2);
     }
 
+     @Test @Ignore
+     public  void generatedDateShow () {
+
+        System.out.println(DateTimeStringUtility.getCurrentDate());
+
+     }
+
     private class FewHasCodeTestClass {
 
         int number = 1;
