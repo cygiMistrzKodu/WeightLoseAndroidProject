@@ -208,7 +208,7 @@ public abstract class WeightCommonViewFragment extends Fragment {
     }
 
     private void saveData() {
-        weightTrackDatabaseHelper.insertOneRecordIntoWeightTrackDatabase(weightDataModel);
+        weightTrackDatabaseHelper.insertOneMeasurementIntoDatabase(weightDataModel);
     }
 
     private void clearAllValuesInUndoStack() {

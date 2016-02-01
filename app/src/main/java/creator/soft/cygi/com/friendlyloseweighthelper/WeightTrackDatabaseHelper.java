@@ -139,7 +139,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
     }
 
 
-    public long insertOneRecordIntoWeightTrackDatabase(WeightDataModel weightDataModel) {
+    public long insertOneMeasurementIntoDatabase(WeightDataModel weightDataModel) {
 
         int currentUserId = getIdOfCurrentUser();
 
@@ -282,7 +282,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
         dateTimeDTO.setAndroidContext(context);
 
         weightDataModel.setTimeAndDate(dateTimeDTO);
-        insertOneRecordIntoWeightTrackDatabase(weightDataModel);
+        insertOneMeasurementIntoDatabase(weightDataModel);
 
         notifyMeasurementUndoDeletion(dateTimeDTO);
         notifyTableMeasurementIsNotEmpty();
@@ -495,5 +495,18 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
         long rowCount = DatabaseUtils.queryNumEntries(db,TABLE_MEASUREMENT_DATA,whereStatement,whereArgs);
 
         return rowCount;
+    }
+
+    public List<UserData> getUsersData() {
+        return null;
+    }
+
+    public void clearAllUsersData() {
+    }
+
+    public void insertUserDataIntoDatabase(UserData userData) {
+
+        
+
     }
 }

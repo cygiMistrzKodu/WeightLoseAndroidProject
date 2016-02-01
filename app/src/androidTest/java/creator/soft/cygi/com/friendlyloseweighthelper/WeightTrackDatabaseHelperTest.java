@@ -44,7 +44,7 @@ public class WeightTrackDatabaseHelperTest {
         weightDataModel.setWeightWithCurrentDate(1600f);
 
         WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(instrumentationContext);
-        weightTrackDatabaseHelper.insertOneRecordIntoWeightTrackDatabase(weightDataModel);
+        weightTrackDatabaseHelper.insertOneMeasurementIntoDatabase(weightDataModel);
         WeightDataModel weightDataModelReturnFromDatabase = weightTrackDatabaseHelper.getAllWeightDataFromDatabase();
         List<DateTimeDTO> measurementInDataBase = weightDataModelReturnFromDatabase.getDatabaseData();
         DateTimeDTO returnMeasurementDateTimeDTO = measurementInDataBase.get(0);
@@ -55,7 +55,7 @@ public class WeightTrackDatabaseHelperTest {
 
     @Test
     public void checkWhenMeasurementClearThenMeasurementTableIsEmpty() {
-        fillDatabase();
+        fillMeasurementTable();
         clearDataInMeasurementTable();
 
         WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(instrumentationContext);
@@ -66,7 +66,7 @@ public class WeightTrackDatabaseHelperTest {
     @Test
     public void insertThreeMeasurementThenCountIsAlsoThree() {
         clearDataInMeasurementTable();
-        fillDatabase();
+        fillMeasurementTable();
         Long expectedCount = 3l;
         WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(instrumentationContext);
 
@@ -77,7 +77,7 @@ public class WeightTrackDatabaseHelperTest {
     public void checkLastMeasurementDeletion() {
 
         clearDataInMeasurementTable();
-        fillDatabase();
+        fillMeasurementTable();
         WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(instrumentationContext);
 
         WeightDataModel weightDataModelBeforeDeletion = weightTrackDatabaseHelper.getAllWeightDataFromDatabase();
@@ -99,7 +99,7 @@ public class WeightTrackDatabaseHelperTest {
     public void checkUndoLastLastMeasurementDeletion() {
 
         clearDataInMeasurementTable();
-        fillDatabase();
+        fillMeasurementTable();
 
         WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(instrumentationContext);
         WeightDataModel weightDataModelBeforeDeletion = weightTrackDatabaseHelper.getAllWeightDataFromDatabase();
@@ -119,7 +119,7 @@ public class WeightTrackDatabaseHelperTest {
                 .get(measurementListAfterDeletingAndRecovering.size() - 1);
 
         assertEquals(expectedMeasurementRecoverAfterDeletion.getWeight(),returnedDateTimeDTOMeasurement.getWeight());
-        assertEquals(expectedMeasurementRecoverAfterDeletion.getDateWithoutFormatting(),returnedDateTimeDTOMeasurement.getDateWithoutFormatting());
+        assertEquals(expectedMeasurementRecoverAfterDeletion.getDateWithoutFormatting(), returnedDateTimeDTOMeasurement.getDateWithoutFormatting());
 
     }
 
@@ -127,7 +127,7 @@ public class WeightTrackDatabaseHelperTest {
     public void updateMeasurementTest() {
 
         clearDataInMeasurementTable();
-        fillDatabase();
+        fillMeasurementTable();
 
         int UpdateMeasurementLocation = 1;
 
@@ -158,6 +158,68 @@ public class WeightTrackDatabaseHelperTest {
 
     }
 
+    @Test
+    public void readUserDataFromDatabaseTest() {
+
+
+        clearDatabase();
+        fillDatabase();
+
+        UserData userJanekDataExpected = new UserData();
+        userJanekDataExpected.setName("Janek");
+        userJanekDataExpected.setPassword("Koparka");
+
+        WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(instrumentationContext);
+        List<UserData> usersData = weightTrackDatabaseHelper.getUsersData();
+
+        UserData actualUserData = usersData.get(0);
+
+
+        assertEquals(userJanekDataExpected.getName(),actualUserData.getName());
+        assertEquals(userJanekDataExpected.getPassword(),actualUserData.getPassword());
+
+    }
+
+    private void fillDatabase() {
+        fillUserTable();
+        fillMeasurementTable();
+    }
+
+    private void clearDatabase() {
+        clearDataInMeasurementTable();
+        clearUserData();
+    }
+
+    private void clearUserData() {
+
+        WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(instrumentationContext);
+        weightTrackDatabaseHelper.clearAllUsersData();
+
+    }
+
+    private void fillUserTable() {
+
+        WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(instrumentationContext);
+
+        UserData userJanekData = new UserData();
+        userJanekData.setName("Janek");
+        userJanekData.setPassword("Koparka");
+
+        weightTrackDatabaseHelper.insertUserDataIntoDatabase(userJanekData);
+
+        UserData userJacekData = new UserData();
+        userJacekData.setName("Jacek");
+        userJacekData.setPassword("");
+
+        weightTrackDatabaseHelper.insertUserDataIntoDatabase(userJacekData);
+
+        UserData userAniaData = new UserData();
+        userAniaData.setName("Ania");
+        userAniaData.setPassword("Password");
+
+        weightTrackDatabaseHelper.insertUserDataIntoDatabase(userAniaData);
+
+    }
 
 
     private void clearDataInMeasurementTable() {
@@ -165,7 +227,7 @@ public class WeightTrackDatabaseHelperTest {
         weightTrackDatabaseHelper.clearAllMeasurementData();
     }
 
-    private void fillDatabase() {
+    private void fillMeasurementTable() {
 
         WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(instrumentationContext);
 
@@ -175,14 +237,14 @@ public class WeightTrackDatabaseHelperTest {
 
             WeightDataModel weightDataModel = new WeightDataModel(instrumentationContext);
             weightDataModel.setWeightWithCurrentDate(120f);
-            weightTrackDatabaseHelper.insertOneRecordIntoWeightTrackDatabase(weightDataModel);
+            weightTrackDatabaseHelper.insertOneMeasurementIntoDatabase(weightDataModel);
             Thread.sleep(1000);
             weightDataModel = new WeightDataModel(instrumentationContext);
             weightDataModel.setWeightWithCurrentDate(130f);
-            weightTrackDatabaseHelper.insertOneRecordIntoWeightTrackDatabase(weightDataModel);
+            weightTrackDatabaseHelper.insertOneMeasurementIntoDatabase(weightDataModel);
             Thread.sleep(1000);
             weightDataModel.setWeightWithCurrentDate(155f);
-            weightTrackDatabaseHelper.insertOneRecordIntoWeightTrackDatabase(weightDataModel);
+            weightTrackDatabaseHelper.insertOneMeasurementIntoDatabase(weightDataModel);
             Thread.sleep(1000);
 
         } catch (InterruptedException e) {
