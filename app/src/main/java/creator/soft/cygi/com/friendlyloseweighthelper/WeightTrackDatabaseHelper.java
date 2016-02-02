@@ -2,6 +2,7 @@ package creator.soft.cygi.com.friendlyloseweighthelper;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
@@ -24,10 +25,11 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
     private static final String TAG = "WeightTrackDatabaseH";
 
     private static final String DB_NAME = "weightTrack.sgl";
-    private static final int VERSION = 3;
+    private static final int VERSION = 4;
     private static final String TABLE_USERS = "users";
     private static final String COLUMN_USERS_ID_USER = "id_user";
     private static final String COLUMN_USERS_USER_NAME = "user_name";
+    private static final String COLUMN_USERS_PASSWORD = "password";
 
     private static final String TABLE_MEASUREMENT_DATA = "measurement_data";
     private static final String COLUMN_MEASUREMENT_DATA_MEASUREMENT_ID = "measurement_id";
@@ -35,9 +37,13 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
     private static final String COLUMN_MEASUREMENT_DATA_DATE_TIME = "date_time";
     private static final String COLUMN_MEASUREMENT_DATA_WEIGHT = "weight";
     public static final int ROW_NOT_INSERTED = -1;
+
+    private static String USER_DATA_PREFS = "user_data_preferences";
+    private static String CURRENT_USER_NAME = "current_user_name";
+
     private Context context;
     Stack<DateTimeDTO> lastMeasurementDeletionStack = new Stack<DateTimeDTO>();
-    private String currentUser = "JacekCygi";   // just for testing Will be more softicated latter
+    private String currentUserName = "JacekCygi";   // just for testing Will be more softicated latter
     private int existingUserID;
 
     private List<DatabaseNotificationObserver> DatabaseNotificationObservers = new ArrayList<DatabaseNotificationObserver>();
@@ -46,6 +52,20 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
     WeightTrackDatabaseHelper(Context context) {
         super(context, DB_NAME, null, VERSION);
         this.context = context;
+        readCurrentUserNameFromPreferences();
+    }
+
+    private void readCurrentUserNameFromPreferences() {
+//        SharedPreferences preferences = context.getSharedPreferences(USER_DATA_PREFS,context.MODE_PRIVATE);
+//        currentUserName = preferences.getString(CURRENT_USER_NAME,null);
+    }
+
+    public String getCurrentUserName() {
+        return currentUserName;
+    }
+
+    public void setCurrentUserName(String currentUserName) {
+        this.currentUserName = currentUserName;
     }
 
     @Override
@@ -69,7 +89,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
         }
         IOUtils.closeQuietly(inputStream);
 
-        Log.i("WEIGHT_TRACK", sqlCommand);
+        Log.d(TAG,"Command: "+ sqlCommand);
 
         return sqlCommand;
     }
@@ -77,8 +97,15 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
-        Log.d(TAG, "Database should be deleted : " + DB_NAME);
-        context.deleteDatabase(DB_NAME);
+        Log.d(TAG, "Upgrading database: " + DB_NAME);
+
+        switch (oldVersion){
+            case 3 :
+                db.execSQL(readSqlCommandFromResource(R.raw.update_table_users_add_password_column));;
+        }
+
+        Log.d(TAG, "Database Upgraded: " + DB_NAME);
+
     }
 
     public void deleteDatabase() {
@@ -176,7 +203,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
     private int getIdOfCurrentUser() {
 
-        if (checkIfUserExist(currentUser)) {
+        if (checkIfUserExist(currentUserName)) {
 
             int existingUserId = getExistingUserID();
 
@@ -204,7 +231,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
             }
         }
 
-        Log.i(TAG, "User name from database:  " + userNameInDatabase);
+        Log.d(TAG, "User name from database:  " + userNameInDatabase);
 
         if (userNameInDatabase.equals(userName)) {
             saveExistingUserId(cursor);
@@ -241,13 +268,13 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
     private void createNewUser() {
 
         ContentValues cv = new ContentValues();
-        cv.put(COLUMN_USERS_USER_NAME, currentUser);
+        cv.put(COLUMN_USERS_USER_NAME, currentUserName);
         getWritableDatabase().insert(TABLE_USERS, null, cv);
     }
 
     private int getNewUserId() {
 
-        Cursor cursor = findUser(currentUser);
+        Cursor cursor = findUser(currentUserName);
 
         return getUserId(cursor);
     }
@@ -363,7 +390,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
     }
 
-    public void clearAllMeasurementData() {
+    public void clearAllMeasurementDataForLoginUser() {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -504,9 +531,16 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
     public void clearAllUsersData() {
     }
 
-    public void insertUserDataIntoDatabase(UserData userData) {
+    public void insertNewUserDataIntoDatabase(UserData userData) {
 
-        
+        String userName = userData.getName();
+        String password = userData.getPassword();
+
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_USERS_USER_NAME, userName);
+        cv.put(COLUMN_USERS_PASSWORD,password);
+        getWritableDatabase().insert(TABLE_USERS, null, cv);
+
 
     }
 }

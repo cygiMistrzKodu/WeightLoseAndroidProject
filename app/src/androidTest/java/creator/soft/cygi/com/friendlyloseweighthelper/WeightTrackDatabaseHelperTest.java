@@ -205,26 +205,26 @@ public class WeightTrackDatabaseHelperTest {
         userJanekData.setName("Janek");
         userJanekData.setPassword("Koparka");
 
-        weightTrackDatabaseHelper.insertUserDataIntoDatabase(userJanekData);
+        weightTrackDatabaseHelper.insertNewUserDataIntoDatabase(userJanekData);
 
         UserData userJacekData = new UserData();
         userJacekData.setName("Jacek");
         userJacekData.setPassword("");
 
-        weightTrackDatabaseHelper.insertUserDataIntoDatabase(userJacekData);
+        weightTrackDatabaseHelper.insertNewUserDataIntoDatabase(userJacekData);
 
         UserData userAniaData = new UserData();
         userAniaData.setName("Ania");
         userAniaData.setPassword("Password");
 
-        weightTrackDatabaseHelper.insertUserDataIntoDatabase(userAniaData);
+        weightTrackDatabaseHelper.insertNewUserDataIntoDatabase(userAniaData);
 
     }
 
 
     private void clearDataInMeasurementTable() {
         WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(instrumentationContext);
-        weightTrackDatabaseHelper.clearAllMeasurementData();
+        weightTrackDatabaseHelper.clearAllMeasurementDataForLoginUser();
     }
 
     private void fillMeasurementTable() {
