@@ -23,13 +23,15 @@ import static org.junit.Assert.assertTrue;
 @MediumTest
 public class WeightTrackDatabaseHelperTest {
 
+    private final Context instrumentationContext = InstrumentationRegistry.getTargetContext();
+    private final WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(instrumentationContext);
     private String TAG = "WeightTrackDatabaseHelperTest";
-
-    private Context instrumentationContext;
 
     @Before
     public void setup() {
-        instrumentationContext = InstrumentationRegistry.getTargetContext();
+        weightTrackDatabaseHelper.setLoginUserName("Jacek");
+        clearDatabase();
+        fillDatabase();
 
     }
 
@@ -43,7 +45,6 @@ public class WeightTrackDatabaseHelperTest {
         WeightDataModel weightDataModel = new WeightDataModel(instrumentationContext);
         weightDataModel.setWeightWithCurrentDate(1600f);
 
-        WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(instrumentationContext);
         weightTrackDatabaseHelper.insertOneMeasurementIntoDatabase(weightDataModel);
         WeightDataModel weightDataModelReturnFromDatabase = weightTrackDatabaseHelper.getAllWeightDataFromDatabase();
         List<DateTimeDTO> measurementInDataBase = weightDataModelReturnFromDatabase.getDatabaseData();
@@ -55,30 +56,22 @@ public class WeightTrackDatabaseHelperTest {
 
     @Test
     public void checkWhenMeasurementClearThenMeasurementTableIsEmpty() {
+
         fillMeasurementTable();
         clearDataInMeasurementTable();
-
-        WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(instrumentationContext);
 
         assertTrue(weightTrackDatabaseHelper.isMeasurementTableEmpty());
     }
 
     @Test
     public void insertThreeMeasurementThenCountIsAlsoThree() {
-        clearDataInMeasurementTable();
-        fillMeasurementTable();
         Long expectedCount = 3l;
-        WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(instrumentationContext);
 
         assertEquals(expectedCount, weightTrackDatabaseHelper.numberOfMeasurementDataForCurrentUser());
     }
 
     @Test
     public void checkLastMeasurementDeletion() {
-
-        clearDataInMeasurementTable();
-        fillMeasurementTable();
-        WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(instrumentationContext);
 
         WeightDataModel weightDataModelBeforeDeletion = weightTrackDatabaseHelper.getAllWeightDataFromDatabase();
         List<DateTimeDTO> measurementListBeforeDeletingLastMeasurement = weightDataModelBeforeDeletion.getDatabaseData();
@@ -96,12 +89,8 @@ public class WeightTrackDatabaseHelperTest {
     }
 
     @Test
-    public void checkUndoLastLastMeasurementDeletion() {
+    public void checkUndoLastMeasurementDeletion() {
 
-        clearDataInMeasurementTable();
-        fillMeasurementTable();
-
-        WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(instrumentationContext);
         WeightDataModel weightDataModelBeforeDeletion = weightTrackDatabaseHelper.getAllWeightDataFromDatabase();
         List<DateTimeDTO> measurementListBeforeDeletingLastMeasurement = weightDataModelBeforeDeletion.getDatabaseData();
 
@@ -111,14 +100,14 @@ public class WeightTrackDatabaseHelperTest {
         weightTrackDatabaseHelper.deleteLatestEntry();
         weightTrackDatabaseHelper.undoDeleteLastMeasurement();
 
-        WeightDataModel weightDataModelAfterDeleteAndUndo= weightTrackDatabaseHelper.getAllWeightDataFromDatabase();
+        WeightDataModel weightDataModelAfterDeleteAndUndo = weightTrackDatabaseHelper.getAllWeightDataFromDatabase();
 
         List<DateTimeDTO> measurementListAfterDeletingAndRecovering = weightDataModelAfterDeleteAndUndo.getDatabaseData();
 
         DateTimeDTO returnedDateTimeDTOMeasurement = measurementListAfterDeletingAndRecovering
                 .get(measurementListAfterDeletingAndRecovering.size() - 1);
 
-        assertEquals(expectedMeasurementRecoverAfterDeletion.getWeight(),returnedDateTimeDTOMeasurement.getWeight());
+        assertEquals(expectedMeasurementRecoverAfterDeletion.getWeight(), returnedDateTimeDTOMeasurement.getWeight());
         assertEquals(expectedMeasurementRecoverAfterDeletion.getDateWithoutFormatting(), returnedDateTimeDTOMeasurement.getDateWithoutFormatting());
 
     }
@@ -126,12 +115,8 @@ public class WeightTrackDatabaseHelperTest {
     @Test
     public void updateMeasurementTest() {
 
-        clearDataInMeasurementTable();
-        fillMeasurementTable();
-
         int UpdateMeasurementLocation = 1;
 
-        WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(instrumentationContext);
         WeightDataModel weightDataModelBeforeUpdate = weightTrackDatabaseHelper.getAllWeightDataFromDatabase();
         List<DateTimeDTO> measurementListBeforeUpdate = weightDataModelBeforeUpdate.getDatabaseData();
 
@@ -152,18 +137,14 @@ public class WeightTrackDatabaseHelperTest {
 
         DateTimeDTO dateTimeDTOAfterUpdate = measurementListAfterUpdate.get(UpdateMeasurementLocation);
 
-        assertEquals(dateTimeDTOToUpdated.getMeasurementID(),dateTimeDTOAfterUpdate.getMeasurementID());
-        assertEquals(dateTimeDTOToUpdated.getDateWithoutFormatting(),dateTimeDTOAfterUpdate.getDateWithoutFormatting());
-        assertEquals(dateTimeDTOToUpdated.getWeight(),dateTimeDTOAfterUpdate.getWeight());
+        assertEquals(dateTimeDTOToUpdated.getMeasurementID(), dateTimeDTOAfterUpdate.getMeasurementID());
+        assertEquals(dateTimeDTOToUpdated.getDateWithoutFormatting(), dateTimeDTOAfterUpdate.getDateWithoutFormatting());
+        assertEquals(dateTimeDTOToUpdated.getWeight(), dateTimeDTOAfterUpdate.getWeight());
 
     }
 
     @Test
-    public void readUserDataFromDatabaseTest() {
-
-
-        clearDatabase();
-        fillDatabase();
+    public void writeAndReadUserDataInAndOutDatabaseTest() {
 
         UserData userJanekDataExpected = new UserData();
         userJanekDataExpected.setName("Janek");
@@ -174,10 +155,8 @@ public class WeightTrackDatabaseHelperTest {
 
         UserData actualUserData = usersData.get(0);
 
-
-        assertEquals(userJanekDataExpected.getName(),actualUserData.getName());
-        assertEquals(userJanekDataExpected.getPassword(),actualUserData.getPassword());
-
+        assertEquals(userJanekDataExpected.getName(), actualUserData.getName());
+        assertEquals(userJanekDataExpected.getPassword(), actualUserData.getPassword());
     }
 
     private void fillDatabase() {
@@ -186,15 +165,9 @@ public class WeightTrackDatabaseHelperTest {
     }
 
     private void clearDatabase() {
-        clearDataInMeasurementTable();
-        clearUserData();
-    }
-
-    private void clearUserData() {
 
         WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(instrumentationContext);
-        weightTrackDatabaseHelper.clearAllUsersData();
-
+        weightTrackDatabaseHelper.clearDatabase();
     }
 
     private void fillUserTable() {
@@ -223,14 +196,10 @@ public class WeightTrackDatabaseHelperTest {
 
 
     private void clearDataInMeasurementTable() {
-        WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(instrumentationContext);
         weightTrackDatabaseHelper.clearAllMeasurementDataForLoginUser();
     }
 
     private void fillMeasurementTable() {
-
-        WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(instrumentationContext);
-
         clearDataInMeasurementTable();
 
         try {
