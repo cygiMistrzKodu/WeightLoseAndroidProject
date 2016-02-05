@@ -2,10 +2,12 @@ package creator.soft.cygi.com.friendlyloseweighthelper;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import org.apache.commons.io.IOUtils;
@@ -35,8 +37,6 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
     private static final String COLUMN_MEASUREMENT_DATA_ID_USER = "id_user";
     private static final String COLUMN_MEASUREMENT_DATA_DATE_TIME = "date_time";
     private static final String COLUMN_MEASUREMENT_DATA_WEIGHT = "weight";
-    private static String USER_DATA_PREFS = "user_data_preferences";
-    private static String CURRENT_USER_NAME = "current_user_name";
     Stack<DateTimeDTO> lastMeasurementDeletionStack = new Stack<DateTimeDTO>();
     private Context context;
     private String loginUserName;
@@ -51,8 +51,10 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
     }
 
     private void readCurrentUserNameFromPreferences() {
-//        SharedPreferences preferences = context.getSharedPreferences(USER_DATA_PREFS,context.MODE_PRIVATE);
-//        loginUserName = preferences.getString(CURRENT_USER_NAME,null);
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        loginUserName = sharedPreferences.getString(LoginViewFragment.LOGIN_USER_NAME, null);
+
     }
 
     public String getLoginUserName() {
@@ -500,6 +502,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
     }
 
     private Cursor getAllUserCursor() {
+
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_USERS,
