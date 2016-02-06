@@ -3,7 +3,7 @@
 
     <string name="weight_enter">Enter your weight</string>
     <string name="action_settings">Settings</string>
-    <string name="ok_button">OK</string>
+    <string name="ok_input_weight_button">OK</string>
     <string name="weight_units">Kg</string>
     <string name="chart_unit_kg">Weight in Kg</string>
     <string name="undo_last_deletion_button">Undo</string>
@@ -17,4 +17,7 @@
     <string name="left_Arrow"><![CDATA[<]]></string>
     <string name="right_Arrow"><![CDATA[>]]></string>
     <string name="position_number">Position: %d</string>
+    <string name="create_new_user">Create new user</string>
+    <string name="ok_login_button">OK</string>
+    <string name="choose_user_text_view">Choose user</string>
 </resources>

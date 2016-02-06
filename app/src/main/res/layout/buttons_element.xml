@@ -5,7 +5,7 @@
         android:id="@+id/acceptButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/ok_button" />
+        android:text="@string/ok_input_weight_button" />
 
     <Button
         android:id="@+id/schowChart_test"

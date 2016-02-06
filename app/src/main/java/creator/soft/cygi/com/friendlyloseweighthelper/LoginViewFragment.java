@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Space;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -27,8 +30,11 @@ public class LoginViewFragment extends Fragment {
     public static final String LOGIN_USER_NAME = "loginUserName";
     private Spinner userListSpinner;
     private EditText passwordEditText;
+    private TextView passwordTextView;
     private Button okButton;
     private Button createNewUserButton;
+    private Space abovePasswordTextViewSpace;
+    private Space belowPasswordTextViewSpace;
 
 
     @Override
@@ -48,12 +54,29 @@ public class LoginViewFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                Toast.makeText(getContext() , "Position:  " + userListSpinner.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
+                UserData userData = (UserData) userListSpinner.getSelectedItem();
+
+                Toast.makeText(getContext(), "Position:  " + userData.getName(), Toast.LENGTH_LONG).show();
 
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
                 SharedPreferences.Editor editor = prefs.edit();
-                editor.putString(LOGIN_USER_NAME,userListSpinner.getSelectedItem().toString());
+                editor.putString(LOGIN_USER_NAME, userData.getName());
                 editor.commit();
+
+
+                if (userData.getPassword().isEmpty()) {
+
+                    belowPasswordTextViewSpace.setVisibility(View.GONE);
+                    abovePasswordTextViewSpace.setVisibility(View.GONE);
+                    passwordTextView.setVisibility(View.GONE);
+                    passwordEditText.setVisibility(View.GONE);
+
+                } else {
+                    belowPasswordTextViewSpace.setVisibility(View.VISIBLE);
+                    abovePasswordTextViewSpace.setVisibility(View.VISIBLE);
+                    passwordTextView.setVisibility(View.VISIBLE);
+                    passwordEditText.setVisibility(View.VISIBLE);
+                }
 
             }
 
@@ -69,12 +92,30 @@ public class LoginViewFragment extends Fragment {
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.fragmentContainer, new WeightStandardViewFragment());
-                ft.commit();
+
+                UserData userData = (UserData) userListSpinner.getSelectedItem();
+                String password = userData.getPassword();
+
+                String passwordEnter = passwordEditText.getText().toString();
+
+                boolean noPassword = password.isEmpty();
+
+                if(passwordEnter.equals(userData.getPassword()) || noPassword ) {
+
+                    final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                    ft.replace(R.id.fragmentContainer, new WeightStandardViewFragment());
+                    ft.commit();
+                } else {
+
+                    passwordEditText.setError("Wrong Password");
+
+                }
             }
         });
         createNewUserButton = (Button) view.findViewById(R.id.createNewUserButton);
+        passwordTextView = (TextView) view.findViewById(R.id.passwordTextView);
+        abovePasswordTextViewSpace = (Space) view.findViewById(R.id.spaceAbovePasswordTextView);
+        belowPasswordTextViewSpace = (Space) view.findViewById(R.id.spaceBelowPasswordTextView);
 
 
 

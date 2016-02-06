@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Choose user"
+        android:text="@string/choose_user_text_view"
         android:textSize="20dp"/>
     <Space
         android:layout_width="match_parent"
@@ -20,21 +20,27 @@
         android:gravity="center">
     </Spinner>
     <Space
+        android:id="@+id/spaceAbovePasswordTextView"
         android:layout_width="match_parent"
         android:layout_height="10dp" />
     <TextView
+        android:id="@+id/passwordTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20dp"
         android:text="Password"/>
     <Space
+        android:id="@+id/spaceBelowPasswordTextView"
         android:layout_width="match_parent"
         android:layout_height="10dp" />
     <EditText
         android:id="@+id/passwordEditText"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/rectangle_border"/>
+        android:minWidth="150dp"
+        android:background="@drawable/rectangle_border"
+        android:gravity="center"
+        android:password="true"/>
     <Space
         android:layout_width="match_parent"
         android:layout_height="20dp" />
@@ -42,7 +48,7 @@
         android:id="@+id/okButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="OK"/>
+        android:text="@string/ok_login_button"/>
     <Space
         android:layout_width="match_parent"
         android:layout_height="40dp" />
@@ -50,6 +56,6 @@
         android:id="@+id/createNewUserButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create new user"/>
+        android:text="@string/create_new_user"/>
 
 </LinearLayout>

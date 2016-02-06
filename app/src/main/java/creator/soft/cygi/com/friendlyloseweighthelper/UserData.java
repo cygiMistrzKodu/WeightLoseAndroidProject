@@ -8,7 +8,7 @@ import android.util.Log;
 public class UserData {
     private Long userId;
     private String name;
-    private String password;
+    private String password="";
 
     public void setName(String name) {
         this.name = name;

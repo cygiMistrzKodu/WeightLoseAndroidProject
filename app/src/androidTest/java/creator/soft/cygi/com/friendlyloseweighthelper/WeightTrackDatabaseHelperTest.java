@@ -13,6 +13,8 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -157,6 +159,22 @@ public class WeightTrackDatabaseHelperTest {
 
         assertEquals(userJanekDataExpected.getName(), actualUserData.getName());
         assertEquals(userJanekDataExpected.getPassword(), actualUserData.getPassword());
+    }
+
+    @Test
+    public void whenNoPasswordIsSetThenImplicitlyIsEmptyStringAndWhenPasswordReturnFromDatabaseIsEmptyString() {
+
+        UserData userWithNoPasswordSet = new UserData();
+        userWithNoPasswordSet.setName("UserWithNoPasswordSet");
+        weightTrackDatabaseHelper.insertNewUserDataIntoDatabase(userWithNoPasswordSet);
+
+        List<UserData> usersData = weightTrackDatabaseHelper.getUsersData();
+
+        UserData userFromDatabaseWithNullPassword = usersData.get(3);
+
+        String passwordReturn = userFromDatabaseWithNullPassword.getPassword();
+
+        assertEquals("", passwordReturn);
     }
 
     private void fillDatabase() {
