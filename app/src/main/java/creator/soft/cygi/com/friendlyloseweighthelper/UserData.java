@@ -7,7 +7,7 @@ public class UserData {
     private Long userId;
     private String name;
     private String password="";
-    private String weightGoal;
+    private float weightGoal = 0;
 
     public void setName(String name) {
         this.name = name;
@@ -33,11 +33,11 @@ public class UserData {
         this.userId = userId;
     }
 
-    public void setWeightGoal(String weightGoal) {
+    public void setWeightGoal(float weightGoal) {
         this.weightGoal = weightGoal;
     }
 
-    public String getWeightGoal() {
+    public float getWeightGoal() {
         return weightGoal;
     }
 

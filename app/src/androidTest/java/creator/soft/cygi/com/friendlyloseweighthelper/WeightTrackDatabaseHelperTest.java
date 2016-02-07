@@ -6,6 +6,7 @@ import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.MediumTest;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -168,14 +169,97 @@ public class WeightTrackDatabaseHelperTest {
         userWithNoPasswordSet.setName("UserWithNoPasswordSet");
         weightTrackDatabaseHelper.insertNewUserDataIntoDatabase(userWithNoPasswordSet);
 
-        List<UserData> usersData = weightTrackDatabaseHelper.getUsersData();
+        List<UserData> usersDataList = weightTrackDatabaseHelper.getUsersData();
 
-        UserData userFromDatabaseWithNullPassword = usersData.get(3);
+        UserData userFromDatabaseWithNullPassword = usersDataList.get(3);
 
         String passwordReturn = userFromDatabaseWithNullPassword.getPassword();
 
         assertEquals("", passwordReturn);
     }
+
+    @Test
+    public void whenInsertUserWithWeightGoalThenGoalIsInStorage() {
+
+        UserData userWithGoal = new UserData();
+        userWithGoal.setName("UserWithGoal");
+        userWithGoal.setWeightGoal(250.50f);
+
+        weightTrackDatabaseHelper.insertNewUserDataIntoDatabase(userWithGoal);
+
+        List<UserData> usersDataList = weightTrackDatabaseHelper.getUsersData();
+        UserData userFromStorageWithGoal = usersDataList.get(3);
+
+        assertEquals("UserWithGoal",userFromStorageWithGoal.getName());
+
+        float expectedWeightGoal = 250.50f;
+        assertEquals(expectedWeightGoal,userFromStorageWithGoal.getWeightGoal(),0.00f);
+
+    }
+
+    @Test
+    public void changeUserWeightGoalTest(){
+
+        UserData userWithGoal = new UserData();
+        userWithGoal.setName("UserWithGoal");
+        userWithGoal.setWeightGoal(140.20f);
+
+        weightTrackDatabaseHelper.insertNewUserDataIntoDatabase(userWithGoal);
+
+        List<UserData> usersDataList = weightTrackDatabaseHelper.getUsersData();
+        UserData userFromStorageWithGoalToUpdate = usersDataList.get(3);
+
+        float newWeightGoal = 78.5f;
+        userFromStorageWithGoalToUpdate.setWeightGoal(newWeightGoal);
+        weightTrackDatabaseHelper.updateUserData(userFromStorageWithGoalToUpdate);
+
+        UserData UserAfterUpdatedGoal = weightTrackDatabaseHelper.getUserDataById(userFromStorageWithGoalToUpdate.getUserId());
+
+        assertEquals(userWithGoal.getName(),UserAfterUpdatedGoal.getName());
+        assertEquals(newWeightGoal,UserAfterUpdatedGoal.getWeightGoal(),0.00f);
+    }
+
+    @Test @Ignore
+    public void checkIfWhenTwoUserHaveSameNameThenEveryTimeWhenUpdateGoalThenAlwaysFirstInRowGoalIsUpdateWithIsWrong(){
+
+        UserData userWithGoal = new UserData();
+        userWithGoal.setName("UserWithGoal");
+        userWithGoal.setWeightGoal(50f);
+
+        UserData userDifferentGoalSameName = new UserData();
+        userWithGoal.setName("UserWithGoal");
+        userWithGoal.setWeightGoal(330f);
+
+        weightTrackDatabaseHelper.insertNewUserDataIntoDatabase(userWithGoal);
+        weightTrackDatabaseHelper.insertNewUserDataIntoDatabase(userDifferentGoalSameName);
+
+        List<UserData> usersDataList = weightTrackDatabaseHelper.getUsersData();
+        UserData userFromStorageWithGoalToUpdateFirst = usersDataList.get(3);
+        UserData userFromStorageWithGoalToUpdateSecond = usersDataList.get(4);
+
+        float newWeightGoalFirst = 78.5f;
+        float newWeightGoalSecond = 800f;
+        userFromStorageWithGoalToUpdateFirst.setWeightGoal(newWeightGoalFirst);
+        userFromStorageWithGoalToUpdateSecond.setWeightGoal(newWeightGoalSecond);
+
+        weightTrackDatabaseHelper.updateUserData(userFromStorageWithGoalToUpdateFirst);
+        weightTrackDatabaseHelper.updateUserData(userFromStorageWithGoalToUpdateSecond);
+
+        UserData UserAfterUpdatedGoal = weightTrackDatabaseHelper.getUserDataById(userFromStorageWithGoalToUpdateFirst.getUserId());
+        UserData UserAfterUpdatedGoal2 = weightTrackDatabaseHelper.getUserDataById(userFromStorageWithGoalToUpdateSecond.getUserId());
+
+        assertEquals(userWithGoal.getName(),UserAfterUpdatedGoal.getName());
+        assertEquals(newWeightGoalFirst,UserAfterUpdatedGoal.getWeightGoal(),0.00f);
+
+
+
+        assertEquals(userDifferentGoalSameName.getName(),UserAfterUpdatedGoal2.getName());
+        assertEquals(newWeightGoalSecond,UserAfterUpdatedGoal2.getWeightGoal(),0.00f);
+
+        assertNotNull(userWithGoal);
+        assertNotNull(userDifferentGoalSameName.getName());
+    }
+
 
     private void fillDatabase() {
         fillUserTable();

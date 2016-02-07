@@ -49,7 +49,7 @@ public class CreateNewUserFragment extends Fragment {
 
                 String userName = userNameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
-                String weightGoal = weightGoalEditText.getText().toString();
+                float weightGoal = Float.parseFloat(weightGoalEditText.getText().toString());
 
                 boolean isUserNameEmpty = userName.isEmpty();
 
@@ -62,7 +62,7 @@ public class CreateNewUserFragment extends Fragment {
                 UserData userData = new UserData();
                 userData.setName(userName);
                 userData.setPassword(password);
-                userData.setWeightGoal(weightGoal); // TODO trzeba jeszcze dodac nowa tabele do bazy GOAL
+                userData.setWeightGoal(weightGoal);
 
                 weightTrackDatabaseHelper.insertNewUserDataIntoDatabase(userData);
 
@@ -72,9 +72,6 @@ public class CreateNewUserFragment extends Fragment {
         userNameEditText = (EditText) view.findViewById(R.id.userNameEditText);
         passwordEditText = (EditText) view.findViewById(R.id.passwordEditText);
         weightGoalEditText = (EditText) view.findViewById(R.id.weightGoalEditText);
-
-
-
 
         return view;
     }

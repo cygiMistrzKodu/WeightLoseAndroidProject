@@ -27,7 +27,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
     public static final int ROW_NOT_INSERTED = -1;
     private static final String TAG = "WeightTrackDatabaseH";
     private static final String DB_NAME = "weightTrack.sgl";
-    private static final int VERSION = 4;
+    private static final int VERSION = 5;
     private static final String TABLE_USERS = "users";
     private static final String COLUMN_USERS_ID_USER = "id_user";
     private static final String COLUMN_USERS_USER_NAME = "user_name";
@@ -37,6 +37,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
     private static final String COLUMN_MEASUREMENT_DATA_ID_USER = "id_user";
     private static final String COLUMN_MEASUREMENT_DATA_DATE_TIME = "date_time";
     private static final String COLUMN_MEASUREMENT_DATA_WEIGHT = "weight";
+    private static final String COLUMN_USERS_WEIGHT_GOAL = "weight_goal";
     Stack<DateTimeDTO> lastMeasurementDeletionStack = new Stack<DateTimeDTO>();
     private Context context;
     private String loginUserName;
@@ -99,6 +100,9 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
         switch (oldVersion) {
             case 3:
                 db.execSQL(readSqlCommandFromResource(R.raw.update_table_users_add_password_column));
+            case 4:
+                db.execSQL(readSqlCommandFromResource(R.raw.update_tabel_users_add_goal_column));
+
         }
 
         Log.d(TAG, "Database Upgraded: " + DB_NAME);
@@ -204,17 +208,17 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
         int userId = getUserId(cursor);
 
-        return  userId;
+        return userId;
     }
 
     private Cursor findUser(String userName) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Log.d("USERNAME ***", " "+ userName);
+        Log.d("USERNAME ***", " " + userName);
 
         Cursor cursor = db.query(TABLE_USERS,
                 new String[]{COLUMN_USERS_ID_USER,
-                        COLUMN_USERS_USER_NAME,COLUMN_USERS_PASSWORD},
+                        COLUMN_USERS_USER_NAME, COLUMN_USERS_PASSWORD},
                 COLUMN_USERS_USER_NAME + "=?", new String[]{userName},
                 null, null, null);
         cursor.moveToFirst();
@@ -475,6 +479,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
         long userId;
         String userName;
         String userPassword;
+        float userGoal;
 
         if (allUserCursor.getCount() > 0) {
 
@@ -483,13 +488,16 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
                 userId = allUserCursor.getLong(allUserCursor.getColumnIndex(COLUMN_USERS_ID_USER));
                 userName = allUserCursor.getString(allUserCursor.getColumnIndex(COLUMN_USERS_USER_NAME));
                 userPassword = allUserCursor.getString(allUserCursor.getColumnIndex(COLUMN_USERS_PASSWORD));
+                userGoal = allUserCursor.getFloat(allUserCursor.getColumnIndex(COLUMN_USERS_WEIGHT_GOAL));
 
-                Log.d(TAG, "Data From database : " + "userId: " + userId + " userName: " + userName + " userPassword: " + userPassword);
+                Log.d(TAG, "Data From database : " + "userId: " + userId + " userName: "
+                        + userName + " userPassword: " + userPassword + "weightGoal " + userGoal);
 
                 UserData userData = new UserData();
                 userData.setUserId(userId);
                 userData.setName(userName);
                 userData.setPassword(userPassword);
+                userData.setWeightGoal(userGoal);
 
                 allUsersData.add(userData);
 
@@ -507,7 +515,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
         Cursor cursor = db.query(TABLE_USERS,
                 new String[]{COLUMN_MEASUREMENT_DATA_ID_USER, COLUMN_USERS_USER_NAME,
-                        COLUMN_USERS_PASSWORD},
+                        COLUMN_USERS_PASSWORD, COLUMN_USERS_WEIGHT_GOAL},
                 null, null,
                 null, null, null);
 
@@ -549,11 +557,62 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
         String userName = userData.getName();
         String password = userData.getPassword();
+        float weightGoal = userData.getWeightGoal();
 
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_USERS_USER_NAME, userName);
         cv.put(COLUMN_USERS_PASSWORD, password);
+        cv.put(COLUMN_USERS_WEIGHT_GOAL, weightGoal);
         getWritableDatabase().insert(TABLE_USERS, null, cv);
 
+    }
+
+    public void updateUserData(UserData userToUpdate) {
+
+        Long userId = userToUpdate.getUserId();
+        String userName = userToUpdate.getName();
+        String password = userToUpdate.getPassword();
+        float weightGoal = userToUpdate.getWeightGoal();
+
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_USERS_USER_NAME, userName);
+        cv.put(COLUMN_USERS_PASSWORD, password);
+        cv.put(COLUMN_USERS_WEIGHT_GOAL, weightGoal);
+
+        String whereStatement = COLUMN_USERS_ID_USER + " = ?";
+        String[] whereArgs = new String[]{userId.toString()};
+
+        getWritableDatabase().update(TABLE_USERS, cv, whereStatement, whereArgs);
+
+    }
+
+    public UserData getUserDataById(Long userId) {
+
+        Cursor userCursor = getUserCursorBaseOnUserID(userId);
+
+        String userName = userCursor.getString(userCursor.getColumnIndex(COLUMN_USERS_USER_NAME));
+        String password = userCursor.getString(userCursor.getColumnIndex(COLUMN_USERS_PASSWORD));
+        Float weightGoal = userCursor.getFloat(userCursor.getColumnIndex(COLUMN_USERS_WEIGHT_GOAL));
+
+        UserData userData = new UserData();
+        userData.setUserId(userId);
+        userData.setName(userName);
+        userData.setPassword(password);
+        userData.setWeightGoal(weightGoal);
+
+        return userData;
+    }
+
+    private Cursor getUserCursorBaseOnUserID(Long userId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_USERS,
+                new String[]{COLUMN_USERS_ID_USER,
+                        COLUMN_USERS_USER_NAME, COLUMN_USERS_PASSWORD, COLUMN_USERS_WEIGHT_GOAL},
+                COLUMN_USERS_ID_USER + " = ?", new String[]{userId.toString()},
+                null, null, null);
+        cursor.moveToFirst();
+
+        return cursor;
     }
 }
