@@ -34,9 +34,11 @@
             android:text="User Name" />
 
         <EditText
+            android:id="@+id/userNameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rectangle_border" />
+            android:background="@drawable/rectangle_border"
+            android:gravity="center"/>
 
         <Space
             android:layout_width="match_parent"
@@ -49,9 +51,11 @@
 
 
         <EditText
+            android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rectangle_border" />
+            android:background="@drawable/rectangle_border"
+            android:gravity="center"/>
 
         <Space
             android:layout_width="match_parent"
@@ -63,18 +67,26 @@
             android:text="Weight Goal (optional)" />
 
         <EditText
+            android:id="@+id/weightGoalEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rectangle_border" />
+            android:background="@drawable/rectangle_border"
+            android:gravity="center"/>
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="30dp" />
 
         <Button
+            android:id="@+id/createNewUserOKButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="OK" />
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"/>
 
     </LinearLayout>
 

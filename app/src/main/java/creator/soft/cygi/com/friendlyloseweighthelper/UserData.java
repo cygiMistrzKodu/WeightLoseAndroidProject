@@ -1,7 +1,5 @@
 package creator.soft.cygi.com.friendlyloseweighthelper;
 
-import android.util.Log;
-
 /**
  * Created by CygiMasterProgrammer on 2016-02-01.
  */
@@ -9,6 +7,7 @@ public class UserData {
     private Long userId;
     private String name;
     private String password="";
+    private String weightGoal;
 
     public void setName(String name) {
         this.name = name;
@@ -32,6 +31,14 @@ public class UserData {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public void setWeightGoal(String weightGoal) {
+        this.weightGoal = weightGoal;
+    }
+
+    public String getWeightGoal() {
+        return weightGoal;
     }
 
     @Override

@@ -86,7 +86,6 @@ public class LoginViewFragment extends Fragment {
             }
         });
 
-
         passwordEditText = (EditText) view.findViewById(R.id.passwordEditText);
         okButton = (Button) view.findViewById(R.id.okButton);
         okButton.setOnClickListener(new View.OnClickListener() {
@@ -113,6 +112,17 @@ public class LoginViewFragment extends Fragment {
             }
         });
         createNewUserButton = (Button) view.findViewById(R.id.createNewUserButton);
+        createNewUserButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.fragmentContainer, new CreateNewUserFragment());
+                ft.commit();
+            }
+        });
+
+
         passwordTextView = (TextView) view.findViewById(R.id.passwordTextView);
         abovePasswordTextViewSpace = (Space) view.findViewById(R.id.spaceAbovePasswordTextView);
         belowPasswordTextViewSpace = (Space) view.findViewById(R.id.spaceBelowPasswordTextView);
