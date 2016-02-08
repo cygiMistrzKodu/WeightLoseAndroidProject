@@ -22,7 +22,7 @@ import java.util.Stack;
 /**
  * Created by CygiMasterProgrammer on 2015-12-14.
  */
-public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements DatabaseNotificationSubject {
+public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements DatabaseNotificationSubject, UserNotificationSubject {
 
     public static final int ROW_NOT_INSERTED = -1;
     private static final String TAG = "WeightTrackDatabaseH";
@@ -43,6 +43,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
     private String loginUserName;
 
     private List<DatabaseNotificationObserver> DatabaseNotificationObservers = new ArrayList<DatabaseNotificationObserver>();
+private List<UserNotificationObserver> userNotificationObservers = new ArrayList<UserNotificationObserver>();
 
 
     WeightTrackDatabaseHelper(Context context) {
@@ -559,12 +560,48 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
         String password = userData.getPassword();
         float weightGoal = userData.getWeightGoal();
 
+        if(isUserExist(userName)){
+            notifyUserExistAlready(userData);
+            return;
+        }
+
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_USERS_USER_NAME, userName);
         cv.put(COLUMN_USERS_PASSWORD, password);
         cv.put(COLUMN_USERS_WEIGHT_GOAL, weightGoal);
         getWritableDatabase().insert(TABLE_USERS, null, cv);
 
+    }
+
+    @Override
+    public void addUserNotificationObserver(UserNotificationObserver userNotificationObserver) {
+
+        userNotificationObservers.add(userNotificationObserver);
+
+    }
+
+    @Override
+    public void removeNotificationUserObserver(UserNotificationObserver userNotificationObserver) {
+
+        userNotificationObservers.remove(userNotificationObserver);
+    }
+
+    @Override
+    public void notifyUserExistAlready(UserData userData) {
+
+        for (UserNotificationObserver userNotificationObserver : userNotificationObservers){
+            userNotificationObserver.onUserAlreadyExist(userData);
+        }
+    }
+
+    private boolean isUserExist(String userName) {
+        Cursor cursor = findUser(userName);
+
+        if(cursor.getCount() > 0) {
+            return true;
+        }
+
+        return false;
     }
 
     public void updateUserData(UserData userToUpdate) {

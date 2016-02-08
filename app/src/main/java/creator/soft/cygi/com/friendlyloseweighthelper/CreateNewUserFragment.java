@@ -49,7 +49,14 @@ public class CreateNewUserFragment extends Fragment {
 
                 String userName = userNameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
-                float weightGoal = Float.parseFloat(weightGoalEditText.getText().toString());
+                String weightGoalContent = weightGoalEditText.getText().toString();
+                float weightGoal = 0;
+
+                if(!weightGoalContent.equals(".")) {
+                    if (!weightGoalContent.isEmpty()) {
+                        weightGoal = Float.parseFloat(weightGoalEditText.getText().toString());
+                    }
+                }
 
                 boolean isUserNameEmpty = userName.isEmpty();
 
@@ -59,6 +66,12 @@ public class CreateNewUserFragment extends Fragment {
                 }
 
                 WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(getContext());
+                weightTrackDatabaseHelper.addUserNotificationObserver(new UserNotificationObserver() {
+                    @Override
+                    public void onUserAlreadyExist(UserData userData) {
+                        userNameEditText.setError("User already exist");
+                    }
+                });
                 UserData userData = new UserData();
                 userData.setName(userName);
                 userData.setPassword(password);
