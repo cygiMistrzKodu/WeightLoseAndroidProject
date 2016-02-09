@@ -43,7 +43,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
     private String loginUserName;
 
     private List<DatabaseNotificationObserver> DatabaseNotificationObservers = new ArrayList<DatabaseNotificationObserver>();
-private List<UserNotificationObserver> userNotificationObservers = new ArrayList<UserNotificationObserver>();
+    private List<UserNotificationObserver> userNotificationObservers = new ArrayList<UserNotificationObserver>();
 
 
     WeightTrackDatabaseHelper(Context context) {
@@ -651,5 +651,13 @@ private List<UserNotificationObserver> userNotificationObservers = new ArrayList
         cursor.moveToFirst();
 
         return cursor;
+    }
+
+    public Long countUsersInStorage() {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        long userCount = DatabaseUtils.queryNumEntries(db, TABLE_USERS);
+        return userCount;
     }
 }

@@ -219,47 +219,24 @@ public class WeightTrackDatabaseHelperTest {
         assertEquals(newWeightGoal,UserAfterUpdatedGoal.getWeightGoal(),0.00f);
     }
 
-    @Test @Ignore
-    public void checkIfWhenTwoUserHaveSameNameThenEveryTimeWhenUpdateGoalThenAlwaysFirstInRowGoalIsUpdateWithIsWrong(){
+    @Test
+    public void IfTryInsertUserWithNameThatAlreadyExistInStorageThenIsNotInserted(){
 
-        UserData userWithGoal = new UserData();
-        userWithGoal.setName("UserWithGoal");
-        userWithGoal.setWeightGoal(50f);
+        UserData userFirst = new UserData();
+        userFirst.setName("Wicek");
 
-        UserData userDifferentGoalSameName = new UserData();
-        userWithGoal.setName("UserWithGoal");
-        userWithGoal.setWeightGoal(330f);
+        UserData userSecondSameName = new UserData();
+        userSecondSameName.setName("Wicek");
 
-        weightTrackDatabaseHelper.insertNewUserDataIntoDatabase(userWithGoal);
-        weightTrackDatabaseHelper.insertNewUserDataIntoDatabase(userDifferentGoalSameName);
+        weightTrackDatabaseHelper.insertNewUserDataIntoDatabase(userFirst);
+        Long numberUsersIsStorageAfterInsertFirstUser = weightTrackDatabaseHelper.countUsersInStorage();
 
-        List<UserData> usersDataList = weightTrackDatabaseHelper.getUsersData();
-        UserData userFromStorageWithGoalToUpdateFirst = usersDataList.get(3);
-        UserData userFromStorageWithGoalToUpdateSecond = usersDataList.get(4);
+        weightTrackDatabaseHelper.insertNewUserDataIntoDatabase(userSecondSameName);
+        Long numberUsersIsStorageAfterInsertSecondUserWithSameName = weightTrackDatabaseHelper.countUsersInStorage();
 
-        float newWeightGoalFirst = 78.5f;
-        float newWeightGoalSecond = 800f;
-        userFromStorageWithGoalToUpdateFirst.setWeightGoal(newWeightGoalFirst);
-        userFromStorageWithGoalToUpdateSecond.setWeightGoal(newWeightGoalSecond);
+        assertEquals(numberUsersIsStorageAfterInsertFirstUser, numberUsersIsStorageAfterInsertSecondUserWithSameName);
 
-        weightTrackDatabaseHelper.updateUserData(userFromStorageWithGoalToUpdateFirst);
-        weightTrackDatabaseHelper.updateUserData(userFromStorageWithGoalToUpdateSecond);
-
-        UserData UserAfterUpdatedGoal = weightTrackDatabaseHelper.getUserDataById(userFromStorageWithGoalToUpdateFirst.getUserId());
-        UserData UserAfterUpdatedGoal2 = weightTrackDatabaseHelper.getUserDataById(userFromStorageWithGoalToUpdateSecond.getUserId());
-
-        assertEquals(userWithGoal.getName(),UserAfterUpdatedGoal.getName());
-        assertEquals(newWeightGoalFirst,UserAfterUpdatedGoal.getWeightGoal(),0.00f);
-
-
-
-        assertEquals(userDifferentGoalSameName.getName(),UserAfterUpdatedGoal2.getName());
-        assertEquals(newWeightGoalSecond,UserAfterUpdatedGoal2.getWeightGoal(),0.00f);
-
-        assertNotNull(userWithGoal);
-        assertNotNull(userDifferentGoalSameName.getName());
     }
-
 
     private void fillDatabase() {
         fillUserTable();
@@ -295,7 +272,6 @@ public class WeightTrackDatabaseHelperTest {
         weightTrackDatabaseHelper.insertNewUserDataIntoDatabase(userAniaData);
 
     }
-
 
     private void clearDataInMeasurementTable() {
         weightTrackDatabaseHelper.clearAllMeasurementDataForLoginUser();
