@@ -9,9 +9,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -83,6 +87,7 @@ public abstract class WeightCommonViewFragment extends Fragment {
         weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(getContext());
         setTagName();
         updateWeightDataModel();
+        setHasOptionsMenu(true);
     }
 
     private void setTagName() {
@@ -153,6 +158,29 @@ public abstract class WeightCommonViewFragment extends Fragment {
         autoCheckBox = (CheckBox) view.findViewById(R.id.autoCheckBox);
 
         return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.main_menu,menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.menu_switch_users:
+
+                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.fragmentContainer, new LoginViewFragment());
+                ft.commit();
+
+               return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     }
 
     private void processUserMeasurementInput() {
