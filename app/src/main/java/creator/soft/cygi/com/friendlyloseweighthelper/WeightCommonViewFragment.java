@@ -177,6 +177,12 @@ public abstract class WeightCommonViewFragment extends Fragment {
                 ft.commit();
 
                return true;
+            case R.id.menu_set_weight_goal:
+
+                Intent i = new Intent(getActivity() , WeightGoalActivity.class);
+                getActivity().startActivity(i);
+
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
