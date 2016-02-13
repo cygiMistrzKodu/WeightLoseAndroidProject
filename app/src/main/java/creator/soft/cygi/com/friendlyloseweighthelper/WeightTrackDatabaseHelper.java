@@ -153,7 +153,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
     private Cursor getMeasurementDataCursor() {
 
-        int idOfCurrentUser = getIdOfCurrentUser();
+        Long idOfCurrentUser = getIdOfCurrentUser();
 
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -170,7 +170,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
     public long insertOneMeasurementIntoDatabase(WeightDataModel weightDataModel) {
 
-        int currentUserId = getIdOfCurrentUser();
+        Long currentUserId = getIdOfCurrentUser();
 
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_MEASUREMENT_DATA_ID_USER, currentUserId);
@@ -203,11 +203,11 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
         return insertedRowNumber;
     }
 
-    private int getIdOfCurrentUser() {
+    private long getIdOfCurrentUser() {
 
         Cursor cursor = findUser(loginUserName);
 
-        int userId = getUserId(cursor);
+        long userId = getUserId(cursor);
 
         return userId;
     }
@@ -219,7 +219,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
         Cursor cursor = db.query(TABLE_USERS,
                 new String[]{COLUMN_USERS_ID_USER,
-                        COLUMN_USERS_USER_NAME, COLUMN_USERS_PASSWORD},
+                        COLUMN_USERS_USER_NAME, COLUMN_USERS_PASSWORD, COLUMN_USERS_WEIGHT_GOAL},
                 COLUMN_USERS_USER_NAME + "=?", new String[]{userName},
                 null, null, null);
         cursor.moveToFirst();
@@ -227,15 +227,15 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
         return cursor;
     }
 
-    private int getUserId(Cursor cursor) {
+    private long getUserId(Cursor cursor) {
         cursor.moveToFirst();
-        return cursor.getInt(cursor.getColumnIndex(COLUMN_USERS_ID_USER));
+        return cursor.getLong(cursor.getColumnIndex(COLUMN_USERS_ID_USER));
     }
 
     public void deleteLatestEntry() {
 
         String whereStatement = readSqlCommandFromResource(R.raw.where_statment_last_entry_to_mesurement_data);
-        Integer currentIdUser = getIdOfCurrentUser();
+        Long currentIdUser = getIdOfCurrentUser();
         SQLiteDatabase db = getWritableDatabase();
         saveLastDeletedData();
         db.delete(TABLE_MEASUREMENT_DATA, whereStatement, new String[]{String.valueOf(currentIdUser)});
@@ -295,7 +295,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
     }
 
     private Cursor getLatestMeasurementCursor() {
-        int idCurrentUser = getIdOfCurrentUser();
+        Long idCurrentUser = getIdOfCurrentUser();
 
         Cursor latestMeasurementCursor = getReadableDatabase().query(TABLE_MEASUREMENT_DATA,
                 new String[]{COLUMN_MEASUREMENT_DATA_MEASUREMENT_ID, COLUMN_MEASUREMENT_DATA_DATE_TIME,
@@ -316,7 +316,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
     public void updatedMeasurement(DateTimeDTO dateTimeDTO) {
 
         SQLiteDatabase db = getWritableDatabase();
-        int idCurrentUser = getIdOfCurrentUser();
+        Long idCurrentUser = getIdOfCurrentUser();
 
         String dateString = dateTimeDTO.getDateWithoutFormatting();
         float weight = dateTimeDTO.getWeight();
@@ -461,7 +461,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
         String whereStatement = COLUMN_MEASUREMENT_DATA_ID_USER + " = ?";
 
-        Integer idOfCurrentUser = getIdOfCurrentUser();
+        Long idOfCurrentUser = getIdOfCurrentUser();
 
         String[] whereArgs = new String[]{idOfCurrentUser.toString()};
 
@@ -604,6 +604,36 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
         return false;
     }
 
+    public void updateWeightGoal(Float weightGoal) {
+
+        Long userId =  getIdOfCurrentUser();
+        String password = getPasswordOfCurrentUser();
+
+        UserData userData = new UserData();
+        userData.setUserId(userId);
+        userData.setName(loginUserName);
+        userData.setPassword(password);
+        userData.setWeightGoal(weightGoal);
+
+        updateUserData(userData);
+
+    }
+
+    private String getPasswordOfCurrentUser() {
+
+        Cursor cursor = findUser(loginUserName);
+
+        String password = getPassword(cursor);
+
+        return password;
+    }
+
+    private String getPassword(Cursor cursor) {
+        cursor.moveToFirst();
+        return cursor.getString(cursor.getColumnIndex(COLUMN_USERS_PASSWORD));
+
+    }
+
     public void updateUserData(UserData userToUpdate) {
 
         Long userId = userToUpdate.getUserId();
@@ -659,5 +689,20 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
         long userCount = DatabaseUtils.queryNumEntries(db, TABLE_USERS);
         return userCount;
+    }
+
+    public Float getWeightGoalOfCurrentUser() {
+
+        Cursor cursor = findUser(loginUserName);
+
+        Float weightGoal = getWeightGoal(cursor);
+
+        return weightGoal;
+    }
+
+    private Float getWeightGoal(Cursor cursor) {
+        cursor.moveToFirst();
+        return cursor.getFloat(cursor.getColumnIndex(COLUMN_USERS_WEIGHT_GOAL));
+
     }
 }

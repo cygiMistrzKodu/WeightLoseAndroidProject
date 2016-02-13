@@ -151,7 +151,7 @@ public class WeightTrackDatabaseHelperTest {
 
         UserData userJanekDataExpected = new UserData();
         userJanekDataExpected.setName("Janek");
-        userJanekDataExpected.setPassword("Koparka");
+        userJanekDataExpected.setPassword("koparka");
 
         WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(instrumentationContext);
         List<UserData> usersData = weightTrackDatabaseHelper.getUsersData();
@@ -218,6 +218,24 @@ public class WeightTrackDatabaseHelperTest {
         assertEquals(userWithGoal.getName(),UserAfterUpdatedGoal.getName());
         assertEquals(newWeightGoal,UserAfterUpdatedGoal.getWeightGoal(),0.00f);
     }
+    @Test
+    public void changeUserWeightGoalWhenOnlyWeightGoalIsSetToCurrentUserTest() {
+
+        Float newWeightGoal = 160f;
+
+        WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(instrumentationContext);
+        weightTrackDatabaseHelper.setLoginUserName("Janek");
+
+        weightTrackDatabaseHelper.updateWeightGoal(newWeightGoal);
+
+        List<UserData> userDataList = weightTrackDatabaseHelper.getUsersData();
+        UserData userInStorageAfterWeightGoalUpdate = userDataList.get(0);
+
+        assertEquals("Janek",userInStorageAfterWeightGoalUpdate.getName());
+        assertEquals("koparka",userInStorageAfterWeightGoalUpdate.getPassword());
+
+        assertEquals(newWeightGoal,userInStorageAfterWeightGoalUpdate.getWeightGoal(),0.00);
+    }
 
     @Test
     public void IfTryInsertUserWithNameThatAlreadyExistInStorageThenIsNotInserted(){
@@ -238,6 +256,19 @@ public class WeightTrackDatabaseHelperTest {
 
     }
 
+    @Test
+    public void getWeightGoalOfCurrentUserTest() {
+
+        Float expectedWeightGoal = 90f;
+
+        WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(instrumentationContext);
+        weightTrackDatabaseHelper.setLoginUserName("Ania");
+
+        Float currentUserWeightGoal = weightTrackDatabaseHelper.getWeightGoalOfCurrentUser();
+
+        assertEquals(expectedWeightGoal,currentUserWeightGoal,0.00);
+    }
+
     private void fillDatabase() {
         fillUserTable();
         fillMeasurementTable();
@@ -255,7 +286,7 @@ public class WeightTrackDatabaseHelperTest {
 
         UserData userJanekData = new UserData();
         userJanekData.setName("Janek");
-        userJanekData.setPassword("Koparka");
+        userJanekData.setPassword("koparka");
 
         weightTrackDatabaseHelper.insertNewUserDataIntoDatabase(userJanekData);
 
@@ -268,6 +299,7 @@ public class WeightTrackDatabaseHelperTest {
         UserData userAniaData = new UserData();
         userAniaData.setName("Ania");
         userAniaData.setPassword("Password");
+        userAniaData.setWeightGoal(90);
 
         weightTrackDatabaseHelper.insertNewUserDataIntoDatabase(userAniaData);
 

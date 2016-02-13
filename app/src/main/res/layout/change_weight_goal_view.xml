@@ -14,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="60dp"
-            android:text="Set Goal"
+            android:text="@string/change_weight_goal_title"
             android:textSize="50dp"
             android:layout_gravity="left" />
     </LinearLayout>
@@ -25,6 +25,7 @@
         android:orientation="horizontal">
 
         <EditText
+            android:id="@+id/changeGoalEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxWidth="300dp"
@@ -35,14 +36,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kg"
+            android:text="@string/weight_goal_unit"
             android:textSize="40dp" />
     </LinearLayout>
 
     <Button
+        android:id="@+id/changeGoalOkButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
-        android:text="OK" />
+        android:text="@string/weight_goal_ok_button" />
 
 </LinearLayout>
