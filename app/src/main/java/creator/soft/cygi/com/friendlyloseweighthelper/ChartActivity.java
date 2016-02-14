@@ -9,10 +9,13 @@ import android.util.Log;
 import android.view.View;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.LimitLine;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import java.util.ArrayList;
 
@@ -26,6 +29,7 @@ public class ChartActivity extends AppCompatActivity {
     LineChart chart;
     ArrayList<String> dateSeries;
     ArrayList<Float> weight_units;
+    Float userWeightGoal;
 
 
     @Override
@@ -51,8 +55,7 @@ public class ChartActivity extends AppCompatActivity {
         for(Float weight_measurement : weight_data){
             weight_units.add(weight_measurement);
         }
-
-
+        userWeightGoal = extras.getFloat(ChartHelper.WEIGHT_GOAL_DATA);
 
     }
 
@@ -62,7 +65,7 @@ public class ChartActivity extends AppCompatActivity {
         int xindex = 0;
         for (Float weight : weight_units) {
 
-            Log.i("ChartFloat", "Chart Float values : " + weight );  // to testing
+            Log.d("ChartFloat", "Chart Float values : " + weight );  // to testing
             Entry weightEntry = new Entry(weight, xindex++);
             weightUnitEntrySet.add(weightEntry);
         }
@@ -74,13 +77,29 @@ public class ChartActivity extends AppCompatActivity {
         lineDataSet.setColor(Color.RED);
         lineDataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
 
-        ArrayList<LineDataSet> dataSets = new ArrayList<LineDataSet>();
+        ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
         dataSets.add(lineDataSet);
 
         LineData data = new LineData(dateSeries, dataSets);
 
+        drawWeightGoalLine();
+
         chart.setData(data);
         chart.invalidate();
+    }
+
+    private void drawWeightGoalLine() {
+
+        if(userWeightGoal <= 0){
+            return;
+        }
+
+        YAxis leftAxis = chart.getAxisLeft();
+        LimitLine weightGoalLine = new LimitLine(userWeightGoal,"Weight Goal: "+userWeightGoal+" Kg");
+        weightGoalLine.setLineColor(Color.BLUE);
+        weightGoalLine.setLineWidth(5f);
+        weightGoalLine.setTextSize(20f);
+        leftAxis.addLimitLine(weightGoalLine);
     }
 
     @Override

@@ -264,6 +264,10 @@ public abstract class WeightCommonViewFragment extends Fragment {
         chartHelper.setFragment(this);
         chartHelper.setWeightDataModel(weightDataModel);
         chartHelper.setFragmentActivity(getActivity());
+        Float weightGoal = weightTrackDatabaseHelper.getWeightGoalOfCurrentUser();
+        chartHelper.setWeightGoal(weightGoal);
+
+
     }
 
     @Override

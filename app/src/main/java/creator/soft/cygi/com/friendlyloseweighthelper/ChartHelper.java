@@ -10,7 +10,6 @@ import org.apache.commons.lang3.ArrayUtils;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Map;
 
 /**
  * Created by CygiMasterProgrammer on 2016-01-09.
@@ -22,7 +21,9 @@ public class ChartHelper {
     private WeightDataModel weightDataModel;
     public static final String WEIGHT_DATA = "weightTimeData";
     public static final String DATE_DATA = "dateData";
+    public static final String WEIGHT_GOAL_DATA = "weightGoalData";
     Fragment fragment;
+    private Float weightGoal;
 
     public void displayChart(){
 
@@ -48,6 +49,7 @@ public class ChartHelper {
 
         i.putExtra(WEIGHT_DATA, weight_measurements);
         i.putExtra(DATE_DATA, dateSeries);
+        i.putExtra(WEIGHT_GOAL_DATA,weightGoal);
 
        fragment.startActivity(i);
 
@@ -68,5 +70,13 @@ public class ChartHelper {
 
     public void setWeightDataModel(WeightDataModel weightDataModel) {
         this.weightDataModel = weightDataModel;
+    }
+
+    public Float getWeightGoal() {
+        return weightGoal;
+    }
+
+    public void setWeightGoal(Float weightGoal) {
+        this.weightGoal = weightGoal;
     }
 }
