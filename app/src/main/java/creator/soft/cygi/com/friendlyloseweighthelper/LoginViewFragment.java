@@ -35,6 +35,7 @@ public class LoginViewFragment extends Fragment {
     private Button createNewUserButton;
     private Space abovePasswordTextViewSpace;
     private Space belowPasswordTextViewSpace;
+    private TextView chooseUserTextView;
 
 
     @Override
@@ -63,7 +64,6 @@ public class LoginViewFragment extends Fragment {
                 editor.putString(LOGIN_USER_NAME, userData.getName());
                 editor.commit();
 
-
                 if (userData.getPassword().isEmpty()) {
 
                     belowPasswordTextViewSpace.setVisibility(View.GONE);
@@ -82,6 +82,7 @@ public class LoginViewFragment extends Fragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+
 
             }
         });
@@ -127,9 +128,40 @@ public class LoginViewFragment extends Fragment {
         abovePasswordTextViewSpace = (Space) view.findViewById(R.id.spaceAbovePasswordTextView);
         belowPasswordTextViewSpace = (Space) view.findViewById(R.id.spaceBelowPasswordTextView);
 
+        chooseUserTextView = (TextView) view.findViewById(R.id.chooseUserTextView);
+
+        if(isNoUserExistYet()){
+            showOnlyCreateNewUserOption();
+        }
 
 
         return view;
+    }
+
+    private boolean isNoUserExistYet() {
+
+        WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(getContext());
+
+       Long userNumber =  weightTrackDatabaseHelper.countUsersInStorage();
+
+        if(userNumber <= 0){
+            return true;
+        }
+
+        return false;
+    }
+
+    private void showOnlyCreateNewUserOption() {
+
+
+        belowPasswordTextViewSpace.setVisibility(View.GONE);
+        abovePasswordTextViewSpace.setVisibility(View.GONE);
+        passwordTextView.setVisibility(View.GONE);
+        passwordEditText.setVisibility(View.GONE);
+        okButton.setVisibility(View.GONE);
+        userListSpinner.setVisibility(View.GONE);
+        chooseUserTextView.setVisibility(View.GONE);
+
     }
 
     private void fillWithUserNames() {
