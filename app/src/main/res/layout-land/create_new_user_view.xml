@@ -39,8 +39,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/rectangle_border"
             android:gravity="center"
-            android:layout_marginLeft="120dp"
-            android:layout_marginRight="120dp"/>
+            android:layout_marginLeft="225dp"
+            android:layout_marginRight="225dp"/>
 
         <Space
             android:layout_width="match_parent"
@@ -58,8 +58,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/rectangle_border"
             android:gravity="center"
-            android:layout_marginLeft="120dp"
-            android:layout_marginRight="120dp"/>
+            android:layout_marginLeft="225dp"
+            android:layout_marginRight="225dp"/>
 
         <Space
             android:layout_width="match_parent"
@@ -77,8 +77,8 @@
             android:background="@drawable/rectangle_border"
             android:gravity="center"
             android:inputType="numberDecimal"
-            android:layout_marginLeft="120dp"
-            android:layout_marginRight="120dp"/>
+            android:layout_marginLeft="225dp"
+            android:layout_marginRight="225dp"/>
 
         <Space
             android:layout_width="match_parent"
