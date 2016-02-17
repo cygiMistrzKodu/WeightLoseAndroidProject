@@ -17,7 +17,7 @@
     <string name="left_Arrow"><![CDATA[<]]></string>
     <string name="right_Arrow"><![CDATA[>]]></string>
     <string name="position_number">Position: %d</string>
-    <string name="create_new_user">Create new user</string>
+    <string name="create_new_user">New user</string>
     <string name="ok_login_button">OK</string>
     <string name="choose_user_text_view">Choose user</string>
     <string name="menu_set_weight_goal">Change Weight Goal</string>

@@ -13,7 +13,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="60dp"
+            android:layout_margin="10dp"
             android:text="@string/change_weight_goal_title"
             android:textSize="50sp"
             android:layout_gravity="left" />
@@ -44,12 +44,12 @@
         android:id="@+id/changeGoalOkButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="30dp"
+        android:layout_margin="20dp"
         android:text="@string/weight_goal_ok_button"
         android:textSize="20sp"
         android:paddingLeft="50dp"
         android:paddingRight="50dp"
         android:paddingTop="20dp"
-        android:paddingBottom="20dp"/>
+        android:paddingBottom="20dp" />
 
 </LinearLayout>

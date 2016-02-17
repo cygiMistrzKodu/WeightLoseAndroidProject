@@ -28,7 +28,7 @@
         android:id="@+id/passwordTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:text="Password"/>
     <Space
         android:id="@+id/spaceBelowPasswordTextView"
@@ -52,11 +52,14 @@
         android:text="@string/ok_login_button"/>
     <Space
         android:layout_width="match_parent"
-        android:layout_height="40dp" />
+        android:layout_height="30dp" />
     <Button
         android:id="@+id/createNewUserButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/create_new_user"/>
+        android:text="@string/create_new_user"
+        android:textStyle="bold"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp" />
 
 </LinearLayout>
