@@ -7,8 +7,8 @@
     <string name="weight_units">Kg</string>
     <string name="chart_unit_kg">Weight in Kg</string>
     <string name="undo_last_deletion_button">Undo</string>
-    <string name="modify_standard_view_button">Go to Modify Mode</string>
-    <string name="modify_modification_view_button">Back to Standard Mode</string>
+    <string name="modify_standard_view_button">Modify mode</string>
+    <string name="modify_modification_view_button">Standard mode</string>
     <string name="delete_last_entry_button">Delete</string>
     <string name="date_picker_title">Pick a date</string>
     <string name="time_picker_title">Pick a time</string>
@@ -25,4 +25,5 @@
     <string name="weight_goal_ok_button">OK</string>
     <string name="weight_goal_unit">Kg</string>
     <string name="change_weight_goal_title">Set Goal</string>
+    <string name="chart_button">Chart</string>
 </resources>

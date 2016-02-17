@@ -22,13 +22,6 @@
 
     <include layout="@layout/date_element"></include>
 
-    <include layout="@layout/buttons_element"></include>
-
-
-    <Button
-        android:id="@+id/goToModifyViewButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/modify_standard_view_button" />
+    <include layout="@layout/buttons_element_land"></include>
 
 </LinearLayout>

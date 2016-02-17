@@ -12,7 +12,7 @@
         android:id="@+id/positionNumberTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="32dp"
+        android:textSize="20sp"
         android:text="@string/position_number"/>
     </LinearLayout>
 
@@ -35,7 +35,7 @@
 
     <Button
         android:id="@+id/backToStandardModeButton"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/modify_modification_view_button" />
 

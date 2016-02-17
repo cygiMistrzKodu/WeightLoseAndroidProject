@@ -103,7 +103,7 @@ public abstract class WeightCommonViewFragment extends Fragment {
 
         weightInput = (EditText) view.findViewById(R.id.inputWeightField);
 
-        chartButton = (Button) view.findViewById(R.id.schowChart_test);
+        chartButton = (Button) view.findViewById(R.id.showChart);
         chartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
