@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge>
+
+    <LinearLayout style="@style/rightButtonContainerStyleNormal">
+
+        <include layout="@layout/delete_last_entry_button_normal" />
+
+    </LinearLayout>
+
+</merge>

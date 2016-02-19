@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/deleteLatestEntryButton"
+        android:layout_width="@dimen/button_width_medium"
+        android:layout_height="@dimen/button_height_medium"
+        android:text="@string/delete_last_entry_button"
+        android:textSize="@dimen/button_text_size_medium"/>
+
+</LinearLayout>

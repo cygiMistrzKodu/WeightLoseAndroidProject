@@ -1,0 +1,34 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/MainRootStyle">
+
+    <TextView
+        style="@style/LabelTitleTextStyle"
+        android:text="@string/weight_enter" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <include layout="@layout/left_button_container_standard_view_element" />
+
+        <include layout="@layout/input_weight_element_with_unit" />
+
+        <include layout="@layout/right_button_container_standard_view_element" />
+
+
+    </LinearLayout>
+
+    <include layout="@layout/date_element"></include>
+
+    <include layout="@layout/buttons_element"></include>
+
+
+    <Button
+        android:id="@+id/goToModifyViewButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/modify_standard_view_button" />
+
+</LinearLayout>
