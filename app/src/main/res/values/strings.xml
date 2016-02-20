@@ -26,4 +26,6 @@
     <string name="weight_goal_unit">Kg</string>
     <string name="change_weight_goal_title">Set Goal</string>
     <string name="chart_button">Chart</string>
+    <string name="create_new_user_user_name">User Name</string>
+    <string name="CreateNewUserTitle">Create New User</string>
 </resources>
