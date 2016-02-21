@@ -16,8 +16,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="bottom"
-            android:text="Create New User"
-            android:textSize="35sp" />
+            android:text="@string/CreateNewUserTitle"
+            android:textSize="@dimen/titleTextSizeMedium" />
 
     </LinearLayout>
 
@@ -31,16 +31,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="User Name" />
+            android:text="@string/create_new_user_user_name"
+            android:textSize="@dimen/textViewTextSizeMedium"/>
 
         <EditText
             android:id="@+id/userNameEditText"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/rectangle_border"
-            android:gravity="center"
-            android:layout_marginLeft="120dp"
-            android:layout_marginRight="120dp"/>
+            android:textSize="@dimen/editTextTextSizeMedium"
+            android:minWidth="@dimen/editTextMinWidthMedium"
+            android:gravity="center" />
 
         <Space
             android:layout_width="match_parent"
@@ -49,17 +50,18 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Password (optional)" />
+            android:text="@string/password_optional_text"
+            android:textSize="@dimen/textViewTextSizeMedium"/>
 
 
         <EditText
             android:id="@+id/passwordEditText"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/rectangle_border"
-            android:gravity="center"
-            android:layout_marginLeft="120dp"
-            android:layout_marginRight="120dp"/>
+            android:textSize="@dimen/editTextTextSizeMedium"
+            android:minWidth="@dimen/editTextMinWidthMedium"
+            android:gravity="center" />
 
         <Space
             android:layout_width="match_parent"
@@ -68,17 +70,18 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Weight Goal (optional)" />
+            android:text="Weight Goal (optional)"
+            android:textSize="@dimen/textViewTextSizeMedium"/>
 
         <EditText
             android:id="@+id/weightGoalEditText"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/rectangle_border"
+            android:textSize="@dimen/editTextTextSizeMedium"
+            android:minWidth="@dimen/editTextMinWidthMedium"
             android:gravity="center"
-            android:inputType="numberDecimal"
-            android:layout_marginLeft="120dp"
-            android:layout_marginRight="120dp"/>
+            android:inputType="numberDecimal" />
 
         <Space
             android:layout_width="match_parent"
@@ -88,12 +91,12 @@
             android:id="@+id/createNewUserOKButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="OK" />
+            android:text="@string/accept_button_ok" />
         <Button
             android:id="@+id/backButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Back"/>
+            android:text="@string/back_button"/>
 
     </LinearLayout>
 

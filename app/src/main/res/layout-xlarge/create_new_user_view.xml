@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:gravity="bottom"
             android:text="@string/CreateNewUserTitle"
-            android:textSize="@dimen/tittleTextSizeLarge" />
+            android:textSize="@dimen/titleTextSizeLarge" />
 
     </LinearLayout>
 
