@@ -2,22 +2,22 @@
 <resources>
 
     <dimen name="layoutMarginTop768dp">20dp</dimen>
-    <dimen name="layoutMargin768dp">50dp</dimen>
-    <dimen name="titleTextSize768dp">130sp</dimen>
+    <dimen name="layoutMargin768dp">100dp</dimen>
+    <dimen name="titleTextSize768dp">150sp</dimen>
     <dimen name="maxWidth768dp">300dp</dimen>
-    <dimen name="editTextTextSize768dp">120sp</dimen>
-    <dimen name="textViewTextSize768dp">120sp</dimen>
-    <dimen name="buttonMargin768dp">60dp</dimen>
-    <dimen name="buttonTextSize768dp">80sp</dimen>
+    <dimen name="editTextTextSize768dp">150sp</dimen>
+    <dimen name="textViewTextSize768dp">150sp</dimen>
+    <dimen name="buttonMargin768dp">90dp</dimen>
+    <dimen name="buttonTextSize768dp">110sp</dimen>
     <dimen name="buttonPaddingLeft768dp">60dp</dimen>
     <dimen name="buttonPaddingRight768dp">60dp</dimen>
     <dimen name="buttonPaddingTop768dp">20dp</dimen>
     <dimen name="buttonPaddingBottom768dp">20dp</dimen>
 
-    <dimen name="titleTextSizeLand768dp">111sp</dimen>
+    <dimen name="titleTextSizeLand768dp">150sp</dimen>
     <dimen name="layoutMarginLand768dp">10dp</dimen>
-    <dimen name="buttonMarginLand768dp">20dp</dimen>
-    <dimen name="editTextTextSizeLand768dp">90sp</dimen>
-    <dimen name="textViewTextSizeLand768dp">90sp</dimen>
-    <dimen name="buttonTextSizeLand768dp">60sp</dimen>
+    <dimen name="buttonMarginLand768dp">30dp</dimen>
+    <dimen name="editTextTextSizeLand768dp">150sp</dimen>
+    <dimen name="textViewTextSizeLand768dp">150sp</dimen>
+    <dimen name="buttonTextSizeLand768dp">110sp</dimen>
 </resources>
