@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/layoutMarginLand380dp"
             android:text="@string/change_weight_goal_title"
-            android:textSize="@dimen/titleTextSize380dp"
+            android:textSize="@dimen/titleTextSizeLand380dp"
             android:layout_gravity="left" />
     </LinearLayout>
 
@@ -31,22 +31,22 @@
             android:maxWidth="@dimen/maxWidth380dp"
             android:text="300"
             android:inputType="numberDecimal"
-            android:textSize="@dimen/editTextTextSize380dp" />
+            android:textSize="@dimen/editTextTextSizeLand380dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/weight_goal_unit"
-            android:textSize="@dimen/textViewTextSize380dp" />
+            android:textSize="@dimen/textViewTextSizeLand380dp" />
     </LinearLayout>
 
     <Button
         android:id="@+id/changeGoalOkButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/buttonMargin380dp"
+        android:layout_margin="@dimen/buttonMarginLand380dp"
         android:text="@string/accept_button_ok"
-        android:textSize="@dimen/buttonTextSize380dp"
+        android:textSize="@dimen/buttonTextSizeLand380dp"
         android:paddingLeft="@dimen/buttonPaddingLeft380dp"
         android:paddingRight="@dimen/buttonPaddingRight380dp"
         android:paddingTop="@dimen/buttonPaddingTop380dp"

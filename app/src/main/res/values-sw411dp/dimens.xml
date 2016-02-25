@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="layoutMarginTop411dp">20dp</dimen>
+    <dimen name="layoutMargin411dp">40dp</dimen>
+    <dimen name="titleTextSize411dp">70sp</dimen>
+    <dimen name="maxWidth411dp">300dp</dimen>
+    <dimen name="editTextTextSize411dp">70sp</dimen>
+    <dimen name="textViewTextSize411dp">70sp</dimen>
+    <dimen name="buttonMargin411dp">60dp</dimen>
+    <dimen name="buttonTextSize411dp">50sp</dimen>
+    <dimen name="buttonPaddingLeft411dp">60dp</dimen>
+    <dimen name="buttonPaddingRight411dp">60dp</dimen>
+    <dimen name="buttonPaddingTop411dp">20dp</dimen>
+    <dimen name="buttonPaddingBottom411dp">20dp</dimen>
+
+    <dimen name="layoutMarginLand411dp">10dp</dimen>
+    <dimen name="buttonMarginLand411dp">20dp</dimen>
+    <dimen name="editTextTextSizeLand411dp">60sp</dimen>
+    <dimen name="textViewTextSizeLand411dp">60sp</dimen>
+    <dimen name="buttonTextSizeLand411dp">30sp</dimen>
+</resources>
