@@ -2,7 +2,7 @@
 <merge>
 
     <LinearLayout
-        style="@style/LeftButtonContainerStyleSmall">
+        style="@style/CommonButtonContainerStyle">
 
        <include layout="@layout/undo_last_deletion_button_small"></include>
 

@@ -10,29 +10,9 @@
         <item name="android:paddingRight">10dp</item>
     </style>
 
-    <style name="LeftButtonContainerStyleNormal" parent="CommonButtonContainerStyle">
-        <item name="android:paddingLeft">0dp</item>
-        <item name="android:paddingRight">0dp</item>
-    </style>
-
-    <style name="LeftButtonContainerStyleSmall" parent="CommonButtonContainerStyle">
-        <item name="android:paddingLeft">0dp</item>
-        <item name="android:paddingRight">0dp</item>
-    </style>
-
     <style name="rightButtonContainerStyle" parent="CommonButtonContainerStyle">
         <item name="android:paddingLeft">10dp</item>
         <item name="android:paddingRight">5dp</item>
-    </style>
-
-    <style name="rightButtonContainerStyleSmall" parent="CommonButtonContainerStyle">
-        <item name="android:paddingLeft">0dp</item>
-        <item name="android:paddingRight">0dp</item>
-    </style>
-
-    <style name="rightButtonContainerStyleNormal" parent="CommonButtonContainerStyle">
-        <item name="android:paddingLeft">0dp</item>
-        <item name="android:paddingRight">0dp</item>
     </style>
 
     <style name="CommonButtonContainerStyle">
@@ -56,10 +36,13 @@
         <item name="android:textSize">25sp</item>
     </style>
 
-    <style name="LabelTitleTextStyle320dp">
+    <style name="LabelTitleTextStyleCommon">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>
+    </style>
+
+    <style name="LabelTitleTextStyle320dp" parent="LabelTitleTextStyleCommon">
         <item name="android:layout_marginTop">@dimen/WeightInputMarginTopTitle320dp</item>
         <item name="android:textSize">@dimen/WeightInputTextSizeTitle320dp</item>
     </style>
@@ -67,5 +50,12 @@
     <style name="LabelTitleTextStyleLand320dp" parent="LabelTitleTextStyle320dp" >
         <item name="android:layout_marginTop">@dimen/WeightInputLayoutMarginBottomButtonLand320dp</item>
     </style>
+
+    <style name="LabelTitleTextStyle360dp" parent="LabelTitleTextStyleCommon">
+        <item name="android:layout_marginTop">@dimen/weightInputMarginTopTitle360dp</item>
+        <item name="android:textSize">@dimen/weightInputTextSizeTitle360dp</item>
+    </style>
+
+
 
 </resources>

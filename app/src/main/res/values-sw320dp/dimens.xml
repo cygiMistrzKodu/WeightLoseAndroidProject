@@ -14,17 +14,21 @@
     <dimen name="buttonPaddingBottom320dp">20dp</dimen>
     <dimen name="buttonMargin320dp">30dp</dimen>
 
+    <dimen name="WeightInputTextSizeTitle320dp">30sp</dimen>
+    <dimen name="WeightInputMarginTopTitle320dp">30dp</dimen>
+    <dimen name="WeightInputSpaceBetween320dp">20dp</dimen>
+    <dimen name="WeightInputMarginTop320dp">20dp</dimen>
+    <dimen name="WeightInputLayoutMarginBottomButton320dp">10dp</dimen>
+    <dimen name="WeightInputEditTextAndUnitEditTextMinWidth320dp">130dp</dimen>
+    <dimen name="WeightInputEditTextAndUnitTextSize320dp">20sp</dimen>
+    <dimen name="WeightInputEditTextAndUnitTextViewMinWidth320dp">15sp</dimen>
+
     <dimen name="editTextTextSizeLand320dp">35sp</dimen>
     <dimen name="layoutMarginLand320dp">10dp</dimen>
     <dimen name="titleTextSizeLand320dp">40sp</dimen>
     <dimen name="textViewTextSizeLand320dp">35sp</dimen>
     <dimen name="buttonMarginLand320dp">10dp</dimen>
 
-    <dimen name="WeightInputTextSizeTitle320dp">30sp</dimen>
-    <dimen name="WeightInputMarginTopTitle320dp">30dp</dimen>
-    <dimen name="WeightInputSpaceBetween320dp">20dp</dimen>
-    <dimen name="WeightInputMarginTop320dp">20dp</dimen>
-    <dimen name="WeightInputLayoutMarginBottomButton320dp">10dp</dimen>
     <dimen name="WeightInputLayoutMarginBottomButtonLand320dp">2dp</dimen>
     <dimen name="WeightInputMarginTopButtonLand320dp">40dp</dimen>
     <dimen name="WeightInputTextSizeButtonLand320dp">13sp</dimen>

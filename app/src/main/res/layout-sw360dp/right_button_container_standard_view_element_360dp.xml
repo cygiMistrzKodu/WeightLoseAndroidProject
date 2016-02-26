@@ -3,7 +3,7 @@
 
     <LinearLayout style="@style/CommonButtonContainerStyle">
 
-        <include layout="@layout/delete_last_entry_button_320dp" />
+        <include layout="@layout/delete_last_entry_button_360dp" />
 
     </LinearLayout>
 
