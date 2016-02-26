@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/MainRootStyle">
+
+    <TextView
+        style="@style/LabelTitleTextStyleLand320dp"
+        android:text="@string/weight_enter" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <include layout="@layout/left_button_container_standard_view_element_320dp" />
+
+        <include layout="@layout/input_weight_element_with_unit_320dp" />
+
+        <include layout="@layout/right_button_container_standard_view_element_320dp" />
+
+
+    </LinearLayout>
+
+    <include layout="@layout/date_element_320dp"/>
+
+    <include layout="@layout/buttons_element_320dp_land"/>
+
+</LinearLayout>

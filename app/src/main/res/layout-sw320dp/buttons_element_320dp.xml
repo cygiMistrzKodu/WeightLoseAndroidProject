@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <Button
+        android:id="@+id/acceptButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/accept_button_ok" />
+<Space
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/WeightInputSpaceBetween320dp" />
+
+    <Button
+        android:id="@+id/showChart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/WeightInputLayoutMarginBottomButton320dp"
+        android:text="@string/chart_button" />
+</LinearLayout>

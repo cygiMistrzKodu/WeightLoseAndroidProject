@@ -56,4 +56,16 @@
         <item name="android:textSize">25sp</item>
     </style>
 
+    <style name="LabelTitleTextStyle320dp">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">@dimen/WeightInputMarginTopTitle320dp</item>
+        <item name="android:textSize">@dimen/WeightInputTextSizeTitle320dp</item>
+    </style>
+
+    <style name="LabelTitleTextStyleLand320dp" parent="LabelTitleTextStyle320dp" >
+        <item name="android:layout_marginTop">@dimen/WeightInputLayoutMarginBottomButtonLand320dp</item>
+    </style>
+
 </resources>
