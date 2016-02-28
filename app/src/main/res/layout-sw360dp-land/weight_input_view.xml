@@ -2,7 +2,7 @@
     style="@style/MainRootStyle">
 
     <TextView
-        style="@style/LabelTitleTextStyle360dp"
+        style="@style/LabelTitleTextStyleLand360dp"
         android:text="@string/weight_enter" />
 
     <LinearLayout
@@ -23,14 +23,6 @@
 
     <include layout="@layout/date_element_360dp"></include>
 
-    <include layout="@layout/buttons_element_360dp"></include>
-
-
-    <Button
-        android:id="@+id/goToModifyViewButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/standardViewButtonTextSize360dp"
-        android:text="@string/modify_standard_view_button" />
+    <include layout="@layout/buttons_element_360dp_land"></include>
 
 </LinearLayout>

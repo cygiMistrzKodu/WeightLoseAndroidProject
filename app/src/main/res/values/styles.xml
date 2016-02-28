@@ -48,12 +48,16 @@
     </style>
 
     <style name="LabelTitleTextStyleLand320dp" parent="LabelTitleTextStyle320dp" >
-        <item name="android:layout_marginTop">@dimen/WeightInputLayoutMarginBottomButtonLand320dp</item>
+        <item name="android:layout_marginTop">@dimen/WeightInputMarginTopTittleLand320dp</item>
     </style>
 
     <style name="LabelTitleTextStyle360dp" parent="LabelTitleTextStyleCommon">
         <item name="android:layout_marginTop">@dimen/weightInputMarginTopTitle360dp</item>
         <item name="android:textSize">@dimen/weightInputTextSizeTitle360dp</item>
+    </style>
+
+    <style name="LabelTitleTextStyleLand360dp" parent="LabelTitleTextStyle360dp">
+        <item name="android:layout_marginTop">@dimen/WeightInputMarginTopTittleLand360dp</item>
     </style>
 
 
