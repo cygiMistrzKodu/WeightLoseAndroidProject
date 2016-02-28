@@ -22,24 +22,24 @@
     <dimen name="weightInputEditTextAndUnitEditTextMinWidth360dp">130dp</dimen>
     <dimen name="weightInputEditTextAndUnitTextSize360dp">25sp</dimen>
     <dimen name="weightInputEditTextAndUnitTextViewMinWidth360dp">30sp</dimen>
-    <dimen name="rightLefButtonTextSize360dp">20sp</dimen>
-    <dimen name="rightLeftButtonLayoutWidth360dp">100dp</dimen>
+    <dimen name="rightLefButtonTextSize360dp">19sp</dimen>
+    <dimen name="rightLeftButtonLayoutWidth360dp">95dp</dimen>
     <dimen name="rightLeftButtonLayoutHeight360dp">55dp</dimen>
     <dimen name="acceptButtonTextSize360dp">22sp</dimen>
     <dimen name="chartButtonTextSize360dp">22sp</dimen>
     <dimen name="standardViewButtonTextSize360dp">22sp</dimen>
 
-    <dimen name="dateTextSize360dp">25sp</dimen>
+    <dimen name="dateTextSize360dp">23sp</dimen>
     <dimen name="autoCheckBoxTextSize360dp">20sp</dimen>
 
     <dimen name="layoutMarginLand360dp">10dp</dimen>
 
     <dimen name="WeightInputMarginTopTittleLand360dp">5dp</dimen>
-
-    <dimen name="WeightInputMarginTopButtonLand360dp">38dp</dimen>
-    <dimen name="WeightInputTextSizeButtonLand360dp">18sp</dimen>
+    <dimen name="weightInputMarginTopLand360dp">8dp</dimen>
+    <dimen name="WeightInputMarginTopButtonLand360dp">50dp</dimen>
+    <dimen name="WeightInputTextSizeButtonLand360dp">15sp</dimen>
     <dimen name="WeightInputMinHeightWidthButtonLand360dp">20dp</dimen>
-    <dimen name="WeightInputTextSizeAcceptButtonLand360dp">20sp</dimen>
+    <dimen name="WeightInputTextSizeAcceptButtonLand360dp">18sp</dimen>
     <dimen name="WeightInputMinHeightAcceptButtonLand360dp">30dp</dimen>
     <dimen name="WeightInputMinWidthAcceptButtonLand360dp">80dp</dimen>
 
