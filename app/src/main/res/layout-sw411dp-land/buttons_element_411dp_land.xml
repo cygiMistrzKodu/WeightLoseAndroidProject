@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/goToModifyViewButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="@dimen/WeightInputMarginTopButtonLand360dp"
+                android:textSize="@dimen/WeightInputTextSizeButtonLand360dp"
+                android:minHeight="@dimen/WeightInputMinHeightWidthButtonLand360dp"
+                android:minWidth="@dimen/WeightInputMinHeightWidthButtonLand360dp"
+                android:text="@string/modify_standard_view_button" />
+
+            <Button
+                android:id="@+id/acceptButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:textSize="@dimen/WeightInputTextSizeAcceptButtonLand360dp"
+                android:minHeight="@dimen/WeightInputMinHeightAcceptButtonLand360dp"
+                android:minWidth="@dimen/WeightInputMinWidthAcceptButtonLand360dp"
+                android:text="@string/accept_button_ok" />
+
+
+            <Button
+                android:id="@+id/showChart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="@dimen/WeightInputMarginTopButtonLand360dp"
+                android:textSize="@dimen/WeightInputTextSizeButtonLand360dp"
+                android:minHeight="@dimen/WeightInputMinHeightWidthButtonLand360dp"
+                android:minWidth="@dimen/WeightInputMinHeightWidthButtonLand360dp"
+                android:text="@string/chart_button" />
+
+
+    </RelativeLayout>
+</merge>

@@ -19,4 +19,26 @@
     <dimen name="editTextTextSizeLand411dp">60sp</dimen>
     <dimen name="textViewTextSizeLand411dp">60sp</dimen>
     <dimen name="buttonTextSizeLand411dp">30sp</dimen>
+
+    <dimen name="weightInputEditTextAndUnitEditTextMinWidth411dp">150dp</dimen>
+    <dimen name="weightInputEditTextAndUnitTextSize411dp">25sp</dimen>
+    <dimen name="weightInputEditTextAndUnitTextViewMinWidth411dp">38sp</dimen>
+
+    <dimen name="rightLefButtonTextSize411dp">20sp</dimen>
+    <dimen name="rightLeftButtonLayoutWidth411dp">100dp</dimen>
+    <dimen name="rightLeftButtonLayoutHeight411dp">55dp</dimen>
+
+    <dimen name="dateTextSize411dp">27sp</dimen>
+    <dimen name="autoCheckBoxTextSize411dp">24sp</dimen>
+
+    <dimen name="acceptButtonTextSize411dp">30sp</dimen>
+    <dimen name="weightInputSpaceBetween411dp">25dp</dimen>
+    <dimen name="weightInputLayoutMarginBottomButton411dp">20dp</dimen>
+    <dimen name="chartButtonTextSize411dp">30sp</dimen>
+    <dimen name="standardViewButtonTextSize411dp">25sp</dimen>
+    <dimen name="weightInputMarginTop411dp">30dp</dimen>
+
+
+
+
 </resources>

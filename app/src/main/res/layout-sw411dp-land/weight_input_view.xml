@@ -2,27 +2,28 @@
     style="@style/MainRootStyle">
 
     <TextView
-        style="@style/LabelTitleTextStyleLand360dp"
+        style="@style/LabelTitleTextStyle360dp"
         android:text="@string/weight_enter" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_marginTop="@dimen/weightInputMarginTopLand360dp"
+        android:layout_marginTop="@dimen/weightInputMarginTop411dp"
         android:orientation="horizontal">
 
-        <include layout="@layout/left_button_container_standard_view_element_360dp" />
+        <include layout="@layout/left_button_container_standard_view_element_411dp" />
 
-        <include layout="@layout/input_weight_element_with_unit_360dp" />
+        <include layout="@layout/input_weight_element_with_unit_411dp" />
 
-        <include layout="@layout/right_button_container_standard_view_element_360dp" />
+        <include layout="@layout/right_button_container_standard_view_element_411dp" />
 
 
     </LinearLayout>
 
-    <include layout="@layout/date_element_360dp"></include>
+    <include layout="@layout/date_element_411dp"></include>
 
     <include layout="@layout/buttons_element_411dp_land"></include>
+
 
 </LinearLayout>

@@ -20,4 +20,8 @@
     <dimen name="textViewTextSizeLand380dp">60sp</dimen>
     <dimen name="titleTextSizeLand380dp">60sp</dimen>
     <dimen name="buttonTextSizeLand380dp">30sp</dimen>
+
+    <dimen name="WeightInputTextSizeButtonLand380dp">19sp</dimen>
+    <dimen name="WeightInputTextSizeAcceptButtonLand380dp">22sp</dimen>
+    <dimen name="WeightInputMarginTopButtonLand380dp">65dp</dimen>
 </resources>
