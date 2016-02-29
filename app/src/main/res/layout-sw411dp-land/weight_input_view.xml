@@ -2,7 +2,7 @@
     style="@style/MainRootStyle">
 
     <TextView
-        style="@style/LabelTitleTextStyle360dp"
+        style="@style/LabelTitleTextStyleLand411dp"
         android:text="@string/weight_enter" />
 
     <LinearLayout

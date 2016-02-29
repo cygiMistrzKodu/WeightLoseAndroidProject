@@ -60,6 +60,11 @@
         <item name="android:layout_marginTop">@dimen/WeightInputMarginTopTittleLand360dp</item>
     </style>
 
+    <style name="LabelTitleTextStyleLand411dp" parent="LabelTitleTextStyleCommon">
+        <item name="android:layout_marginTop">@dimen/weightInputTextSizeTitle411dp</item>
+        <item name="android:textSize">@dimen/weightInputMarginTopTitle411dp</item>
+    </style>
+
 
 
 </resources>
