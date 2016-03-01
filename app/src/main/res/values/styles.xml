@@ -65,6 +65,11 @@
         <item name="android:textSize">@dimen/weightInputMarginTopTitle411dp</item>
     </style>
 
+    <style name="LabelTitleTextStyle600dp" parent="LabelTitleTextStyleCommon">
+        <item name="android:layout_marginTop">@dimen/weightInputTextSizeTitle600dp</item>
+        <item name="android:textSize">@dimen/weightInputMarginTopTitle600dp</item>
+    </style>
+
 
 
 </resources>

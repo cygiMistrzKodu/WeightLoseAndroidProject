@@ -23,6 +23,6 @@
 
     <include layout="@layout/date_element_360dp"></include>
 
-    <include layout="@layout/buttons_element_411dp_land"></include>
+    <include layout="@layout/buttons_element_360dp_land"></include>
 
 </LinearLayout>
