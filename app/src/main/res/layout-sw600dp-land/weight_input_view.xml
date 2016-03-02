@@ -2,7 +2,7 @@
     style="@style/MainRootStyle">
 
     <TextView
-        style="@style/LabelTitleTextStyle600dp"
+        style="@style/LabelTitleTextStyleLand600dp"
         android:text="@string/weight_enter" />
 
     <LinearLayout
@@ -23,14 +23,6 @@
 
     <include layout="@layout/date_element_600dp"></include>
 
-    <include layout="@layout/buttons_element_600dp"></include>
-
-
-    <Button
-        android:id="@+id/goToModifyViewButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/standardViewButtonTextSize600dp"
-        android:text="@string/modify_standard_view_button" />
+    <include layout="@layout/buttons_element_600dp_land"></include>
 
 </LinearLayout>

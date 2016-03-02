@@ -45,8 +45,8 @@
     <dimen name="WeightInputMinHeightAcceptButtonLand411dp">30dp</dimen>
     <dimen name="WeightInputMinWidthAcceptButtonLand411dp">80dp</dimen>
 
-    <dimen name="weightInputTextSizeTitle411dp">5sp</dimen>
-    <dimen name="weightInputMarginTopTitle411dp">40dp</dimen>
+    <dimen name="weightInputTextSizeTitle411dp">40dp</dimen>
+    <dimen name="weightInputMarginTopTitle411dp">5sp</dimen>
 
 
 

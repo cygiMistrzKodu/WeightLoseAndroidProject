@@ -61,13 +61,18 @@
     </style>
 
     <style name="LabelTitleTextStyleLand411dp" parent="LabelTitleTextStyleCommon">
-        <item name="android:layout_marginTop">@dimen/weightInputTextSizeTitle411dp</item>
-        <item name="android:textSize">@dimen/weightInputMarginTopTitle411dp</item>
+        <item name="android:layout_marginTop">@dimen/weightInputMarginTopTitle411dp</item>
+        <item name="android:textSize">@dimen/weightInputTextSizeTitle411dp</item>
     </style>
 
     <style name="LabelTitleTextStyle600dp" parent="LabelTitleTextStyleCommon">
-        <item name="android:layout_marginTop">@dimen/weightInputTextSizeTitle600dp</item>
-        <item name="android:textSize">@dimen/weightInputMarginTopTitle600dp</item>
+        <item name="android:layout_marginTop">@dimen/weightInputMarginTopTitle600dp</item>
+        <item name="android:textSize">@dimen/weightInputTextSizeTitle600dp</item>
+    </style>
+
+    <style name="LabelTitleTextStyleLand600dp" parent= "LabelTitleTextStyleCommon">
+        <item name="android:layout_marginTop">@dimen/weightInputMarginTopTitleLand600dp</item>
+        <item name="android:textSize">@dimen/weightInputTextSizeTitleLand600dp</item>
     </style>
 
 
