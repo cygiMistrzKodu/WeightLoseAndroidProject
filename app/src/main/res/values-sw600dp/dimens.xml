@@ -37,7 +37,7 @@
     <dimen name="weightInputTextSizeTitle600dp">70sp</dimen>
     <dimen name="weightInputMarginTopTitle600dp">60dp</dimen>
 
-    <dimen name="dateElementLinearLayoutLayoutHeight">110dp</dimen>
+    <dimen name="dateElementLinearLayoutLayoutHeight600dp">110dp</dimen>
 
     <dimen name="acceptButtonTextSize600dp">55sp</dimen>
     <dimen name="weightInputSpaceBetween600dp">25dp</dimen>

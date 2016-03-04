@@ -20,4 +20,36 @@
     <dimen name="editTextTextSizeLand768dp">150sp</dimen>
     <dimen name="textViewTextSizeLand768dp">150sp</dimen>
     <dimen name="buttonTextSizeLand768dp">110sp</dimen>
+
+    <dimen name="rightLeftButtonLayoutWidth768dp">170dp</dimen>
+    <dimen name="rightLeftButtonLayoutHeight768dp">90dp</dimen>
+    <dimen name="rightLefButtonTextSize768dp">40sp</dimen>
+
+    <dimen name="weightInputEditTextAndUnitEditTextMinWidth768dp">300dp</dimen>
+    <dimen name="weightInputEditTextAndUnitTextSize768dp">45sp</dimen>
+    <dimen name="weightInputEditTextAndUnitTextViewMinWidth768dp">75sp</dimen>
+
+    <dimen name="dateTextSize768dp">55sp</dimen>
+    <dimen name="autoCheckBoxTextSize768dp">45sp</dimen>
+
+    <dimen name="weightInputTextSizeTitle768dp">90sp</dimen>
+    <dimen name="weightInputMarginTopTitle768dp">60dp</dimen>
+
+    <dimen name="acceptButtonTextSize768dp">65sp</dimen>
+    <dimen name="weightInputSpaceBetween768dp">35dp</dimen>
+    <dimen name="weightInputLayoutMarginBottomButton768dp">40dp</dimen>
+    <dimen name="chartButtonTextSize768dp">65sp</dimen>
+
+    <dimen name="standardViewButtonTextSize768dp">60sp</dimen>
+
+    <dimen name="dateElementLinearLayoutLayoutHeight768dp">140dp</dimen>
+
+    <dimen name="WeightInputMarginTopButtonLand768dp">120dp</dimen>
+    <dimen name="WeightInputTextSizeButtonLand768dp">38sp</dimen>
+    <dimen name="WeightInputMinHeightWidthButtonLand768dp">30dp</dimen>
+    <dimen name="WeightInputTextSizeAcceptButtonLand768dp">70sp</dimen>
+    <dimen name="WeightInputMinHeightAcceptButtonLand768dp">70dp</dimen>
+    <dimen name="WeightInputMinWidthAcceptButtonLand768dp">150dp</dimen>
+
+
 </resources>

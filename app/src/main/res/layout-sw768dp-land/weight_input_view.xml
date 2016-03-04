@@ -2,7 +2,7 @@
     style="@style/MainRootStyle">
 
     <TextView
-        style="@style/LabelTitleTextStyleLand600dp"
+        style="@style/LabelTitleTextStyle768dp"
         android:text="@string/weight_enter" />
 
     <LinearLayout
@@ -12,16 +12,16 @@
         android:layout_marginTop="@dimen/weightInputMarginTop600dp"
         android:orientation="horizontal">
 
-        <include layout="@layout/left_button_container_standard_view_element_600dp" />
+        <include layout="@layout/left_button_container_standard_view_element_768dp" />
 
-        <include layout="@layout/input_weight_element_with_unit_600dp" />
+        <include layout="@layout/input_weight_element_with_unit_768dp" />
 
-        <include layout="@layout/right_button_container_standard_view_element_600dp" />
+        <include layout="@layout/right_button_container_standard_view_element_768dp" />
 
 
     </LinearLayout>
 
-    <include layout="@layout/date_element_600dp"></include>
+    <include layout="@layout/date_element_768dp"></include>
 
     <include layout="@layout/buttons_element_768dp_land"></include>
 
