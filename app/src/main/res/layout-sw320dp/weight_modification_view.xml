@@ -2,7 +2,8 @@
     style="@style/MainRootStyle">
 
     <TextView
-        style="@style/LabelTitleTextStyle"
+        style="@style/LabelTitleTextStyleModificationView"
+        android:layout_marginTop="@dimen/modificationViewMarginTop320dp"
         android:text="@string/weight_modify"/>
 
     <LinearLayout
@@ -12,7 +13,9 @@
         android:id="@+id/positionNumberTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:layout_marginTop="@dimen/positionTextViewMarginTop320dp"
+        android:layout_marginBottom="@dimen/positionTextViewMarginBottom320dp"
+        android:textSize="@dimen/textViewMeasurementPositionTextSize320dp"
         android:text="@string/position_number"/>
     </LinearLayout>
 

@@ -3,8 +3,8 @@
 
     <Button
         android:id="@+id/goToNextMeasurement"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="@dimen/previousNextMeasurementLayoutWidth320dp"
+        android:layout_height="@dimen/previousNextMeasurementLayoutHeight320dp"
         android:text="@string/right_Arrow" />
 
 </merge>

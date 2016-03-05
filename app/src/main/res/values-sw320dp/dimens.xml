@@ -35,6 +35,19 @@
     <dimen name="WeightInputMinHeightWidthButtonLand320dp">10dp</dimen>
     <dimen name="WeightInputTextSizeAcceptButtonLand320dp">13sp</dimen>
     <dimen name="WeightInputMinHeightAcceptButtonLand320dp">30dp</dimen>
-    <dimen name="WeightInputMinWidthAcceptButtonLand320dp">80dp</dimen>
+    <dimen name="WeightInputMinWidthAcceptButtonLand320dp">80dp</dimen>2
+
+    <dimen name="labelTitleTextSizeModificationView320dp">32sp</dimen>
+    <dimen name="textViewMeasurementPositionTextSize320dp">32sp</dimen>
+
+    <dimen name="modificationViewMarginTop320dp">20dp</dimen>
+    
+    <dimen name="previousNextMeasurementLayoutWidth320dp">70dp</dimen>
+    <dimen name="previousNextMeasurementLayoutHeight320dp">50dp</dimen>
+    <dimen name="dateModificationLayoutHeight">50dp</dimen>
+    <dimen name="dateModificationViewTextSize320dp">28sp</dimen>
+
+    <dimen name="positionTextViewMarginTop320dp">5dp</dimen>
+    <dimen name="positionTextViewMarginBottom320dp">5dp</dimen>
 
 </resources>
