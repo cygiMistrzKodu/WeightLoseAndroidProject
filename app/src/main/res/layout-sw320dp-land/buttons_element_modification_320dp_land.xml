@@ -10,20 +10,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:layout_marginTop="@dimen/WeightInputMarginTopButtonLand360dp"
-                android:textSize="@dimen/WeightInputTextSizeButtonLand360dp"
-                android:minHeight="@dimen/WeightInputMinHeightWidthButtonLand360dp"
-                android:minWidth="@dimen/WeightInputMinHeightWidthButtonLand360dp"
-                android:text="@string/modify_standard_view_button" />
+                android:layout_marginTop="@dimen/WeightInputMarginTopButtonModificationLand320dp"
+                android:textSize="@dimen/WeightInputTextSizeButtonLand320dp"
+                android:minHeight="@dimen/WeightInputMinHeightWidthButtonLand320dp"
+                android:minWidth="@dimen/WeightInputMinHeightWidthButtonLand320dp"
+                android:text="@string/modify_modification_view_button" />
 
             <Button
                 android:id="@+id/acceptButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:textSize="@dimen/WeightInputTextSizeAcceptButtonLand360dp"
-                android:minHeight="@dimen/WeightInputMinHeightAcceptButtonLand360dp"
-                android:minWidth="@dimen/WeightInputMinWidthAcceptButtonLand360dp"
+                android:textSize="@dimen/WeightInputTextSizeAcceptButtonLand320dp"
+                android:minHeight="@dimen/WeightInputMinHeightAcceptButtonLand320dp"
+                android:minWidth="@dimen/WeightInputMinWidthAcceptButtonLand320dp"
                 android:text="@string/accept_button_ok" />
 
 
@@ -32,10 +32,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="@dimen/WeightInputMarginTopButtonLand360dp"
-                android:textSize="@dimen/WeightInputTextSizeButtonLand360dp"
-                android:minHeight="@dimen/WeightInputMinHeightWidthButtonLand360dp"
-                android:minWidth="@dimen/WeightInputMinHeightWidthButtonLand360dp"
+                android:layout_marginTop="@dimen/WeightInputMarginTopButtonModificationLand320dp"
+                android:textSize="@dimen/WeightInputTextSizeButtonLand320dp"
+                android:minHeight="@dimen/WeightInputMinHeightWidthButtonLand320dp"
+                android:minWidth="@dimen/WeightInputMinHeightWidthButtonLand320dp"
                 android:text="@string/chart_button" />
 
 

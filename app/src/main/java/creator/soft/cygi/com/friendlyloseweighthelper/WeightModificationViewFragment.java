@@ -38,7 +38,7 @@ public class WeightModificationViewFragment extends WeightCommonViewFragment imp
 
        View view =  super.onCreateView(inflater, container, savedInstanceState);
 
-        standardModeButton = (Button) view.findViewById(R.id.backToStandardModeButton);
+        standardModeButton = (Button) view.findViewById(R.id.changeModeButton);
         standardModeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

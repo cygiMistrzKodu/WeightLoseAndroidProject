@@ -34,7 +34,7 @@
     <include layout="@layout/buttons_element"></include>
 
     <Button
-        android:id="@+id/backToStandardModeButton"
+        android:id="@+id/changeModeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/modify_modification_view_button" />

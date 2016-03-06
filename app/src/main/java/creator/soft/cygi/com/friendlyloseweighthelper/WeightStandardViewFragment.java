@@ -95,7 +95,7 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
 
         ifDateAndTimeIsGenerateAutomaticallyDisableDateAndTimeTextView();
 
-        modifyModeButton = (Button) view.findViewById(R.id.goToModifyViewButton);
+        modifyModeButton = (Button) view.findViewById(R.id.changeModeButton);
         modifyModeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

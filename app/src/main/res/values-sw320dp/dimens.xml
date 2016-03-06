@@ -45,9 +45,19 @@
     <dimen name="previousNextMeasurementLayoutWidth320dp">70dp</dimen>
     <dimen name="previousNextMeasurementLayoutHeight320dp">50dp</dimen>
     <dimen name="dateModificationLayoutHeight">50dp</dimen>
-    <dimen name="dateModificationViewTextSize320dp">28sp</dimen>
+    <dimen name="dateModificationViewTextSize320dp">25sp</dimen>
 
     <dimen name="positionTextViewMarginTop320dp">5dp</dimen>
     <dimen name="positionTextViewMarginBottom320dp">5dp</dimen>
+
+    <dimen name="modificationViewMarginTopLand320dp">5dp</dimen>
+
+    <dimen name="positionTextViewMarginTopLand320dp">1dp</dimen>
+    <dimen name="positionTextViewMarginBottomLand320dp">1dp</dimen>
+
+    <dimen name="WeightInputMarginTopButtonModificationLand320dp">20dp</dimen>
+
+    <dimen name="labelTitleTextSizeModificationViewLand320dp">29sp</dimen>
+    <dimen name="textViewMeasurementPositionTextSizeLand320dp">28sp</dimen>
 
 </resources>

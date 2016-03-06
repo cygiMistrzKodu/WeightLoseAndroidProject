@@ -34,12 +34,7 @@
 
     </LinearLayout>
     <include layout="@layout/date_modification_element_320dp"></include>
-    <include layout="@layout/buttons_element_320dp"></include>
+    <include layout="@layout/buttons_element_modification_360dp_land"></include>
 
-    <Button
-        android:id="@+id/changeModeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/modify_modification_view_button" />
 
 </LinearLayout>
