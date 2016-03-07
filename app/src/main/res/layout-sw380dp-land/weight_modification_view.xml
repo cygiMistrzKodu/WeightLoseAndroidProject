@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/MainRootStyle">
+
+    <TextView
+        style="@style/LabelTitleTextStyleModificationView360dp"
+        android:layout_marginTop="@dimen/modificationViewMarginTopLand380dp"
+        android:text="@string/weight_modify"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/positionNumberTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/positionTextViewMarginTop320dp"
+        android:layout_marginBottom="@dimen/positionTextViewMarginBottom320dp"
+        android:textSize="@dimen/textViewMeasurementPositionTextSize320dp"
+        android:text="@string/position_number"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <include layout="@layout/left_button_container_modify_view_element_380dp"/>
+
+        <include layout="@layout/input_weight_element_with_unit_380dp"></include>
+
+        <include layout="@layout/right_button_container_modify_view_element_380dp"/>
+
+
+    </LinearLayout>
+    <include layout="@layout/date_modification_element_380dp"></include>
+    <include layout="@layout/buttons_element_modification_380dp_land"></include>
+
+</LinearLayout>

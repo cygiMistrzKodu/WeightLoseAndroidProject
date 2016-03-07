@@ -24,4 +24,11 @@
     <dimen name="WeightInputTextSizeButtonLand380dp">19sp</dimen>
     <dimen name="WeightInputTextSizeAcceptButtonLand380dp">22sp</dimen>
     <dimen name="WeightInputMarginTopButtonLand380dp">65dp</dimen>
+
+    <dimen name="weightInputEditTextAndUnitEditTextMinWidth380dp">160dp</dimen>
+    <dimen name="weightInputEditTextAndUnitTextSize380dp">28sp</dimen>
+    <dimen name="weightInputEditTextAndUnitTextViewMinWidth380dp">32sp</dimen>
+
+    <dimen name="modificationViewMarginTopLand380dp">5dp</dimen>
+
 </resources>

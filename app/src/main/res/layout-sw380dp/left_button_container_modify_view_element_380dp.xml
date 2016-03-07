@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge>
+    <LinearLayout
+        style="@style/LeftButtonContainerStyle">
+
+        <include layout="@layout/go_to_previous_measurement_button_380dp"></include>
+
+    </LinearLayout>
+
+</merge>

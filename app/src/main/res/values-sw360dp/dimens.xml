@@ -19,9 +19,11 @@
     <dimen name="weightInputSpaceBetween360dp">20dp</dimen>
     <dimen name="weightInputMarginTop360dp">30dp</dimen>
     <dimen name="weightInputLayoutMarginBottomButton360dp">10dp</dimen>
+
     <dimen name="weightInputEditTextAndUnitEditTextMinWidth360dp">130dp</dimen>
     <dimen name="weightInputEditTextAndUnitTextSize360dp">25sp</dimen>
     <dimen name="weightInputEditTextAndUnitTextViewMinWidth360dp">30sp</dimen>
+
     <dimen name="rightLefButtonTextSize360dp">19sp</dimen>
     <dimen name="rightLeftButtonLayoutWidth360dp">95dp</dimen>
     <dimen name="rightLeftButtonLayoutHeight360dp">55dp</dimen>
