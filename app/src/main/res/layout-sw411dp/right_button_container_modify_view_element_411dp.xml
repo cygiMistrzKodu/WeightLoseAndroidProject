@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        style="@style/rightButtonContainerStyle">
+
+        <include layout="@layout/go_to_next_measurement_button_411dp"></include>
+
+    </LinearLayout>
+</merge>

@@ -44,6 +44,10 @@
         <item name="android:textSize">@dimen/labelTitleTextSizeModificationView360dp</item>
     </style>
 
+    <style name="LabelTitleTextStyleModificationView411dp" parent="LabelTitleTextStyleCommon">
+        <item name="android:textSize">@dimen/labelTitleTextSizeModificationView411dp</item>
+    </style>
+
 
     <style name="LabelTitleTextStyle">
         <item name="android:layout_width">match_parent</item>

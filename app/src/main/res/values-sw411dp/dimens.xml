@@ -48,8 +48,20 @@
     <dimen name="weightInputTextSizeTitle411dp">40dp</dimen>
     <dimen name="weightInputMarginTopTitle411dp">5sp</dimen>
 
+    <dimen name="labelTitleTextSizeModificationView411dp">40sp</dimen>
 
+    <dimen name="positionTextViewMarginTop411dp">8dp</dimen>
+    <dimen name="positionTextViewMarginBottom411dp">8dp</dimen>
 
+    <dimen name="textViewMeasurementPositionTextSize411dp">40sp</dimen>
 
+    <dimen name="previousNextMeasurementLayoutWidth411dp">85dp</dimen>
+    <dimen name="previousNextMeasurementLayoutHeight411dp">65dp</dimen>
+
+    <dimen name="dateModificationViewTextSize411dp">34sp</dimen>
+
+    <dimen name="dateModificationChangeModeButtonTextSize411dp">30sp</dimen>
+
+    <dimen name="modificationViewMarginTopLand411dp">5dp</dimen>
 
 </resources>
