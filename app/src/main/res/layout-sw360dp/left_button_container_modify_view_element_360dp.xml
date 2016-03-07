@@ -3,7 +3,7 @@
     <LinearLayout
         style="@style/LeftButtonContainerStyle">
 
-        <include layout="@layout/go_to_previous_measurement_button_320dp"></include>
+        <include layout="@layout/go_to_previous_measurement_button_360dp"></include>
 
     </LinearLayout>
 

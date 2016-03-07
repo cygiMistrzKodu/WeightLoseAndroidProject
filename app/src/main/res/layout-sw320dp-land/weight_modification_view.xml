@@ -2,7 +2,7 @@
     style="@style/MainRootStyle">
 
     <TextView
-        style="@style/LabelTitleTextStyleModificationView"
+        style="@style/LabelTitleTextStyleModificationView320dp"
         android:layout_marginTop="@dimen/modificationViewMarginTopLand320dp"
         android:text="@string/weight_modify"/>
 

@@ -2,7 +2,7 @@
     style="@style/MainRootStyle">
 
     <TextView
-        style="@style/LabelTitleTextStyleModificationView"
+        style="@style/LabelTitleTextStyleModificationView360dp"
         android:layout_marginTop="@dimen/modificationViewMarginTop320dp"
         android:text="@string/weight_modify"/>
 
@@ -40,6 +40,7 @@
         android:id="@+id/changeModeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/dateModificationChangeModeButtonTextSize360dp"
         android:text="@string/modify_modification_view_button" />
 
 </LinearLayout>

@@ -2,8 +2,8 @@
     style="@style/MainRootStyle">
 
     <TextView
-        style="@style/LabelTitleTextStyleModificationView"
-        android:layout_marginTop="@dimen/modificationViewMarginTop320dp"
+        style="@style/LabelTitleTextStyleModificationView360dp"
+        android:layout_marginTop="@dimen/modificationViewMarginTop360dp"
         android:text="@string/weight_modify"/>
 
     <LinearLayout
@@ -27,7 +27,7 @@
 
         <include layout="@layout/left_button_container_modify_view_element_320dp"/>
 
-        <include layout="@layout/input_weight_element_with_unit_320dp"></include>
+        <include layout="@layout/input_weight_element_with_unit_360dp"></include>
 
         <include layout="@layout/right_button_container_modify_view_element_320dp"/>
 
