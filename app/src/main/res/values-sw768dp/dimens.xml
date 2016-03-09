@@ -36,7 +36,7 @@
     <dimen name="weightInputMarginTopTitle768dp">60dp</dimen>
 
     <dimen name="acceptButtonTextSize768dp">65sp</dimen>
-    <dimen name="weightInputSpaceBetween768dp">35dp</dimen>
+    <dimen name="weightInputSpaceBetween768dp">25dp</dimen>
     <dimen name="weightInputLayoutMarginBottomButton768dp">40dp</dimen>
     <dimen name="chartButtonTextSize768dp">65sp</dimen>
 
@@ -51,5 +51,24 @@
     <dimen name="WeightInputMinHeightAcceptButtonLand768dp">70dp</dimen>
     <dimen name="WeightInputMinWidthAcceptButtonLand768dp">150dp</dimen>
 
+    <dimen name="labelTitleTextSizeModificationView768dp">75sp</dimen>
+    <dimen name="modificationViewMarginTop768dp">40dp</dimen>
+
+    <dimen name="positionTextViewMarginTop768dp">12dp</dimen>
+    <dimen name="positionTextViewMarginBottom768dp">12dp</dimen>
+
+    <dimen name="textViewMeasurementPositionTextSize768dp">70sp</dimen>
+
+    <dimen name="previousNextMeasurementLayoutWidth768dp">120dp</dimen>
+    <dimen name="previousNextMeasurementLayoutHeight768dp">100dp</dimen>
+    <dimen name="nextPreviousMeasurementTextSize768dp">70sp</dimen>
+
+    <dimen name="dateModificationViewTextSizeLand768dp">60sp</dimen>
+
+    <dimen name="dateModificationLayoutHeightLand768dp">120dp</dimen>
+
+    <dimen name="dateModificationChangeModeButtonTextSize768dp">60sp</dimen>
+
+    <dimen name="modificationViewMarginTopLand768dp">5dp</dimen>
 
 </resources>
