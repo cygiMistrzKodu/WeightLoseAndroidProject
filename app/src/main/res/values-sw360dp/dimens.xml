@@ -38,9 +38,11 @@
 
     <dimen name="WeightInputMarginTopTittleLand360dp">5dp</dimen>
     <dimen name="weightInputMarginTopLand360dp">8dp</dimen>
+
     <dimen name="WeightInputMarginTopButtonLand360dp">50dp</dimen>
     <dimen name="WeightInputTextSizeButtonLand360dp">15sp</dimen>
     <dimen name="WeightInputMinHeightWidthButtonLand360dp">20dp</dimen>
+
     <dimen name="WeightInputTextSizeAcceptButtonLand360dp">18sp</dimen>
     <dimen name="WeightInputMinHeightAcceptButtonLand360dp">30dp</dimen>
     <dimen name="WeightInputMinWidthAcceptButtonLand360dp">80dp</dimen>
@@ -52,5 +54,7 @@
     <dimen name="dateModificationChangeModeButtonTextSize360dp">20sp</dimen>
 
     <dimen name="modificationViewMarginTop360dp">5dp</dimen>
+
+    <dimen name="nextPreviousMeasurementTextSize360dp">26sp</dimen>
 
 </resources>

@@ -23,6 +23,6 @@
 
     <include layout="@layout/date_element_600dp"></include>
 
-    <include layout="@layout/buttons_element_768dp_land"></include>
+    <include layout="@layout/buttons_element_600dp_land"></include>
 
 </LinearLayout>

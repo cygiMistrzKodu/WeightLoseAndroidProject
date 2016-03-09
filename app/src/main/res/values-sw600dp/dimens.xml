@@ -56,4 +56,33 @@
     <dimen name="WeightInputMinHeightAcceptButtonLand600dp">30dp</dimen>
     <dimen name="WeightInputMinWidthAcceptButtonLand600dp">80dp</dimen>
 
+    <dimen name="modificationViewMarginTop600dp">40dp</dimen>
+    <dimen name="labelTitleTextSizeModificationView600dp">60sp</dimen>
+    <dimen name="textViewMeasurementPositionTextSize600dp">60sp</dimen>
+
+    <dimen name="positionTextViewMarginTop600dp">12dp</dimen>
+    <dimen name="positionTextViewMarginBottom600dp">12dp</dimen>
+
+    <dimen name="previousNextMeasurementLayoutWidth600dp">110dp</dimen>
+    <dimen name="previousNextMeasurementLayoutHeight600dp">90dp</dimen>
+
+    <dimen name="dateModificationViewTextSize600dp">50sp</dimen>
+
+    <dimen name="dateModificationLayoutHeight600dp">100dp</dimen>
+
+    <dimen name="dateModificationChangeModeButtonTextSize600dp">50sp</dimen>
+
+    <dimen name="modificationViewMarginTopLand600dp">5dp</dimen>
+
+    <dimen name="positionTextViewMarginTopLand600dp">5dp</dimen>
+    <dimen name="positionTextViewMarginBottomLand600dp">5dp</dimen>
+
+    <dimen name="textViewMeasurementPositionTextSizeLand600dp">50sp</dimen>
+
+    <dimen name="nextPreviousMeasurementTextSize600dp">60sp</dimen>
+    <dimen name="dateModificationViewTextSizeLand600dp">50sp</dimen>
+
+    <dimen name="dateModificationLayoutHeightLand600dp">80dp</dimen>
+
+
 </resources>

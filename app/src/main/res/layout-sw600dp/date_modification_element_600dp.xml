@@ -1,0 +1,35 @@
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/dateModificationLayoutHeightLand600dp"
+    android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+        <TextView
+            android:id="@+id/dateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:freezesText="true"
+            android:hint="09-01-2016"
+            android:text="09-01-2016"
+            android:textSize="@dimen/dateModificationViewTextSizeLand600dp"
+            android:layout_gravity="center"
+            android:background="@drawable/rectangle_border"/>
+
+        <Space
+            android:layout_width="20dp"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/timeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:freezesText="true"
+            android:hint="12:23:45 AM"
+            android:text="12:23:45 AM"
+            android:textSize="@dimen/dateModificationViewTextSizeLand600dp"
+            android:layout_gravity="center"
+            android:background="@drawable/rectangle_border"/>
+
+    </LinearLayout>
+

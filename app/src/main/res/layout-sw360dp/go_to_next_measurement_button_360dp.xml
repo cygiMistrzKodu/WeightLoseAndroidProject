@@ -5,6 +5,7 @@
         android:id="@+id/goToNextMeasurement"
         android:layout_width="@dimen/previousNextMeasurementLayoutWidth320dp"
         android:layout_height="@dimen/previousNextMeasurementLayoutHeight320dp"
+        android:textSize="@dimen/nextPreviousMeasurementTextSize360dp"
         android:text="@string/right_Arrow" />
 
 </merge>

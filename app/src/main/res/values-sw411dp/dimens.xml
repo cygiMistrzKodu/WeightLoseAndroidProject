@@ -64,4 +64,6 @@
 
     <dimen name="modificationViewMarginTopLand411dp">5dp</dimen>
 
+    <dimen name="nextPreviousMeasurementTextSize411dp">40sp</dimen>
+
 </resources>

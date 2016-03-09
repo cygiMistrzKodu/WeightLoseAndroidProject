@@ -25,11 +25,11 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <include layout="@layout/left_button_container_modify_view_element_320dp"/>
+        <include layout="@layout/left_button_container_modify_view_element_360dp"/>
 
         <include layout="@layout/input_weight_element_with_unit_360dp"></include>
 
-        <include layout="@layout/right_button_container_modify_view_element_320dp"/>
+        <include layout="@layout/right_button_container_modify_view_element_360dp"/>
 
 
     </LinearLayout>

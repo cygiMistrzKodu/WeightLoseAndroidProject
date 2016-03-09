@@ -31,4 +31,6 @@
 
     <dimen name="modificationViewMarginTopLand380dp">5dp</dimen>
 
+    <dimen name="nextPreviousMeasurementTextSize380dp">26sp</dimen>
+
 </resources>

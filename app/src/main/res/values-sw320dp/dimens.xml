@@ -60,4 +60,6 @@
     <dimen name="labelTitleTextSizeModificationViewLand320dp">29sp</dimen>
     <dimen name="textViewMeasurementPositionTextSizeLand320dp">28sp</dimen>
 
+    <dimen name="nextPreviousMeasurementTextSize320dp">26sp</dimen>
+
 </resources>
