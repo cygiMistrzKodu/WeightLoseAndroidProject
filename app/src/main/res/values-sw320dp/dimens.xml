@@ -62,4 +62,6 @@
 
     <dimen name="nextPreviousMeasurementTextSize320dp">26sp</dimen>
 
+    <dimen name="simpleSpinnerDropDownItemTextSize320dp">32sp</dimen>
+
 </resources>

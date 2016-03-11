@@ -33,8 +33,8 @@ public class LoginViewFragment extends Fragment {
     private TextView passwordTextView;
     private Button okButton;
     private Button createNewUserButton;
-    private Space abovePasswordTextViewSpace;
-    private Space belowPasswordTextViewSpace;
+//    private Space abovePasswordTextViewSpace;
+//    private Space belowPasswordTextViewSpace;
     private TextView chooseUserTextView;
 
 
@@ -66,14 +66,14 @@ public class LoginViewFragment extends Fragment {
 
                 if (userData.getPassword().isEmpty()) {
 
-                    belowPasswordTextViewSpace.setVisibility(View.GONE);
-                    abovePasswordTextViewSpace.setVisibility(View.GONE);
+                   // belowPasswordTextViewSpace.setVisibility(View.GONE);
+                  //  abovePasswordTextViewSpace.setVisibility(View.GONE);
                     passwordTextView.setVisibility(View.GONE);
                     passwordEditText.setVisibility(View.GONE);
 
                 } else {
-                    belowPasswordTextViewSpace.setVisibility(View.VISIBLE);
-                    abovePasswordTextViewSpace.setVisibility(View.VISIBLE);
+                  //  belowPasswordTextViewSpace.setVisibility(View.VISIBLE);
+                  //  abovePasswordTextViewSpace.setVisibility(View.VISIBLE);
                     passwordTextView.setVisibility(View.VISIBLE);
                     passwordEditText.setVisibility(View.VISIBLE);
                 }
@@ -125,8 +125,8 @@ public class LoginViewFragment extends Fragment {
 
 
         passwordTextView = (TextView) view.findViewById(R.id.passwordTextView);
-        abovePasswordTextViewSpace = (Space) view.findViewById(R.id.spaceAbovePasswordTextView);
-        belowPasswordTextViewSpace = (Space) view.findViewById(R.id.spaceBelowPasswordTextView);
+//        abovePasswordTextViewSpace = (Space) view.findViewById(R.id.spaceAbovePasswordTextView);
+//        belowPasswordTextViewSpace = (Space) view.findViewById(R.id.spaceBelowPasswordTextView);
 
         chooseUserTextView = (TextView) view.findViewById(R.id.chooseUserTextView);
 
@@ -154,8 +154,8 @@ public class LoginViewFragment extends Fragment {
     private void showOnlyCreateNewUserOption() {
 
 
-        belowPasswordTextViewSpace.setVisibility(View.GONE);
-        abovePasswordTextViewSpace.setVisibility(View.GONE);
+       // belowPasswordTextViewSpace.setVisibility(View.GONE);
+       // abovePasswordTextViewSpace.setVisibility(View.GONE);
         passwordTextView.setVisibility(View.GONE);
         passwordEditText.setVisibility(View.GONE);
         okButton.setVisibility(View.GONE);
@@ -170,7 +170,7 @@ public class LoginViewFragment extends Fragment {
         List<UserData> userList  = weightTrackDatabaseHelper.getUsersData();
 
         ArrayAdapter<UserData> userDataArrayAdapter =
-                new ArrayAdapter<UserData>(getContext(),android.R.layout.simple_spinner_dropdown_item,userList);
+                new ArrayAdapter<UserData>(getContext(),R.layout.simple_spinner_dropdown_item_custom,userList);
         userDataArrayAdapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
         userListSpinner.setAdapter(userDataArrayAdapter);
     }
