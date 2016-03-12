@@ -77,6 +77,12 @@
     
     <dimen name="buttonOkLayoutMarginBottom">85dp</dimen>
 
+    <dimen name="loginTextViewChooseUserLayoutMarginTopLand">1dp</dimen>
+    <dimen name="loginSpinnerLayoutMarginTopLand">2dp</dimen>
+    <dimen name="loginSpinnerLayoutMarginBottomLand">5dp</dimen>
+    <dimen name="loginTextViewLayoutMarginPasswordBottomLand">2dp</dimen>
+    <dimen name="editTextLayoutMarginBottomLand">30dp</dimen>
+
 
 
 </resources>
