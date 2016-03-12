@@ -33,7 +33,7 @@
         android:textSize="@dimen/loginTextViewPasswordTextSize"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/loginTextViewLayoutMarginPasswordBottom"
-        android:text="Password"/>
+        android:text="@string/textViewPasswordText"/>
 
     <EditText
         android:id="@+id/passwordEditText"

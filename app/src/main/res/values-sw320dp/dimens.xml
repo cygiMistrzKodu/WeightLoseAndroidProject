@@ -62,7 +62,7 @@
 
     <dimen name="nextPreviousMeasurementTextSize320dp">26sp</dimen>
 
-    <dimen name="simpleSpinnerDropDownItemTextSize320dp">32sp</dimen>
+    <dimen name="simpleSpinnerDropDownItemTextSize">32sp</dimen>
     
     <dimen name="loginChooseUserTextSize">45sp</dimen>
     <dimen name="loginTextViewChooseUserLayoutMarginTop">10dp</dimen>
@@ -81,7 +81,7 @@
     <dimen name="loginSpinnerLayoutMarginTopLand">2dp</dimen>
     <dimen name="loginSpinnerLayoutMarginBottomLand">5dp</dimen>
     <dimen name="loginTextViewLayoutMarginPasswordBottomLand">2dp</dimen>
-    <dimen name="editTextLayoutMarginBottomLand">30dp</dimen>
+    <dimen name="editTextLayoutMarginBottomLand">27dp</dimen>
 
 
 

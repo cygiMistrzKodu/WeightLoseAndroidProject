@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/choose_user_text_view"
-        android:layout_marginTop="@dimen/loginTextViewChooseUserLayoutMarginTopLand"
+        android:layout_marginTop="@dimen/loginTextViewChooseUserLayoutMarginTop"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:textSize="@dimen/loginChooseUserTextSize"/>
@@ -17,11 +17,11 @@
         android:id="@+id/chooseUserSpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/loginSpinnerLayoutMarginTopLand"
+        android:layout_marginTop="@dimen/loginSpinnerLayoutMarginTop"
         android:layout_below="@+id/chooseUserTextView"
         android:layout_above="@+id/passwordTextView"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/loginSpinnerLayoutMarginBottomLand"
+        android:layout_marginBottom="@dimen/loginSpinnerLayoutMarginBottom"
         android:gravity="center">
     </Spinner>
 
@@ -32,7 +32,7 @@
         android:layout_above="@+id/passwordEditText"
         android:textSize="@dimen/loginTextViewPasswordTextSize"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/loginTextViewLayoutMarginPasswordBottomLand"
+        android:layout_marginBottom="@dimen/loginTextViewLayoutMarginPasswordBottom"
         android:text="@string/textViewPasswordText"/>
 
     <EditText
@@ -43,16 +43,21 @@
         android:layout_above="@+id/okButton"
         android:background="@drawable/rectangle_border"
         android:layout_centerHorizontal="true"
+        android:textSize="@dimen/editTextTextPasswordSize"
         android:gravity="center"
-        android:layout_marginBottom="@dimen/editTextLayoutMarginBottomLand"
+        android:layout_marginBottom="@dimen/editTextLayoutMarginBottom"
         android:password="true"/>
 
     <Button
         android:id="@+id/okButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/createNewUserButton"
+        android:layout_marginBottom="@dimen/buttonOkLayoutMarginBottom"
+        android:textSize="@dimen/buttonOkTextSize"
+        android:paddingLeft="@dimen/buttonOkPaddingLeftRight"
+        android:paddingRight="@dimen/buttonOkPaddingLeftRight"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
         android:text="@string/accept_button_ok"/>
 
     <Button
@@ -61,8 +66,8 @@
         android:layout_height="wrap_content"
         android:text="@string/create_new_user"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
         android:textStyle="bold"
+        android:textSize="@dimen/buttonNewUserTextSize"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

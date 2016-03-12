@@ -5,6 +5,6 @@
     android:singleLine="true"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:textSize="@dimen/simpleSpinnerDropDownItemTextSize320dp"
+    android:textSize="@dimen/simpleSpinnerDropDownItemTextSize"
     android:gravity="center"
     android:ellipsize="marquee"/>

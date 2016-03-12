@@ -57,4 +57,28 @@
 
     <dimen name="nextPreviousMeasurementTextSize360dp">26sp</dimen>
 
+    <dimen name="loginChooseUserTextSize">55sp</dimen>
+    <dimen name="loginTextViewChooseUserLayoutMarginTop">10dp</dimen>
+    <dimen name="loginSpinnerLayoutMarginTop">30dp</dimen>
+    <dimen name="loginSpinnerLayoutMarginBottom">30dp</dimen>
+
+    <dimen name="loginTextViewPasswordTextSize">40sp</dimen>
+    <dimen name="loginTextViewLayoutMarginPasswordBottom">10dp</dimen>
+
+    <dimen name="editTextPasswordMinWidth">200dp</dimen>
+    <dimen name="editTextLayoutMarginBottom">20dp</dimen>
+    <dimen name="editTextTextPasswordSize">30sp</dimen>
+
+    <dimen name="buttonOkLayoutMarginBottom">60dp</dimen>
+    <dimen name="buttonOkTextSize">50sp</dimen>
+    <dimen name="buttonOkPaddingLeftRight">40sp</dimen>
+
+    <dimen name="buttonNewUserTextSize">30sp</dimen>
+
+    <dimen name="loginTextViewChooseUserLayoutMarginTopLand">1dp</dimen>
+    <dimen name="loginSpinnerLayoutMarginTopLand">2dp</dimen>
+    <dimen name="loginSpinnerLayoutMarginBottomLand">5dp</dimen>
+    <dimen name="loginTextViewLayoutMarginPasswordBottomLand">2dp</dimen>
+    <dimen name="editTextLayoutMarginBottomLand">20dp</dimen>
+
 </resources>
