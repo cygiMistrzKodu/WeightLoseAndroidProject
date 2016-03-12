@@ -9,20 +9,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/choose_user_text_view"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/loginTextViewChooseUserLayoutMarginTop"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textSize="45dp"/>
+        android:textSize="@dimen/loginChooseUserTextSize"/>
     <Spinner
         android:id="@+id/chooseUserSpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="@dimen/loginSpinnerLayoutMarginTop"
         android:layout_below="@+id/chooseUserTextView"
         android:layout_above="@+id/passwordTextView"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="@dimen/loginSpinnerLayoutMarginBottom"
         android:gravity="center">
     </Spinner>
 
@@ -31,21 +30,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/passwordEditText"
-        android:textSize="20sp"
+        android:textSize="@dimen/loginTextViewPasswordTextSize"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="@dimen/loginTextViewLayoutMarginPasswordBottom"
         android:text="Password"/>
 
     <EditText
         android:id="@+id/passwordEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minWidth="150dp"
+        android:minWidth="@dimen/editTextPasswordMinWidth"
         android:layout_above="@+id/okButton"
         android:background="@drawable/rectangle_border"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:layout_marginBottom="90dp"
+        android:layout_marginBottom="@dimen/editTextLayoutMarginBottom"
         android:password="true"/>
 
     <Button
@@ -53,7 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/createNewUserButton"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="@dimen/buttonOkLayoutMarginBottom"
         android:layout_centerHorizontal="true"
         android:text="@string/accept_button_ok"/>
 
@@ -64,8 +63,6 @@
         android:text="@string/create_new_user"
         android:layout_alignParentBottom="true"
         android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp" />
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
