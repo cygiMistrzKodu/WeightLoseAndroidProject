@@ -66,4 +66,13 @@
 
     <dimen name="nextPreviousMeasurementTextSize411dp">40sp</dimen>
 
+    <dimen name="simpleSpinnerDropDownTextSize">50sp</dimen>
+    <dimen name="loginChooseUserTextSize">65sp</dimen>
+    <dimen name="loginSpinnerLayoutMarginTop">20dp</dimen>
+    <dimen name="loginSpinnerLayoutMarginBottom">30dp</dimen>
+    <dimen name="buttonOkLayoutMarginBottom">100dp</dimen>
+    <dimen name="buttonNewUserTextSize">40sp</dimen>
+    <dimen name="editTextPasswordMinWidth">300dp</dimen>
+    <dimen name="editTextTextPasswordSize">35sp</dimen>
+
 </resources>

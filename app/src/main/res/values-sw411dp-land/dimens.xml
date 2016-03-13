@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="loginTextViewChooseUserLayoutMarginTop">1dp</dimen>
+    <dimen name="loginSpinnerLayoutMarginTop">2dp</dimen>
+    <dimen name="loginSpinnerLayoutMarginBottom">5dp</dimen>
+    <dimen name="loginTextViewLayoutMarginPasswordBottom">2dp</dimen>
+    <dimen name="editTextLayoutMarginBottom">40dp</dimen>
+
+    <dimen name="simpleSpinnerDropDownTextSize">40sp</dimen>
+
+    <dimen name="loginChooseUserTextSize">60sp</dimen>
+    <dimen name="loginTextViewPasswordTextSize">35sp</dimen>
+    <dimen name="editTextPasswordMinWidth">250dp</dimen>
+
+    <dimen name="editTextTextPasswordSize">25sp</dimen>
+
+    <dimen name="buttonOkTextSize">25sp</dimen>
+    <dimen name="buttonOkPaddingLeftRight">40sp</dimen>
+
+    <dimen name="buttonNewUserTextSize">20sp</dimen>
+
+</resources>
