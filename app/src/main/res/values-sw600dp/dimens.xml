@@ -85,5 +85,22 @@
 
     <dimen name="dateModificationLayoutHeightLand600dp">80dp</dimen>
 
+    <dimen name="simpleSpinnerDropDownTextSize">80sp</dimen>
+    <dimen name="loginChooseUserTextSize">95sp</dimen>
+
+    <dimen name="loginSpinnerLayoutMarginTop">20dp</dimen>
+    <dimen name="loginSpinnerLayoutMarginBottom">20dp</dimen>
+
+    <dimen name="buttonOkLayoutMarginBottom">110dp</dimen>
+    <dimen name="buttonNewUserTextSize">80sp</dimen>
+    <dimen name="editTextPasswordMinWidth">400dp</dimen>
+    <dimen name="editTextTextPasswordSize">45sp</dimen>
+
+    <dimen name="editTextLayoutMarginBottom">40dp</dimen>
+    <dimen name="loginTextViewPasswordTextSize">60sp</dimen>
+
+    <dimen name="buttonOkTextSize">70sp</dimen>
+    <dimen name="buttonOkPaddingLeftRight">70sp</dimen>
+
 
 </resources>
