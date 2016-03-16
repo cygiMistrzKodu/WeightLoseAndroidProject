@@ -6,6 +6,13 @@
     <dimen name="loginTextViewLayoutMarginPasswordBottom">2dp</dimen>
     <dimen name="editTextLayoutMarginBottom">40dp</dimen>
 
+    <dimen name="titleTextSize">55sp</dimen>
+
+    <dimen name="editTextTextSize">40sp</dimen>
+    <dimen name="textViewTextSize">40sp</dimen>
+    <dimen name="buttonPaddingLeftRight">40dp</dimen>
+    <dimen name="buttonTextSize">20sp</dimen>
+
     <dimen name="loginChooseUserTextSize">40sp</dimen>
     <dimen name="loginTextViewPasswordTextSize">25sp</dimen>
 

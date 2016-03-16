@@ -2,7 +2,7 @@
 <resources>
 
     <dimen name="layoutMarginTop768dp">20dp</dimen>
-    <dimen name="layoutMargin768dp">100dp</dimen>
+    <dimen name="layoutMargin768dp">60dp</dimen>
     <dimen name="titleTextSize768dp">150sp</dimen>
     <dimen name="maxWidth768dp">300dp</dimen>
     <dimen name="editTextTextSize768dp">150sp</dimen>

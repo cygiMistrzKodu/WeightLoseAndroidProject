@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="titleTextSize360dp">50sp</dimen>
-    <dimen name="layoutMargin360dp">60dp</dimen>
+    <dimen name="titleTextSize">60sp</dimen>
+    <dimen name="layoutMargin360dp">40dp</dimen>
     <dimen name="layoutMarginTop360dp">10dp</dimen>
     <dimen name="maxWidth360dp">300dp</dimen>
-    <dimen name="editTextTextSize360dp">40sp</dimen>
-    <dimen name="textViewTextSize360dp">40sp</dimen>
-    <dimen name="buttonTextSize360dp">20sp</dimen>
-    <dimen name="buttonPaddingLeft360dp">50dp</dimen>
-    <dimen name="buttonPaddingRight360dp">50dp</dimen>
+    <dimen name="editTextTextSize">60sp</dimen>
+    <dimen name="textViewTextSize">60sp</dimen>
+    <dimen name="buttonTextSize">50sp</dimen>
+    <dimen name="buttonPaddingLeftRight">50dp</dimen>
+
     <dimen name="buttonPaddingTop360dp">20dp</dimen>
     <dimen name="buttonPaddingBottom360dp">20dp</dimen>
-    <dimen name="buttonMargin360dp">30dp</dimen>
+    <dimen name="buttonMargin">30dp</dimen>
 
     <dimen name="weightInputTextSizeTitle360dp">45sp</dimen>
     <dimen name="weightInputMarginTopTitle360dp">30dp</dimen>
