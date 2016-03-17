@@ -27,6 +27,8 @@
     <string name="create_new_user_user_name">User Name</string>
     <string name="CreateNewUserTitle">Create New User</string>
     <string name="password_optional_text">Password (optional)</string>
+    <string name="weight_goal_optional_text">Weight Goal (optional)</string>
     <string name="back_button">Back</string>
     <string name="textViewPasswordText">Password</string>
+    <string name="create_new_user_title">Create new user</string>
 </resources>

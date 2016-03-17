@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center">
+
+
+    <TextView
+        android:id="@+id/createNewUserTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/createNewUserTextViewMarginTopTitle"
+        android:text="@string/create_new_user_title"
+        android:textSize="@dimen/createNewUserTextViewTextSizeTittle" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/userNameEditText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/createNewUserTextViewLayoutMarginBottom"
+        android:text="@string/create_new_user_user_name"
+        android:textSize="@dimen/createNewUserTextViewTextSizeFieldsLabel" />
+
+    <EditText
+        android:id="@+id/userNameEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/createNewUserEditTextLayoutMarginBottom"
+        android:background="@drawable/rectangle_border"
+        android:layout_above="@+id/passwordTextView"
+        android:layout_centerHorizontal="true"
+        android:minWidth="@dimen/createNewUserEditTextMinWidth"
+        android:textSize="@dimen/createNewUserEditTextSize"
+        android:gravity="center" />
+
+
+    <TextView
+        android:id="@+id/passwordTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/passwordEditText"
+        android:layout_marginBottom="@dimen/createNewUserTextViewLayoutMarginBottom"
+        android:textSize="@dimen/createNewUserTextViewTextSizeFieldsLabel"
+        android:layout_centerHorizontal="true"
+        android:text="@string/password_optional_text" />
+
+
+    <EditText
+        android:id="@+id/passwordEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/weightGoalTextView"
+        android:background="@drawable/rectangle_border"
+        android:layout_marginBottom="@dimen/createNewUserEditTextLayoutMarginBottom"
+        android:minWidth="@dimen/createNewUserEditTextMinWidth"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/createNewUserEditTextSize"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/weightGoalTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/weightGoalEditText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/createNewUserTextViewLayoutMarginBottom"
+        android:textSize="@dimen/createNewUserTextViewTextSizeFieldsLabel"
+        android:text="@string/weight_goal_optional_text" />
+
+    <EditText
+        android:id="@+id/weightGoalEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rectangle_border"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/createNewUserOKButton"
+        android:layout_marginBottom="@dimen/createNewUserEditTextLayoutMarginBottom"
+        android:minWidth="@dimen/createNewUserEditTextMinWidth"
+        android:textSize="@dimen/createNewUserEditTextSize"
+        android:inputType="numberDecimal" />
+
+    <Button
+        android:id="@+id/createNewUserOKButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/backButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/createNewUserOkButtonLayoutMarginTop"
+        android:text="@string/accept_button_ok" />
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:text="@string/back_button" />
+
+</RelativeLayout>
