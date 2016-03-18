@@ -20,5 +20,18 @@
 
     <dimen name="loginTextViewChooseUserLayoutMarginTop">5dp</dimen>
 
+    <dimen name="createNewUserTextViewTextSizeTittle">55sp</dimen>
+    <dimen name="createNewUserTextViewMarginTopTitle">2dp</dimen>
+    <dimen name="createNewUserOkButtonLayoutMarginTop">15dp</dimen>
+
+    <dimen name="createNewUserTextViewTextSizeFieldsLabel">30sp</dimen>
+    <dimen name="createNewUserTextViewLayoutMarginBottom">8dp</dimen>
+    <dimen name="createNewUserEditTextLayoutMarginBottom">10dp</dimen>
+
+    <dimen name="createNewUserEditTextMinWidth">450dp</dimen>
+    <dimen name="createNewUserEditTextSize">30sp</dimen>
+    <dimen name="createNewUserButtonTextSize">40sp</dimen>
+    <dimen name="createNewUserButtonMarginBottom">20dp</dimen>
+
 
 </resources>
