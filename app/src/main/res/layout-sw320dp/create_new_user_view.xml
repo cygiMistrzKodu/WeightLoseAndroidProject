@@ -91,6 +91,7 @@
         android:layout_above="@id/backButton"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/createNewUserOkButtonLayoutMarginTop"
+        android:textSize="@dimen/createNewUserButtonTextSize"
         android:text="@string/accept_button_ok" />
 
     <Button
@@ -100,6 +101,7 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
+        android:textSize="@dimen/createNewUserButtonTextSize"
         android:text="@string/back_button" />
 
 </RelativeLayout>
