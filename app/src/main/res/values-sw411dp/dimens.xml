@@ -75,4 +75,17 @@
     <dimen name="editTextPasswordMinWidth">300dp</dimen>
     <dimen name="editTextTextPasswordSize">35sp</dimen>
 
+    <dimen name="createNewUserTextViewTextSizeTittle">50sp</dimen>
+    <dimen name="createNewUserTextViewMarginTopTitle">10dp</dimen>
+    <dimen name="createNewUserOkButtonLayoutMarginTop">20dp</dimen>
+
+    <dimen name="createNewUserTextViewTextSizeFieldsLabel">32sp</dimen>
+    <dimen name="createNewUserTextViewLayoutMarginBottom">8dp</dimen>
+    <dimen name="createNewUserEditTextLayoutMarginBottom">20dp</dimen>
+
+    <dimen name="createNewUserEditTextMinWidth">300dp</dimen>
+    <dimen name="createNewUserEditTextSize">30sp</dimen>
+    <dimen name="createNewUserButtonTextSize">30sp</dimen>
+    <dimen name="createNewUserButtonMarginBottom">20dp</dimen>
+
 </resources>
