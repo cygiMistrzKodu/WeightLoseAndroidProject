@@ -12,15 +12,15 @@
         android:gravity="center"
         android:inputType="numberDecimal"
         android:maxLength="7"
-        android:minWidth="@dimen/weightInputEditTextAndUnitEditTextMinWidth768dp"
-        android:textSize="@dimen/weightInputEditTextAndUnitTextSize768dp" />
+        android:minWidth="@dimen/weightInputEditTextAndUnitEditTextMinWidth"
+        android:textSize="@dimen/weightInputEditTextAndUnitTextSize" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/weight_units"
-        android:textSize="@dimen/weightInputEditTextAndUnitTextViewMinWidth768dp"/>
+        android:textSize="@dimen/weightInputEditTextAndUnitTextViewMinWidth"/>
 
 
 </LinearLayout>

@@ -12,12 +12,12 @@
         android:text="@string/accept_button_ok" />
 <Space
     android:layout_width="match_parent"
-    android:layout_height="@dimen/WeightInputSpaceBetween320dp" />
+    android:layout_height="@dimen/WeightInputSpaceBetween" />
 
     <Button
         android:id="@+id/showChart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/WeightInputLayoutMarginBottomButton320dp"
+        android:layout_marginBottom="@dimen/WeightInputLayoutMarginBottomButton"
         android:text="@string/chart_button" />
 </LinearLayout>

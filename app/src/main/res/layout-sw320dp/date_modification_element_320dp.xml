@@ -1,6 +1,6 @@
 <LinearLayout
     android:layout_width="wrap_content"
-    android:layout_height="@dimen/dateModificationLayoutHeight320dp"
+    android:layout_height="@dimen/dateModificationLayoutHeight"
     android:orientation="horizontal"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -12,7 +12,7 @@
             android:freezesText="true"
             android:hint="09-01-2016"
             android:text="09-01-2016"
-            android:textSize="@dimen/dateModificationViewTextSize320dp"
+            android:textSize="@dimen/dateModificationViewTextSize"
             android:layout_gravity="center"
             android:background="@drawable/rectangle_border"/>
 
@@ -27,7 +27,7 @@
             android:freezesText="true"
             android:hint="3:23:45 AM"
             android:text="3:23:45 AM"
-            android:textSize="@dimen/dateModificationViewTextSize320dp"
+            android:textSize="@dimen/dateModificationViewTextSize"
             android:layout_gravity="center"
             android:background="@drawable/rectangle_border"/>
 

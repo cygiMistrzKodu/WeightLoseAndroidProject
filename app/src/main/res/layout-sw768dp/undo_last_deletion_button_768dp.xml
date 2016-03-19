@@ -5,9 +5,9 @@
 
     <Button
         android:id="@+id/undoLastDeletionButton"
-        android:layout_width="@dimen/rightLeftButtonLayoutWidth768dp"
-        android:layout_height="@dimen/rightLeftButtonLayoutHeight768dp"
+        android:layout_width="@dimen/rightLeftButtonLayoutWidth"
+        android:layout_height="@dimen/rightLeftButtonLayoutHeight"
         android:text="@string/undo_last_deletion_button"
-        android:textSize="@dimen/rightLefButtonTextSize768dp"/>
+        android:textSize="@dimen/rightLefButtonTextSize"/>
 
 </LinearLayout>

@@ -32,4 +32,20 @@
     <dimen name="createNewUserButtonTextSize">30sp</dimen>
     <dimen name="createNewUserButtonMarginBottom">20dp</dimen>
 
+    <dimen name="layoutMargin">10dp</dimen>
+    <dimen name="buttonMargin">20dp</dimen>
+    <dimen name="editTextTextSize">60sp</dimen>
+    <dimen name="textViewTextSize">60sp</dimen>
+    <dimen name="buttonTextSize">30sp</dimen>
+
+    <dimen name="WeightInputMarginTopButton">70dp</dimen>
+    <dimen name="WeightInputTextSizeButton">22sp</dimen>
+    <dimen name="WeightInputMinHeightWidthButton">20dp</dimen>
+    <dimen name="WeightInputTextSizeAcceptButton">28sp</dimen>
+    <dimen name="WeightInputMinHeightAcceptButton">30dp</dimen>
+    <dimen name="WeightInputMinWidthAcceptButton">80dp</dimen>
+
+    <dimen name="modificationViewMarginTop">5dp</dimen>
+
+
 </resources>

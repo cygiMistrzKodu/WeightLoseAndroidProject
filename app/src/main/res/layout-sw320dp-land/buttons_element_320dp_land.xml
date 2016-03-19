@@ -11,9 +11,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentBottom="true"
-                android:textSize="@dimen/WeightInputTextSizeButtonLand320dp"
-                android:minHeight="@dimen/WeightInputMinHeightWidthButtonLand320dp"
-                android:minWidth="@dimen/WeightInputMinHeightWidthButtonLand320dp"
+                android:textSize="@dimen/WeightInputTextSizeButton"
+                android:minHeight="@dimen/WeightInputMinHeightWidthButton"
+                android:minWidth="@dimen/WeightInputMinHeightWidthButton"
                 android:text="@string/modify_standard_view_button" />
 
             <Button
@@ -21,9 +21,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:textSize="@dimen/WeightInputTextSizeAcceptButtonLand320dp"
-                android:minHeight="@dimen/WeightInputMinHeightAcceptButtonLand320dp"
-                android:minWidth="@dimen/WeightInputMinWidthAcceptButtonLand320dp"
+                android:textSize="@dimen/WeightInputTextSizeAcceptButton"
+                android:minHeight="@dimen/WeightInputMinHeightAcceptButton"
+                android:minWidth="@dimen/WeightInputMinWidthAcceptButton"
                 android:text="@string/accept_button_ok" />
 
 
@@ -33,9 +33,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
-                android:textSize="@dimen/WeightInputTextSizeButtonLand320dp"
-                android:minHeight="@dimen/WeightInputMinHeightWidthButtonLand320dp"
-                android:minWidth="@dimen/WeightInputMinHeightWidthButtonLand320dp"
+                android:textSize="@dimen/WeightInputTextSizeButton"
+                android:minHeight="@dimen/WeightInputMinHeightWidthButton"
+                android:minWidth="@dimen/WeightInputMinHeightWidthButton"
                 android:text="@string/chart_button" />
 
 

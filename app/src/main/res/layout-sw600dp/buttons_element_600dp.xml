@@ -9,17 +9,17 @@
         android:id="@+id/acceptButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/acceptButtonTextSize600dp"
+        android:textSize="@dimen/acceptButtonTextSize"
         android:text="@string/accept_button_ok" />
 <Space
     android:layout_width="match_parent"
-    android:layout_height="@dimen/weightInputSpaceBetween600dp" />
+    android:layout_height="@dimen/weightInputSpaceBetween" />
 
     <Button
         android:id="@+id/showChart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/weightInputLayoutMarginBottomButton600dp"
-        android:textSize="@dimen/chartButtonTextSize600dp"
+        android:layout_marginBottom="@dimen/weightInputLayoutMarginBottomButton"
+        android:textSize="@dimen/chartButtonTextSize"
         android:text="@string/chart_button" />
 </LinearLayout>

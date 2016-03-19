@@ -5,9 +5,9 @@
 
     <Button
         android:id="@+id/deleteLatestEntryButton"
-        android:layout_width="@dimen/rightLeftButtonLayoutWidth411dp"
-        android:layout_height="@dimen/rightLeftButtonLayoutHeight411dp"
-        android:textSize="@dimen/rightLefButtonTextSize411dp"
+        android:layout_width="@dimen/rightLeftButtonLayoutWidth"
+        android:layout_height="@dimen/rightLeftButtonLayoutHeight"
+        android:textSize="@dimen/rightLefButtonTextSize"
         android:text="@string/delete_last_entry_button"/>
 
 </LinearLayout>

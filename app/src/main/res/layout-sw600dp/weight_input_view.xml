@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_marginTop="@dimen/weightInputMarginTop600dp"
+        android:layout_marginTop="@dimen/weightInputMarginTop"
         android:orientation="horizontal">
 
         <include layout="@layout/left_button_container_standard_view_element_600dp" />
@@ -30,7 +30,7 @@
         android:id="@+id/changeModeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/standardViewButtonTextSize600dp"
+        android:textSize="@dimen/standardViewButtonTextSize"
         android:text="@string/modify_standard_view_button" />
 
 </LinearLayout>

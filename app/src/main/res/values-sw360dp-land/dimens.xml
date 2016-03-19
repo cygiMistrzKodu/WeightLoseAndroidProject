@@ -32,4 +32,17 @@
     <dimen name="createNewUserEditTextMinWidth">250dp</dimen>
     <dimen name="createNewUserEditTextSize">20sp</dimen>
     <dimen name="createNewUserOkButtonLayoutMarginTop">8dp</dimen>
+
+    <dimen name="layoutMargin">10dp</dimen>
+
+    <dimen name="WeightInputMarginTopTittle">5dp</dimen>
+    <dimen name="weightInputMarginTop">8dp</dimen>
+
+    <dimen name="WeightInputMarginTopButton">50dp</dimen>
+    <dimen name="WeightInputTextSizeButton">15sp</dimen>
+    <dimen name="WeightInputMinHeightWidthButton">20dp</dimen>
+
+    <dimen name="WeightInputTextSizeAcceptButton">18sp</dimen>
+    <dimen name="WeightInputMinHeightAcceptButton">30dp</dimen>
+    <dimen name="WeightInputMinWidthAcceptButton">80dp</dimen>
 </resources>

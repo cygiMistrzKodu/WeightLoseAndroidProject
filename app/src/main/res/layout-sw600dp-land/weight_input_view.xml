@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_marginTop="@dimen/weightInputMarginTop600dp"
+        android:layout_marginTop="@dimen/weightInputMarginTop"
         android:orientation="horizontal">
 
         <include layout="@layout/left_button_container_standard_view_element_600dp" />

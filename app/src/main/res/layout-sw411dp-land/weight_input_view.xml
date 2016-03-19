@@ -2,14 +2,14 @@
     style="@style/MainRootStyle">
 
     <TextView
-        style="@style/LabelTitleTextStyleLand411dp"
+        style="@style/LabelTitleTextStyle"
         android:text="@string/weight_enter" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_marginTop="@dimen/weightInputMarginTop411dp"
+        android:layout_marginTop="@dimen/weightInputMarginTop"
         android:orientation="horizontal">
 
         <include layout="@layout/left_button_container_standard_view_element_411dp" />

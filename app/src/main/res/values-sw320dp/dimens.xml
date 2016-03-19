@@ -1,64 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="titleTextSize320dp">50sp</dimen>
-    <dimen name="layoutMargin320dp">40dp</dimen>
-    <dimen name="layoutMarginTop320dp">10dp</dimen>
-    <dimen name="maxWidth320dp">300dp</dimen>
-    <dimen name="editTextTextSize320dp">40sp</dimen>
-    <dimen name="textViewTextSize320dp">40sp</dimen>
-    <dimen name="buttonTextSize320dp">20sp</dimen>
-    <dimen name="buttonPaddingLeft320dp">50dp</dimen>
-    <dimen name="buttonPaddingRight320dp">50dp</dimen>
-    <dimen name="buttonPaddingTop320dp">20dp</dimen>
-    <dimen name="buttonPaddingBottom320dp">20dp</dimen>
-    <dimen name="buttonMargin320dp">30dp</dimen>
+    <dimen name="titleTextSize">50sp</dimen>
+    <dimen name="layoutMargin">40dp</dimen>
+    <dimen name="layoutMarginTop">10dp</dimen>
+    <dimen name="maxWidth">300dp</dimen>
+    <dimen name="editTextTextSize">40sp</dimen>
+    <dimen name="textViewTextSize">40sp</dimen>
+    <dimen name="buttonTextSize">20sp</dimen>
+    <dimen name="buttonPaddingLeft">50dp</dimen>
+    <dimen name="buttonPaddingRight">50dp</dimen>
+    <dimen name="buttonPaddingTop">20dp</dimen>
+    <dimen name="buttonPaddingBottom">20dp</dimen>
+    <dimen name="buttonMargin">30dp</dimen>
 
-    <dimen name="WeightInputTextSizeTitle320dp">30sp</dimen>
-    <dimen name="WeightInputMarginTopTitle320dp">30dp</dimen>
-    <dimen name="WeightInputSpaceBetween320dp">20dp</dimen>
-    <dimen name="WeightInputMarginTop320dp">20dp</dimen>
-    <dimen name="WeightInputLayoutMarginBottomButton320dp">10dp</dimen>
-    <dimen name="WeightInputEditTextAndUnitEditTextMinWidth320dp">130dp</dimen>
-    <dimen name="WeightInputEditTextAndUnitTextSize320dp">20sp</dimen>
-    <dimen name="WeightInputEditTextAndUnitTextViewMinWidth320dp">15sp</dimen>
+    <dimen name="WeightInputTextSizeTitle">30sp</dimen>
+    <dimen name="WeightInputMarginTopTitle">30dp</dimen>
+    <dimen name="WeightInputSpaceBetween">20dp</dimen>
+    <dimen name="WeightInputMarginTop">20dp</dimen>
+    <dimen name="WeightInputLayoutMarginBottomButton">10dp</dimen>
+    <dimen name="WeightInputEditTextAndUnitEditTextMinWidth">130dp</dimen>
+    <dimen name="WeightInputEditTextAndUnitTextSize">20sp</dimen>
+    <dimen name="WeightInputEditTextAndUnitTextViewMinWidth">15sp</dimen>
 
-    <dimen name="editTextTextSizeLand320dp">35sp</dimen>
-    <dimen name="layoutMarginLand320dp">10dp</dimen>
-    <dimen name="titleTextSizeLand320dp">40sp</dimen>
-    <dimen name="textViewTextSizeLand320dp">35sp</dimen>
-    <dimen name="buttonMarginLand320dp">10dp</dimen>
+    <dimen name="labelTitleTextSizeModificationView">32sp</dimen>
+    <dimen name="textViewMeasurementPositionTextSize">32sp</dimen>
 
-    <dimen name="WeightInputMarginTopTittleLand320dp">2dp</dimen>
-    <dimen name="WeightInputMarginTopButtonLand320dp">40dp</dimen>
-    <dimen name="WeightInputTextSizeButtonLand320dp">13sp</dimen>
-    <dimen name="WeightInputMinHeightWidthButtonLand320dp">10dp</dimen>
-    <dimen name="WeightInputTextSizeAcceptButtonLand320dp">13sp</dimen>
-    <dimen name="WeightInputMinHeightAcceptButtonLand320dp">30dp</dimen>
-    <dimen name="WeightInputMinWidthAcceptButtonLand320dp">80dp</dimen>2
-
-    <dimen name="labelTitleTextSizeModificationView320dp">32sp</dimen>
-    <dimen name="textViewMeasurementPositionTextSize320dp">32sp</dimen>
-
-    <dimen name="modificationViewMarginTop320dp">20dp</dimen>
+    <dimen name="modificationViewMarginTop">20dp</dimen>
     
-    <dimen name="previousNextMeasurementLayoutWidth320dp">70dp</dimen>
-    <dimen name="previousNextMeasurementLayoutHeight320dp">50dp</dimen>
-    <dimen name="dateModificationLayoutHeight320dp">50dp</dimen>
-    <dimen name="dateModificationViewTextSize320dp">25sp</dimen>
+    <dimen name="previousNextMeasurementLayoutWidth">70dp</dimen>
+    <dimen name="previousNextMeasurementLayoutHeight">50dp</dimen>
+    <dimen name="dateModificationLayoutHeight">50dp</dimen>
+    <dimen name="dateModificationViewTextSize">25sp</dimen>
 
-    <dimen name="positionTextViewMarginTop320dp">5dp</dimen>
-    <dimen name="positionTextViewMarginBottom320dp">5dp</dimen>
-
-    <dimen name="modificationViewMarginTopLand320dp">5dp</dimen>
-
-    <dimen name="positionTextViewMarginTopLand320dp">1dp</dimen>
-    <dimen name="positionTextViewMarginBottomLand320dp">1dp</dimen>
-
-    <dimen name="WeightInputMarginTopButtonModificationLand320dp">20dp</dimen>
-
-    <dimen name="labelTitleTextSizeModificationViewLand320dp">29sp</dimen>
-    <dimen name="textViewMeasurementPositionTextSizeLand320dp">28sp</dimen>
+    <dimen name="positionTextViewMarginTop">5dp</dimen>
+    <dimen name="positionTextViewMarginBottom">5dp</dimen>
 
     <dimen name="nextPreviousMeasurementTextSize320dp">26sp</dimen>
 
@@ -76,12 +52,6 @@
     <dimen name="editTextLayoutMarginBottom">20dp</dimen>
     
     <dimen name="buttonOkLayoutMarginBottom">85dp</dimen>
-
-    <dimen name="loginTextViewChooseUserLayoutMarginTopLand">1dp</dimen>
-    <dimen name="loginSpinnerLayoutMarginTopLand">2dp</dimen>
-    <dimen name="loginSpinnerLayoutMarginBottomLand">5dp</dimen>
-    <dimen name="loginTextViewLayoutMarginPasswordBottomLand">2dp</dimen>
-    <dimen name="editTextLayoutMarginBottomLand">27dp</dimen>
 
     <dimen name="createNewUserTextViewTextSizeTittle">40sp</dimen>
     <dimen name="createNewUserTextViewMarginTopTitle">10dp</dimen>

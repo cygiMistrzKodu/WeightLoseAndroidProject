@@ -1,36 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="layoutMarginTop380dp">20dp</dimen>
-    <dimen name="layoutMargin380dp">40dp</dimen>
-    <dimen name="titleTextSize380dp">70sp</dimen>
-    <dimen name="maxWidth380dp">300dp</dimen>
-    <dimen name="editTextTextSize380dp">70sp</dimen>
-    <dimen name="textViewTextSize380dp">70sp</dimen>
-    <dimen name="buttonMargin380dp">40dp</dimen>
-    <dimen name="buttonTextSize380dp">40sp</dimen>
-    <dimen name="buttonPaddingLeft380dp">50dp</dimen>
-    <dimen name="buttonPaddingRight380dp">50dp</dimen>
-    <dimen name="buttonPaddingTop380dp">20dp</dimen>
-    <dimen name="buttonPaddingBottom380dp">20dp</dimen>
+    <dimen name="layoutMarginTop">20dp</dimen>
+    <dimen name="layoutMargin">40dp</dimen>
+    <dimen name="titleTextSize">70sp</dimen>
+    <dimen name="maxWidth">300dp</dimen>
+    <dimen name="editTextTextSize">70sp</dimen>
+    <dimen name="textViewTextSize">70sp</dimen>
+    <dimen name="buttonMargin">40dp</dimen>
+    <dimen name="buttonTextSize">40sp</dimen>
+    <dimen name="buttonPaddingLeft">50dp</dimen>
+    <dimen name="buttonPaddingRight">50dp</dimen>
+    <dimen name="buttonPaddingTop">20dp</dimen>
+    <dimen name="buttonPaddingBottom">20dp</dimen>
 
-    <dimen name="layoutMarginLand380dp">10dp</dimen>
-    <dimen name="buttonMarginLand380dp">10dp</dimen>
-    <dimen name="editTextTextSizeLand380dp">60sp</dimen>
-    <dimen name="textViewTextSizeLand380dp">60sp</dimen>
-    <dimen name="titleTextSizeLand380dp">60sp</dimen>
-    <dimen name="buttonTextSizeLand380dp">30sp</dimen>
-
-    <dimen name="WeightInputTextSizeButtonLand380dp">19sp</dimen>
-    <dimen name="WeightInputTextSizeAcceptButtonLand380dp">22sp</dimen>
-    <dimen name="WeightInputMarginTopButtonLand380dp">65dp</dimen>
-
-    <dimen name="weightInputEditTextAndUnitEditTextMinWidth380dp">160dp</dimen>
-    <dimen name="weightInputEditTextAndUnitTextSize380dp">28sp</dimen>
-    <dimen name="weightInputEditTextAndUnitTextViewMinWidth380dp">32sp</dimen>
-
-    <dimen name="modificationViewMarginTopLand380dp">5dp</dimen>
-    <dimen name="nextPreviousMeasurementTextSize380dp">26sp</dimen>
+    <dimen name="nextPreviousMeasurementTextSize">26sp</dimen>
 
     <dimen name="createNewUserTextViewTextSizeTittle">50sp</dimen>
     <dimen name="createNewUserTextViewMarginTopTitle">10dp</dimen>

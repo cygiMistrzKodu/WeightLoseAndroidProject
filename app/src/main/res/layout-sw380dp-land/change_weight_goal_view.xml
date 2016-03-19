@@ -8,14 +8,14 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/layoutMarginTop380dp">
+        android:layout_marginTop="@dimen/layoutMarginTop">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/layoutMarginLand380dp"
+            android:layout_margin="@dimen/layoutMargin"
             android:text="@string/change_weight_goal_title"
-            android:textSize="@dimen/titleTextSizeLand380dp"
+            android:textSize="@dimen/titleTextSize"
             android:layout_gravity="left" />
     </LinearLayout>
 
@@ -28,28 +28,28 @@
             android:id="@+id/changeGoalEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxWidth="@dimen/maxWidth380dp"
+            android:maxWidth="@dimen/maxWidth"
             android:text="300"
             android:inputType="numberDecimal"
-            android:textSize="@dimen/editTextTextSizeLand380dp" />
+            android:textSize="@dimen/editTextTextSize" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/weight_goal_unit"
-            android:textSize="@dimen/textViewTextSizeLand380dp" />
+            android:textSize="@dimen/textViewTextSize" />
     </LinearLayout>
 
     <Button
         android:id="@+id/changeGoalOkButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/buttonMarginLand380dp"
+        android:layout_margin="@dimen/buttonMargin"
         android:text="@string/accept_button_ok"
-        android:textSize="@dimen/buttonTextSizeLand380dp"
-        android:paddingLeft="@dimen/buttonPaddingLeft380dp"
-        android:paddingRight="@dimen/buttonPaddingRight380dp"
-        android:paddingTop="@dimen/buttonPaddingTop380dp"
-        android:paddingBottom="@dimen/buttonPaddingBottom380dp"/>
+        android:textSize="@dimen/buttonTextSize"
+        android:paddingLeft="@dimen/buttonPaddingLeft"
+        android:paddingRight="@dimen/buttonPaddingRight"
+        android:paddingTop="@dimen/buttonPaddingTop"
+        android:paddingBottom="@dimen/buttonPaddingBottom"/>
 
 </LinearLayout>

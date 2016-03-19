@@ -9,4 +9,35 @@
     <dimen name="createNewUserEditTextMinWidth">250dp</dimen>
     <dimen name="createNewUserEditTextSize">16sp</dimen>
     <dimen name="createNewUserOkButtonLayoutMarginTop">8dp</dimen>
+
+    <dimen name="editTextTextSize">35sp</dimen>
+    <dimen name="layoutMargin">10dp</dimen>
+    <dimen name="titleTextSize">40sp</dimen>
+    <dimen name="textViewTextSize">35sp</dimen>
+    <dimen name="buttonMargin">10dp</dimen>
+
+    <dimen name="WeightInputMarginTopTittle">2dp</dimen>
+    <dimen name="WeightInputMarginTopButton">40dp</dimen>
+    <dimen name="WeightInputTextSizeButton">13sp</dimen>
+    <dimen name="WeightInputMinHeightWidthButton">10dp</dimen>
+    <dimen name="WeightInputTextSizeAcceptButton">13sp</dimen>
+    <dimen name="WeightInputMinHeightAcceptButton">30dp</dimen>
+    <dimen name="WeightInputMinWidthAcceptButton">80dp</dimen>
+
+    <dimen name="modificationViewMarginTop">5dp</dimen>
+
+    <dimen name="positionTextViewMarginTop">1dp</dimen>
+    <dimen name="positionTextViewMarginBottom">1dp</dimen>
+
+    <dimen name="WeightInputMarginTopButtonModification">20dp</dimen>
+
+    <dimen name="labelTitleTextSizeModificationView">29sp</dimen>
+    <dimen name="textViewMeasurementPositionTextSize">28sp</dimen>
+
+    <dimen name="loginTextViewChooseUserLayoutMarginTop">1dp</dimen>
+    <dimen name="loginSpinnerLayoutMarginTop">2dp</dimen>
+    <dimen name="loginSpinnerLayoutMarginBottom">5dp</dimen>
+    <dimen name="loginTextViewLayoutMarginPasswordBottom">2dp</dimen>
+    <dimen name="editTextLayoutMarginBottom">27dp</dimen>
+
 </resources>

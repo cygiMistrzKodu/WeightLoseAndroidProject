@@ -3,7 +3,7 @@
 
     <TextView
         style="@style/LabelTitleTextStyleModificationView600dp"
-        android:layout_marginTop="@dimen/modificationViewMarginTop600dp"
+        android:layout_marginTop="@dimen/modificationViewMarginTop"
         android:text="@string/weight_modify"/>
 
     <LinearLayout
@@ -13,9 +13,9 @@
         android:id="@+id/positionNumberTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/positionTextViewMarginTop600dp"
-        android:layout_marginBottom="@dimen/positionTextViewMarginBottom600dp"
-        android:textSize="@dimen/textViewMeasurementPositionTextSize600dp"
+        android:layout_marginTop="@dimen/positionTextViewMarginTop"
+        android:layout_marginBottom="@dimen/positionTextViewMarginBottom"
+        android:textSize="@dimen/textViewMeasurementPositionTextSize"
         android:text="@string/position_number"/>
     </LinearLayout>
 
@@ -40,7 +40,7 @@
         android:id="@+id/changeModeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/dateModificationChangeModeButtonTextSize600dp"
+        android:textSize="@dimen/dateModificationChangeModeButtonTextSize"
         android:text="@string/modify_modification_view_button" />
 
 </LinearLayout>

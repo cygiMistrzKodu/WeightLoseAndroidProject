@@ -1,6 +1,6 @@
 <LinearLayout
     android:layout_width="wrap_content"
-    android:layout_height="@dimen/dateElementLinearLayoutLayoutHeight600dp"
+    android:layout_height="@dimen/dateElementLinearLayoutLayoutHeight"
     android:orientation="horizontal"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -11,7 +11,7 @@
             android:layout_height="wrap_content"
             android:freezesText="true"
             android:hint="26-02-2016"
-            android:textSize="@dimen/dateTextSize600dp"
+            android:textSize="@dimen/dateTextSize"
             android:layout_gravity="center_vertical"
             android:background="@drawable/rectangle_border"/>
 
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:freezesText="true"
             android:hint="3:23:45 AM"
-            android:textSize="@dimen/dateTextSize600dp"
+            android:textSize="@dimen/dateTextSize"
             android:layout_gravity="center_vertical"
             android:background="@drawable/rectangle_border"/>
 
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/auto_checkbox_text"
-            android:textSize="@dimen/autoCheckBoxTextSize600dp"
+            android:textSize="@dimen/autoCheckBoxTextSize"
             android:layout_gravity="center_vertical" />
 
     </LinearLayout>

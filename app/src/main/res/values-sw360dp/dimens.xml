@@ -2,60 +2,47 @@
 <resources>
 
     <dimen name="titleTextSize">60sp</dimen>
-    <dimen name="layoutMargin360dp">40dp</dimen>
-    <dimen name="layoutMarginTop360dp">10dp</dimen>
-    <dimen name="maxWidth360dp">300dp</dimen>
+    <dimen name="layoutMargin">40dp</dimen>
+    <dimen name="layoutMarginTop">10dp</dimen>
+    <dimen name="maxWidth">300dp</dimen>
     <dimen name="editTextTextSize">60sp</dimen>
     <dimen name="textViewTextSize">60sp</dimen>
     <dimen name="buttonTextSize">50sp</dimen>
     <dimen name="buttonPaddingLeftRight">50dp</dimen>
 
-    <dimen name="buttonPaddingTop360dp">20dp</dimen>
-    <dimen name="buttonPaddingBottom360dp">20dp</dimen>
+    <dimen name="buttonPaddingTop">20dp</dimen>
+    <dimen name="buttonPaddingBottom">20dp</dimen>
     <dimen name="buttonMargin">30dp</dimen>
 
-    <dimen name="weightInputTextSizeTitle360dp">45sp</dimen>
-    <dimen name="weightInputMarginTopTitle360dp">30dp</dimen>
-    <dimen name="weightInputSpaceBetween360dp">20dp</dimen>
-    <dimen name="weightInputMarginTop360dp">30dp</dimen>
-    <dimen name="weightInputLayoutMarginBottomButton360dp">10dp</dimen>
+    <dimen name="weightInputTextSizeTitle">45sp</dimen>
+    <dimen name="weightInputMarginTopTitle">30dp</dimen>
+    <dimen name="weightInputSpaceBetween">20dp</dimen>
+    <dimen name="weightInputMarginTop">30dp</dimen>
+    <dimen name="weightInputLayoutMarginBottomButton">10dp</dimen>
 
-    <dimen name="weightInputEditTextAndUnitEditTextMinWidth360dp">130dp</dimen>
-    <dimen name="weightInputEditTextAndUnitTextSize360dp">25sp</dimen>
-    <dimen name="weightInputEditTextAndUnitTextViewMinWidth360dp">30sp</dimen>
+    <dimen name="weightInputEditTextAndUnitEditTextMinWidth">130dp</dimen>
+    <dimen name="weightInputEditTextAndUnitTextSize">25sp</dimen>
+    <dimen name="weightInputEditTextAndUnitTextViewMinWidth">30sp</dimen>
 
-    <dimen name="rightLefButtonTextSize360dp">19sp</dimen>
-    <dimen name="rightLeftButtonLayoutWidth360dp">95dp</dimen>
-    <dimen name="rightLeftButtonLayoutHeight360dp">55dp</dimen>
-    <dimen name="acceptButtonTextSize360dp">22sp</dimen>
-    <dimen name="chartButtonTextSize360dp">22sp</dimen>
-    <dimen name="standardViewButtonTextSize360dp">22sp</dimen>
+    <dimen name="rightLefButtonTextSize">19sp</dimen>
+    <dimen name="rightLeftButtonLayoutWidth">95dp</dimen>
+    <dimen name="rightLeftButtonLayoutHeight">55dp</dimen>
+    <dimen name="acceptButtonTextSize">22sp</dimen>
+    <dimen name="chartButtonTextSize">22sp</dimen>
+    <dimen name="standardViewButtonTextSize">22sp</dimen>
 
-    <dimen name="dateTextSize360dp">23sp</dimen>
-    <dimen name="autoCheckBoxTextSize360dp">20sp</dimen>
+    <dimen name="dateTextSize">23sp</dimen>
+    <dimen name="autoCheckBoxTextSize">20sp</dimen>
 
-    <dimen name="layoutMarginLand360dp">10dp</dimen>
+    <dimen name="labelTitleTextSizeModificationView">36sp</dimen>
+    <dimen name="dateModificationViewTextSize">30sp</dimen>
 
-    <dimen name="WeightInputMarginTopTittleLand360dp">5dp</dimen>
-    <dimen name="weightInputMarginTopLand360dp">8dp</dimen>
+    <dimen name="dateModificationLayoutHeight">70dp</dimen>
+    <dimen name="dateModificationChangeModeButtonTextSize">20sp</dimen>
 
-    <dimen name="WeightInputMarginTopButtonLand360dp">50dp</dimen>
-    <dimen name="WeightInputTextSizeButtonLand360dp">15sp</dimen>
-    <dimen name="WeightInputMinHeightWidthButtonLand360dp">20dp</dimen>
+    <dimen name="modificationViewMarginTop">5dp</dimen>
 
-    <dimen name="WeightInputTextSizeAcceptButtonLand360dp">18sp</dimen>
-    <dimen name="WeightInputMinHeightAcceptButtonLand360dp">30dp</dimen>
-    <dimen name="WeightInputMinWidthAcceptButtonLand360dp">80dp</dimen>
-
-    <dimen name="labelTitleTextSizeModificationView360dp">36sp</dimen>
-    <dimen name="dateModificationViewTextSize360dp">30sp</dimen>
-
-    <dimen name="dateModificationLayoutHeight360dp">70dp</dimen>
-    <dimen name="dateModificationChangeModeButtonTextSize360dp">20sp</dimen>
-
-    <dimen name="modificationViewMarginTop360dp">5dp</dimen>
-
-    <dimen name="nextPreviousMeasurementTextSize360dp">26sp</dimen>
+    <dimen name="nextPreviousMeasurementTextSize">26sp</dimen>
 
     <dimen name="loginChooseUserTextSize">55sp</dimen>
     <dimen name="loginTextViewChooseUserLayoutMarginTop">10dp</dimen>
@@ -74,12 +61,6 @@
     <dimen name="buttonOkPaddingLeftRight">40sp</dimen>
 
     <dimen name="buttonNewUserTextSize">30sp</dimen>
-
-    <dimen name="loginTextViewChooseUserLayoutMarginTopLand">1dp</dimen>
-    <dimen name="loginSpinnerLayoutMarginTopLand">2dp</dimen>
-    <dimen name="loginSpinnerLayoutMarginBottomLand">5dp</dimen>
-    <dimen name="loginTextViewLayoutMarginPasswordBottomLand">2dp</dimen>
-    <dimen name="editTextLayoutMarginBottomLand">20dp</dimen>
 
     <dimen name="createNewUserTextViewTextSizeTittle">45sp</dimen>
     <dimen name="createNewUserTextViewMarginTopTitle">10dp</dimen>

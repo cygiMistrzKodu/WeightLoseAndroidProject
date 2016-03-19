@@ -33,27 +33,27 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>
-        <item name="android:textSize">@dimen/labelTitleTextSizeModificationView320dp</item>
+        <item name="android:textSize">@dimen/labelTitleTextSizeModificationView</item>
     </style>
 
     <style name="LabelTitleTextStyleModificationView320dp" parent="LabelTitleTextStyleCommon">
-        <item name="android:textSize">@dimen/labelTitleTextSizeModificationView320dp</item>
+        <item name="android:textSize">@dimen/labelTitleTextSizeModificationView</item>
     </style>
 
     <style name="LabelTitleTextStyleModificationView360dp" parent="LabelTitleTextStyleCommon">
-        <item name="android:textSize">@dimen/labelTitleTextSizeModificationView360dp</item>
+        <item name="android:textSize">@dimen/labelTitleTextSizeModificationView</item>
     </style>
 
     <style name="LabelTitleTextStyleModificationView411dp" parent="LabelTitleTextStyleCommon">
-        <item name="android:textSize">@dimen/labelTitleTextSizeModificationView411dp</item>
+        <item name="android:textSize">@dimen/labelTitleTextSizeModificationView</item>
     </style>
 
     <style name="LabelTitleTextStyleModificationView600dp" parent="LabelTitleTextStyleCommon">
-        <item name="android:textSize">@dimen/labelTitleTextSizeModificationView600dp</item>
+        <item name="android:textSize">@dimen/labelTitleTextSizeModificationView</item>
     </style>
 
     <style name="LabelTitleTextStyleModificationView768dp" parent="LabelTitleTextStyleCommon">
-        <item name="android:textSize">@dimen/labelTitleTextSizeModificationView768dp</item>
+        <item name="android:textSize">@dimen/labelTitleTextSizeModificationView</item>
     </style>
 
 
@@ -72,41 +72,41 @@
     </style>
 
     <style name="LabelTitleTextStyle320dp" parent="LabelTitleTextStyleCommon">
-        <item name="android:layout_marginTop">@dimen/WeightInputMarginTopTitle320dp</item>
-        <item name="android:textSize">@dimen/WeightInputTextSizeTitle320dp</item>
+        <item name="android:layout_marginTop">@dimen/WeightInputMarginTopTitle</item>
+        <item name="android:textSize">@dimen/WeightInputTextSizeTitle</item>
     </style>
 
     <style name="LabelTitleTextStyleLand320dp" parent="LabelTitleTextStyle320dp">
-        <item name="android:layout_marginTop">@dimen/WeightInputMarginTopTittleLand320dp</item>
+        <item name="android:layout_marginTop">@dimen/WeightInputMarginTopTittle</item>
     </style>
 
     <style name="LabelTitleTextStyle360dp" parent="LabelTitleTextStyleCommon">
-        <item name="android:layout_marginTop">@dimen/weightInputMarginTopTitle360dp</item>
-        <item name="android:textSize">@dimen/weightInputTextSizeTitle360dp</item>
+        <item name="android:layout_marginTop">@dimen/weightInputMarginTopTitle</item>
+        <item name="android:textSize">@dimen/weightInputTextSizeTitle</item>
     </style>
 
     <style name="LabelTitleTextStyleLand360dp" parent="LabelTitleTextStyle360dp">
-        <item name="android:layout_marginTop">@dimen/WeightInputMarginTopTittleLand360dp</item>
+        <item name="android:layout_marginTop">@dimen/WeightInputMarginTopTittle</item>
     </style>
 
     <style name="LabelTitleTextStyleLand411dp" parent="LabelTitleTextStyleCommon">
-        <item name="android:layout_marginTop">@dimen/weightInputMarginTopTitle411dp</item>
-        <item name="android:textSize">@dimen/weightInputTextSizeTitle411dp</item>
+        <item name="android:layout_marginTop">@dimen/weightInputMarginTopTitle</item>
+        <item name="android:textSize">@dimen/weightInputTextSizeTitle</item>
     </style>
 
     <style name="LabelTitleTextStyle600dp" parent="LabelTitleTextStyleCommon">
-        <item name="android:layout_marginTop">@dimen/weightInputMarginTopTitle600dp</item>
-        <item name="android:textSize">@dimen/weightInputTextSizeTitle600dp</item>
+        <item name="android:layout_marginTop">@dimen/weightInputMarginTopTitle</item>
+        <item name="android:textSize">@dimen/weightInputTextSizeTitle</item>
     </style>
 
     <style name="LabelTitleTextStyleLand600dp" parent="LabelTitleTextStyleCommon">
-        <item name="android:layout_marginTop">@dimen/weightInputMarginTopTitleLand600dp</item>
-        <item name="android:textSize">@dimen/weightInputTextSizeTitleLand600dp</item>
+        <item name="android:layout_marginTop">@dimen/weightInputMarginTopTitle</item>
+        <item name="android:textSize">@dimen/weightInputTextSizeTitle</item>
     </style>
 
     <style name="LabelTitleTextStyle768dp" parent="LabelTitleTextStyleCommon">
-        <item name="android:layout_marginTop">@dimen/weightInputMarginTopTitle768dp</item>
-        <item name="android:textSize">@dimen/weightInputTextSizeTitle768dp</item>
+        <item name="android:layout_marginTop">@dimen/weightInputMarginTopTitle</item>
+        <item name="android:textSize">@dimen/weightInputTextSizeTitle</item>
     </style>
 
 

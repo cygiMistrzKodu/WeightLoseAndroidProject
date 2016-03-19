@@ -3,9 +3,9 @@
 
     <Button
         android:id="@+id/goToPreviousMeasurement"
-        android:layout_width="@dimen/previousNextMeasurementLayoutWidth411dp"
-        android:layout_height="@dimen/previousNextMeasurementLayoutHeight411dp"
-        android:textSize="@dimen/nextPreviousMeasurementTextSize411dp"
+        android:layout_width="@dimen/previousNextMeasurementLayoutWidth"
+        android:layout_height="@dimen/previousNextMeasurementLayoutHeight"
+        android:textSize="@dimen/nextPreviousMeasurementTextSize"
         android:text="@string/left_Arrow" />
 
 </merge>
