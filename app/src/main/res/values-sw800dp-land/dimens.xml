@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="createNewUserTextViewTextSizeTittle">80sp</dimen>
+    <dimen name="createNewUserTextViewMarginTopTitle">2dp</dimen>
+    <dimen name="createNewUserOkButtonLayoutMarginTop">30dp</dimen>
+
+    <dimen name="createNewUserTextViewTextSizeFieldsLabel">45sp</dimen>
+    <dimen name="createNewUserTextViewLayoutMarginBottom">15dp</dimen>
+    <dimen name="createNewUserEditTextLayoutMarginBottom">20dp</dimen>
+
+    <dimen name="createNewUserEditTextMinWidth">600dp</dimen>
+    <dimen name="createNewUserEditTextSize">40sp</dimen>
+    <dimen name="createNewUserButtonTextSize">70sp</dimen>
+    <dimen name="createNewUserButtonMarginBottom">40dp</dimen>
+
+</resources>
