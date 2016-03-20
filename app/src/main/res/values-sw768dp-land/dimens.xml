@@ -33,6 +33,7 @@
     <dimen name="createNewUserButtonTextSize">55sp</dimen>
     <dimen name="createNewUserButtonMarginBottom">20dp</dimen>
 
+
     <dimen name="titleTextSize">150sp</dimen>
     <dimen name="layoutMargin">10dp</dimen>
     <dimen name="buttonMargin">30dp</dimen>

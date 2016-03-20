@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -77,6 +78,9 @@ public class ChartActivity extends AppCompatActivity {
         int colorGreenDark = Color.argb(255,0,77,0);
         lineDataSet.setColor(colorGreenDark);
         lineDataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
+        lineDataSet.setDrawFilled(true);
+
+
 
         ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
         dataSets.add(lineDataSet);
@@ -84,17 +88,45 @@ public class ChartActivity extends AppCompatActivity {
         LineData data = new LineData(dateSeries, dataSets);
 
         decorateXaxis();
+        decorateYaxis();
+        decorateLegend();
         drawWeightGoalLine();
 
+        int yellowOpacity = Color.argb(20,255,255,0);
+        chart.setBackgroundColor(yellowOpacity);
 
         chart.setData(data);
         chart.invalidate();
     }
 
+    private void decorateLegend() {
+
+        Legend legend = chart.getLegend();
+        legend.setTextSize(12f);
+        legend.setForm(Legend.LegendForm.CIRCLE);
+        legend.setPosition(Legend.LegendPosition.BELOW_CHART_RIGHT);
+
+
+    }
+
+    private void decorateYaxis() {
+        removeYaxisRight();
+
+        YAxis yAxisLeft = chart.getAxisLeft();
+        yAxisLeft.setTextSize(20f);
+
+    }
+
+    private void removeYaxisRight() {
+        YAxis yAxisRight = chart.getAxisRight();
+        yAxisRight.setEnabled(false);
+    }
+
     private void decorateXaxis() {
         XAxis xAxis = chart.getXAxis();
-        xAxis.setTextSize(14f);
+        xAxis.setTextSize(15f);
         xAxis.setAvoidFirstLastClipping(true);
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setValueFormatter(new DateAxisXValueFormatter());
     }
 

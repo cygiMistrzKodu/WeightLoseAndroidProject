@@ -31,4 +31,5 @@
     <string name="back_button">Back</string>
     <string name="textViewPasswordText">Password</string>
     <string name="create_new_user_title">Create new user</string>
+    <string name="testDateTime">3:23</string>
 </resources>

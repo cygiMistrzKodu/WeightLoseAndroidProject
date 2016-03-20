@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <dimen name="simpleSpinnerDropDownTextSize">50sp</dimen>
     <dimen name="loginChooseUserTextSize">70sp</dimen>
 
@@ -33,7 +32,8 @@
     <dimen name="createNewUserButtonTextSize">40sp</dimen>
     <dimen name="createNewUserButtonMarginBottom">20dp</dimen>
 
-    <dimen name="titleTextSize">111sp</dimen>
+    <dimen name="layoutMarginTop">5dp</dimen>
+    <dimen name="titleTextSize">106sp</dimen>
     <dimen name="layoutMargin">10dp</dimen>
     <dimen name="buttonMargin">20dp</dimen>
     <dimen name="editTextTextSize">90sp</dimen>

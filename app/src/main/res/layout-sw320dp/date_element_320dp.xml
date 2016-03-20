@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:freezesText="true"
-            android:hint="3:23:45 AM"
+            android:hint="@string/testDateTime"
             android:textSize="@dimen/date_text_size_medium"
             android:layout_gravity="center_vertical"
             android:background="@drawable/rectangle_border"/>
