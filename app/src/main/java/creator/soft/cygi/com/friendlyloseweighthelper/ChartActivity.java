@@ -95,7 +95,7 @@ public class ChartActivity extends AppCompatActivity {
         XAxis xAxis = chart.getXAxis();
         xAxis.setTextSize(14f);
         xAxis.setAvoidFirstLastClipping(true);
-        xAxis.setValueFormatter(new DateXAxisValueFormatter());
+        xAxis.setValueFormatter(new DateAxisXValueFormatter());
     }
 
     private void drawWeightGoalLine() {

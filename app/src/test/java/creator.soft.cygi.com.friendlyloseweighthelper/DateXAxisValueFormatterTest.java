@@ -12,11 +12,11 @@ public class DateXAxisValueFormatterTest {
     @Test
     public void originalValueMustBeChangeToDifferentFormatting() throws Exception {
 
-        DateXAxisValueFormatter dateXAxisValueFormatter = new DateXAxisValueFormatter();
+        DateAxisXValueFormatter dateAxisXValueFormatter = new DateAxisXValueFormatter();
 
         String originalValue = "18-02-2016 8:44:21 PM";
 
-        String changeValue =   dateXAxisValueFormatter.getXValue(originalValue, 0, null);
+        String changeValue =   dateAxisXValueFormatter.getXValue(originalValue, 0, null);
 
         System.out.print(changeValue);
     }
