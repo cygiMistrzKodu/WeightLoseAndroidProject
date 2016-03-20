@@ -74,7 +74,8 @@ public class ChartActivity extends AppCompatActivity {
         LineDataSet lineDataSet = new LineDataSet(weightUnitEntrySet,weightUnitInChart);
         lineDataSet.setValueFormatter(new ChartValueFormatter());
         lineDataSet.setValueTextSize(17);
-        lineDataSet.setColor(Color.RED);
+        int colorGreenDark = Color.argb(255,0,77,0);
+        lineDataSet.setColor(colorGreenDark);
         lineDataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
 
         ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
@@ -82,10 +83,19 @@ public class ChartActivity extends AppCompatActivity {
 
         LineData data = new LineData(dateSeries, dataSets);
 
+        decorateXaxis();
         drawWeightGoalLine();
+
 
         chart.setData(data);
         chart.invalidate();
+    }
+
+    private void decorateXaxis() {
+        XAxis xAxis = chart.getXAxis();
+        xAxis.setTextSize(14f);
+        xAxis.setAvoidFirstLastClipping(true);
+        xAxis.setValueFormatter(new DateXAxisValueFormatter());
     }
 
     private void drawWeightGoalLine() {
@@ -96,9 +106,16 @@ public class ChartActivity extends AppCompatActivity {
 
         YAxis leftAxis = chart.getAxisLeft();
         LimitLine weightGoalLine = new LimitLine(userWeightGoal,"Weight Goal: "+userWeightGoal+" Kg");
-        weightGoalLine.setLineColor(Color.BLUE);
-        weightGoalLine.setLineWidth(5f);
-        weightGoalLine.setTextSize(20f);
+
+        int OpacityBlueColor = Color.argb(80, 0,0,255);
+        weightGoalLine.setLineColor(OpacityBlueColor);
+
+
+        weightGoalLine.enableDashedLine(30, 20, 0);
+        weightGoalLine.setLineWidth(2f);
+        weightGoalLine.setTextSize(40f);
+        int opacityBlackColor = Color.argb(100,0,0,0);
+        weightGoalLine.setTextColor(opacityBlackColor);
         leftAxis.addLimitLine(weightGoalLine);
     }
 
