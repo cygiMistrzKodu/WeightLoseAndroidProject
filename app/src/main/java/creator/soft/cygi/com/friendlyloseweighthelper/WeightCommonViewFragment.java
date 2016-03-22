@@ -30,26 +30,10 @@ import org.apache.commons.lang3.math.NumberUtils;
  */
 public abstract class WeightCommonViewFragment extends Fragment {
 
-    protected WeightDataModel weightDataModel;
-    private Button chartButton;
-    protected WeightTrackDatabaseHelper weightTrackDatabaseHelper;
-    protected TextView dateTextView;
-    protected TextView timeTextView;
-    private final ChartHelper chartHelper = new ChartHelper();
-
     private static final String DIALOG_DATE = "date";
     private static final String DIALOG_TIME = "time";
-
     private static final int REQUEST_DATE = 0;
     private static final int REQUEST_TIME = 1;
-
-    protected Button acceptButton;
-    protected EditText weightInput;
-
-    private CheckBox autoCheckBox;
-
-    public  String TAG = "WeightCommonViewFragment";
-
     private static IntentFilter intentFilter;
 
     static {
@@ -57,6 +41,12 @@ public abstract class WeightCommonViewFragment extends Fragment {
         intentFilter.addAction(Intent.ACTION_TIME_CHANGED);
     }
 
+    private final ChartHelper chartHelper = new ChartHelper();
+    public String TAG = "WeightCommonViewFragment";
+    protected WeightDataModel weightDataModel;
+    protected WeightTrackDatabaseHelper weightTrackDatabaseHelper;
+    protected TextView dateTextView;
+    protected TextView timeTextView;
     private final BroadcastReceiver timeChangeReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -66,12 +56,12 @@ public abstract class WeightCommonViewFragment extends Fragment {
             if (action.equals(Intent.ACTION_TIME_CHANGED)) {
 
                 String currentTime = timeTextView.getText().toString();
-                Log.d(TAG,"Broadcast receiver currentTime: "+ currentTime);
+                Log.d(TAG, "Broadcast receiver currentTime: " + currentTime);
                 Context whatIsContextState = getContext();
-                if(whatIsContextState == null){
-                    Log.d(TAG,"Boradcast Context is NULL");
-                }else {
-                    Log.d(TAG,"Broadcast Context is  NOT NULL");
+                if (whatIsContextState == null) {
+                    Log.d(TAG, "Boradcast Context is NULL");
+                } else {
+                    Log.d(TAG, "Broadcast Context is  NOT NULL");
                 }
                 String formattedTime12Or24 = DateTimeStringUtility.convertTimeBaseOnDeviceFormat12or24(getContext(), currentTime);
                 timeTextView.setText(formattedTime12Or24);
@@ -79,6 +69,10 @@ public abstract class WeightCommonViewFragment extends Fragment {
 
         }
     };
+    protected Button acceptButton;
+    protected EditText weightInput;
+    private Button chartButton;
+    private CheckBox autoCheckBox;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -163,30 +157,41 @@ public abstract class WeightCommonViewFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.main_menu,menu);
+        inflater.inflate(R.menu.main_menu, menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.menu_switch_users:
 
-                final FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.fragmentContainer, new LoginViewFragment());
-                ft.commit();
+                replaceFragment(new LoginViewFragment());
 
-               return true;
+                return true;
             case R.id.menu_set_weight_goal:
 
-                Intent i = new Intent(getActivity() , WeightGoalActivity.class);
+                Intent i = new Intent(getActivity(), WeightGoalActivity.class);
                 getActivity().startActivity(i);
+
+                return true;
+            case R.id.menu_delete_all_measurement:
+
+                weightTrackDatabaseHelper.clearAllMeasurementDataForLoginUser();
+
+                replaceFragment(new WeightStandardViewFragment());
 
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
 
+    }
+
+    private void replaceFragment(Fragment fragment) {
+        final FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.replace(R.id.fragmentContainer, fragment);
+        ft.commit();
     }
 
     private void processUserMeasurementInput() {
@@ -218,8 +223,7 @@ public abstract class WeightCommonViewFragment extends Fragment {
 
     private boolean isDateGeneratedAutomatically() {
 
-        if(autoCheckBox == null)
-        {
+        if (autoCheckBox == null) {
             return false;
         }
 

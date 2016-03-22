@@ -20,6 +20,7 @@
     <string name="choose_user_text_view">Choose user</string>
     <string name="menu_set_weight_goal">Change Weight Goal</string>
     <string name="menu_switch_user">Switch user</string>
+    <string name="menu_delete_all_measurement">Delete all measurement</string>
     <string name="accept_button_ok">OK</string>
     <string name="weight_goal_unit">Kg</string>
     <string name="change_weight_goal_title">Set Goal</string>
