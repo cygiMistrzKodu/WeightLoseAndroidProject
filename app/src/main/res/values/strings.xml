@@ -33,4 +33,8 @@
     <string name="textViewPasswordText">Password</string>
     <string name="create_new_user_title">Create new user</string>
     <string name="testDateTime">3:23</string>
+    <string name="delete_all_measurement_dialog_title">Are you sure?</string>
+    <string name="delete_all_measurement_dialog_message">This operation is permanent.</string>
+    <string name="delete_all_measurement_dialog_positive_button">Yes</string>
+    <string name="delete_all_measurement_dialog_negative_button">No</string>
 </resources>

@@ -1,8 +1,10 @@
 package creator.soft.cygi.com.friendlyloseweighthelper;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
@@ -177,15 +179,48 @@ public abstract class WeightCommonViewFragment extends Fragment {
                 return true;
             case R.id.menu_delete_all_measurement:
 
-                weightTrackDatabaseHelper.clearAllMeasurementDataForLoginUser();
-
-                replaceFragment(new WeightStandardViewFragment());
+                showDeleteAllMeasurementAlertDialog();
 
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
 
+    }
+
+    private void showDeleteAllMeasurementAlertDialog() {
+
+        AlertDialog alertDialog = createDeleteAllMeasurementDialog();
+
+        alertDialog.show();
+    }
+
+    private AlertDialog createDeleteAllMeasurementDialog() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
+        alertDialogBuilder.setTitle(R.string.delete_all_measurement_dialog_title);
+
+        alertDialogBuilder.setMessage(R.string.delete_all_measurement_dialog_message)
+                .setCancelable(false)
+                .setPositiveButton(R.string.delete_all_measurement_dialog_positive_button, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        deleteAllMeasurement();
+                    }
+                })
+                .setNegativeButton(R.string.delete_all_measurement_dialog_negative_button, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+        return alertDialogBuilder.create();
+    }
+
+    private void deleteAllMeasurement() {
+        weightTrackDatabaseHelper.clearAllMeasurementDataForLoginUser();
+        replaceFragment(new WeightStandardViewFragment());
     }
 
     private void replaceFragment(Fragment fragment) {
