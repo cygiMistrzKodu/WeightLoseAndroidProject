@@ -230,6 +230,7 @@ public abstract class WeightCommonViewFragment extends Fragment {
     }
 
     private void processUserMeasurementInput() {
+
         if (checkIfNumber(weightInput.getText().toString())) {
 
             String numberInText = weightInput.getText().toString();

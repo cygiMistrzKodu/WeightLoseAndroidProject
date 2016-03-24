@@ -1,7 +1,10 @@
 package creator.soft.cygi.com.friendlyloseweighthelper;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
@@ -19,6 +22,7 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
 
     private static final String AUTO_CHECK_BOX = "autoCheckBoxState";
     private static final String UNDO_LAST_DELETION_BUTTON_STATE = "undoLastDeletionButtonState";
+    private static final long ANIMATION_DURATION = 1000;
     private static String TAG = "WeightStandardViewFragment";
 
     private Button deleteLatestEntryButton;
@@ -28,6 +32,7 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
     private CheckBox autoCheckBox;
     private boolean autoCheckBoxStateBeforeShutDown;
     private Button modifyModeButton;
+    private Integer textInputViewColor;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -109,6 +114,8 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
 
         weightTrackDatabaseHelper.isMeasurementTableEmpty();
 
+        textInputViewColor = weightInput.getCurrentTextColor();
+
         return view;
     }
 
@@ -188,6 +195,8 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
 
         putDataToInputView(dateTimeDTO);
 
+        animateText(Color.RED, textInputViewColor);
+
     }
 
     @Override
@@ -200,13 +209,33 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
 
     @Override
     public void onMeasurementFailToInsertToDatabase() {
-        Log.d(TAG,"**Duplicate Date Value**");
+        Log.d(TAG, "**Duplicate Date Value**");
     }
 
     @Override
     public void onMeasurementInsertedToDatabase() {
         deleteLatestEntryButton.setEnabled(true);
         modifyModeButton.setEnabled(true);
+
+        animateText(Color.GREEN,textInputViewColor);
+
+    }
+
+    private void animateText(Integer startColor, Integer endColor) {
+
+
+        ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(),startColor,endColor);
+        colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+            @Override
+            public  void  onAnimationUpdate(ValueAnimator animation) {
+
+                    weightInput.setTextColor((Integer) animation.getAnimatedValue());
+            }
+        });
+
+        colorAnimation.setDuration(ANIMATION_DURATION);
+        colorAnimation.start();
     }
 
     private void putDataToInputView(DateTimeDTO dateTimeDTO) {
