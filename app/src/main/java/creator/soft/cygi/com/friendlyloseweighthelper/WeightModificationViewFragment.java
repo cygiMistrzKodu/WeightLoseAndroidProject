@@ -144,7 +144,7 @@ public class WeightModificationViewFragment extends WeightCommonViewFragment imp
     }
 
     private void animateInputText() {
-        TextAnimatorHeelper animateInputText = new TextAnimatorHeelper();
+        TextAnimatorUtilityHelper animateInputText = new TextAnimatorUtilityHelper();
         animateInputText.addTextComponentToAnimate(weightInput);
         animateInputText.animateManyTextComponent(Color.GREEN, textInputColor);
     }
@@ -159,7 +159,7 @@ public class WeightModificationViewFragment extends WeightCommonViewFragment imp
     }
 
     private void animateDateTimeText() {
-        TextAnimatorHeelper animateDateAndTimeText = new TextAnimatorHeelper();
+        TextAnimatorUtilityHelper animateDateAndTimeText = new TextAnimatorUtilityHelper();
         animateDateAndTimeText.addTextComponentToAnimate(dateTextView);
         animateDateAndTimeText.addTextComponentToAnimate(timeTextView);
         animateDateAndTimeText.animateManyTextComponent(Color.YELLOW, textDateAndTimeColor);

@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by CygiMasterProgrammer on 2016-03-25.
  */
-public class TextAnimatorHeelper {
+public class TextAnimatorUtilityHelper {
 
     private static final long ANIMATION_DURATION = 1000;
 

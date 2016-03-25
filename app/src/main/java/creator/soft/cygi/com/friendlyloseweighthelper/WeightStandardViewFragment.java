@@ -33,7 +33,7 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
     private Button modifyModeButton;
     private Integer textInputViewColor;
     private Integer textDateAndTimeColor;
-    private TextAnimatorHeelper textAnimatorHelper = new TextAnimatorHeelper();
+    private TextAnimatorUtilityHelper textAnimatorUtilityHelper = new TextAnimatorUtilityHelper();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -117,7 +117,7 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
 
         textInputViewColor = weightInput.getCurrentTextColor();
         textDateAndTimeColor = timeTextView.getCurrentTextColor();
-        textAnimatorHelper.setTextFiled(weightInput);
+        textAnimatorUtilityHelper.setTextFiled(weightInput);
 
         return view;
     }
@@ -198,7 +198,7 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
 
         putDataToInputView(dateTimeDTO);
 
-        textAnimatorHelper.animateOneText(Color.RED, textInputViewColor);
+        textAnimatorUtilityHelper.animateOneText(Color.RED, textInputViewColor);
 
     }
 
@@ -214,7 +214,7 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
     public void onMeasurementFailToInsertToDatabase() {
         Log.d(TAG, "**Duplicate Date Value**");
 
-        TextAnimatorHeelper animateDateAndTimeText = new TextAnimatorHeelper();
+        TextAnimatorUtilityHelper animateDateAndTimeText = new TextAnimatorUtilityHelper();
         animateDateAndTimeText.addTextComponentToAnimate(dateTextView);
         animateDateAndTimeText.addTextComponentToAnimate(timeTextView);
         animateDateAndTimeText.animateManyTextComponent(Color.YELLOW, textDateAndTimeColor);
@@ -234,7 +234,7 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
         deleteLatestEntryButton.setEnabled(true);
         modifyModeButton.setEnabled(true);
 
-        textAnimatorHelper.animateOneText(Color.GREEN, textInputViewColor);
+        textAnimatorUtilityHelper.animateOneText(Color.GREEN, textInputViewColor);
 
     }
 
