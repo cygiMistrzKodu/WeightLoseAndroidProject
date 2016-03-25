@@ -1,7 +1,5 @@
 package creator.soft.cygi.com.friendlyloseweighthelper;
 
-import android.animation.ArgbEvaluator;
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -9,11 +7,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
 /**
  * Created by CygiMasterProgrammer on 2015-12-09.
@@ -22,7 +22,6 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
 
     private static final String AUTO_CHECK_BOX = "autoCheckBoxState";
     private static final String UNDO_LAST_DELETION_BUTTON_STATE = "undoLastDeletionButtonState";
-    private static final long ANIMATION_DURATION = 1000;
     private static String TAG = "WeightStandardViewFragment";
 
     private Button deleteLatestEntryButton;
@@ -33,6 +32,8 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
     private boolean autoCheckBoxStateBeforeShutDown;
     private Button modifyModeButton;
     private Integer textInputViewColor;
+    private Integer textDateAndTimeColor;
+    private TextAnimatorHelper textAnimatorHelper = new TextAnimatorHelper();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -115,6 +116,8 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
         weightTrackDatabaseHelper.isMeasurementTableEmpty();
 
         textInputViewColor = weightInput.getCurrentTextColor();
+        textDateAndTimeColor = timeTextView.getCurrentTextColor();
+        textAnimatorHelper.setTextFiled(weightInput);
 
         return view;
     }
@@ -195,7 +198,7 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
 
         putDataToInputView(dateTimeDTO);
 
-        animateText(Color.RED, textInputViewColor);
+        textAnimatorHelper.animateOneText(Color.RED, textInputViewColor);
 
     }
 
@@ -210,6 +213,20 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
     @Override
     public void onMeasurementFailToInsertToDatabase() {
         Log.d(TAG, "**Duplicate Date Value**");
+
+        TextAnimatorHelper animateDateAndTimeText = new TextAnimatorHelper();
+        animateDateAndTimeText.addTextComponentToAnimate(dateTextView);
+        animateDateAndTimeText.addTextComponentToAnimate(timeTextView);
+        animateDateAndTimeText.animateManyTextComponent(Color.YELLOW, textDateAndTimeColor);
+
+        Context context = getContext();
+        String message = context.getString(R.string.error_try_insert_duplicated_date);
+
+        Toast toast = Toast.makeText(context,message,Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER,0,0);
+        toast.show();
+
+
     }
 
     @Override
@@ -217,25 +234,8 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
         deleteLatestEntryButton.setEnabled(true);
         modifyModeButton.setEnabled(true);
 
-        animateText(Color.GREEN,textInputViewColor);
+        textAnimatorHelper.animateOneText(Color.GREEN, textInputViewColor);
 
-    }
-
-    private void animateText(Integer startColor, Integer endColor) {
-
-
-        ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(),startColor,endColor);
-        colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-
-            @Override
-            public  void  onAnimationUpdate(ValueAnimator animation) {
-
-                    weightInput.setTextColor((Integer) animation.getAnimatedValue());
-            }
-        });
-
-        colorAnimation.setDuration(ANIMATION_DURATION);
-        colorAnimation.start();
     }
 
     private void putDataToInputView(DateTimeDTO dateTimeDTO) {

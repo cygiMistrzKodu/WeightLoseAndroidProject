@@ -1,15 +1,19 @@
 package creator.soft.cygi.com.friendlyloseweighthelper;
 
+import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by CygiMasterProgrammer on 2016-01-08.
@@ -21,6 +25,8 @@ public class WeightModificationViewFragment extends WeightCommonViewFragment imp
     private Button previousButton;
     private Button nextButton;
     private TextView positionNumberTextView;
+    private Integer textDateAndTimeColor;
+    private Integer textInputColor;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -106,8 +112,15 @@ public class WeightModificationViewFragment extends WeightCommonViewFragment imp
                     String newFormattedTime = dateTimeDTOUpdateMeasurement.getFormattedTime();
 
                     timeTextView.setText(newFormattedTime);
+
+                    animateInputText();
+
                 }else {
                     Log.d(TAG,"New Date is Repeated");
+
+                    animateDateTimeText();
+                    showErrorUpdateDateMessage();
+
                 }
             }
         });
@@ -124,8 +137,32 @@ public class WeightModificationViewFragment extends WeightCommonViewFragment imp
             dateTextView.setText(formattedDate);
             timeTextView.setText(formattedTime);
 
+            textDateAndTimeColor = timeTextView.getCurrentTextColor();
+             textInputColor = weightInput.getCurrentTextColor();
 
         return view;
+    }
+
+    private void animateInputText() {
+        TextAnimatorHelper animateInputText = new TextAnimatorHelper();
+        animateInputText.addTextComponentToAnimate(weightInput);
+        animateInputText.animateManyTextComponent(Color.GREEN, textInputColor);
+    }
+
+    private void showErrorUpdateDateMessage() {
+        Context context = getContext();
+        String message = context.getString(R.string.error_update_date_or_time_will_be_repeated);
+
+        Toast toast = Toast.makeText(context,message,Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
+    }
+
+    private void animateDateTimeText() {
+        TextAnimatorHelper animateDateAndTimeText = new TextAnimatorHelper();
+        animateDateAndTimeText.addTextComponentToAnimate(dateTextView);
+        animateDateAndTimeText.addTextComponentToAnimate(timeTextView);
+        animateDateAndTimeText.animateManyTextComponent(Color.YELLOW, textDateAndTimeColor);
     }
 
     @Override
