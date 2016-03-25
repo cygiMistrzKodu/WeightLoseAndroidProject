@@ -33,7 +33,7 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
     private Button modifyModeButton;
     private Integer textInputViewColor;
     private Integer textDateAndTimeColor;
-    private TextAnimatorHelper textAnimatorHelper = new TextAnimatorHelper();
+    private TextAnimatorHeelper textAnimatorHelper = new TextAnimatorHeelper();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -214,7 +214,7 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
     public void onMeasurementFailToInsertToDatabase() {
         Log.d(TAG, "**Duplicate Date Value**");
 
-        TextAnimatorHelper animateDateAndTimeText = new TextAnimatorHelper();
+        TextAnimatorHeelper animateDateAndTimeText = new TextAnimatorHeelper();
         animateDateAndTimeText.addTextComponentToAnimate(dateTextView);
         animateDateAndTimeText.addTextComponentToAnimate(timeTextView);
         animateDateAndTimeText.animateManyTextComponent(Color.YELLOW, textDateAndTimeColor);
