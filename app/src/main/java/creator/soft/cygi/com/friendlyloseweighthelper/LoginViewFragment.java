@@ -33,8 +33,6 @@ public class LoginViewFragment extends Fragment {
     private TextView passwordTextView;
     private Button okButton;
     private Button createNewUserButton;
-//    private Space abovePasswordTextViewSpace;
-//    private Space belowPasswordTextViewSpace;
     private TextView chooseUserTextView;
 
 
@@ -57,8 +55,6 @@ public class LoginViewFragment extends Fragment {
 
                 UserData userData = (UserData) userListSpinner.getSelectedItem();
 
-                Toast.makeText(getContext(), "Position:  " + userData.getName(), Toast.LENGTH_LONG).show();
-
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString(LOGIN_USER_NAME, userData.getName());
@@ -66,14 +62,11 @@ public class LoginViewFragment extends Fragment {
 
                 if (userData.getPassword().isEmpty()) {
 
-                   // belowPasswordTextViewSpace.setVisibility(View.GONE);
-                  //  abovePasswordTextViewSpace.setVisibility(View.GONE);
                     passwordTextView.setVisibility(View.GONE);
                     passwordEditText.setVisibility(View.GONE);
 
                 } else {
-                  //  belowPasswordTextViewSpace.setVisibility(View.VISIBLE);
-                  //  abovePasswordTextViewSpace.setVisibility(View.VISIBLE);
+
                     passwordTextView.setVisibility(View.VISIBLE);
                     passwordEditText.setVisibility(View.VISIBLE);
                 }
@@ -125,9 +118,6 @@ public class LoginViewFragment extends Fragment {
 
 
         passwordTextView = (TextView) view.findViewById(R.id.passwordTextView);
-//        abovePasswordTextViewSpace = (Space) view.findViewById(R.id.spaceAbovePasswordTextView);
-//        belowPasswordTextViewSpace = (Space) view.findViewById(R.id.spaceBelowPasswordTextView);
-
         chooseUserTextView = (TextView) view.findViewById(R.id.chooseUserTextView);
 
         if(isNoUserExistYet()){
@@ -153,9 +143,6 @@ public class LoginViewFragment extends Fragment {
 
     private void showOnlyCreateNewUserOption() {
 
-
-       // belowPasswordTextViewSpace.setVisibility(View.GONE);
-       // abovePasswordTextViewSpace.setVisibility(View.GONE);
         passwordTextView.setVisibility(View.GONE);
         passwordEditText.setVisibility(View.GONE);
         okButton.setVisibility(View.GONE);

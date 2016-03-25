@@ -33,7 +33,6 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
     private Button modifyModeButton;
     private Integer textInputViewColor;
     private Integer textDateAndTimeColor;
-    private TextAnimatorUtilityHelper textAnimatorUtilityHelper = new TextAnimatorUtilityHelper();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -117,7 +116,6 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
 
         textInputViewColor = weightInput.getCurrentTextColor();
         textDateAndTimeColor = timeTextView.getCurrentTextColor();
-        textAnimatorUtilityHelper.setTextFiled(weightInput);
 
         return view;
     }
@@ -198,7 +196,9 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
 
         putDataToInputView(dateTimeDTO);
 
-        textAnimatorUtilityHelper.animateOneText(Color.RED, textInputViewColor);
+        TextAnimatorUtilityHelper textAnimatorUtilityHelper = new TextAnimatorUtilityHelper();
+        textAnimatorUtilityHelper.addTextComponentToAnimate(weightInput);
+        textAnimatorUtilityHelper.animateTextComponents(Color.RED, textInputViewColor);
 
     }
 
@@ -217,7 +217,7 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
         TextAnimatorUtilityHelper animateDateAndTimeText = new TextAnimatorUtilityHelper();
         animateDateAndTimeText.addTextComponentToAnimate(dateTextView);
         animateDateAndTimeText.addTextComponentToAnimate(timeTextView);
-        animateDateAndTimeText.animateManyTextComponent(Color.YELLOW, textDateAndTimeColor);
+        animateDateAndTimeText.animateTextComponents(Color.YELLOW, textDateAndTimeColor);
 
         Context context = getContext();
         String message = context.getString(R.string.error_try_insert_duplicated_date);
@@ -234,7 +234,9 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
         deleteLatestEntryButton.setEnabled(true);
         modifyModeButton.setEnabled(true);
 
-        textAnimatorUtilityHelper.animateOneText(Color.GREEN, textInputViewColor);
+        TextAnimatorUtilityHelper textAnimatorUtilityHelper = new TextAnimatorUtilityHelper();
+        textAnimatorUtilityHelper.addTextComponentToAnimate(weightInput);
+        textAnimatorUtilityHelper.animateTextComponents(Color.GREEN, textInputViewColor);
 
     }
 

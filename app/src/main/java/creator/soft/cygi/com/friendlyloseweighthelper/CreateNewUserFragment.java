@@ -1,5 +1,6 @@
 package creator.soft.cygi.com.friendlyloseweighthelper;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -20,6 +21,8 @@ public class CreateNewUserFragment extends Fragment {
     private EditText weightGoalEditText;
     private EditText passwordEditText;
     private EditText userNameEditText;
+
+    private Integer colorEditText;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -78,6 +81,7 @@ public class CreateNewUserFragment extends Fragment {
                 userData.setWeightGoal(weightGoal);
 
                 weightTrackDatabaseHelper.insertNewUserDataIntoDatabase(userData);
+                animateUserNameText();
 
             }
         });
@@ -86,7 +90,20 @@ public class CreateNewUserFragment extends Fragment {
         passwordEditText = (EditText) view.findViewById(R.id.passwordEditText);
         weightGoalEditText = (EditText) view.findViewById(R.id.weightGoalEditText);
 
+        colorEditText = userNameEditText.getCurrentTextColor();
+
         return view;
+    }
+
+    private void animateUserNameText() {
+
+        TextAnimatorUtilityHelper textAnimatorUtilityHelper = new TextAnimatorUtilityHelper();
+        textAnimatorUtilityHelper.addTextComponentToAnimate(weightGoalEditText);
+        textAnimatorUtilityHelper.addTextComponentToAnimate(passwordEditText);
+        textAnimatorUtilityHelper.addTextComponentToAnimate(userNameEditText);
+
+        textAnimatorUtilityHelper.animateTextComponents(Color.GREEN, colorEditText);
+
     }
 }
 

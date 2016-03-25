@@ -14,39 +14,13 @@ public class TextAnimatorUtilityHelper {
 
     private static final long ANIMATION_DURATION = 1000;
 
-    private TextView textFiled;
-
     private List<TextView> manyTextFiled = new ArrayList<>();
-
-    public TextView getTextFiled() {
-        return textFiled;
-    }
-
-    public void setTextFiled(TextView textView) {
-        this.textFiled = textView;
-    }
 
     public void addTextComponentToAnimate(TextView textView) {
         manyTextFiled.add(textView);
     }
 
-    public void animateOneText(Integer startColor, Integer endColor) {
-
-        ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), startColor, endColor);
-        colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-
-                textFiled.setTextColor((Integer) animation.getAnimatedValue());
-            }
-        });
-
-        colorAnimation.setDuration(ANIMATION_DURATION);
-        colorAnimation.start();
-    }
-
-    public void animateManyTextComponent(Integer startColor, Integer endColor) {
+    public void animateTextComponents(Integer startColor, Integer endColor) {
 
 
         ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), startColor, endColor);
@@ -58,6 +32,7 @@ public class TextAnimatorUtilityHelper {
                 for (TextView textView : manyTextFiled){
 
                     textView.setTextColor((Integer) animation.getAnimatedValue());
+
                 }
             }
         });
@@ -66,5 +41,7 @@ public class TextAnimatorUtilityHelper {
         colorAnimation.start();
 
     }
+
+
 
 }
