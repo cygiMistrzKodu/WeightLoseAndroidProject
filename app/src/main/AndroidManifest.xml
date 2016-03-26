@@ -18,6 +18,7 @@
         </activity>
         <activity android:name=".ChartActivity"/>
         <activity android:name=".WeightGoalActivity"/>
+        <activity android:name=".UserProfileOptionActivity"/>
 
     </application>
 

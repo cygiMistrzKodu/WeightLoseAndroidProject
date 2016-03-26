@@ -182,6 +182,11 @@ public abstract class WeightCommonViewFragment extends Fragment {
                 showDeleteAllMeasurementAlertDialog();
 
                 return true;
+
+            case  R.id.menu_user_profile_option:
+                 Intent userProfileIntent = new Intent(getActivity(),UserProfileOptionActivity.class);
+                 getActivity().startActivity(userProfileIntent);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
