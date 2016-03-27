@@ -206,14 +206,14 @@ public abstract class WeightCommonViewFragment extends Fragment {
 
         alertDialogBuilder.setMessage(R.string.delete_all_measurement_dialog_message)
                 .setCancelable(false)
-                .setPositiveButton(R.string.delete_all_measurement_dialog_positive_button, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.dialog_positive_button, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
                         deleteAllMeasurement();
                     }
                 })
-                .setNegativeButton(R.string.delete_all_measurement_dialog_negative_button, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.dialog_negative_button, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 

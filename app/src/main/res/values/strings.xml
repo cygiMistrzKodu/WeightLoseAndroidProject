@@ -35,9 +35,11 @@
     <string name="testDateTime">3:23</string>
     <string name="delete_all_measurement_dialog_title">Are you sure?</string>
     <string name="delete_all_measurement_dialog_message">This operation is permanent.</string>
-    <string name="delete_all_measurement_dialog_positive_button">Yes</string>
-    <string name="delete_all_measurement_dialog_negative_button">No</string>
+    <string name="dialog_positive_button">Yes</string>
+    <string name="dialog_negative_button">No</string>
     <string name="error_try_insert_duplicated_date">Date is duplicated. Change date</string>
     <string name="error_update_date_or_time_will_be_repeated">Date or time will be repeated. Try change one of them.</string>
     <string name="menu_user_profile_option">Profile option</string>
+    <string name="delete_user_account_dialog_title">Delete account</string>
+    <string name="delete_user_account_message">All data will be lost. Are you sure?</string>
 </resources>

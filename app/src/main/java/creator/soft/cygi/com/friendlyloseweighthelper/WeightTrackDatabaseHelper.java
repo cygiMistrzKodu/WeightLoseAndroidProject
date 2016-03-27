@@ -354,6 +354,33 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
     }
 
+    public void deleteCurrentUserAccount() {
+
+        clearAllMeasurementDataForLoginUser();
+        deleteCurrentLoginUser();
+
+    }
+
+    private void deleteCurrentLoginUser() {
+
+        Long idOfCurrentUser = getIdOfCurrentUser();
+
+        String whereStatement = COLUMN_USERS_ID_USER + "= ?";
+        String[] whereArgs = new String[]{String.valueOf(idOfCurrentUser)};
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.beginTransaction();
+        try {
+            db.delete(TABLE_USERS,whereStatement,whereArgs);
+            db.setTransactionSuccessful();
+            Log.d(TAG,"User account : "+ loginUserName +" deleted.");
+        } finally {
+            db.endTransaction();
+        }
+
+    }
+
     @Override
     public void addNotificationObserver(DatabaseNotificationObserver notificationObserver) {
         DatabaseNotificationObservers.add(notificationObserver);
@@ -560,7 +587,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
         String password = userData.getPassword();
         float weightGoal = userData.getWeightGoal();
 
-        if(isUserExist(userName)){
+        if (isUserExist(userName)) {
             notifyUserExistAlready(userData);
             return;
         }
@@ -589,7 +616,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
     @Override
     public void notifyUserExistAlready(UserData userData) {
 
-        for (UserNotificationObserver userNotificationObserver : userNotificationObservers){
+        for (UserNotificationObserver userNotificationObserver : userNotificationObservers) {
             userNotificationObserver.onUserAlreadyExist(userData);
         }
     }
@@ -597,7 +624,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
     private boolean isUserExist(String userName) {
         Cursor cursor = findUser(userName);
 
-        if(cursor.getCount() > 0) {
+        if (cursor.getCount() > 0) {
             return true;
         }
 
@@ -606,7 +633,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
     public void updateWeightGoal(Float weightGoal) {
 
-        Long userId =  getIdOfCurrentUser();
+        Long userId = getIdOfCurrentUser();
         String password = getPasswordOfCurrentUser();
 
         UserData userData = new UserData();
