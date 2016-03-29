@@ -7,8 +7,14 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * Created by CygiMasterProgrammer on 2016-03-26.
@@ -16,6 +22,10 @@ import android.widget.Button;
 public class UserProfileOptionActivity extends AppCompatActivity {
 
     private Button deleteAccountButton;
+    private Button changeUserNameButton;
+
+    private String newUserName = "";
+    private EditText userNewName;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,11 +42,87 @@ public class UserProfileOptionActivity extends AppCompatActivity {
 
             }
         });
+
+        changeUserNameButton = (Button) findViewById(R.id.changeUserNameButton);
+        changeUserNameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showChangeUserNameDialog();
+
+            }
+        });
+    }
+
+    private void showChangeUserNameDialog() {
+
+        createChangeUserDialog();
+
+    }
+
+    private void createChangeUserDialog() {
+
+        AlertDialog.Builder changeUserNameBuilder = new AlertDialog.Builder(this);
+        changeUserNameBuilder.setTitle(R.string.change_user_name_dialog_title);
+
+        userNewName = new EditText(this);
+        userNewName.setInputType(InputType.TYPE_CLASS_TEXT);
+
+        changeUserNameBuilder.setView(userNewName);
+
+        changeUserNameBuilder.setPositiveButton(R.string.accept_button_ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                newUserName = userNewName.getText().toString();
+                Toast.makeText(UserProfileOptionActivity.this, R.string.toast_info_user_name_change, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        changeUserNameBuilder.setNegativeButton(R.string.change_user_name_cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        final AlertDialog changeUserNameDialog = changeUserNameBuilder.create();
+        changeUserNameDialog.show();
+
+        disablePositiveButtonIfEmptyName(changeUserNameDialog);
+
+    }
+
+    private void disablePositiveButtonIfEmptyName(final AlertDialog changeUserNameDialog) {
+        changeUserNameDialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+
+        userNewName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if (TextUtils.isEmpty(s)) {
+                    changeUserNameDialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+                } else {
+                    changeUserNameDialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
+                }
+
+            }
+        });
     }
 
     private void showDeleteUserAccountDialog() {
 
-        AlertDialog alertDialog =  createDeleteUserAccountDialog();
+        AlertDialog alertDialog = createDeleteUserAccountDialog();
         alertDialog.show();
     }
 
@@ -60,6 +146,7 @@ public class UserProfileOptionActivity extends AppCompatActivity {
 
                     }
                 });
+
 
         return alertDialogBuilder.create();
     }
