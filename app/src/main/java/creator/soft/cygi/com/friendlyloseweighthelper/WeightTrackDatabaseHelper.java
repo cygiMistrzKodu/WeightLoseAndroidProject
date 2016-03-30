@@ -680,7 +680,18 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
     }
 
-    public void updateUserName(String newUserName){
+    public boolean updateUserName(String newUserName){
+
+       if(isUserExist(newUserName)){
+
+           Log.d(TAG, "User already exist with this name");
+
+           UserData userData = new UserData();
+           userData.setName(newUserName);
+           notifyUserExistAlready(userData);
+
+           return false;
+       }
 
         Long currentUserId = getIdOfCurrentUser();
         UserData currentUserData = getUserDataById(currentUserId);
@@ -689,7 +700,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
         updateSharedPreferencesWithNewUserName(newUserName);
 
-
+      return true;
     }
 
     private void updateSharedPreferencesWithNewUserName(String newUserName) {

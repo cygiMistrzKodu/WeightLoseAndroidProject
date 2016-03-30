@@ -7,8 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputType;
@@ -28,7 +26,7 @@ public class UserProfileOptionActivity extends AppCompatActivity {
     private Button changeUserNameButton;
 
     private String newUserName = "";
-    private EditText userNewName;
+    private EditText userNewNameEditText;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,53 +50,62 @@ public class UserProfileOptionActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 showChangeUserNameDialog();
-
             }
         });
     }
 
     private void showChangeUserNameDialog() {
 
-        createChangeUserDialog();
+        createChangeUserNameDialog();
 
     }
 
-    private void createChangeUserDialog() {
+    private void createChangeUserNameDialog() {
 
         final AlertDialog.Builder changeUserNameBuilder = new AlertDialog.Builder(this);
         changeUserNameBuilder.setTitle(R.string.change_user_name_dialog_title);
 
-        userNewName = new EditText(this);
-        userNewName.setInputType(InputType.TYPE_CLASS_TEXT);
+        userNewNameEditText = new EditText(this);
+        userNewNameEditText.setInputType(InputType.TYPE_CLASS_TEXT);
 
-        changeUserNameBuilder.setView(userNewName);
-
-        changeUserNameBuilder.setPositiveButton(R.string.accept_button_ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                newUserName = userNewName.getText().toString();
-
-                WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(getApplicationContext());
-                weightTrackDatabaseHelper.updateUserName(newUserName);
-                setResult(Activity.RESULT_OK);
-
-                Resources res = getResources();
-                String userChangeNameInfo = String.format(res.getString(R.string.toast_info_user_name_change), newUserName);
-                Toast.makeText(UserProfileOptionActivity.this, userChangeNameInfo, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        changeUserNameBuilder.setNegativeButton(R.string.change_user_name_cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });
+        changeUserNameBuilder.setView(userNewNameEditText);
+        changeUserNameBuilder.setPositiveButton(R.string.accept_button_ok, null);
+        changeUserNameBuilder.setNegativeButton(R.string.change_user_name_cancel, null);
 
         final AlertDialog changeUserNameDialog = changeUserNameBuilder.create();
-        changeUserNameDialog.show();
 
+        changeUserNameDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+
+                final Button positiveButton = changeUserNameDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                positiveButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        newUserName = userNewNameEditText.getText().toString();
+
+                        WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(getApplicationContext());
+                        boolean isUserNameUpdated = weightTrackDatabaseHelper.updateUserName(newUserName);
+
+
+                        if (isUserNameUpdated) {
+                            setResult(Activity.RESULT_OK);
+                            Resources res = getResources();
+                            String userChangeNameInfo = String.format(res.getString(R.string.toast_info_user_name_change), newUserName);
+                            Toast.makeText(UserProfileOptionActivity.this, userChangeNameInfo, Toast.LENGTH_SHORT).show();
+                            changeUserNameDialog.dismiss();
+                        } else {
+                            userNewNameEditText.setError(getString(R.string.change_user_name_dialog_error_name_already_in_use));
+                        }
+
+                    }
+                });
+
+            }
+        });
+
+        changeUserNameDialog.show();
         disablePositiveButtonIfEmptyName(changeUserNameDialog);
 
     }
@@ -106,7 +113,7 @@ public class UserProfileOptionActivity extends AppCompatActivity {
     private void disablePositiveButtonIfEmptyName(final AlertDialog changeUserNameDialog) {
         changeUserNameDialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
 
-        userNewName.addTextChangedListener(new TextWatcher() {
+        userNewNameEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
