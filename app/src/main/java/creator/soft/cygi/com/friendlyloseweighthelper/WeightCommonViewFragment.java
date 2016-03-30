@@ -36,6 +36,7 @@ public abstract class WeightCommonViewFragment extends Fragment {
     private static final String DIALOG_TIME = "time";
     private static final int REQUEST_DATE = 0;
     private static final int REQUEST_TIME = 1;
+    private static final int REQUEST_USER_PROFILE_CHANGE_USER_NAME = 3;
     private static IntentFilter intentFilter;
 
     static {
@@ -183,9 +184,9 @@ public abstract class WeightCommonViewFragment extends Fragment {
 
                 return true;
 
-            case  R.id.menu_user_profile_option:
-                 Intent userProfileIntent = new Intent(getActivity(),UserProfileOptionActivity.class);
-                 getActivity().startActivity(userProfileIntent);
+            case R.id.menu_user_profile_option:
+                Intent userProfileIntent = new Intent(getActivity(), UserProfileOptionActivity.class);
+                startActivityForResult(userProfileIntent, REQUEST_USER_PROFILE_CHANGE_USER_NAME);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -350,6 +351,16 @@ public abstract class WeightCommonViewFragment extends Fragment {
             String rawTime = (String) data.getSerializableExtra(TimePickerFragment.EXTRA_TIME);
             String formattedTime = DateTimeStringUtility.formatRawTime(getContext(), rawTime);
             timeTextView.setText(formattedTime);
+        }
+
+        if (requestCode == REQUEST_USER_PROFILE_CHANGE_USER_NAME) {
+
+            final FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.replace(R.id.fragmentContainer, new WeightStandardViewFragment());
+            ft.commit();
+
+            Log.d(TAG,"New user name updated");
+
         }
 
     }

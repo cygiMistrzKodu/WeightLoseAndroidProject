@@ -44,5 +44,5 @@
     <string name="delete_user_account_message">All data will be lost. Are you sure?</string>
     <string name="change_user_name_dialog_title">Write new name</string>
     <string name="change_user_name_cancel">Cancel</string>
-    <string name="toast_info_user_name_change">User name change</string>
+    <string name="toast_info_user_name_change">User name change to %s</string>
 </resources>

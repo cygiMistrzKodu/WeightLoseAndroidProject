@@ -1,11 +1,14 @@
 package creator.soft.cygi.com.friendlyloseweighthelper;
 
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputType;
@@ -62,7 +65,7 @@ public class UserProfileOptionActivity extends AppCompatActivity {
 
     private void createChangeUserDialog() {
 
-        AlertDialog.Builder changeUserNameBuilder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder changeUserNameBuilder = new AlertDialog.Builder(this);
         changeUserNameBuilder.setTitle(R.string.change_user_name_dialog_title);
 
         userNewName = new EditText(this);
@@ -75,7 +78,14 @@ public class UserProfileOptionActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
 
                 newUserName = userNewName.getText().toString();
-                Toast.makeText(UserProfileOptionActivity.this, R.string.toast_info_user_name_change, Toast.LENGTH_SHORT).show();
+
+                WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(getApplicationContext());
+                weightTrackDatabaseHelper.updateUserName(newUserName);
+                setResult(Activity.RESULT_OK);
+
+                Resources res = getResources();
+                String userChangeNameInfo = String.format(res.getString(R.string.toast_info_user_name_change), newUserName);
+                Toast.makeText(UserProfileOptionActivity.this, userChangeNameInfo, Toast.LENGTH_SHORT).show();
             }
         });
 

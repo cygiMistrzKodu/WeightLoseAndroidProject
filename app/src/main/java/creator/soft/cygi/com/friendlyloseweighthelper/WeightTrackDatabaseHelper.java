@@ -680,6 +680,25 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
     }
 
+    public void updateUserName(String newUserName){
+
+        Long currentUserId = getIdOfCurrentUser();
+        UserData currentUserData = getUserDataById(currentUserId);
+        currentUserData.setName(newUserName);
+        updateUserData(currentUserData);
+
+        updateSharedPreferencesWithNewUserName(newUserName);
+
+
+    }
+
+    private void updateSharedPreferencesWithNewUserName(String newUserName) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(LoginViewFragment.LOGIN_USER_NAME, newUserName);
+        editor.commit();
+    }
+
     public UserData getUserDataById(Long userId) {
 
         Cursor userCursor = getUserCursorBaseOnUserID(userId);
