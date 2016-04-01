@@ -24,9 +24,12 @@ public class UserProfileOptionActivity extends AppCompatActivity {
 
     private Button deleteAccountButton;
     private Button changeUserNameButton;
+    private Button changeUserPasswordButton;
 
     private String newUserName = "";
     private EditText userNewNameEditText;
+    private String newUserPassword ="";
+    private EditText userNewPasswordEditText;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,46 @@ public class UserProfileOptionActivity extends AppCompatActivity {
                 showChangeUserNameDialog();
             }
         });
+
+        changeUserPasswordButton = (Button) findViewById(R.id.changeUserPasswordButton);
+        changeUserPasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showChangePasswordDialog();
+            }
+        });
+    }
+
+    private void showChangePasswordDialog() {
+
+        createChangeUserPasswordDialog();
+    }
+
+    private void createChangeUserPasswordDialog() {
+
+        AlertDialog.Builder changeUserPasswordBuilder = new AlertDialog.Builder(this);
+        changeUserPasswordBuilder.setTitle("Change password");
+
+        final View changePasswordView = getLayoutInflater().inflate(R.layout.change_user_password_view,null);
+        changeUserPasswordBuilder.setView(changePasswordView);
+        changeUserPasswordBuilder.setPositiveButton(R.string.accept_button_ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                userNewPasswordEditText =  (EditText) changePasswordView.findViewById(R.id.passwordInputField);
+                newUserPassword = userNewPasswordEditText.getText().toString().trim();
+
+                WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(getApplicationContext());
+                weightTrackDatabaseHelper.updateUserPassword(newUserPassword);
+
+            }
+        });
+
+        changeUserPasswordBuilder.setNegativeButton(R.string.cancel_button,null);
+
+        AlertDialog changeUserPasswordDialog = changeUserPasswordBuilder.create();
+        changeUserPasswordDialog.show();
     }
 
     private void showChangeUserNameDialog() {
@@ -70,7 +113,7 @@ public class UserProfileOptionActivity extends AppCompatActivity {
 
         changeUserNameBuilder.setView(userNewNameEditText);
         changeUserNameBuilder.setPositiveButton(R.string.accept_button_ok, null);
-        changeUserNameBuilder.setNegativeButton(R.string.change_user_name_cancel, null);
+        changeUserNameBuilder.setNegativeButton(R.string.cancel_button, null);
 
         final AlertDialog changeUserNameDialog = changeUserNameBuilder.create();
 
@@ -83,7 +126,7 @@ public class UserProfileOptionActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
-                        newUserName = userNewNameEditText.getText().toString();
+                        newUserName = userNewNameEditText.getText().toString().trim();
 
                         WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(getApplicationContext());
                         boolean isUserNameUpdated = weightTrackDatabaseHelper.updateUserName(newUserName);

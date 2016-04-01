@@ -680,6 +680,15 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
     }
 
+    public void updateUserPassword(String newUserPassword){
+
+        Long currentUserId = getIdOfCurrentUser();
+        UserData currentUserData = getUserDataById(currentUserId);
+        currentUserData.setPassword(newUserPassword);
+        updateUserData(currentUserData);
+
+    }
+
     public boolean updateUserName(String newUserName){
 
        if(isUserExist(newUserName)){

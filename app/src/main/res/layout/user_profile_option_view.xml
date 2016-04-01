@@ -21,12 +21,21 @@
         android:layout_below="@+id/userOptionTitle"/>
 
     <Button
+        android:id="@+id/changeUserPasswordButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change password"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/changeUserNameButton"/>
+
+    <Button
         android:id="@+id/deleteAccountButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Delete account"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/changeUserNameButton"/>
+        android:layout_below="@+id/changeUserPasswordButton"/>
 
 </RelativeLayout>

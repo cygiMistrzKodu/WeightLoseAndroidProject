@@ -50,9 +50,9 @@ public class CreateNewUserFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String userName = userNameEditText.getText().toString();
-                String password = passwordEditText.getText().toString();
-                String weightGoalContent = weightGoalEditText.getText().toString();
+                String userName = userNameEditText.getText().toString().trim();
+                String password = passwordEditText.getText().toString().trim();
+                String weightGoalContent = weightGoalEditText.getText().toString().trim();
                 float weightGoal = 0;
 
                 if(!weightGoalContent.equals(".")) {
