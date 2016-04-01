@@ -14,6 +14,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -28,8 +29,11 @@ public class UserProfileOptionActivity extends AppCompatActivity {
 
     private String newUserName = "";
     private EditText userNewNameEditText;
-    private String newUserPassword ="";
+    private String newUserPassword = "";
     private EditText userNewPasswordEditText;
+    private CheckBox disablePasswordCheckBox;
+
+    private View changePasswordView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,27 +78,99 @@ public class UserProfileOptionActivity extends AppCompatActivity {
     private void createChangeUserPasswordDialog() {
 
         AlertDialog.Builder changeUserPasswordBuilder = new AlertDialog.Builder(this);
-        changeUserPasswordBuilder.setTitle("Change password");
+        changeUserPasswordBuilder.setTitle(R.string.new_password_dalog_tittle);
 
-        final View changePasswordView = getLayoutInflater().inflate(R.layout.change_user_password_view,null);
+        changePasswordView = getLayoutInflater().inflate(R.layout.change_user_password_view, null);
+
+        userNewPasswordEditText = (EditText) changePasswordView.findViewById(R.id.passwordInputField);
+        disablePasswordCheckBox = (CheckBox) changePasswordView.findViewById(R.id.disablePasswordCheckBox);
+
         changeUserPasswordBuilder.setView(changePasswordView);
         changeUserPasswordBuilder.setPositiveButton(R.string.accept_button_ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                userNewPasswordEditText =  (EditText) changePasswordView.findViewById(R.id.passwordInputField);
                 newUserPassword = userNewPasswordEditText.getText().toString().trim();
 
                 WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(getApplicationContext());
-                weightTrackDatabaseHelper.updateUserPassword(newUserPassword);
+
+                Resources res = getResources();
+                if (disablePasswordCheckBox.isChecked()) {
+
+                    String passwordDisable = "";
+                    weightTrackDatabaseHelper.updateUserPassword(passwordDisable);
+                    String userPasswordDisableInfo = String.format(res.getString(R.string.toast_info_user_password_disable));
+                    Toast.makeText(UserProfileOptionActivity.this, userPasswordDisableInfo, Toast.LENGTH_SHORT).show();
+
+
+                } else {
+
+                    weightTrackDatabaseHelper.updateUserPassword(newUserPassword);
+                    String userPasswordChangeInfo = String.format(res.getString(R.string.toast_info_user_password_change));
+                    Toast.makeText(UserProfileOptionActivity.this, userPasswordChangeInfo, Toast.LENGTH_SHORT).show();
+                }
+
 
             }
         });
 
-        changeUserPasswordBuilder.setNegativeButton(R.string.cancel_button,null);
+        changeUserPasswordBuilder.setNegativeButton(R.string.cancel_button, null);
 
-        AlertDialog changeUserPasswordDialog = changeUserPasswordBuilder.create();
+        final AlertDialog changeUserPasswordDialog = changeUserPasswordBuilder.create();
+
+        changeUserPasswordDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+
+                ifNoPasswordDisableCheckBoxIsEnable(changeUserPasswordDialog);
+
+            }
+        });
+
+
         changeUserPasswordDialog.show();
+
+        addDisableEnableButtonsLogickInChangePasswordDialog(changeUserPasswordDialog);
+
+        disablePositiveButtonIfEmptyTextField(changeUserPasswordDialog, userNewPasswordEditText);
+
+    }
+
+    private void ifNoPasswordDisableCheckBoxIsEnable(AlertDialog changeUserPasswordDialog) {
+        WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(getApplicationContext());
+        String userPassword = weightTrackDatabaseHelper.getPasswordOfCurrentUser();
+
+        final Button positiveButton = changeUserPasswordDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        if (userPassword.isEmpty()) {
+            disablePasswordCheckBox.setChecked(true);
+            userNewPasswordEditText.setEnabled(false);
+            positiveButton.setEnabled(true);
+        }
+    }
+
+    private void addDisableEnableButtonsLogickInChangePasswordDialog(final AlertDialog changeUserPasswordDialog) {
+        disablePasswordCheckBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final Button positiveButton = changeUserPasswordDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+
+                if (disablePasswordCheckBox.isChecked()) {
+
+                    userNewPasswordEditText.setEnabled(false);
+                    positiveButton.setEnabled(true);
+                } else {
+                    userNewPasswordEditText.setEnabled(true);
+                    if (userNewPasswordEditText.getText().toString().isEmpty()) {
+
+                        positiveButton.setEnabled(false);
+                    } else {
+                        positiveButton.setEnabled(true);
+                    }
+
+                }
+            }
+        });
     }
 
     private void showChangeUserNameDialog() {
@@ -149,14 +225,14 @@ public class UserProfileOptionActivity extends AppCompatActivity {
         });
 
         changeUserNameDialog.show();
-        disablePositiveButtonIfEmptyName(changeUserNameDialog);
+        disablePositiveButtonIfEmptyTextField(changeUserNameDialog, userNewNameEditText);
 
     }
 
-    private void disablePositiveButtonIfEmptyName(final AlertDialog changeUserNameDialog) {
-        changeUserNameDialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+    private void disablePositiveButtonIfEmptyTextField(final AlertDialog userDialog, EditText editText) {
+        userDialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
 
-        userNewNameEditText.addTextChangedListener(new TextWatcher() {
+        editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -171,9 +247,9 @@ public class UserProfileOptionActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
 
                 if (TextUtils.isEmpty(s)) {
-                    changeUserNameDialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+                    userDialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
                 } else {
-                    changeUserNameDialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
+                    userDialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
                 }
 
             }

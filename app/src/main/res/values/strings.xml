@@ -45,5 +45,8 @@
     <string name="change_user_name_dialog_title">Write new name</string>
     <string name="cancel_button">Cancel</string>
     <string name="toast_info_user_name_change">User name change to %s</string>
+    <string name="toast_info_user_password_change">Password change</string>
+    <string name="toast_info_user_password_disable">Password disable</string>
     <string name="change_user_name_dialog_error_name_already_in_use">Name is in use already</string>
+    <string name="new_password_dalog_tittle">Change password</string>
 </resources>

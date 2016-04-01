@@ -646,7 +646,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
     }
 
-    private String getPasswordOfCurrentUser() {
+    public String getPasswordOfCurrentUser() {
 
         Cursor cursor = findUser(loginUserName);
 
