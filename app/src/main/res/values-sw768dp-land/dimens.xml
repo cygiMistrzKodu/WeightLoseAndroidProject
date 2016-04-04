@@ -53,6 +53,11 @@
     <dimen name="dateModificationLayoutHeight">120dp</dimen>
 
     <dimen name="modificationViewMarginTop">5dp</dimen>
+    <dimen name="userProfileOptionsTextSizeTittle">115sp</dimen>
+    <dimen name="userProfileOptionsLayoutMarginTopButton">55dp</dimen>
+    <dimen name="userProfileOptionPaddingRightAccountDeleteButton">41dp</dimen>
+    <dimen name="userProfileOptionPaddingLeftAccountDeleteButton">41dp</dimen>
+    <dimen name="userProfileButtonTextSize">50sp</dimen>
 
 
 </resources>

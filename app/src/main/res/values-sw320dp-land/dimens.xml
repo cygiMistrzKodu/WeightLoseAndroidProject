@@ -39,5 +39,10 @@
     <dimen name="loginSpinnerLayoutMarginBottom">5dp</dimen>
     <dimen name="loginTextViewLayoutMarginPasswordBottom">2dp</dimen>
     <dimen name="editTextLayoutMarginBottom">27dp</dimen>
+    <dimen name="userProfileOptionsTextSizeTittle">50sp</dimen>
+    <dimen name="userProfileOptionsLayoutMarginTopButton">10dp</dimen>
+    <dimen name="userProfileOptionPaddingRightAccountDeleteButton">21dp</dimen>
+    <dimen name="userProfileOptionPaddingLeftAccountDeleteButton">21dp</dimen>
+    <dimen name="userProfileButtonTextSize">20sp</dimen>
 
 </resources>

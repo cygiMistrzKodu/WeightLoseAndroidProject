@@ -72,5 +72,10 @@
     <dimen name="createNewUserEditTextSize">30sp</dimen>
     <dimen name="createNewUserButtonTextSize">30sp</dimen>
     <dimen name="createNewUserButtonMarginBottom">20dp</dimen>
+    <dimen name="userProfileOptionsTextSizeTittle">65sp</dimen>
+    <dimen name="userProfileOptionsLayoutMarginTopButton">30dp</dimen>
+    <dimen name="userProfileOptionPaddingRightAccountDeleteButton">27dp</dimen>
+    <dimen name="userProfileOptionPaddingLeftAccountDeleteButton">27dp</dimen>
+    <dimen name="userProfileButtonTextSize">28sp</dimen>
 
 </resources>

@@ -45,4 +45,9 @@
     <dimen name="WeightInputTextSizeAcceptButton">18sp</dimen>
     <dimen name="WeightInputMinHeightAcceptButton">30dp</dimen>
     <dimen name="WeightInputMinWidthAcceptButton">80dp</dimen>
+    <dimen name="userProfileOptionsTextSizeTittle">50sp</dimen>
+    <dimen name="userProfileOptionsLayoutMarginTopButton">20dp</dimen>
+    <dimen name="userProfileOptionPaddingRightAccountDeleteButton">27dp</dimen>
+    <dimen name="userProfileOptionPaddingLeftAccountDeleteButton">27dp</dimen>
+    <dimen name="userProfileButtonTextSize">20sp</dimen>
 </resources>

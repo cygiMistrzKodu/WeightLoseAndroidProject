@@ -27,5 +27,10 @@
     <dimen name="weightInputEditTextAndUnitTextViewMinWidth380dp">32sp</dimen>
 
     <dimen name="modificationViewMarginTop">5dp</dimen>
+    <dimen name="userProfileOptionsTextSizeTittle">60sp</dimen>
+    <dimen name="userProfileOptionsLayoutMarginTopButton">20dp</dimen>
+    <dimen name="userProfileOptionPaddingRightAccountDeleteButton">27dp</dimen>
+    <dimen name="userProfileOptionPaddingLeftAccountDeleteButton">27dp</dimen>
+    <dimen name="userProfileButtonTextSize">25sp</dimen>
 
 </resources>

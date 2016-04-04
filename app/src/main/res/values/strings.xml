@@ -49,4 +49,8 @@
     <string name="toast_info_user_password_disable">Password disable</string>
     <string name="change_user_name_dialog_error_name_already_in_use">Name is in use already</string>
     <string name="new_password_dalog_tittle">Change password</string>
+    <string name="user_option_title_textview">User Option</string>
+    <string name="user_profile_option_change_user_name_button">Change User name</string>
+    <string name="user_profile_option_change_user_password_button">Change password</string>
+    <string name="user_profile_option_delete_account_Button">Delete account</string>
 </resources>

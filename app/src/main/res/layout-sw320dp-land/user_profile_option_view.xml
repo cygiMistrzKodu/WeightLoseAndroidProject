@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/userOptionTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/user_option_title_textview"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/userProfileOptionsTextSizeTittle"/>
+
+    <Button
+        android:id="@+id/changeUserNameButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/user_profile_option_change_user_name_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/userProfileOptionsLayoutMarginTopButton"
+        android:textSize="@dimen/userProfileButtonTextSize"
+        android:layout_below="@+id/userOptionTitle"/>
+
+    <Button
+        android:id="@+id/changeUserPasswordButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/user_profile_option_change_user_password_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/userProfileOptionsLayoutMarginTopButton"
+        android:textSize="@dimen/userProfileButtonTextSize"
+        android:layout_below="@+id/changeUserNameButton"/>
+
+    <Button
+        android:id="@+id/deleteAccountButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/user_profile_option_delete_account_Button"
+        android:layout_centerHorizontal="true"
+        android:paddingRight="@dimen/userProfileOptionPaddingRightAccountDeleteButton"
+        android:paddingLeft="@dimen/userProfileOptionPaddingLeftAccountDeleteButton"
+        android:layout_marginTop="@dimen/userProfileOptionsLayoutMarginTopButton"
+        android:textSize="@dimen/userProfileButtonTextSize"
+        android:layout_below="@+id/changeUserPasswordButton"/>
+
+</RelativeLayout>

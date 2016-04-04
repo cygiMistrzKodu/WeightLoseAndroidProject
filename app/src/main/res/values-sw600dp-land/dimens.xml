@@ -62,6 +62,11 @@
     <dimen name="dateModificationViewTextSize">50sp</dimen>
 
     <dimen name="dateModificationLayoutHeight">80dp</dimen>
+    <dimen name="userProfileOptionsTextSizeTittle">95sp</dimen>
+    <dimen name="userProfileOptionsLayoutMarginTopButton">35dp</dimen>
+    <dimen name="userProfileOptionPaddingRightAccountDeleteButton">35dp</dimen>
+    <dimen name="userProfileOptionPaddingLeftAccountDeleteButton">35dp</dimen>
+    <dimen name="userProfileButtonTextSize">38sp</dimen>
 
 
 </resources>

@@ -33,6 +33,11 @@
     <dimen name="editTextTextSizeXLargeLand">45sp</dimen>
     <dimen name="buttonTextSizeXLargeLand">45sp</dimen>
     <dimen name="editTextMinWidthXLargeLand">500dp</dimen>
+    <dimen name="userProfileOptionsTextSizeTittle">50sp</dimen>
+    <dimen name="userProfileOptionsLayoutMarginTopButton">20dp</dimen>
+    <dimen name="userProfileOptionPaddingRightAccountDeleteButton">20dp</dimen>
+    <dimen name="userProfileOptionPaddingLeftAccountDeleteButton">20dp</dimen>
+    <dimen name="userProfileButtonTextSize">20sp</dimen>
 
 
 </resources>
