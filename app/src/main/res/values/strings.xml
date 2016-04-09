@@ -53,4 +53,5 @@
     <string name="user_profile_option_change_user_name_button">Change User name</string>
     <string name="user_profile_option_change_user_password_button">Change password</string>
     <string name="user_profile_option_delete_account_Button">Delete account</string>
+    <string name="email_password_recovery">E-mail (password recovery)</string>
 </resources>
