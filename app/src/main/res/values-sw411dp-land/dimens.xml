@@ -19,16 +19,16 @@
 
     <dimen name="buttonNewUserTextSize">20sp</dimen>
 
-    <dimen name="createNewUserTextViewTextSizeTittle">38sp</dimen>
+    <dimen name="createNewUserTextViewTextSizeTittle">32sp</dimen>
     <dimen name="createNewUserTextViewMarginTopTitle">1dp</dimen>
     <dimen name="createNewUserOkButtonLayoutMarginTop">5dp</dimen>
 
-    <dimen name="createNewUserTextViewTextSizeFieldsLabel">22sp</dimen>
-    <dimen name="createNewUserTextViewLayoutMarginBottom">8dp</dimen>
-    <dimen name="createNewUserEditTextLayoutMarginBottom">10dp</dimen>
+    <dimen name="createNewUserTextViewTextSizeFieldsLabel">17sp</dimen>
+    <dimen name="createNewUserTextViewLayoutMarginBottom">6dp</dimen>
+    <dimen name="createNewUserEditTextLayoutMarginBottom">8dp</dimen>
 
     <dimen name="createNewUserEditTextMinWidth">300dp</dimen>
-    <dimen name="createNewUserEditTextSize">22sp</dimen>
+    <dimen name="createNewUserEditTextSize">17sp</dimen>
     <dimen name="createNewUserButtonTextSize">30sp</dimen>
     <dimen name="createNewUserButtonMarginBottom">20dp</dimen>
 
