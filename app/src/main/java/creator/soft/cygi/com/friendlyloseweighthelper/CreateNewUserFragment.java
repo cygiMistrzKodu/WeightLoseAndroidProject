@@ -21,6 +21,7 @@ public class CreateNewUserFragment extends Fragment {
     private EditText weightGoalEditText;
     private EditText passwordEditText;
     private EditText userNameEditText;
+    private EditText userEmailEditText;
 
     private Integer colorEditText;
 
@@ -53,6 +54,8 @@ public class CreateNewUserFragment extends Fragment {
                 String userName = userNameEditText.getText().toString().trim();
                 String password = passwordEditText.getText().toString().trim();
                 String weightGoalContent = weightGoalEditText.getText().toString().trim();
+                String userEmail = userEmailEditText.getText().toString().trim();
+
                 float weightGoal = 0;
 
                 if(!weightGoalContent.equals(".")) {
@@ -89,6 +92,7 @@ public class CreateNewUserFragment extends Fragment {
         userNameEditText = (EditText) view.findViewById(R.id.userNameEditText);
         passwordEditText = (EditText) view.findViewById(R.id.passwordEditText);
         weightGoalEditText = (EditText) view.findViewById(R.id.weightGoalEditText);
+        userEmailEditText = (EditText) view.findViewById((R.id.emailEditText));
 
         colorEditText = userNameEditText.getCurrentTextColor();
 
@@ -101,6 +105,7 @@ public class CreateNewUserFragment extends Fragment {
         textAnimatorUtilityHelper.addTextComponentToAnimate(weightGoalEditText);
         textAnimatorUtilityHelper.addTextComponentToAnimate(passwordEditText);
         textAnimatorUtilityHelper.addTextComponentToAnimate(userNameEditText);
+        textAnimatorUtilityHelper.addTextComponentToAnimate(userEmailEditText);
 
         textAnimatorUtilityHelper.animateTextComponents(Color.GREEN, colorEditText);
 
