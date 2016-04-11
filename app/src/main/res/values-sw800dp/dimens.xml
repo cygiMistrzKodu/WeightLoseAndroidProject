@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="createNewUserTextViewTextSizeTittle">105sp</dimen>
-    <dimen name="createNewUserTextViewMarginTopTitle">20dp</dimen>
+    <dimen name="createNewUserTextViewTextSizeTittle">102sp</dimen>
+    <dimen name="createNewUserTextViewMarginTopTitle">10dp</dimen>
     <dimen name="createNewUserOkButtonLayoutMarginTop">30dp</dimen>
 
-    <dimen name="createNewUserTextViewTextSizeFieldsLabel">60sp</dimen>
+    <dimen name="createNewUserTextViewTextSizeFieldsLabel">50sp</dimen>
     <dimen name="createNewUserTextViewLayoutMarginBottom">20dp</dimen>
-    <dimen name="createNewUserEditTextLayoutMarginBottom">60dp</dimen>
+    <dimen name="createNewUserEditTextLayoutMarginBottom">30dp</dimen>
 
     <dimen name="createNewUserEditTextMinWidth">650dp</dimen>
-    <dimen name="createNewUserEditTextSize">50sp</dimen>
+    <dimen name="createNewUserEditTextSize">45sp</dimen>
     <dimen name="createNewUserButtonTextSize">75sp</dimen>
     <dimen name="createNewUserButtonMarginBottom">40dp</dimen>
     <dimen name="userProfileOptionsTextSizeTittle">125sp</dimen>
