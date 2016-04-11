@@ -72,18 +72,19 @@
     <dimen name="buttonOkTextSize">70sp</dimen>
     <dimen name="buttonOkPaddingLeftRight">70sp</dimen>
 
-    <dimen name="createNewUserTextViewTextSizeTittle">75sp</dimen>
-    <dimen name="createNewUserTextViewMarginTopTitle">10dp</dimen>
+    <dimen name="createNewUserTextViewTextSizeTittle">70sp</dimen>
+    <dimen name="createNewUserTextViewMarginTopTitle">5dp</dimen>
     <dimen name="createNewUserOkButtonLayoutMarginTop">30dp</dimen>
 
-    <dimen name="createNewUserTextViewTextSizeFieldsLabel">45sp</dimen>
-    <dimen name="createNewUserTextViewLayoutMarginBottom">12dp</dimen>
-    <dimen name="createNewUserEditTextLayoutMarginBottom">25dp</dimen>
+    <dimen name="createNewUserTextViewTextSizeFieldsLabel">30sp</dimen>
+    <dimen name="createNewUserTextViewLayoutMarginBottom">10dp</dimen>
+    <dimen name="createNewUserEditTextLayoutMarginBottom">20dp</dimen>
 
     <dimen name="createNewUserEditTextMinWidth">450dp</dimen>
-    <dimen name="createNewUserEditTextSize">40sp</dimen>
+    <dimen name="createNewUserEditTextSize">30sp</dimen>
     <dimen name="createNewUserButtonTextSize">60sp</dimen>
     <dimen name="createNewUserButtonMarginBottom">20dp</dimen>
+
     <dimen name="userProfileOptionsTextSizeTittle">95sp</dimen>
     <dimen name="userProfileOptionsLayoutMarginTopButton">50dp</dimen>
     <dimen name="userProfileOptionPaddingRightAccountDeleteButton">35dp</dimen>
