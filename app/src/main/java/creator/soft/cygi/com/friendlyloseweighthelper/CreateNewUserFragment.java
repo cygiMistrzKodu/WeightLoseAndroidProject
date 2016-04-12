@@ -82,6 +82,7 @@ public class CreateNewUserFragment extends Fragment {
                 userData.setName(userName);
                 userData.setPassword(password);
                 userData.setWeightGoal(weightGoal);
+                userData.setEmail(userEmail);
 
                 weightTrackDatabaseHelper.insertNewUserDataIntoDatabase(userData);
                 animateUserNameText();

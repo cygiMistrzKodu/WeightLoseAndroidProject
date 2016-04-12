@@ -7,6 +7,7 @@ public class UserData {
     private Long userId;
     private String name;
     private String password="";
+    private String email="";
     private float weightGoal = 0;
 
     public void setName(String name) {
@@ -31,6 +32,14 @@ public class UserData {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setWeightGoal(float weightGoal) {

@@ -27,17 +27,18 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
     public static final int ROW_NOT_INSERTED = -1;
     private static final String TAG = "WeightTrackDatabaseH";
     private static final String DB_NAME = "weightTrack.sgl";
-    private static final int VERSION = 5;
+    private static final int VERSION = 6;
     private static final String TABLE_USERS = "users";
     private static final String COLUMN_USERS_ID_USER = "id_user";
     private static final String COLUMN_USERS_USER_NAME = "user_name";
     private static final String COLUMN_USERS_PASSWORD = "password";
+    private static final String COLUMN_USERS_EMAIL = "email";
+    private static final String COLUMN_USERS_WEIGHT_GOAL = "weight_goal";
     private static final String TABLE_MEASUREMENT_DATA = "measurement_data";
     private static final String COLUMN_MEASUREMENT_DATA_MEASUREMENT_ID = "measurement_id";
     private static final String COLUMN_MEASUREMENT_DATA_ID_USER = "id_user";
     private static final String COLUMN_MEASUREMENT_DATA_DATE_TIME = "date_time";
     private static final String COLUMN_MEASUREMENT_DATA_WEIGHT = "weight";
-    private static final String COLUMN_USERS_WEIGHT_GOAL = "weight_goal";
     Stack<DateTimeDTO> lastMeasurementDeletionStack = new Stack<DateTimeDTO>();
     private Context context;
     private String loginUserName;
@@ -103,6 +104,8 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
                 db.execSQL(readSqlCommandFromResource(R.raw.update_table_users_add_password_column));
             case 4:
                 db.execSQL(readSqlCommandFromResource(R.raw.update_tabel_users_add_goal_column));
+            case 5:
+                db.execSQL(readSqlCommandFromResource(R.raw.update_table_users_add_email_column));
 
         }
 
@@ -507,6 +510,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
         long userId;
         String userName;
         String userPassword;
+        String userEmail;
         float userGoal;
 
         if (allUserCursor.getCount() > 0) {
@@ -516,10 +520,11 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
                 userId = allUserCursor.getLong(allUserCursor.getColumnIndex(COLUMN_USERS_ID_USER));
                 userName = allUserCursor.getString(allUserCursor.getColumnIndex(COLUMN_USERS_USER_NAME));
                 userPassword = allUserCursor.getString(allUserCursor.getColumnIndex(COLUMN_USERS_PASSWORD));
+                userEmail = allUserCursor.getString(allUserCursor.getColumnIndex(COLUMN_USERS_EMAIL));
                 userGoal = allUserCursor.getFloat(allUserCursor.getColumnIndex(COLUMN_USERS_WEIGHT_GOAL));
 
                 Log.d(TAG, "Data From database : " + "userId: " + userId + " userName: "
-                        + userName + " userPassword: " + userPassword + "weightGoal " + userGoal);
+                        + userName + " userPassword: " + userPassword +" userEmail: "+userEmail+" weightGoal: " + userGoal);
 
                 UserData userData = new UserData();
                 userData.setUserId(userId);
@@ -543,7 +548,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
         Cursor cursor = db.query(TABLE_USERS,
                 new String[]{COLUMN_MEASUREMENT_DATA_ID_USER, COLUMN_USERS_USER_NAME,
-                        COLUMN_USERS_PASSWORD, COLUMN_USERS_WEIGHT_GOAL},
+                        COLUMN_USERS_PASSWORD,COLUMN_USERS_EMAIL ,COLUMN_USERS_WEIGHT_GOAL},
                 null, null,
                 null, null, null);
 
@@ -585,6 +590,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
         String userName = userData.getName();
         String password = userData.getPassword();
+        String email = userData.getEmail();
         float weightGoal = userData.getWeightGoal();
 
         if (isUserExist(userName)) {
@@ -595,6 +601,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_USERS_USER_NAME, userName);
         cv.put(COLUMN_USERS_PASSWORD, password);
+        cv.put(COLUMN_USERS_EMAIL, email);
         cv.put(COLUMN_USERS_WEIGHT_GOAL, weightGoal);
         getWritableDatabase().insert(TABLE_USERS, null, cv);
 
