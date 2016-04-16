@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,6 +72,11 @@ public class CreateNewUserFragment extends Fragment {
                     return;
                 }
 
+                if(isEmailNotCorrect(userEmailEditText.getText().toString())){
+                    userEmailEditText.setError("email is not correct");
+                    return;
+                }
+
                 WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(getContext());
                 weightTrackDatabaseHelper.addUserNotificationObserver(new UserNotificationObserver() {
                     @Override
@@ -95,6 +101,18 @@ public class CreateNewUserFragment extends Fragment {
         weightGoalEditText = (EditText) view.findViewById(R.id.weightGoalEditText);
         userEmailEditText = (EditText) view.findViewById((R.id.emailEditText));
 
+        userEmailEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                 if(isEmailNotCorrect(userEmailEditText.getText().toString())) {
+                        userEmailEditText.setError("email is not correct");
+                    }
+                }
+            }
+        });
+
+
         colorEditText = userNameEditText.getCurrentTextColor();
 
         return view;
@@ -110,6 +128,10 @@ public class CreateNewUserFragment extends Fragment {
 
         textAnimatorUtilityHelper.animateTextComponents(Color.GREEN, colorEditText);
 
+    }
+
+    private boolean isEmailNotCorrect(String email) {
+      return !Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 }
 
