@@ -18,5 +18,7 @@
     <dimen name="userProfileOptionPaddingRightAccountDeleteButton">48dp</dimen>
     <dimen name="userProfileOptionPaddingLeftAccountDeleteButton">48dp</dimen>
     <dimen name="userProfileButtonTextSize">58sp</dimen>
+    <dimen name="userProfileOptionPaddingRightEmailButton">39dp</dimen>
+    <dimen name="userProfileOptionPaddingLeftEmailButton">39dp</dimen>
 
 </resources>
