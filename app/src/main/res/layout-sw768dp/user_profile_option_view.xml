@@ -22,6 +22,19 @@
         android:layout_below="@+id/userOptionTitle"/>
 
     <Button
+        android:id="@+id/changeUserEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/user_profile_option_change_user_email_button"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/userProfileButtonTextSize"
+        android:layout_marginTop="@dimen/userProfileOptionsLayoutMarginTopButton"
+        android:paddingRight="@dimen/userProfileOptionPaddingRightEmailButton"
+        android:paddingLeft="@dimen/userProfileOptionPaddingLeftEmailButton"
+        android:layout_below="@+id/changeUserNameButton"/>
+
+
+    <Button
         android:id="@+id/changeUserPasswordButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,7 +42,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/userProfileOptionsLayoutMarginTopButton"
         android:textSize="@dimen/userProfileButtonTextSize"
-        android:layout_below="@+id/changeUserNameButton"/>
+        android:layout_below="@+id/changeUserEmail"/>
 
     <Button
         android:id="@+id/deleteAccountButton"

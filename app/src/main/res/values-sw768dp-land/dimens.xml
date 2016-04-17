@@ -53,13 +53,13 @@
     <dimen name="dateModificationLayoutHeight">120dp</dimen>
 
     <dimen name="modificationViewMarginTop">5dp</dimen>
-    <dimen name="userProfileOptionsTextSizeTittle">115sp</dimen>
-    <dimen name="userProfileOptionsLayoutMarginTopButton">55dp</dimen>
-    <dimen name="userProfileOptionPaddingRightAccountDeleteButton">41dp</dimen>
-    <dimen name="userProfileOptionPaddingLeftAccountDeleteButton">41dp</dimen>
-    <dimen name="userProfileButtonTextSize">50sp</dimen>
-    <dimen name="userProfileOptionPaddingRightEmailButton">39dp</dimen>
-    <dimen name="userProfileOptionPaddingLeftEmailButton">39dp</dimen>
+    <dimen name="userProfileOptionsTextSizeTittle">105sp</dimen>
+    <dimen name="userProfileOptionsLayoutMarginTopButton">30dp</dimen>
+    <dimen name="userProfileOptionPaddingRightAccountDeleteButton">40dp</dimen>
+    <dimen name="userProfileOptionPaddingLeftAccountDeleteButton">40dp</dimen>
+    <dimen name="userProfileButtonTextSize">45sp</dimen>
+    <dimen name="userProfileOptionPaddingRightEmailButton">69dp</dimen>
+    <dimen name="userProfileOptionPaddingLeftEmailButton">69dp</dimen>
 
 
 </resources>

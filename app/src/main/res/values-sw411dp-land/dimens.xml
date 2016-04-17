@@ -46,13 +46,13 @@
     <dimen name="WeightInputMinWidthAcceptButton">80dp</dimen>
 
     <dimen name="modificationViewMarginTop">5dp</dimen>
-    <dimen name="userProfileOptionsTextSizeTittle">60sp</dimen>
-    <dimen name="userProfileOptionsLayoutMarginTopButton">20dp</dimen>
-    <dimen name="userProfileOptionPaddingRightAccountDeleteButton">27dp</dimen>
-    <dimen name="userProfileOptionPaddingLeftAccountDeleteButton">27dp</dimen>
-    <dimen name="userProfileButtonTextSize">28sp</dimen>
-    <dimen name="userProfileOptionPaddingRightEmailButton">39dp</dimen>
-    <dimen name="userProfileOptionPaddingLeftEmailButton">39dp</dimen>
+    <dimen name="userProfileOptionsTextSizeTittle">50sp</dimen>
+    <dimen name="userProfileOptionsLayoutMarginTopButton">10dp</dimen>
+    <dimen name="userProfileOptionPaddingRightAccountDeleteButton">30dp</dimen>
+    <dimen name="userProfileOptionPaddingLeftAccountDeleteButton">30dp</dimen>
+    <dimen name="userProfileButtonTextSize">25sp</dimen>
+    <dimen name="userProfileOptionPaddingRightEmailButton">47dp</dimen>
+    <dimen name="userProfileOptionPaddingLeftEmailButton">47dp</dimen>
 
 
 </resources>
