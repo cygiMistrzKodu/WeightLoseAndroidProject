@@ -638,18 +638,33 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
         return false;
     }
 
+    public boolean updateUserEmail(String userEmail) {
+
+        if(isOtherUserHaveThisEmailAlready(userEmail)){
+            return false;
+        }
+
+        Long currentUserId = getIdOfCurrentUser();
+        UserData currentUserData = getUserDataById(currentUserId);
+        currentUserData.setEmail(userEmail);
+        updateUserData(currentUserData);
+
+       return true;
+    }
+
+    private boolean isOtherUserHaveThisEmailAlready(String userEmail) {
+
+        //// TODO: 2016-04-19 check if other user have same email
+
+        return false;
+    }
+
     public void updateWeightGoal(Float weightGoal) {
 
-        Long userId = getIdOfCurrentUser();
-        String password = getPasswordOfCurrentUser();
-
-        UserData userData = new UserData();
-        userData.setUserId(userId);
-        userData.setName(loginUserName);
-        userData.setPassword(password);
-        userData.setWeightGoal(weightGoal);
-
-        updateUserData(userData);
+        Long currentUserId = getIdOfCurrentUser();
+        UserData currentUserData = getUserDataById(currentUserId);
+        currentUserData.setWeightGoal(weightGoal);
+        updateUserData(currentUserData);
 
     }
 
@@ -672,11 +687,13 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
         Long userId = userToUpdate.getUserId();
         String userName = userToUpdate.getName();
+        String userEmail = userToUpdate.getEmail();
         String password = userToUpdate.getPassword();
         float weightGoal = userToUpdate.getWeightGoal();
 
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_USERS_USER_NAME, userName);
+        cv.put(COLUMN_USERS_EMAIL,userEmail);
         cv.put(COLUMN_USERS_PASSWORD, password);
         cv.put(COLUMN_USERS_WEIGHT_GOAL, weightGoal);
 
@@ -731,12 +748,14 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
         Cursor userCursor = getUserCursorBaseOnUserID(userId);
 
         String userName = userCursor.getString(userCursor.getColumnIndex(COLUMN_USERS_USER_NAME));
+        String userEmail = userCursor.getString(userCursor.getColumnIndex(COLUMN_USERS_EMAIL));
         String password = userCursor.getString(userCursor.getColumnIndex(COLUMN_USERS_PASSWORD));
         Float weightGoal = userCursor.getFloat(userCursor.getColumnIndex(COLUMN_USERS_WEIGHT_GOAL));
 
         UserData userData = new UserData();
         userData.setUserId(userId);
         userData.setName(userName);
+        userData.setEmail(userEmail);
         userData.setPassword(password);
         userData.setWeightGoal(weightGoal);
 
@@ -748,7 +767,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
         Cursor cursor = db.query(TABLE_USERS,
                 new String[]{COLUMN_USERS_ID_USER,
-                        COLUMN_USERS_USER_NAME, COLUMN_USERS_PASSWORD, COLUMN_USERS_WEIGHT_GOAL},
+                        COLUMN_USERS_USER_NAME,COLUMN_USERS_EMAIL,COLUMN_USERS_PASSWORD, COLUMN_USERS_WEIGHT_GOAL},
                 COLUMN_USERS_ID_USER + " = ?", new String[]{userId.toString()},
                 null, null, null);
         cursor.moveToFirst();

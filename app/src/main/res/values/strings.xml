@@ -45,6 +45,7 @@
     <string name="change_user_name_dialog_title">Write new name</string>
     <string name="cancel_button">Cancel</string>
     <string name="toast_info_user_name_change">User name change to %s</string>
+    <string name="toast_info_user_email_change">User email change to %s</string>
     <string name="toast_info_user_password_change">Password change</string>
     <string name="toast_info_user_password_disable">Password disable</string>
     <string name="change_user_name_dialog_error_name_already_in_use">Name is in use already</string>
@@ -55,4 +56,9 @@
     <string name="user_profile_option_change_user_password_button">Change password</string>
     <string name="user_profile_option_delete_account_Button">Delete account</string>
     <string name="email_password_recovery">E-mail (password recovery)</string>
+    <string name="new_email_dialog_tittle">Change email</string>
+    <string name="change_user_email_dialog_error_email_already_in_use">Email is in user already</string>
+    <string name="email_error_email_is_not_correct">Email is not correct</string>
+    <string name="create_new_user_error_user_already_exisit">User already exist</string>
+    <string name="create_new_user_error_user_name_cannot_be_empty">User name cannot be empty</string>
 </resources>

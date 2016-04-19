@@ -68,12 +68,12 @@ public class CreateNewUserFragment extends Fragment {
                 boolean isUserNameEmpty = userName.isEmpty();
 
                 if(isUserNameEmpty){
-                    userNameEditText.setError("User name cannot be empty");
+                    userNameEditText.setError(getString(R.string.create_new_user_error_user_name_cannot_be_empty));
                     return;
                 }
 
                 if(isEmailNotCorrect(userEmailEditText.getText().toString())){
-                    userEmailEditText.setError("email is not correct");
+                    userEmailEditText.setError(getString(R.string.email_error_email_is_not_correct));
                     return;
                 }
 
@@ -81,7 +81,7 @@ public class CreateNewUserFragment extends Fragment {
                 weightTrackDatabaseHelper.addUserNotificationObserver(new UserNotificationObserver() {
                     @Override
                     public void onUserAlreadyExist(UserData userData) {
-                        userNameEditText.setError("User already exist");
+                        userNameEditText.setError(getString(R.string.create_new_user_error_user_already_exisit));
                     }
                 });
                 UserData userData = new UserData();
@@ -106,7 +106,7 @@ public class CreateNewUserFragment extends Fragment {
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
                  if(isEmailNotCorrect(userEmailEditText.getText().toString())) {
-                        userEmailEditText.setError("email is not correct");
+                        userEmailEditText.setError(getString(R.string.email_error_email_is_not_correct));
                     }
                 }
             }

@@ -22,7 +22,7 @@
         android:layout_below="@+id/userOptionTitle"/>
 
     <Button
-        android:id="@+id/changeUserEmail"
+        android:id="@+id/changeUserEmailButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/user_profile_option_change_user_email_button"
@@ -41,7 +41,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/userProfileOptionsLayoutMarginTopButton"
         android:textSize="@dimen/userProfileButtonTextSize"
-        android:layout_below="@+id/changeUserEmail"/>
+        android:layout_below="@+id/changeUserEmailButton"/>
 
     <Button
         android:id="@+id/deleteAccountButton"

@@ -12,6 +12,7 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -26,6 +27,7 @@ public class UserProfileOptionActivity extends AppCompatActivity {
     private Button deleteAccountButton;
     private Button changeUserNameButton;
     private Button changeUserPasswordButton;
+    private Button changeUserEmailButton;
 
     private String newUserName = "";
     private EditText userNewNameEditText;
@@ -34,6 +36,8 @@ public class UserProfileOptionActivity extends AppCompatActivity {
     private CheckBox disablePasswordCheckBox;
 
     private View changePasswordView;
+    private EditText userEmailEditText;
+    private String newUserEmail = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,6 +72,76 @@ public class UserProfileOptionActivity extends AppCompatActivity {
                 showChangePasswordDialog();
             }
         });
+
+        changeUserEmailButton = (Button) findViewById(R.id.changeUserEmailButton);
+        changeUserEmailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showChangeEmailDialog();
+            }
+        });
+
+
+    }
+
+    private void showChangeEmailDialog() {
+
+        createChangeEmailDialog();
+    }
+
+    private void createChangeEmailDialog() {
+
+
+        AlertDialog.Builder changeUserEmailBuilder = new AlertDialog.Builder(this);
+        changeUserEmailBuilder.setTitle(R.string.new_email_dialog_tittle);
+
+        userEmailEditText = new EditText(this);
+        userEmailEditText.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+
+        changeUserEmailBuilder.setView(userEmailEditText);
+        changeUserEmailBuilder.setPositiveButton(R.string.accept_button_ok, null);
+        changeUserEmailBuilder.setNegativeButton(R.string.cancel_button, null);
+
+        final AlertDialog changeUserEmailDialog = changeUserEmailBuilder.create();
+
+        changeUserEmailDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+
+                final Button positiveButton = changeUserEmailDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                positiveButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        newUserEmail = userEmailEditText.getText().toString().trim();
+
+                        if(isEmailNotCorrect(newUserEmail)){
+                            userEmailEditText.setError(getString(R.string.email_error_email_is_not_correct));
+                            return;
+                        }
+
+
+                        WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(getApplicationContext());
+                        boolean isUserEmailUpdated = weightTrackDatabaseHelper.updateUserEmail(newUserEmail);
+
+                        if(isUserEmailUpdated){
+                            Resources res = getResources();
+                            String userChangeNameInfo = String.format(res.getString(R.string.toast_info_user_email_change), newUserEmail);
+                            Toast.makeText(UserProfileOptionActivity.this, userChangeNameInfo, Toast.LENGTH_SHORT).show();
+                            changeUserEmailDialog.dismiss();
+                        }else {
+                            userEmailEditText.setError(getString(R.string.change_user_email_dialog_error_email_already_in_use));
+                        }
+
+                    }
+                });
+
+            }
+        });
+
+        changeUserEmailDialog.show();
+
     }
 
     private void showChangePasswordDialog() {
@@ -207,7 +281,6 @@ public class UserProfileOptionActivity extends AppCompatActivity {
                         WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(getApplicationContext());
                         boolean isUserNameUpdated = weightTrackDatabaseHelper.updateUserName(newUserName);
 
-
                         if (isUserNameUpdated) {
                             setResult(Activity.RESULT_OK);
                             Resources res = getResources();
@@ -296,6 +369,10 @@ public class UserProfileOptionActivity extends AppCompatActivity {
         Intent intent = new Intent(UserProfileOptionActivity.this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    private boolean isEmailNotCorrect(String email) {
+        return !Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
 }
