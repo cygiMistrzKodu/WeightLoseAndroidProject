@@ -653,7 +653,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
     }
 
     private boolean isOtherUserHaveThisEmailAlready(String userEmail) {
-        
+
        Cursor cursor =  findEmail(userEmail);
 
         if(cursor.getCount() > 0){

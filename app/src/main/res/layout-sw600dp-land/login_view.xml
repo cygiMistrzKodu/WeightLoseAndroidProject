@@ -46,7 +46,7 @@
         android:textSize="@dimen/editTextTextPasswordSize"
         android:gravity="center"
         android:layout_marginBottom="@dimen/editTextLayoutMarginBottom"
-        android:password="true"/>
+        android:inputType="textPassword"/>
 
     <Button
         android:id="@+id/okButton"
