@@ -222,7 +222,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
         Cursor cursor = db.query(TABLE_USERS,
                 new String[]{COLUMN_USERS_ID_USER,
-                        COLUMN_USERS_USER_NAME, COLUMN_USERS_PASSWORD, COLUMN_USERS_WEIGHT_GOAL},
+                        COLUMN_USERS_USER_NAME,COLUMN_USERS_EMAIL,COLUMN_USERS_PASSWORD, COLUMN_USERS_WEIGHT_GOAL},
                 COLUMN_USERS_USER_NAME + "=?", new String[]{userName},
                 null, null, null);
         cursor.moveToFirst();
@@ -653,10 +653,25 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
     }
 
     private boolean isOtherUserHaveThisEmailAlready(String userEmail) {
+        
+       Cursor cursor =  findEmail(userEmail);
 
-        //// TODO: 2016-04-19 check if other user have same email
+        if(cursor.getCount() > 0){
+            return true;
+        }
 
         return false;
+    }
+
+    private Cursor findEmail(String userEmail) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_USERS,
+                new String[]{COLUMN_USERS_EMAIL},
+                COLUMN_USERS_EMAIL + "=?", new String[] {userEmail},null,null,null );
+        cursor.moveToFirst();
+
+        return cursor;
     }
 
     public void updateWeightGoal(Float weightGoal) {
