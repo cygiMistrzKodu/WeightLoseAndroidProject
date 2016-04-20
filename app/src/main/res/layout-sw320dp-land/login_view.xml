@@ -40,12 +40,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minWidth="@dimen/editTextPasswordMinWidth"
-        android:layout_above="@+id/okButton"
+        android:layout_above="@+id/passwordRecoveryTextView"
         android:background="@drawable/rectangle_border"
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:layout_marginBottom="@dimen/editTextLayoutMarginBottom"
         android:inputType="textPassword"/>
+
+    <TextView
+        android:id="@+id/passwordRecoveryTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/password_recovery_text_view"
+        android:textSize="@dimen/passwordRecoveryTextViewTextSize"
+        android:layout_marginBottom="@dimen/passwordRecoveryTextViewMarginBottom"
+        style="@style/forgetPasswordTextColor"
+        android:layout_above="@+id/okButton"/>
 
     <Button
         android:id="@+id/okButton"

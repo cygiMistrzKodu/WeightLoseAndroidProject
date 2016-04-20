@@ -29,8 +29,9 @@ public class LoginViewFragment extends Fragment {
 
     public static final String LOGIN_USER_NAME = "loginUserName";
     private Spinner userListSpinner;
-    private EditText passwordEditText;
     private TextView passwordTextView;
+    private EditText passwordEditText;
+    private TextView passwordRecoveryTextView;
     private Button okButton;
     private Button createNewUserButton;
     private TextView chooseUserTextView;
@@ -64,11 +65,13 @@ public class LoginViewFragment extends Fragment {
 
                     passwordTextView.setVisibility(View.GONE);
                     passwordEditText.setVisibility(View.GONE);
+                    passwordRecoveryTextView.setVisibility(View.GONE);
 
                 } else {
 
                     passwordTextView.setVisibility(View.VISIBLE);
                     passwordEditText.setVisibility(View.VISIBLE);
+                    passwordRecoveryTextView.setVisibility(View.VISIBLE);
                 }
 
             }
@@ -81,6 +84,7 @@ public class LoginViewFragment extends Fragment {
         });
 
         passwordEditText = (EditText) view.findViewById(R.id.passwordEditText);
+        passwordRecoveryTextView = (TextView) view.findViewById(R.id.passwordRecoveryTextView);
         okButton = (Button) view.findViewById(R.id.okButton);
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,6 +150,7 @@ public class LoginViewFragment extends Fragment {
         passwordTextView.setVisibility(View.GONE);
         passwordEditText.setVisibility(View.GONE);
         okButton.setVisibility(View.GONE);
+        passwordRecoveryTextView.setVisibility(View.GONE);
         userListSpinner.setVisibility(View.GONE);
         chooseUserTextView.setVisibility(View.GONE);
 

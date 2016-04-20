@@ -38,7 +38,9 @@
     <dimen name="loginSpinnerLayoutMarginTop">2dp</dimen>
     <dimen name="loginSpinnerLayoutMarginBottom">5dp</dimen>
     <dimen name="loginTextViewLayoutMarginPasswordBottom">2dp</dimen>
-    <dimen name="editTextLayoutMarginBottom">27dp</dimen>
+    <dimen name="editTextLayoutMarginBottom">5dp</dimen>
+    <dimen name="passwordRecoveryTextViewMarginBottom">8dp</dimen>
+
     <dimen name="userProfileOptionsTextSizeTittle">30sp</dimen>
     <dimen name="userProfileOptionsLayoutMarginTopButton">2dp</dimen>
     <dimen name="userProfileOptionPaddingRightAccountDeleteButton">21dp</dimen>
@@ -46,5 +48,6 @@
     <dimen name="userProfileButtonTextSize">13sp</dimen>
     <dimen name="userProfileOptionPaddingRightEmailButton">29dp</dimen>
     <dimen name="userProfileOptionPaddingLeftEmailButton">29dp</dimen>
+    <dimen name="passwordRecoveryTextViewTextSize">13sp</dimen>
 
 </resources>

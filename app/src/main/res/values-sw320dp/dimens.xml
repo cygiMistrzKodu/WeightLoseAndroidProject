@@ -45,12 +45,14 @@
     <dimen name="loginSpinnerLayoutMarginTop">40dp</dimen>
     <dimen name="loginSpinnerLayoutMarginBottom">20dp</dimen>
 
-    <dimen name="loginTextViewPasswordTextSize">30sp</dimen>
+    <dimen name="loginTextViewPasswordTextSize">22sp</dimen>
     <dimen name="loginTextViewLayoutMarginPasswordBottom">10dp</dimen>
 
     <dimen name="editTextPasswordMinWidth">150dp</dimen>
-    <dimen name="editTextLayoutMarginBottom">20dp</dimen>
-    
+    <dimen name="editTextLayoutMarginBottom">8dp</dimen>
+    <dimen name="passwordRecoveryTextViewMarginBottom">10dp</dimen>
+    <dimen name="passwordRecoveryTextViewTextSize">13sp</dimen>
+
     <dimen name="buttonOkLayoutMarginBottom">85dp</dimen>
 
     <dimen name="createNewUserTextViewTextSizeTittle">40sp</dimen>

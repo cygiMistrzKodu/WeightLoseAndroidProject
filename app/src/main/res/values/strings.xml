@@ -61,4 +61,5 @@
     <string name="email_error_email_is_not_correct">Email is not correct</string>
     <string name="create_new_user_error_user_already_exisit">User already exist</string>
     <string name="create_new_user_error_user_name_cannot_be_empty">User name cannot be empty</string>
+    <string name="password_recovery_text_view">Forget password ?</string>
 </resources>

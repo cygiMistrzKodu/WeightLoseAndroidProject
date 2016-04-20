@@ -20,5 +20,7 @@
     <dimen name="userProfileButtonTextSize">54sp</dimen>
     <dimen name="userProfileOptionPaddingRightEmailButton">81dp</dimen>
     <dimen name="userProfileOptionPaddingLeftEmailButton">81dp</dimen>
+    <dimen name="passwordRecoveryTextViewMarginBottom">10dp</dimen>
+    <dimen name="passwordRecoveryTextViewTextSize">18sp</dimen>
 
 </resources>
