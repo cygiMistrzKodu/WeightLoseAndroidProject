@@ -37,6 +37,7 @@ public class LoginViewFragment extends Fragment {
     private TextView chooseUserTextView;
 
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +85,6 @@ public class LoginViewFragment extends Fragment {
         });
 
         passwordEditText = (EditText) view.findViewById(R.id.passwordEditText);
-        passwordRecoveryTextView = (TextView) view.findViewById(R.id.passwordRecoveryTextView);
         okButton = (Button) view.findViewById(R.id.okButton);
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,6 +123,14 @@ public class LoginViewFragment extends Fragment {
 
         passwordTextView = (TextView) view.findViewById(R.id.passwordTextView);
         chooseUserTextView = (TextView) view.findViewById(R.id.chooseUserTextView);
+        passwordRecoveryTextView = (TextView) view.findViewById(R.id.passwordRecoveryTextView);
+        passwordRecoveryTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("TMPTMP", "Will Show password recovery dialog");
+            }
+        });
+
 
         if(isNoUserExistYet()){
             showOnlyCreateNewUserOption();
