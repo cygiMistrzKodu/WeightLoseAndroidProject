@@ -607,6 +607,14 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
     }
 
+    public UserData getLoginUserData(){
+
+        long currentUserId = getIdOfCurrentUser();
+        UserData logInUserData =  getUserDataById(currentUserId);
+
+        return logInUserData;
+    }
+
     @Override
     public void addUserNotificationObserver(UserNotificationObserver userNotificationObserver) {
 

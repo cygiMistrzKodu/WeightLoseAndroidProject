@@ -62,4 +62,6 @@
     <string name="create_new_user_error_user_already_exisit">User already exist</string>
     <string name="create_new_user_error_user_name_cannot_be_empty">User name cannot be empty</string>
     <string name="password_recovery_text_view">Forget password ?</string>
+    <string name="reset_password_dialog_message">On your email will be sent randomly generated password. It\'s strongly advice to change them immediately. Do you really want to reset?</string>
+    <string name="reset_password_dialog_tittle">Reset password</string>
 </resources>

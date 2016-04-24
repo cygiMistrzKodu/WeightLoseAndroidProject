@@ -1,6 +1,9 @@
 package creator.soft.cygi.com.friendlyloseweighthelper;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -20,6 +23,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.math.BigInteger;
+import java.security.SecureRandom;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -35,7 +41,8 @@ public class LoginViewFragment extends Fragment {
     private Button okButton;
     private Button createNewUserButton;
     private TextView chooseUserTextView;
-
+    private List<UserData> userList;
+    ArrayAdapter<UserData> userDataArrayAdapter;
 
 
     @Override
@@ -97,7 +104,7 @@ public class LoginViewFragment extends Fragment {
 
                 boolean noPassword = password.isEmpty();
 
-                if(passwordEnter.equals(userData.getPassword()) || noPassword ) {
+                if (passwordEnter.equals(userData.getPassword()) || noPassword) {
 
                     final FragmentTransaction ft = getFragmentManager().beginTransaction();
                     ft.replace(R.id.fragmentContainer, new WeightStandardViewFragment());
@@ -127,12 +134,56 @@ public class LoginViewFragment extends Fragment {
         passwordRecoveryTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("TMPTMP", "Will Show password recovery dialog");
+
+                AlertDialog.Builder resetPasswordAlertDialogBuilder = new AlertDialog.Builder(getActivity());
+                resetPasswordAlertDialogBuilder.setTitle(R.string.reset_password_dialog_tittle);
+
+                resetPasswordAlertDialogBuilder.setMessage(getString(R.string.reset_password_dialog_message));
+
+                resetPasswordAlertDialogBuilder.setPositiveButton(R.string.dialog_positive_button, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        SecureStringCreator secureStringCreator = new SecureStringCreator();
+                        int passwordLength = 6;
+                        String randomPassword = secureStringCreator.createRandomPassword(passwordLength);
+
+                        // TODO: 2016-04-24 send password to email. Best if in separate thread
+
+                        WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(getContext());
+
+                        UserData userData = (UserData) userListSpinner.getSelectedItem();
+                        int selectedPosition = userListSpinner.getSelectedItemPosition();
+                        weightTrackDatabaseHelper.setLoginUserName(userData.getName());
+                        weightTrackDatabaseHelper.updateUserPassword(randomPassword);
+
+                        UserData updatedUserDataFromStore = weightTrackDatabaseHelper.getLoginUserData();
+
+                        LinkedList<UserData> userListLinkedList = (LinkedList<UserData>) userList;
+                        userListLinkedList.set(selectedPosition,updatedUserDataFromStore);
+                        userDataArrayAdapter.notifyDataSetChanged();
+
+
+                        Log.d("Selected Position"," "+ selectedPosition);
+                        Log.d("SecureString", randomPassword);
+
+                    }
+                });
+
+                resetPasswordAlertDialogBuilder.setNegativeButton(R.string.dialog_negative_button, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+                AlertDialog resetPasswordAlertDialog = resetPasswordAlertDialogBuilder.create();
+                resetPasswordAlertDialog.show();
             }
         });
 
 
-        if(isNoUserExistYet()){
+        if (isNoUserExistYet()) {
             showOnlyCreateNewUserOption();
         }
 
@@ -144,9 +195,9 @@ public class LoginViewFragment extends Fragment {
 
         WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(getContext());
 
-       Long userNumber =  weightTrackDatabaseHelper.countUsersInStorage();
+        Long userNumber = weightTrackDatabaseHelper.countUsersInStorage();
 
-        if(userNumber <= 0){
+        if (userNumber <= 0) {
             return true;
         }
 
@@ -167,10 +218,13 @@ public class LoginViewFragment extends Fragment {
     private void fillWithUserNames() {
 
         WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(getContext());
-        List<UserData> userList  = weightTrackDatabaseHelper.getUsersData();
+       // List<UserData> userList = weightTrackDatabaseHelper.getUsersData();
+         userList = weightTrackDatabaseHelper.getUsersData();
 
-        ArrayAdapter<UserData> userDataArrayAdapter =
-                new ArrayAdapter<UserData>(getContext(),R.layout.simple_spinner_dropdown_item_custom,userList);
+//        ArrayAdapter<UserData> userDataArrayAdapter =
+//                new ArrayAdapter<UserData>(getContext(), R.layout.simple_spinner_dropdown_item_custom, userList);
+        userDataArrayAdapter =
+                new ArrayAdapter<UserData>(getContext(), R.layout.simple_spinner_dropdown_item_custom, userList);
         userDataArrayAdapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
         userListSpinner.setAdapter(userDataArrayAdapter);
     }
