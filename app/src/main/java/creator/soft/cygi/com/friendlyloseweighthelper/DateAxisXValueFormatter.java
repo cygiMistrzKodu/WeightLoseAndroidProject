@@ -11,7 +11,7 @@ public class DateAxisXValueFormatter implements XAxisValueFormatter {
         String date = dateAndTime[0];
         String time = dateAndTime[1];
 
-        String formattedString = date + "\n" +"[ " + time + " ]";
+        String formattedString = date  +" [ " + time + " ]";
 
         return formattedString;
     }
