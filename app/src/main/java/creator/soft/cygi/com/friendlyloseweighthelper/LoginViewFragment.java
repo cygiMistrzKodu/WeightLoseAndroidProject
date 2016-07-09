@@ -2,9 +2,7 @@ package creator.soft.cygi.com.friendlyloseweighthelper;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -20,19 +18,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.mail.Provider;
-
-/**
- * Created by CygiMasterProgrammer on 2016-01-31.
- */
 public class LoginViewFragment extends Fragment {
 
     public static final String LOGIN_USER_NAME = "loginUserName";
+    private static final String SENDER_OF_THE_EMAIL_PASSWORD_RESET = "FrendlyLoseWeightHelper@gmail.com";
     ArrayAdapter<UserData> userDataArrayAdapter;
     private Spinner userListSpinner;
     private TextView passwordTextView;
@@ -150,7 +143,6 @@ public class LoginViewFragment extends Fragment {
 
                         updateDataInViewListSpinner(weightTrackDatabaseHelper, userPositionInTheList);
 
-                        // TODO: 2016-04-24 send password to email. Best if in separate thread
                         sendEmail(randomPassword);
 
                         Log.d("Selected Position", " " + userPositionInTheList);
@@ -182,11 +174,12 @@ public class LoginViewFragment extends Fragment {
 
     private void sendEmail(String password) {
 
+        UserData selectedUserData = (UserData) userListSpinner.getSelectedItem();
         EmailSender emailSender = new EmailSender();
-        emailSender.setSubject("Password Reset");
-        emailSender.setMessageContent("Twoje haslo bedzie tutaj: " + password);
-        emailSender.setSendFromEmail("FrendlyLoseWeightHelper@gmail.com");
-        emailSender.setSendToEmail("jacek301@gmail.com"); //// TODO: 2016-07-09 email wczytywany z konta użytkownika  
+        emailSender.setSubject(getString(R.string.subject_of_email));
+        emailSender.setMessageContent(String.format(getString(R.string.email_message_content),password));
+        emailSender.setSendFromEmail(SENDER_OF_THE_EMAIL_PASSWORD_RESET);
+        emailSender.setSendToEmail(selectedUserData.getEmail());
         emailSender.sendEmail();
 
 
@@ -242,13 +235,10 @@ public class LoginViewFragment extends Fragment {
     private void fillWithUserNames() {
 
         WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(getContext());
-        // List<UserData> userList = weightTrackDatabaseHelper.getUsersData();
         userList = weightTrackDatabaseHelper.getUsersData();
 
-//        ArrayAdapter<UserData> userDataArrayAdapter =
-//                new ArrayAdapter<UserData>(getContext(), R.layout.simple_spinner_dropdown_item_custom, userList);
         userDataArrayAdapter =
-                new ArrayAdapter<UserData>(getContext(), R.layout.simple_spinner_dropdown_item_custom, userList);
+                new ArrayAdapter<>(getContext(), R.layout.simple_spinner_dropdown_item_custom, userList);
         userDataArrayAdapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
         userListSpinner.setAdapter(userDataArrayAdapter);
     }
