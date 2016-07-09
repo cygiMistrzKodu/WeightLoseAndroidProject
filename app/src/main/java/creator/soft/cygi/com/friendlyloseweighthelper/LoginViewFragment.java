@@ -176,6 +176,7 @@ public class LoginViewFragment extends Fragment {
 
         UserData selectedUserData = (UserData) userListSpinner.getSelectedItem();
         EmailSender emailSender = new EmailSender();
+        emailSender.setContext(getContext());
         emailSender.setSubject(getString(R.string.subject_of_email));
         emailSender.setMessageContent(String.format(getString(R.string.email_message_content),password));
         emailSender.setSendFromEmail(SENDER_OF_THE_EMAIL_PASSWORD_RESET);

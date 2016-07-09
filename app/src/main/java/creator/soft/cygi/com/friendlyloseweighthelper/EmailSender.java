@@ -1,6 +1,8 @@
 package creator.soft.cygi.com.friendlyloseweighthelper;
 
+import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import java.util.Properties;
 
@@ -14,13 +16,11 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.util.ByteArrayDataSource;
 
-/**
- * Created by CygiMasterProgrammer on 2016-07-02.
- */
 public class EmailSender extends AsyncTask<String, String, Void> {
 
     private final Properties properties = initializeProperties();
     private Session session = getDefaultSessionInstance();
+    private Context context;
 
     private Properties initializeProperties() {
 
@@ -91,6 +91,12 @@ public class EmailSender extends AsyncTask<String, String, Void> {
         return null;
     }
 
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        super.onPostExecute(aVoid);
+
+        Toast.makeText(context, R.string.email_wast_sent_info_toast, Toast.LENGTH_LONG).show();
+    }
     public String getSendToEmail() {
         return sendToEmail;
     }
@@ -133,5 +139,9 @@ public class EmailSender extends AsyncTask<String, String, Void> {
 
     public Properties getProperties() {
         return properties;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
     }
 }

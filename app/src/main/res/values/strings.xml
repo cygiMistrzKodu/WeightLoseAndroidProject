@@ -66,4 +66,5 @@
     <string name="reset_password_dialog_tittle">Reset password</string>
     <string name="email_message_content">"Your new password is: %s .We recommend change them immediately."</string>
     <string name="subject_of_email">Friendly lose weight helper Password Reset</string>
+    <string name="email_wast_sent_info_toast">Email was sent</string>
 </resources>
