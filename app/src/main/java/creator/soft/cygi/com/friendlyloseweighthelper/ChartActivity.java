@@ -28,8 +28,8 @@ public class ChartActivity extends AppCompatActivity {
     private final static String TAG = "ChartActivity";
 
     LineChart chart;
-    ArrayList<String> dateSeries;
-    ArrayList<Float> weight_units;
+    ArrayList<String> dateSeriesSortedByDate;
+    ArrayList<Float> weightUnitsSeries;
     Float userWeightGoal;
 
 
@@ -48,14 +48,15 @@ public class ChartActivity extends AppCompatActivity {
     private void ReadDataForChart() {
         Bundle extras = getIntent().getExtras();
 
-        dateSeries = extras.getStringArrayList(ChartHelper.DATE_DATA);
+        dateSeriesSortedByDate = extras.getStringArrayList(ChartHelper.DATE_DATA);
+        float [] weightDataList = extras.getFloatArray(ChartHelper.WEIGHT_DATA);
 
-        float [] weight_data = extras.getFloatArray(ChartHelper.WEIGHT_DATA);
-        weight_units = new ArrayList<Float>();
+        weightUnitsSeries = new ArrayList<>();
 
-        for(Float weight_measurement : weight_data){
-            weight_units.add(weight_measurement);
+        for(Float weight_measurement : weightDataList){
+            weightUnitsSeries.add(weight_measurement);
         }
+
         userWeightGoal = extras.getFloat(ChartHelper.WEIGHT_GOAL_DATA);
 
     }
@@ -64,7 +65,7 @@ public class ChartActivity extends AppCompatActivity {
 
         ArrayList<Entry> weightUnitEntrySet = new ArrayList<Entry>();
         int xindex = 0;
-        for (Float weight : weight_units) {
+        for (Float weight : weightUnitsSeries) {
 
             Log.d("ChartFloat", "Chart Float values : " + weight );  // to testing
             Entry weightEntry = new Entry(weight, xindex++);
@@ -80,12 +81,10 @@ public class ChartActivity extends AppCompatActivity {
         lineDataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
         lineDataSet.setDrawFilled(true);
 
-
-
         ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
         dataSets.add(lineDataSet);
 
-        LineData data = new LineData(dateSeries, dataSets);
+        LineData data = new LineData(dateSeriesSortedByDate, dataSets);
 
         decorateXaxis();
         decorateYaxis();

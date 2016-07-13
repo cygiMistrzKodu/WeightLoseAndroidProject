@@ -9,7 +9,11 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by CygiMasterProgrammer on 2016-01-09.
@@ -29,12 +33,25 @@ public class ChartHelper {
 
         Intent i = new Intent(fragmentActivity, ChartActivity.class);
 
-        ArrayList<String> dateSeries = new ArrayList<String>();
-        ArrayList<Float> weight_units = new ArrayList<Float>();
+        ArrayList<String> dateSeries = new ArrayList<>();
+        ArrayList<Float> weight_units = new ArrayList<>();
+
+
+        List<DateTimeDTO> dateWeightMeasurementListSortedByDate = new LinkedList<>();
+        for (DateTimeDTO dateTimeDTO : weightDataModel.getDatabaseData()){
+            dateWeightMeasurementListSortedByDate.add(dateTimeDTO);
+        }
+
+        Collections.sort(dateWeightMeasurementListSortedByDate, new Comparator<DateTimeDTO>() {
+            @Override
+            public int compare(DateTimeDTO dt1, DateTimeDTO dt2) {
+                return dt1.getDate().compareTo(dt2.getDate());
+            }
+        });
+
 
         SimpleDateFormat dt = DateTimeStringUtility.getDateFormattingPattern(context);
-
-        for (DateTimeDTO dateTimeDTO : weightDataModel.getDatabaseData()){
+        for (DateTimeDTO dateTimeDTO : dateWeightMeasurementListSortedByDate){
 
             Date date = dateTimeDTO.getDate();
             dateSeries.add(dt.format(date));
