@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import creator.soft.cygi.com.friendlyloseweighthelper.view.DateAxisXValueFormatter;
+
 /**
  * Created by CygiMasterProgrammer on 2016-03-20.
  */

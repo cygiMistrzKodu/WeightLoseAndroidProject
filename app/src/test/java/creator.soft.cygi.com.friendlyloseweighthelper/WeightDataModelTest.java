@@ -14,6 +14,10 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.util.List;
 
+import creator.soft.cygi.com.friendlyloseweighthelper.dto.DateTimeDTO;
+import creator.soft.cygi.com.friendlyloseweighthelper.model.WeightDataModel;
+import creator.soft.cygi.com.friendlyloseweighthelper.model.WeightDataObserver;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;

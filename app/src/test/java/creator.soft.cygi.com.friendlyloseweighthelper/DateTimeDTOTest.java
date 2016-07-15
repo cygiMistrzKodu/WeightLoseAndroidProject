@@ -18,6 +18,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
+import creator.soft.cygi.com.friendlyloseweighthelper.dto.DateTimeDTO;
+
 /**
  * Created by CygiMasterProgrammer on 2016-01-20.
  */
