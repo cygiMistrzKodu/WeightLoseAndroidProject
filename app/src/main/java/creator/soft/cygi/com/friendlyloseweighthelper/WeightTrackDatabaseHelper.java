@@ -149,8 +149,8 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
                 weightDataModel.setTimeAndDate(dateTimeDTO);
 
             } while (cursor.moveToNext());
+            weightDataModel.sortByDate();
         }
-
         return weightDataModel;
     }
 

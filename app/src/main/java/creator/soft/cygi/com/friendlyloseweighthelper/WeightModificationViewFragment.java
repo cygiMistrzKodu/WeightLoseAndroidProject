@@ -108,7 +108,6 @@ public class WeightModificationViewFragment extends WeightCommonViewFragment imp
 
                     weightDataModel.updateMeasurementInModel(dateTimeDTOUpdateMeasurement);
 
-
                     String newFormattedTime = dateTimeDTOUpdateMeasurement.getFormattedTime();
 
                     timeTextView.setText(newFormattedTime);

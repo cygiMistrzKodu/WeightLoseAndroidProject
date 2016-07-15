@@ -2,6 +2,7 @@ package creator.soft.cygi.com.friendlyloseweighthelper;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 
@@ -31,27 +32,11 @@ public class ChartHelper {
 
     public void displayChart(){
 
-        Intent i = new Intent(fragmentActivity, ChartActivity.class);
-
         ArrayList<String> dateSeries = new ArrayList<>();
         ArrayList<Float> weight_units = new ArrayList<>();
 
-
-        List<DateTimeDTO> dateWeightMeasurementListSortedByDate = new LinkedList<>();
-        for (DateTimeDTO dateTimeDTO : weightDataModel.getDatabaseData()){
-            dateWeightMeasurementListSortedByDate.add(dateTimeDTO);
-        }
-
-        Collections.sort(dateWeightMeasurementListSortedByDate, new Comparator<DateTimeDTO>() {
-            @Override
-            public int compare(DateTimeDTO dt1, DateTimeDTO dt2) {
-                return dt1.getDate().compareTo(dt2.getDate());
-            }
-        });
-
-
         SimpleDateFormat dt = DateTimeStringUtility.getDateFormattingPattern(context);
-        for (DateTimeDTO dateTimeDTO : dateWeightMeasurementListSortedByDate){
+        for (DateTimeDTO dateTimeDTO : weightDataModel.getDatabaseData()){
 
             Date date = dateTimeDTO.getDate();
             dateSeries.add(dt.format(date));
@@ -64,12 +49,12 @@ public class ChartHelper {
         float[] weight_measurements = ArrayUtils
                 .toPrimitive(weight_units.toArray(new Float[weight_units.size()]));
 
+        Intent i = new Intent(fragmentActivity, ChartActivity.class);
         i.putExtra(WEIGHT_DATA, weight_measurements);
         i.putExtra(DATE_DATA, dateSeries);
         i.putExtra(WEIGHT_GOAL_DATA,weightGoal);
 
        fragment.startActivity(i);
-
 
     }
 

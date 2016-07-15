@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -124,6 +125,10 @@ public class WeightDataModel implements WeightDataSubject {
     public void updateMeasurementInModel(DateTimeDTO dateTimeDTO) {
 
         databaseData.set(userPosition, dateTimeDTO);
+        sortByDate();
+        userPosition = databaseData.indexOf(dateTimeDTO);
+        notifyPositionChanged();
+
     }
 
     public boolean isDateNotRepeated(DateTimeDTO updatedDateTimeDto) {
@@ -158,6 +163,10 @@ public class WeightDataModel implements WeightDataSubject {
         notifyPositionChanged();
 
         return dateTimeDTO;
+    }
+
+    public void sortByDate(){
+        Collections.sort(databaseData,new DateSorter());
     }
 
     private void rememberOnWhatPositionUserFinished() {

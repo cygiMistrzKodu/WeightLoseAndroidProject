@@ -298,7 +298,6 @@ public abstract class WeightCommonViewFragment extends Fragment {
 
     protected void updateWeightDataModel() {
         weightDataModel = weightTrackDatabaseHelper.getAllWeightDataFromDatabase();
-
     }
 
     public abstract int getLayoutResource();
