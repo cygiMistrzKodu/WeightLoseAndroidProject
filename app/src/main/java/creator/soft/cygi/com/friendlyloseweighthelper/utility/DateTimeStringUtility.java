@@ -21,18 +21,20 @@ public class DateTimeStringUtility {
     private static final String time24hourPattern = "HH:mm:ss";
     private static final String time12hourPattern = "h:mm:ss a";
     private static String TAG = "DateTimeStringUtility";
-    private static DateFormat formatRawDatePattern = new SimpleDateFormat("EEE MMM d HH:mm:ss zzz yyyy", Locale.ENGLISH);
+    private static DateFormat dateFormatPatternLikeInDatabase = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private static DateFormat dateFormatPatternWithoutFormatting = new SimpleDateFormat("EEE MMM d HH:mm:ss zzz yyyy", Locale.ENGLISH);
 
-    public static Date changeToDate(String dateInString) {
-
-        Date date = getRawDateBaseOnDatePattern(dateInString, formatRawDatePattern);
-
-        return date;
+    public static Date changeToDateFromDatabaseFormat(String dateInString) {
+        return getRawDateBaseOnDatePattern(dateInString, dateFormatPatternLikeInDatabase);
     }
 
-    public static String changeToStringRepresentation(Date date) {
+    public static Date changeToDateFromNonePreviouslyFormat(String dateInString) {
+        return getRawDateBaseOnDatePattern(dateInString, dateFormatPatternWithoutFormatting);
+    }
 
-        return date.toString();
+    public static String changeToStringRepresentationLikeInDatabase(Date date) {
+
+        return dateFormatPatternLikeInDatabase.format(date);
     }
 
     public static Date getCurrentDate() {
@@ -43,12 +45,12 @@ public class DateTimeStringUtility {
         return currentDate;
     }
 
-    public static String getCurrentNonFormattedDateInStringRepresentation() {
+    public static String getCurrentDateInStringFormattedLikeInDatabase() {
 
         Calendar cal = Calendar.getInstance();
         Date currentDate = cal.getTime();
 
-        return currentDate.toString();
+        return dateFormatPatternLikeInDatabase.format(currentDate);
     }
 
     public static String getCurrentFormattedDateStringRepresentation() {
@@ -69,7 +71,7 @@ public class DateTimeStringUtility {
 
     public static String formatStringRawDate(String dateToFormat) {
 
-        Date nonFormatDate = changeToDate(dateToFormat);
+        Date nonFormatDate = changeToDateFromDatabaseFormat(dateToFormat);
         String formattedDateInString = formatDate(nonFormatDate);
 
         return formattedDateInString;
@@ -83,7 +85,7 @@ public class DateTimeStringUtility {
 
     public static String formatRawTime(Context context, String timeToFormat) {
 
-        Date nonFormatTime = changeToDate(timeToFormat);
+        Date nonFormatTime = changeToDateFromDatabaseFormat(timeToFormat);
 
         String FormattedTime = formatTime(context, nonFormatTime);
 
@@ -212,8 +214,8 @@ public class DateTimeStringUtility {
         Log.i(TAG," date raw Stamp : "+ dateRawString);
         Log.i(TAG,"time raw Stamp:  "+ timeRawString);
 
-        Date dateRaw = changeToDate(dateRawString);
-        Date timeRaw = changeToDate(timeRawString);
+        Date dateRaw = changeToDateFromNonePreviouslyFormat(dateRawString);
+        Date timeRaw = changeToDateFromNonePreviouslyFormat(timeRawString);
 
         Calendar dateRawCalendar = Calendar.getInstance();
         dateRawCalendar.setTime(dateRaw);
@@ -229,19 +231,17 @@ public class DateTimeStringUtility {
 
         Log.i(TAG, "Combine Dates: " + dateAndTimeCombine.toString());
 
-        return changeToStringRepresentation(dateAndTimeCombine);
+        return changeToStringRepresentationLikeInDatabase(dateAndTimeCombine);
     }
 
     public static String changeSecondsToZero(String dateRawString){
 
-        Date dateRaw = changeToDate(dateRawString);
+        Date dateRaw = changeToDateFromDatabaseFormat(dateRawString);
 
         Calendar dateRawCalender = Calendar.getInstance();
         dateRawCalender.setTime(dateRaw);
         dateRawCalender.set(Calendar.SECOND, 0);
 
-        String dateWithZeroSeconds = dateRawCalender.getTime().toString();
-
-        return dateWithZeroSeconds;
+        return changeToStringRepresentationLikeInDatabase(dateRawCalender.getTime());
     }
 }

@@ -31,7 +31,7 @@ public class DatePickerFragment extends DialogFragment {
 
     public DatePickerFragment() {
 
-        String CurrentDate = DateTimeStringUtility.getCurrentNonFormattedDateInStringRepresentation();
+        String CurrentDate = DateTimeStringUtility.getCurrentDateInStringFormattedLikeInDatabase();
         Log.d(TAG,"Current Date : " + CurrentDate);
         Bundle args = new Bundle();
         args.putSerializable(EXTRA_DATE,CurrentDate);
@@ -60,7 +60,7 @@ public class DatePickerFragment extends DialogFragment {
 
         String dateInString = (String) getArguments().getSerializable(EXTRA_DATE);
 
-        mDate = DateTimeStringUtility.changeToDate(dateInString);
+        mDate = DateTimeStringUtility.changeToDateFromNonePreviouslyFormat(dateInString);
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(mDate);
@@ -85,7 +85,7 @@ public class DatePickerFragment extends DialogFragment {
 
                 mDate = new GregorianCalendar(year, month, day, hour, minutes).getTime();
 
-                getArguments().putSerializable(EXTRA_DATE, DateTimeStringUtility.changeToStringRepresentation(mDate));
+                getArguments().putSerializable(EXTRA_DATE, DateTimeStringUtility.changeToStringRepresentationLikeInDatabase(mDate));
 
             }
         });
@@ -111,7 +111,7 @@ public class DatePickerFragment extends DialogFragment {
         }
 
         Intent i = new Intent();
-        i.putExtra(EXTRA_DATE, DateTimeStringUtility.changeToStringRepresentation(mDate));
+        i.putExtra(EXTRA_DATE, DateTimeStringUtility.changeToStringRepresentationLikeInDatabase(mDate));
 
         getTargetFragment().onActivityResult(getTargetRequestCode(), resultCode, i);
     }

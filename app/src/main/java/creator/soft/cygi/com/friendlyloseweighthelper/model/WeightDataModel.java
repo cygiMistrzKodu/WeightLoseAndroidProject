@@ -53,7 +53,7 @@ public class WeightDataModel implements WeightDataSubject {
         Date currentDate = DateTimeStringUtility.getCurrentDate();
 
         DateTimeDTO dateTimeDTO = new DateTimeDTO();
-        dateTimeDTO.setDate(currentDate.toString());
+        dateTimeDTO.setDate(DateTimeStringUtility.changeToStringRepresentationLikeInDatabase(currentDate));
         dateTimeDTO.setWeight(weight);
         databaseData.add(dateTimeDTO);
 
@@ -65,7 +65,7 @@ public class WeightDataModel implements WeightDataSubject {
 
     private void setLatestMeasurement(Float weight, Date currentDate) {
         latestWeight = weight;
-        latestDate = DateTimeStringUtility.changeToStringRepresentation(currentDate);
+        latestDate = DateTimeStringUtility.changeToStringRepresentationLikeInDatabase(currentDate);
     }
 
     public List<DateTimeDTO> getDatabaseData() {
@@ -89,6 +89,7 @@ public class WeightDataModel implements WeightDataSubject {
         setLatestMeasurement(dateTimeDTO.getWeight(), dateTimeDTO.getDate());
 
         databaseData.add(dateTimeDTO);
+        sortByDate();
         if (userPosition == null) {
             userPosition = getLatestMeasurementPosition();
         }

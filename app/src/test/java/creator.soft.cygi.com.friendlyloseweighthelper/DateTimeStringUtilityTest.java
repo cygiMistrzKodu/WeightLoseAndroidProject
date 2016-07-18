@@ -7,6 +7,7 @@ import android.util.Log;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -14,6 +15,7 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -130,7 +132,7 @@ public class DateTimeStringUtilityTest {
 
         Date expectedDate = calendar.getTime();
 
-        Date returnDate = DateTimeStringUtility.changeToDate(rawDateString);
+        Date returnDate = DateTimeStringUtility.changeToDateFromDatabaseFormat(rawDateString);
 
         assertEquals(expectedDate.toString(), returnDate.toString());
     }
@@ -273,6 +275,32 @@ public class DateTimeStringUtilityTest {
                 .formatStringRawDate(nonFormatDate);
 
         assertEquals(formattedDateExpected, formattedDate);
+    }
+
+    @Test @Ignore
+    public void changeDateToStringRepresentationTest() throws ParseException {
+
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.set(Calendar.YEAR,2016);
+        calendar.set(Calendar.MONTH,0);
+        calendar.set(Calendar.DAY_OF_MONTH,1);
+        calendar.set(Calendar.HOUR_OF_DAY,20);
+        calendar.set(Calendar.MINUTE,38);
+        calendar.set(Calendar.SECOND,25);
+
+        Date date = calendar.getTime();
+
+        String datePattern = "yyyy-MM-dd HH:mm:ss";
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(datePattern);
+        String formattedString = simpleDateFormat.format(date);
+
+        System.out.print(formattedString);
+
+        Date date2 = simpleDateFormat.parse(formattedString);
+        System.out.print("\n"+date2);
+
     }
 
 

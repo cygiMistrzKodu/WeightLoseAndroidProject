@@ -32,7 +32,7 @@ public class TimePickerFragment extends DialogFragment {
 
     public TimePickerFragment() {
 
-        String CurrentTime = DateTimeStringUtility.getCurrentNonFormattedDateInStringRepresentation();
+        String CurrentTime = DateTimeStringUtility.getCurrentDateInStringFormattedLikeInDatabase();
         Log.d(TAG, "Constructor Current Date : " + CurrentTime);
         Bundle args = new Bundle();
         args.putSerializable(EXTRA_TIME, CurrentTime);
@@ -60,7 +60,7 @@ public class TimePickerFragment extends DialogFragment {
 
         String timeInString = (String) getArguments().getSerializable(EXTRA_TIME);
 
-        mTime = DateTimeStringUtility.changeToDate(timeInString);
+        mTime = DateTimeStringUtility.changeToDateFromNonePreviouslyFormat(timeInString);
 
 
         Calendar calendar = Calendar.getInstance();
@@ -100,7 +100,7 @@ public class TimePickerFragment extends DialogFragment {
 
                 Log.d(TAG, "setOnTimeChangedListener Current Date : " + mTime.toString());
 
-                getArguments().putSerializable(EXTRA_TIME, DateTimeStringUtility.changeToStringRepresentation(mTime));
+                getArguments().putSerializable(EXTRA_TIME, DateTimeStringUtility.changeToStringRepresentationLikeInDatabase(mTime));
 
             }
         });
@@ -132,7 +132,7 @@ public class TimePickerFragment extends DialogFragment {
         }
 
         Intent i = new Intent();
-        i.putExtra(EXTRA_TIME, DateTimeStringUtility.changeToStringRepresentation(mTime));
+        i.putExtra(EXTRA_TIME, DateTimeStringUtility.changeToStringRepresentationLikeInDatabase(mTime));
         getTargetFragment().onActivityResult(getTargetRequestCode(), resultCode, i);
 
     }

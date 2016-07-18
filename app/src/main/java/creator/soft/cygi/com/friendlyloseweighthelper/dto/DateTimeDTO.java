@@ -35,12 +35,12 @@ public class DateTimeDTO {
             return;
         }
 
-        this.date = DateTimeStringUtility.changeToDate(date);
+        this.date = DateTimeStringUtility.changeToDateFromDatabaseFormat(date);
 
     }
 
     public String getDateWithoutFormatting() {
-        return DateTimeStringUtility.changeToStringRepresentation(date);
+        return DateTimeStringUtility.changeToStringRepresentationLikeInDatabase(date);
     }
 
     public Float getWeight() {
