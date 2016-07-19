@@ -15,6 +15,7 @@ import creator.soft.cygi.com.friendlyloseweighthelper.dao.WeightTrackDatabaseHel
 import creator.soft.cygi.com.friendlyloseweighthelper.dto.DateTimeDTO;
 import creator.soft.cygi.com.friendlyloseweighthelper.model.UserData;
 import creator.soft.cygi.com.friendlyloseweighthelper.model.WeightDataModel;
+import creator.soft.cygi.com.friendlyloseweighthelper.utility.DateTimeStringUtility;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -86,13 +87,32 @@ public class WeightTrackDatabaseHelperTest {
         DateTimeDTO lastMeasurementBeforeDeletion = measurementListBeforeDeletingLastMeasurement
                 .get(measurementListBeforeDeletingLastMeasurement.size() - 1);
 
-        weightTrackDatabaseHelper.deleteLatestEntry();
+        weightTrackDatabaseHelper.deleteEntryWithLatestDate();
 
         WeightDataModel weightDataModelAfterDeletion = weightTrackDatabaseHelper.getAllWeightDataFromDatabase();
         List<DateTimeDTO> measurementListAfterDeletingLastMeasurement = weightDataModelAfterDeletion.getDatabaseData();
 
         assertFalse(measurementListAfterDeletingLastMeasurement.contains(lastMeasurementBeforeDeletion));
 
+    }
+
+    @Test
+    public void deleteMeasurementHavingTheLatestDateTest() {
+
+        insertAdditionalMeasurement();
+
+        WeightDataModel weightDataModelBeforeMeasurementWithLatestDateDeletion = weightTrackDatabaseHelper.getAllWeightDataFromDatabase();
+        List<DateTimeDTO> measurementListBeforeDeletingMeasurementWithLatestDate = weightDataModelBeforeMeasurementWithLatestDateDeletion.getDatabaseData();
+
+        DateTimeDTO measurementWithLatestDateBeforeDeletion = measurementListBeforeDeletingMeasurementWithLatestDate
+                .get(measurementListBeforeDeletingMeasurementWithLatestDate.size() - 1);
+
+        weightTrackDatabaseHelper.deleteEntryWithLatestDate();
+
+        WeightDataModel weightDataModelAfterDeletion = weightTrackDatabaseHelper.getAllWeightDataFromDatabase();
+        List<DateTimeDTO> measurementListAfterDeletingMeasurementWithLatestDate = weightDataModelAfterDeletion.getDatabaseData();
+
+        assertFalse(measurementListAfterDeletingMeasurementWithLatestDate.contains(measurementWithLatestDateBeforeDeletion));
     }
 
     @Test
@@ -104,7 +124,7 @@ public class WeightTrackDatabaseHelperTest {
         DateTimeDTO expectedMeasurementRecoverAfterDeletion = measurementListBeforeDeletingLastMeasurement
                 .get(measurementListBeforeDeletingLastMeasurement.size() - 1);
 
-        weightTrackDatabaseHelper.deleteLatestEntry();
+        weightTrackDatabaseHelper.deleteEntryWithLatestDate();
         weightTrackDatabaseHelper.undoDeleteLastMeasurement();
 
         WeightDataModel weightDataModelAfterDeleteAndUndo = weightTrackDatabaseHelper.getAllWeightDataFromDatabase();
@@ -120,18 +140,19 @@ public class WeightTrackDatabaseHelperTest {
     }
 
     @Test
-    public void updateMeasurementTest() {
+    public void updateMeasurementSortingByDateTest() {
 
-        int UpdateMeasurementLocation = 1;
+        int updateMeasurementLocation = 1;
+        int UpdatedLocationMeasurementAfterInsertAndSortedByDate = 0 ;
 
         WeightDataModel weightDataModelBeforeUpdate = weightTrackDatabaseHelper.getAllWeightDataFromDatabase();
         List<DateTimeDTO> measurementListBeforeUpdate = weightDataModelBeforeUpdate.getDatabaseData();
 
         DateTimeDTO dateTimeDTOToModify = measurementListBeforeUpdate
-                .get(UpdateMeasurementLocation);
+                .get(updateMeasurementLocation);
 
         DateTimeDTO dateTimeDTOToUpdated = new DateTimeDTO();
-        String dateUpdated = "Fri Jan 29 21:52:06 GMT 2016";
+        String dateUpdated = "2016-01-29 21:52:06";
         Float weightUpdated = 460f;
         dateTimeDTOToUpdated.setMeasurementID(dateTimeDTOToModify.getMeasurementID());
         dateTimeDTOToUpdated.setDate(dateUpdated);
@@ -142,7 +163,7 @@ public class WeightTrackDatabaseHelperTest {
         WeightDataModel weightDataModelAfterUpdate = weightTrackDatabaseHelper.getAllWeightDataFromDatabase();
         List<DateTimeDTO> measurementListAfterUpdate = weightDataModelAfterUpdate.getDatabaseData();
 
-        DateTimeDTO dateTimeDTOAfterUpdate = measurementListAfterUpdate.get(UpdateMeasurementLocation);
+        DateTimeDTO dateTimeDTOAfterUpdate = measurementListAfterUpdate.get(UpdatedLocationMeasurementAfterInsertAndSortedByDate);
 
         assertEquals(dateTimeDTOToUpdated.getMeasurementID(), dateTimeDTOAfterUpdate.getMeasurementID());
         assertEquals(dateTimeDTOToUpdated.getDateWithoutFormatting(), dateTimeDTOAfterUpdate.getDateWithoutFormatting());
@@ -333,6 +354,26 @@ public class WeightTrackDatabaseHelperTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    private void insertAdditionalMeasurement() {
+        WeightDataModel weightDataModel = new WeightDataModel(instrumentationContext);
+
+        DateTimeDTO dateTimeDTOLatestDateBeforeLastIdPositionInDatabase = new DateTimeDTO();
+        dateTimeDTOLatestDateBeforeLastIdPositionInDatabase.setWeight(500f);
+        String date = DateTimeStringUtility.getCurrentDateInStringFormattedLikeInDatabase();
+        dateTimeDTOLatestDateBeforeLastIdPositionInDatabase.setDate(date);
+        weightDataModel.setTimeAndDate(dateTimeDTOLatestDateBeforeLastIdPositionInDatabase);
+        weightTrackDatabaseHelper.insertOneMeasurementIntoDatabase(weightDataModel);
+
+        weightDataModel = new WeightDataModel(instrumentationContext);
+
+        DateTimeDTO dateTimeDTO_OldestDateLatestIdPositionInDatabase = new DateTimeDTO();
+        dateTimeDTO_OldestDateLatestIdPositionInDatabase.setWeight(222f);
+        dateTimeDTO_OldestDateLatestIdPositionInDatabase.setDate("2015-01-29 21:52:06");
+        weightDataModel.setTimeAndDate(dateTimeDTO_OldestDateLatestIdPositionInDatabase);
+
+        weightTrackDatabaseHelper.insertOneMeasurementIntoDatabase(weightDataModel);
     }
 
 }

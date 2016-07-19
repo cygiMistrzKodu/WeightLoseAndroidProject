@@ -130,7 +130,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
     public WeightDataModel getAllWeightDataFromDatabase() {
 
-        Cursor cursor = getMeasurementDataCursor();
+        Cursor cursor =  getMeasurementDataCursorOrderByDate();
         cursor.moveToFirst();
         WeightDataModel weightDataModel = new WeightDataModel(context);
 
@@ -155,12 +155,11 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
                 weightDataModel.setTimeAndDate(dateTimeDTO);
 
             } while (cursor.moveToNext());
-            weightDataModel.sortByDate();
         }
         return weightDataModel;
     }
 
-    private Cursor getMeasurementDataCursor() {
+    private Cursor getMeasurementDataCursorOrderByDate() {
 
         Long idOfCurrentUser = getIdOfCurrentUser();
 
@@ -170,12 +169,11 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
                 new String[]{COLUMN_MEASUREMENT_DATA_MEASUREMENT_ID, COLUMN_MEASUREMENT_DATA_DATE_TIME,
                         COLUMN_MEASUREMENT_DATA_WEIGHT},
                 COLUMN_MEASUREMENT_DATA_ID_USER + "=?", new String[]{String.valueOf(idOfCurrentUser)},
-                null, null, null);
+                null, null, COLUMN_MEASUREMENT_DATA_DATE_TIME);
 
 
         return cursor;
     }
-
 
     public long insertOneMeasurementIntoDatabase(WeightDataModel weightDataModel) {
 
@@ -241,15 +239,14 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
         return cursor.getLong(cursor.getColumnIndex(COLUMN_USERS_ID_USER));
     }
 
-    public void deleteLatestEntry() {
+    public void deleteEntryWithLatestDate() {
 
-        String whereStatement = readSqlCommandFromResource(R.raw.where_statment_last_entry_to_mesurement_data);
+        String whereStatementMostRecentDate = readSqlCommandFromResource(R.raw.where_satement_most_recent_date);
         Long currentIdUser = getIdOfCurrentUser();
         SQLiteDatabase db = getWritableDatabase();
         saveLastDeletedData();
-        db.delete(TABLE_MEASUREMENT_DATA, whereStatement, new String[]{String.valueOf(currentIdUser)});
+        db.delete(TABLE_MEASUREMENT_DATA, whereStatementMostRecentDate, new String[]{String.valueOf(currentIdUser)});
         isMeasurementTableEmpty();
-
     }
 
     public void undoDeleteLastMeasurement() {
@@ -276,7 +273,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
     private void saveLastDeletedData() {
 
-        Cursor latestMeasurementCursor = getLatestMeasurementCursor();
+        Cursor latestMeasurementCursor = getLatestDateMeasurementCursor();
 
         Log.d(TAG, "Number fo Row in Cursor " + latestMeasurementCursor.getCount());
 
@@ -303,16 +300,16 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
     }
 
-    private Cursor getLatestMeasurementCursor() {
+    private Cursor getLatestDateMeasurementCursor() {
         Long idCurrentUser = getIdOfCurrentUser();
 
-        Cursor latestMeasurementCursor = getReadableDatabase().query(TABLE_MEASUREMENT_DATA,
+        Cursor latestDateMeasurementCursor = getReadableDatabase().query(TABLE_MEASUREMENT_DATA,
                 new String[]{COLUMN_MEASUREMENT_DATA_MEASUREMENT_ID, COLUMN_MEASUREMENT_DATA_DATE_TIME,
                         COLUMN_MEASUREMENT_DATA_WEIGHT}, COLUMN_MEASUREMENT_DATA_ID_USER + " = ?",
                 new String[]{String.valueOf(idCurrentUser)},
-                null, null, COLUMN_MEASUREMENT_DATA_MEASUREMENT_ID + " DESC", "1");
-        latestMeasurementCursor.moveToFirst();
-        return latestMeasurementCursor;
+                null, null, COLUMN_MEASUREMENT_DATA_DATE_TIME + " DESC", "1");
+        latestDateMeasurementCursor.moveToFirst();
+        return latestDateMeasurementCursor;
     }
 
 

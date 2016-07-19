@@ -79,7 +79,7 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
         deleteLatestEntryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                weightTrackDatabaseHelper.deleteLatestEntry();
+                weightTrackDatabaseHelper.deleteEntryWithLatestDate();
                 updateWeightDataModel();
 
             }
