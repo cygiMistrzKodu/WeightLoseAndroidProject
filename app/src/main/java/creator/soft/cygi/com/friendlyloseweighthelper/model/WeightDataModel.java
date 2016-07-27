@@ -1,7 +1,6 @@
 package creator.soft.cygi.com.friendlyloseweighthelper.model;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -10,6 +9,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import creator.soft.cygi.com.friendlyloseweighthelper.dao.WeightTrackDatabaseHelper;
 import creator.soft.cygi.com.friendlyloseweighthelper.dto.DateTimeDTO;
 import creator.soft.cygi.com.friendlyloseweighthelper.utility.DateSorter;
 import creator.soft.cygi.com.friendlyloseweighthelper.utility.DateTimeStringUtility;
@@ -19,8 +19,6 @@ import creator.soft.cygi.com.friendlyloseweighthelper.utility.DateTimeStringUtil
  */
 public class WeightDataModel implements WeightDataSubject {
 
-    private static final String USER_POSITION = "user_position";
-    private static final String USER_POSITION_PREFERENCES = "user_position_preferences";
     private static String TAG = "WeightDataModel";
     private String latestDate;
     private Float latestWeight;
@@ -121,7 +119,6 @@ public class WeightDataModel implements WeightDataSubject {
             dateTimeDTO = databaseData.get(userPosition);
         }
 
-        rememberOnWhatPositionUserFinished();
         notifyPositionChanged();
 
         return dateTimeDTO;
@@ -164,7 +161,6 @@ public class WeightDataModel implements WeightDataSubject {
             dateTimeDTO = databaseData.get(userPosition);
         }
 
-        rememberOnWhatPositionUserFinished();
         notifyPositionChanged();
 
         return dateTimeDTO;
@@ -176,29 +172,15 @@ public class WeightDataModel implements WeightDataSubject {
 
     private void rememberOnWhatPositionUserFinished() {
 
-        SharedPreferences sharedPreferences =
-                context.getSharedPreferences(USER_POSITION_PREFERENCES, Context.MODE_PRIVATE);
-
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(USER_POSITION, userPosition);
-        editor.commit();
-
+        WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(context);
+        weightTrackDatabaseHelper.saveUserPositionInModifyMode(userPosition);
 
     }
 
     private void readLastUserPosition() {
 
-
-        Log.d(TAG, "readLastUserPosition: " + userPosition);
-
-        SharedPreferences sharedPreferences =
-                context.getSharedPreferences(USER_POSITION_PREFERENCES, Context.MODE_PRIVATE);
-        if (sharedPreferences != null) {
-           userPosition = sharedPreferences.getInt(USER_POSITION, 0);
-        }
-
-        Log.d(TAG, "readLastUserPosition After Read from preferences: " + userPosition);
-
+        WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(context);
+        userPosition =  weightTrackDatabaseHelper.readUserPositionInModifyMode();
     }
 
     private int getLatestMeasurementPosition() {
@@ -252,6 +234,7 @@ public class WeightDataModel implements WeightDataSubject {
     @Override
     public void notifyPositionChanged() {
 
+        rememberOnWhatPositionUserFinished();
         for (WeightDataObserver weightDataObserver : weightDataModelObservers) {
 
             weightDataObserver.notifyPositionChanged(userPosition);

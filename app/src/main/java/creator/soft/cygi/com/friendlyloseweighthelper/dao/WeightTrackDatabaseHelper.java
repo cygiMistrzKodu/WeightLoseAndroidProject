@@ -33,7 +33,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
     public static final int ROW_NOT_INSERTED = -1;
     private static final String TAG = "WeightTrackDatabaseH";
     private static final String DB_NAME = "weightTrack.sgl";
-    private static final int VERSION = 6;
+    private static final int VERSION = 8;
     private static final String TABLE_USERS = "users";
     private static final String COLUMN_USERS_ID_USER = "id_user";
     private static final String COLUMN_USERS_USER_NAME = "user_name";
@@ -45,6 +45,13 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
     private static final String COLUMN_MEASUREMENT_DATA_ID_USER = "id_user";
     private static final String COLUMN_MEASUREMENT_DATA_DATE_TIME = "date_time";
     private static final String COLUMN_MEASUREMENT_DATA_WEIGHT = "weight";
+
+    private static final String TABLE_USERS_PREFERENCES = "users_preferences";
+    private static final String COLUMN_USERS_PREFERENCES_ID_PREFERENCES = "user_preferences_id";
+    private static final String COLUMN_USERS_PREFERENCES_ID_USER = "id_user";
+    private static final String COLUMN_USERS_PREFERENCES_MODIFY_MEASUREMENT_POSITION = "user_modify_measurement_position";
+    public static final int ROW_NOT_EXIST = 0;
+
     Stack<DateTimeDTO> lastMeasurementDeletionStack = new Stack<DateTimeDTO>();
     private Context context;
     private String loginUserName;
@@ -79,6 +86,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
         db.execSQL(readSqlCommandFromResource(R.raw.crate_tabel_users));
         db.execSQL(readSqlCommandFromResource(R.raw.create_table_mesurment_data));
+        db.execSQL(readSqlCommandFromResource(R.raw.create_tabel_users_preferences));
         Log.i("Baza", "Wykonalem tworzenie bazy ****");
 
 
@@ -112,6 +120,11 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
                 db.execSQL(readSqlCommandFromResource(R.raw.update_tabel_users_add_goal_column));
             case 5:
                 db.execSQL(readSqlCommandFromResource(R.raw.update_table_users_add_email_column));
+            case 6:
+                db.execSQL(readSqlCommandFromResource(R.raw.create_tabel_users_preferences));
+            case 7:
+                db.execSQL(readSqlCommandFromResource(R.raw.delete_table_users_preferences));
+                db.execSQL(readSqlCommandFromResource(R.raw.create_tabel_users_preferences));
 
         }
 
@@ -130,7 +143,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
     public WeightDataModel getAllWeightDataFromDatabase() {
 
-        Cursor cursor =  getMeasurementDataCursorOrderByDate();
+        Cursor cursor = getMeasurementDataCursorOrderByDate();
         cursor.moveToFirst();
         WeightDataModel weightDataModel = new WeightDataModel(context);
 
@@ -363,7 +376,25 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
     public void deleteCurrentUserAccount() {
 
         clearAllMeasurementDataForLoginUser();
+        deleteCurrentUserPreferences();
         deleteCurrentLoginUser();
+
+    }
+
+    private void deleteCurrentUserPreferences() {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String whereStatement = COLUMN_USERS_PREFERENCES_ID_USER + " = ?";
+        String[] whereArgs = new String[]{String.valueOf(getIdOfCurrentUser())};
+
+        db.beginTransaction();
+        try {
+            db.delete(TABLE_USERS_PREFERENCES, whereStatement, whereArgs);
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
 
     }
 
@@ -386,6 +417,74 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
         }
 
     }
+
+    public void saveUserPositionInModifyMode(int userPosition) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.beginTransaction();
+        try {
+
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(COLUMN_USERS_PREFERENCES_ID_USER, getIdOfCurrentUser());
+            contentValues.put(COLUMN_USERS_PREFERENCES_MODIFY_MEASUREMENT_POSITION, userPosition);
+
+            long isRowExist = updateModifyPositionInDatabase(db, contentValues);
+
+            if (isRowExist == ROW_NOT_EXIST) {
+
+                insertNewModifyPositionRecordToDatabse(db, contentValues);
+            }
+
+            db.setTransactionSuccessful();
+            Log.d(TAG, "Position of User : " + loginUserName + " saved.");
+        } finally {
+            db.endTransaction();
+        }
+    }
+
+    private void insertNewModifyPositionRecordToDatabse(SQLiteDatabase db, ContentValues contentValues) {
+        db.insertWithOnConflict(TABLE_USERS_PREFERENCES, null, contentValues, SQLiteDatabase.CONFLICT_IGNORE);
+    }
+
+    private long updateModifyPositionInDatabase(SQLiteDatabase database, ContentValues contentValues) {
+
+        Long idOfCurrentUser = getIdOfCurrentUser();
+
+        String whereStatement = COLUMN_USERS_PREFERENCES_ID_USER + " = ?";
+        String[] whereArgs = new String[]{idOfCurrentUser.toString()};
+
+        return database.updateWithOnConflict(TABLE_USERS_PREFERENCES, contentValues, whereStatement, whereArgs, SQLiteDatabase.CONFLICT_IGNORE);
+    }
+
+    public int readUserPositionInModifyMode() {
+
+        Long idOfCurrentUser = getIdOfCurrentUser();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+
+        Cursor cursor = db.query(TABLE_USERS_PREFERENCES,
+                new String[]{COLUMN_USERS_PREFERENCES_MODIFY_MEASUREMENT_POSITION},
+                COLUMN_USERS_PREFERENCES_ID_USER + "=?", new String[]{String.valueOf(idOfCurrentUser)},
+                null, null, null);
+        cursor.moveToFirst();
+
+        if (cursor.getCount() <= 0) {
+            return 0;
+        }
+
+        int userModifyPosition = 0;
+
+        userModifyPosition = cursor.getInt(cursor.getColumnIndex(COLUMN_USERS_PREFERENCES_MODIFY_MEASUREMENT_POSITION));
+
+
+        Log.d(TAG, "Position of User : " + loginUserName + " is " + userModifyPosition);
+
+
+        return userModifyPosition;
+    }
+
 
     @Override
     public void addNotificationObserver(DatabaseNotificationObserver notificationObserver) {
@@ -561,6 +660,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
     public void clearDatabase() {
 
         clearAllDataInMeasurementTable();
+        clearAllUserDataInUsersPreferencesTable();
         clearAllUserDataInUsersTable();
 
     }
@@ -586,7 +686,18 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
         } finally {
             db.endTransaction();
         }
+    }
 
+    public void clearAllUserDataInUsersPreferencesTable() {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.beginTransaction();
+        try {
+            db.delete(TABLE_USERS_PREFERENCES, null, null);
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
     }
 
     public void insertNewUserDataIntoDatabase(UserData userData) {

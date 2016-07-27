@@ -1,4 +1,4 @@
-package creator.soft.cygi.com.friendlyloseweighthelper;
+package creator.soft.cygi.com.friendlyloseweighthelper.dao;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -29,11 +29,11 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(AndroidJUnit4.class)
 @MediumTest
-public class WeightTrackDatabaseHelperTest {
+public class WeightTrackDatabaseHelperTestIT {
 
     private final Context instrumentationContext = InstrumentationRegistry.getTargetContext();
     private final WeightTrackDatabaseHelper weightTrackDatabaseHelper = new WeightTrackDatabaseHelper(instrumentationContext);
-    private String TAG = "WeightTrackDatabaseHelperTest";
+    private String TAG = "WeightTrackDatabaseHelperTestIT";
 
     @Before
     public void setup() {
@@ -294,6 +294,15 @@ public class WeightTrackDatabaseHelperTest {
         assertEquals(expectedWeightGoal,currentUserWeightGoal,0.00);
     }
 
+    @Test
+    public void saveAndRetrieveCurrentUserPositionWhenInModifyModeTest(){
+        int modifyModePositionExpected = 6;
+        weightTrackDatabaseHelper.saveUserPositionInModifyMode(6);
+        int modifyModePositionActual = weightTrackDatabaseHelper.readUserPositionInModifyMode();
+
+        assertEquals(modifyModePositionExpected,modifyModePositionActual);
+    }
+
     private void fillDatabase() {
         fillUserTable();
         fillMeasurementTable();
@@ -312,18 +321,21 @@ public class WeightTrackDatabaseHelperTest {
         UserData userJanekData = new UserData();
         userJanekData.setName("Janek");
         userJanekData.setPassword("koparka");
+        userJanekData.setEmail("jacek301@gmail.com");
 
         weightTrackDatabaseHelper.insertNewUserDataIntoDatabase(userJanekData);
 
         UserData userJacekData = new UserData();
         userJacekData.setName("Jacek");
         userJacekData.setPassword("");
+        userJacekData.setEmail("jacek301@gmail.com");
 
         weightTrackDatabaseHelper.insertNewUserDataIntoDatabase(userJacekData);
 
         UserData userAniaData = new UserData();
         userAniaData.setName("Ania");
         userAniaData.setPassword("Password");
+        userAniaData.setEmail("jacek301@gmail.com");
         userAniaData.setWeightGoal(90);
 
         weightTrackDatabaseHelper.insertNewUserDataIntoDatabase(userAniaData);
