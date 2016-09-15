@@ -27,11 +27,11 @@ import android.widget.TextView;
 
 import org.apache.commons.lang3.math.NumberUtils;
 
-import creator.soft.cygi.com.friendlyloseweighthelper.dto.DateTimeDTO;
-import creator.soft.cygi.com.friendlyloseweighthelper.utility.DateTimeStringUtility;
 import creator.soft.cygi.com.friendlyloseweighthelper.R;
-import creator.soft.cygi.com.friendlyloseweighthelper.model.WeightDataModel;
 import creator.soft.cygi.com.friendlyloseweighthelper.dao.WeightTrackDatabaseHelper;
+import creator.soft.cygi.com.friendlyloseweighthelper.dto.DateTimeDTO;
+import creator.soft.cygi.com.friendlyloseweighthelper.model.WeightDataModel;
+import creator.soft.cygi.com.friendlyloseweighthelper.utility.DateTimeStringUtility;
 
 /**
  * Created by CygiMasterProgrammer on 2016-01-09.
@@ -184,15 +184,20 @@ public abstract class WeightCommonViewFragment extends Fragment {
                 getActivity().startActivity(i);
 
                 return true;
+            case R.id.menu_user_profile_option:
+                Intent userProfileIntent = new Intent(getActivity(), UserProfileOptionActivity.class);
+                startActivityForResult(userProfileIntent, REQUEST_USER_PROFILE_CHANGE_USER_NAME);
+                return true;
+
+            case R.id.menu_show_progress:
+                Intent progressActivityIntent = new Intent(getActivity(), ProgressActivity.class);
+                getActivity().startActivity(progressActivityIntent);
+                return true;
+
             case R.id.menu_delete_all_measurement:
 
                 showDeleteAllMeasurementAlertDialog();
 
-                return true;
-
-            case R.id.menu_user_profile_option:
-                Intent userProfileIntent = new Intent(getActivity(), UserProfileOptionActivity.class);
-                startActivityForResult(userProfileIntent, REQUEST_USER_PROFILE_CHANGE_USER_NAME);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

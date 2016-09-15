@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/progressViewTittle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/progress_tittle"
+            android:layout_marginBottom="5dp"
+            android:textSize="50dp" />
+
+
+        <TextView
+            android:id="@+id/progressUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/progressViewTittle"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/progress_user_name"
+            android:textSize="30dp" />
+
+        <TextView
+            android:id="@+id/progressWeightGoal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/progressUserName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp"
+            android:text="@string/progress_weight_goal"
+            android:layout_marginTop="2dp"
+            android:textSize="25dp" />
+
+        <GridLayout
+            android:id="@+id/gridLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/progressWeightGoal"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/rectangle_border_in_progress_frame"
+            android:columnCount="1"
+            android:rowCount="12">
+
+            <TextView
+                android:id="@+id/progressMeasurementFromBeginSection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_row="1"
+                android:text="@string/progress_from_the_start_section"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/progressNumberOfMeasurementMadeFromBegining"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_gravity="center_horizontal"
+                android:layout_row="2"
+                android:text="@string/number_of_measurement_made_from_begining"
+                android:textSize="15sp" />
+
+            <RelativeLayout
+                android:id="@+id/measurementFromHighestWeightRelativeLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_gravity="center_horizontal"
+                android:layout_row="3"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/progressAverageDailyWeightChangeFromBegining"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_row="3"
+                    android:text="@string/progress_avg_daily_change_from_begining"
+                    android:textSize="15dp" />
+
+                <ImageView
+                    android:id="@+id/progressArrowIndicatorFromBegining"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/progressAverageDailyWeightChangeFromBegining"
+                    android:layout_toRightOf="@+id/progressAverageDailyWeightChangeFromBegining"
+                    android:src="@drawable/yellow_arrow_right" />
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/progressOverallWeightChangeFromFirstToLastMeasurement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_gravity="center_horizontal"
+                android:layout_row="4"
+                android:text="@string/weight_difference_from_begining"
+                android:textSize="15sp" />
+
+
+            <TextView
+                android:id="@+id/progressMeasurementFromTheHighestWeightSection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_row="5"
+                android:text="@string/progress_from_the_highest_weight_section"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/progressNumberOfMeasurementMadeFromHighestWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_gravity="center_horizontal"
+                android:layout_row="6"
+                android:text="@string/number_of_measurement_made_from_highest_weight"
+                android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/progressAvgDailyWeightChangeValueFromHighestWeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_column="0"
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/avg_daily_weight_loose_from_highest_weight"
+                    android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/progressWeightDifferenceFromHighestWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="0dp"
+                android:layout_row="8"
+                android:text="@string/weight_difference_from_highest_weight"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/progressAchievingAGoalSection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_row="9"
+                android:text="@string/when_achieve_goal_section"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/progressHowManyDaysLeftToAchieveGoal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="0dp"
+                android:layout_row="10"
+                android:text="@string/progress_days_left_to_achieve_goal_label"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/progressDateOfAchievingAGoal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_gravity="center_horizontal"
+                android:layout_row="11"
+                android:text="@string/progress_prediction_date"
+                android:textSize="20sp" />
+
+        </GridLayout>
+
+    </RelativeLayout>
+
+</ScrollView>

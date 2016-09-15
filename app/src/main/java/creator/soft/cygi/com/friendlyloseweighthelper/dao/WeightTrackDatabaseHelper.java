@@ -31,6 +31,7 @@ import creator.soft.cygi.com.friendlyloseweighthelper.model.WeightDataModel;
 public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements DatabaseNotificationSubject, UserNotificationSubject {
 
     public static final int ROW_NOT_INSERTED = -1;
+    public static final int ROW_NOT_EXIST = 0;
     private static final String TAG = "WeightTrackDatabaseH";
     private static final String DB_NAME = "weightTrack.sgl";
     private static final int VERSION = 8;
@@ -45,16 +46,14 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
     private static final String COLUMN_MEASUREMENT_DATA_ID_USER = "id_user";
     private static final String COLUMN_MEASUREMENT_DATA_DATE_TIME = "date_time";
     private static final String COLUMN_MEASUREMENT_DATA_WEIGHT = "weight";
-
     private static final String TABLE_USERS_PREFERENCES = "users_preferences";
     private static final String COLUMN_USERS_PREFERENCES_ID_PREFERENCES = "user_preferences_id";
     private static final String COLUMN_USERS_PREFERENCES_ID_USER = "id_user";
     private static final String COLUMN_USERS_PREFERENCES_MODIFY_MEASUREMENT_POSITION = "user_modify_measurement_position";
-    public static final int ROW_NOT_EXIST = 0;
-
     Stack<DateTimeDTO> lastMeasurementDeletionStack = new Stack<DateTimeDTO>();
     private Context context;
     private String loginUserName;
+    private SharedPreferences sharedPreferences;
 
     private List<DatabaseNotificationObserver> DatabaseNotificationObservers = new ArrayList<DatabaseNotificationObserver>();
     private List<UserNotificationObserver> userNotificationObservers = new ArrayList<UserNotificationObserver>();
@@ -68,7 +67,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
     private void readCurrentUserNameFromPreferences() {
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         loginUserName = sharedPreferences.getString(LoginViewFragment.LOGIN_USER_NAME, null);
 
     }
@@ -138,6 +137,58 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
         Log.i("Baza kasowac", "Czy baza skasowana  " + isDeleted);
 
+    }
+
+    public DateTimeDTO getMeasurementInAFirstDay() {
+
+        final Cursor oldestDateCursor = getOldestDateMeasurementCursor();
+        oldestDateCursor.moveToFirst();
+
+        final DateTimeDTO dateTimeDTO = new DateTimeDTO();
+
+        if (oldestDateCursor.getCount() > 0) {
+
+            int measurementID = oldestDateCursor.getInt(oldestDateCursor.getColumnIndex(COLUMN_MEASUREMENT_DATA_MEASUREMENT_ID));
+            String formatDate = oldestDateCursor.getString(oldestDateCursor.getColumnIndex(COLUMN_MEASUREMENT_DATA_DATE_TIME));
+            float weight = oldestDateCursor.getFloat(oldestDateCursor.getColumnIndex(COLUMN_MEASUREMENT_DATA_WEIGHT));
+
+            dateTimeDTO.setMeasurementID(measurementID);
+            dateTimeDTO.setDate(formatDate);
+            dateTimeDTO.setWeight(weight);
+            dateTimeDTO.setAndroidContext(context);
+        } else {
+
+            dateTimeDTO.setWeight(0f);
+            dateTimeDTO.setAndroidContext(context);
+
+        }
+
+        return dateTimeDTO;
+    }
+
+    public DateTimeDTO getMeasurementInLatestDay() {
+
+        final Cursor latestDateCursor = getLatestDateMeasurementCursor();
+
+        final DateTimeDTO dateTimeDTO = new DateTimeDTO();
+
+        if (latestDateCursor.getCount() > 0) {
+
+            int measurementID = latestDateCursor.getInt(latestDateCursor.getColumnIndex(COLUMN_MEASUREMENT_DATA_MEASUREMENT_ID));
+            String formatDate = latestDateCursor.getString(latestDateCursor.getColumnIndex(COLUMN_MEASUREMENT_DATA_DATE_TIME));
+            float weight = latestDateCursor.getFloat(latestDateCursor.getColumnIndex(COLUMN_MEASUREMENT_DATA_WEIGHT));
+
+            dateTimeDTO.setMeasurementID(measurementID);
+            dateTimeDTO.setDate(formatDate);
+            dateTimeDTO.setWeight(weight);
+            dateTimeDTO.setAndroidContext(context);
+        } else {
+
+            dateTimeDTO.setWeight(0f);
+            dateTimeDTO.setAndroidContext(context);
+        }
+
+        return dateTimeDTO;
     }
 
 
@@ -323,6 +374,19 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
                 null, null, COLUMN_MEASUREMENT_DATA_DATE_TIME + " DESC", "1");
         latestDateMeasurementCursor.moveToFirst();
         return latestDateMeasurementCursor;
+    }
+
+    private Cursor getOldestDateMeasurementCursor() {
+
+        Long idCurrentUser = getIdOfCurrentUser();
+
+        Cursor oldestDateMeasurementCursor = getReadableDatabase().query(TABLE_MEASUREMENT_DATA,
+                new String[]{COLUMN_MEASUREMENT_DATA_MEASUREMENT_ID, COLUMN_MEASUREMENT_DATA_DATE_TIME,
+                        COLUMN_MEASUREMENT_DATA_WEIGHT}, COLUMN_MEASUREMENT_DATA_ID_USER + " = ?",
+                new String[]{String.valueOf(idCurrentUser)},
+                null, null, COLUMN_MEASUREMENT_DATA_DATE_TIME + " ASC", "1");
+        oldestDateMeasurementCursor.moveToFirst();
+        return oldestDateMeasurementCursor;
     }
 
 
@@ -665,7 +729,7 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
 
     }
 
-    private void clearAllDataInMeasurementTable() {
+    public void clearAllDataInMeasurementTable() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.beginTransaction();
         try {
@@ -933,5 +997,61 @@ public class WeightTrackDatabaseHelper extends SQLiteOpenHelper implements Datab
         cursor.moveToFirst();
         return cursor.getFloat(cursor.getColumnIndex(COLUMN_USERS_WEIGHT_GOAL));
 
+    }
+
+    public DateTimeDTO getMeasurementWithHighestWeight() {
+
+        Cursor highestWeightCursor = getHighestWeightMeasurementCursor();
+
+        DateTimeDTO dateTimeDTO = new DateTimeDTO();
+
+        if (highestWeightCursor.getCount() > 0) {
+
+            int measurementID = highestWeightCursor.getInt(highestWeightCursor.getColumnIndex(COLUMN_MEASUREMENT_DATA_MEASUREMENT_ID));
+            String formatDate = highestWeightCursor.getString(highestWeightCursor.getColumnIndex(COLUMN_MEASUREMENT_DATA_DATE_TIME));
+            float weight = highestWeightCursor.getFloat(highestWeightCursor.getColumnIndex(COLUMN_MEASUREMENT_DATA_WEIGHT));
+
+            dateTimeDTO.setMeasurementID(measurementID);
+            dateTimeDTO.setDate(formatDate);
+            dateTimeDTO.setWeight(weight);
+            dateTimeDTO.setAndroidContext(context);
+        } else {
+
+            dateTimeDTO.setWeight(0f);
+            dateTimeDTO.setAndroidContext(context);
+        }
+
+        return dateTimeDTO;
+    }
+
+    private Cursor getHighestWeightMeasurementCursor() {
+
+        Long idCurrentUser = getIdOfCurrentUser();
+
+        Cursor highestWeightMeasurementCursor = getReadableDatabase().query(TABLE_MEASUREMENT_DATA,
+                new String[]{COLUMN_MEASUREMENT_DATA_MEASUREMENT_ID, COLUMN_MEASUREMENT_DATA_DATE_TIME,
+                        "MAX(" + COLUMN_MEASUREMENT_DATA_WEIGHT + ") as " + COLUMN_MEASUREMENT_DATA_WEIGHT}, COLUMN_MEASUREMENT_DATA_ID_USER + " = ?",
+                new String[]{String.valueOf(idCurrentUser)},
+                null, null, null, "1");
+        highestWeightMeasurementCursor.moveToFirst();
+        return highestWeightMeasurementCursor;
+    }
+
+
+    public long countNumberOfMeasurementFromHighestWeightMeasurementToLatest() {
+
+        final DateTimeDTO measurementWithHighestWeight = getMeasurementWithHighestWeight();
+
+        long numberOfRowFromHighestWeightMeasurement = 0;
+
+        if (measurementWithHighestWeight.getDate() != null) {
+
+            final String maxWeightMeasurementDate = measurementWithHighestWeight.getDateWithoutFormatting();
+            final String[] whereArguments = new String[]{maxWeightMeasurementDate};
+
+            numberOfRowFromHighestWeightMeasurement = DatabaseUtils.queryNumEntries(getReadableDatabase(), TABLE_MEASUREMENT_DATA, COLUMN_MEASUREMENT_DATA_DATE_TIME + ">= ?", whereArguments);
+        }
+
+        return numberOfRowFromHighestWeightMeasurement;
     }
 }

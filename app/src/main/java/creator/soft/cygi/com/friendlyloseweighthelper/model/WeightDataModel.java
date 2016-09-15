@@ -46,6 +46,8 @@ public class WeightDataModel implements WeightDataSubject {
         this.userPosition = userPosition;
     }
 
+
+
     public void setWeightWithCurrentDate(Float weight) {
 
         Date currentDate = DateTimeStringUtility.getCurrentDate();

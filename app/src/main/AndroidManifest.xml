@@ -20,6 +20,8 @@
         <activity android:name=".view.ChartActivity"/>
         <activity android:name=".view.WeightGoalActivity"/>
         <activity android:name=".view.UserProfileOptionActivity"/>
+        <activity android:name=".view.ProgressActivity"
+            android:screenOrientation="portrait"/>
 
     </application>
 
