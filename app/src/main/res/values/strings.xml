@@ -84,4 +84,7 @@
     <string name="progress_from_the_start_section">From The start</string>
     <string name="progress_from_the_highest_weight_section">From The highest weight</string>
     <string name="when_achieve_goal_section">When achieve goal</string>
+    <string name="progress_first_weight">First weight: %s kg</string>
+    <string name="progress_max_weight">Max weight: %s kg</string>
+    <string name="progress_current_weight">Current weight: %s kg</string>
 </resources>

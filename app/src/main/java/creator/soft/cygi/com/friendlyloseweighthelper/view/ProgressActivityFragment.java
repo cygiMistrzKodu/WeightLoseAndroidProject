@@ -28,6 +28,9 @@ public class ProgressActivityFragment extends Fragment {
     private TextView weightDifferenceFromHighestMeasurement;
     private TextView numberOfMeasurementMadeFromBeginning;
     private TextView numberOfMeasurementMadeFromHighestWeight;
+    private TextView firstWeight;
+    private TextView maxWeight;
+    private TextView currentWeight;
     private Button records;
     private Button statistic;
     private WeightTrackDatabaseHelper weightTrackDatabaseHelper;
@@ -49,7 +52,7 @@ public class ProgressActivityFragment extends Fragment {
         userNameWeightGoal.setText(String.format(getString(R.string.progress_weight_goal), weightTrackDatabaseHelper.getWeightGoalOfCurrentUser()));
 
         averageDailyWeightChangeFromBeginning = (TextView) view.findViewById(R.id.progressAverageDailyWeightChangeFromBegining);
-        averageDallyWeightChangeValueFromHighestWeightMeasurement = (TextView) view.findViewById(R.id.progressAvgDailyWeightChangeValueFromHighestWeight);
+        averageDallyWeightChangeValueFromHighestWeightMeasurement = (TextView) view.findViewById(R.id.progressAvgDailyWeightChangeFromHighestWeight);
         progressArrowIndicatorFromBeginning = (ImageView) view.findViewById(R.id.progressArrowIndicatorFromBegining);
         daysLeftToAchieveGoal = (TextView) view.findViewById(R.id.progressHowManyDaysLeftToAchieveGoal);
         predictedDateOfAchieveGoal = (TextView) view.findViewById(R.id.progressDateOfAchievingAGoal);
@@ -57,6 +60,9 @@ public class ProgressActivityFragment extends Fragment {
         weightDifferenceFromHighestMeasurement = (TextView) view.findViewById(R.id.progressWeightDifferenceFromHighestWeight);
         numberOfMeasurementMadeFromBeginning = (TextView) view.findViewById(R.id.progressNumberOfMeasurementMadeFromBegining);
         numberOfMeasurementMadeFromHighestWeight = (TextView) view.findViewById(R.id.progressNumberOfMeasurementMadeFromHighestWeight);
+        firstWeight = (TextView) view.findViewById(R.id.progressFirstWeight);
+        maxWeight = (TextView) view.findViewById(R.id.progressMaxWeight);
+        currentWeight = (TextView) view.findViewById(R.id.progressCurrentWeight);
 //        records = (Button) view.findViewById(R.id.progressRecordButton);
 //        statistic = (Button) view.findViewById(R.id.progressStatisticButton);
 
@@ -76,6 +82,11 @@ public class ProgressActivityFragment extends Fragment {
         weightDifferenceFromHighestMeasurement.setText(String.format(getString(R.string.weight_difference_from_highest_weight), progressMeasurer.getWeightDifferenceBetweenHighestWeightMeasurementAndLatestDateMeasurement()));
         numberOfMeasurementMadeFromBeginning.setText(String.format(getString(R.string.number_of_measurement_made_from_begining), progressMeasurer.getNumberOfAllMeasurementMade()));
         numberOfMeasurementMadeFromHighestWeight.setText(String.format(getString(R.string.number_of_measurement_made_from_highest_weight), progressMeasurer.getNumberOfMeasurementFromHighestMeasurementToLatestMeasurementIncludedHighest()));
+        firstWeight.setText(String.format(getString(R.string.progress_first_weight), progressMeasurer.getFirstWeight()));
+        maxWeight.setText(String.format(getString(R.string.progress_max_weight), progressMeasurer.getHighestWeight()));
+        currentWeight.setText(String.format(getString(R.string.progress_current_weight),progressMeasurer.getCurrentWeight()));
+
+
 
        // progressArrowIndicatorFromBeginning.setImageResource(R.drawable.yellow_arrow_right);
 

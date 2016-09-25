@@ -96,5 +96,25 @@
     <dimen name="passwordRecoveryTextViewMarginBottom">30dp</dimen>
     <dimen name="passwordRecoveryTextViewTextSize">30sp</dimen>
 
+    <dimen name="progress_tittle_text_size">100sp</dimen>
+    <dimen name="progress_user_name_text_size">60sp</dimen>
+    <dimen name="progress_weight_goal_text_size">50sp</dimen>
+    <dimen name="progress_from_begin_section_text_size">45sp</dimen>
+    <dimen name="progress_number_of_measurement_made_from_begining_text_size">30sp</dimen>
+    <dimen name="progress_average_daily_weight_change_from_begining_text_size">30sp</dimen>
+    <dimen name="progress_weight_change_from_first_to_last_text_size">30sp</dimen>
+    <dimen name="progress_measurement_from_the_highest_weight_section_text_size">45sp</dimen>
+    <dimen name="progress_number_of_measurement_made_from_highest_weight_text_size">30sp</dimen>
+    <dimen name="progress_avreage_daily_weight_change_from_highest_weight_text_size">30sp</dimen>
+    <dimen name="progress_weight_difference_from_highest_weight_text_size">30sp</dimen>
+    <dimen name="progress_how_many_days_left_to_achieve_goal_section_text_size">45sp</dimen>
+    <dimen name="progress_how_many_days_left_to_achieve_goal_text_size">42sp</dimen>
+    <dimen name="progress_date_of_achieving_a_goal_text_size">42sp</dimen>
+    <dimen name="progress_first_weight_text_size">33sp</dimen>
+    <dimen name="progress_progress_max_weight_text_size">33sp</dimen>
+    <dimen name="progress_image_arrow_min_height">35dp</dimen>
+    <dimen name="progress_image_arrow_min_width">35dp</dimen>
+    <dimen name="progress_current_weight_text_size">47sp</dimen>
+
 
 </resources>

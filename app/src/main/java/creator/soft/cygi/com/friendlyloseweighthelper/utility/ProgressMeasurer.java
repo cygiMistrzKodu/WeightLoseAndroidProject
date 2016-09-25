@@ -17,7 +17,7 @@ public class ProgressMeasurer {
 
     private static final String UNKNOWN = "Unknown";
     private WeightTrackDatabaseHelper weightTrackDatabaseHelper;
-    private DateTimeDTO fistDayMeasurements;
+    private DateTimeDTO firstDayMeasurements;
     private DateTimeDTO latestDayMeasurements;
     private DateTimeDTO theHighestWeightMeasurement;
     private WeightIndicator weightIndicator = WeightIndicator.UNDEFINED;
@@ -25,6 +25,9 @@ public class ProgressMeasurer {
     private float averageDailyChangeForAllMeasurements = 0;
     private float weightDifferenceBetweenFirstAndLatestDate = 0;
     private float weightDifferenceBetweenHighestWeightMeasurementAndLatestDateMeasurement = 0;
+    private float highestWeight = 0;
+    private float firstWeight = 0;
+    private float currentWeight = 0;
     private long numberOfMeasurementFromHighestMeasurementToLatestMeasurementIncludedHighest = 0;
     private long numberOfAllMeasurementMade = 0;
     private float numberOfDaysLeftToAchieveWeighGoal = 0;
@@ -52,6 +55,14 @@ public class ProgressMeasurer {
         return averageDailyChangeForAllMeasurements;
     }
 
+    public float getFirstWeight() {
+        return firstWeight;
+    }
+
+    public float getHighestWeight() {
+        return highestWeight;
+    }
+
     public String getDateOfAchievingAGoal() {
         return dateOfAchievingAGoal;
     }
@@ -62,6 +73,10 @@ public class ProgressMeasurer {
 
     public long getNumberOfMeasurementFromHighestMeasurementToLatestMeasurementIncludedHighest() {
         return numberOfMeasurementFromHighestMeasurementToLatestMeasurementIncludedHighest;
+    }
+
+    public float getCurrentWeight() {
+        return currentWeight;
     }
 
     public WeightIndicator getWeightIndicator() {
@@ -100,6 +115,9 @@ public class ProgressMeasurer {
 
         readOldestAndLatestMeasurement();
         getMeasurementWithHighestWeightFromDatabase();
+        extractFirstWeight();
+        extractLatestWeight();
+        extractTheHighestWeight();
         calculateWeightDifferenceBetweenOldestAndLatestMeasurement();
         calculateWeightDifferenceBetweenHighestWeightMeasurementAndLatestMeasurement();
         determineWeightDirection();
@@ -111,6 +129,18 @@ public class ProgressMeasurer {
         calculateNumberOfDaysLeftToAchieveGoal();
         calculateDateOfAchievingGoal();
 
+    }
+
+    private void extractLatestWeight() {
+      currentWeight =  latestDayMeasurements.getWeight();
+    }
+
+    private void extractFirstWeight() {
+      firstWeight = firstDayMeasurements.getWeight();
+    }
+
+    private void extractTheHighestWeight() {
+      highestWeight = theHighestWeightMeasurement.getWeight();
     }
 
     private void calculateDateOfAchievingGoal() {
@@ -162,7 +192,7 @@ public class ProgressMeasurer {
     }
 
     private void readOldestAndLatestMeasurement() {
-        fistDayMeasurements = weightTrackDatabaseHelper.getMeasurementInAFirstDay();
+        firstDayMeasurements = weightTrackDatabaseHelper.getMeasurementInAFirstDay();
         latestDayMeasurements = weightTrackDatabaseHelper.getMeasurementInLatestDay();
     }
 
@@ -205,9 +235,10 @@ public class ProgressMeasurer {
     }
 
     private void calculateWeightDifferenceBetweenOldestAndLatestMeasurement() {
-        float weightAtTheStart = fistDayMeasurements.getWeight();
+        float weightAtTheStart = firstDayMeasurements.getWeight();
         float weightLatest = latestDayMeasurements.getWeight();
         weightDifferenceBetweenFirstAndLatestDate = weightLatest - weightAtTheStart;
+        weightDifferenceBetweenFirstAndLatestDate = roundNumberToTwoPrecisionPoint(weightDifferenceBetweenFirstAndLatestDate);
     }
 
     private void calculateWeightDifferenceBetweenHighestWeightMeasurementAndLatestMeasurement() {
@@ -216,6 +247,7 @@ public class ProgressMeasurer {
         float weightLatest = latestDayMeasurements.getWeight();
 
         weightDifferenceBetweenHighestWeightMeasurementAndLatestDateMeasurement = weightLatest - highestWeightMeasurement;
+        weightDifferenceBetweenHighestWeightMeasurementAndLatestDateMeasurement = roundNumberToTwoPrecisionPoint(weightDifferenceBetweenHighestWeightMeasurementAndLatestDateMeasurement);
 
     }
 

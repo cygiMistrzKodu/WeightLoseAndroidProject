@@ -15,7 +15,7 @@
             android:layout_centerHorizontal="true"
             android:text="@string/progress_tittle"
             android:layout_marginBottom="5dp"
-            android:textSize="50dp" />
+            android:textSize="@dimen/progress_tittle_text_size" />
 
 
         <TextView
@@ -27,18 +27,29 @@
             android:layout_marginBottom="5dp"
             android:layout_centerHorizontal="true"
             android:text="@string/progress_user_name"
-            android:textSize="30dp" />
+            android:textSize="@dimen/progress_user_name_text_size" />
+
+        <TextView
+            android:id="@+id/progressCurrentWeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/progressUserName"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/progress_current_weight"
+            android:textSize="@dimen/progress_current_weight_text_size" />
 
         <TextView
             android:id="@+id/progressWeightGoal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/progressUserName"
+            android:layout_below="@+id/progressCurrentWeight"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="5dp"
             android:text="@string/progress_weight_goal"
             android:layout_marginTop="2dp"
-            android:textSize="25dp" />
+            android:textSize="@dimen/progress_weight_goal_text_size" />
 
         <GridLayout
             android:id="@+id/gridLayout"
@@ -49,19 +60,30 @@
             android:layout_marginBottom="20dp"
             android:background="@drawable/rectangle_border_in_progress_frame"
             android:columnCount="1"
-            android:rowCount="12">
+            android:rowCount="14">
 
             <TextView
-                android:id="@+id/progressMeasurementFromBeginSection"
+            android:id="@+id/progressMeasurementFromBeginSection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="1dp"
+            android:layout_row="1"
+            android:text="@string/progress_from_the_start_section"
+            android:textSize="@dimen/progress_from_begin_section_text_size" />
+
+            <TextView
+                android:id="@+id/progressFirstWeight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="0"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
-                android:layout_row="1"
-                android:text="@string/progress_from_the_start_section"
-                android:textSize="25sp" />
+                android:layout_row="2"
+                android:text="@string/progress_first_weight"
+                android:textSize="@dimen/progress_first_weight_text_size" />
 
             <TextView
                 android:id="@+id/progressNumberOfMeasurementMadeFromBegining"
@@ -69,9 +91,9 @@
                 android:layout_height="wrap_content"
                 android:layout_column="0"
                 android:layout_gravity="center_horizontal"
-                android:layout_row="2"
+                android:layout_row="3"
                 android:text="@string/number_of_measurement_made_from_begining"
-                android:textSize="15sp" />
+                android:textSize="@dimen/progress_number_of_measurement_made_from_begining_text_size" />
 
             <RelativeLayout
                 android:id="@+id/measurementFromHighestWeightRelativeLayout"
@@ -79,23 +101,23 @@
                 android:layout_height="wrap_content"
                 android:layout_column="0"
                 android:layout_gravity="center_horizontal"
-                android:layout_row="3"
+                android:layout_row="4"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/progressAverageDailyWeightChangeFromBegining"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_column="0"
                     android:layout_gravity="center_horizontal"
-                    android:layout_row="3"
                     android:text="@string/progress_avg_daily_change_from_begining"
-                    android:textSize="15dp" />
+                    android:textSize="@dimen/progress_average_daily_weight_change_from_begining_text_size" />
 
                 <ImageView
                     android:id="@+id/progressArrowIndicatorFromBegining"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:minHeight="@dimen/progress_image_arrow_min_height"
+                    android:minWidth="@dimen/progress_image_arrow_min_width"
                     android:layout_alignBottom="@+id/progressAverageDailyWeightChangeFromBegining"
                     android:layout_toRightOf="@+id/progressAverageDailyWeightChangeFromBegining"
                     android:src="@drawable/yellow_arrow_right" />
@@ -108,9 +130,9 @@
                 android:layout_height="wrap_content"
                 android:layout_column="0"
                 android:layout_gravity="center_horizontal"
-                android:layout_row="4"
+                android:layout_row="5"
                 android:text="@string/weight_difference_from_begining"
-                android:textSize="15sp" />
+                android:textSize="@dimen/progress_weight_change_from_first_to_last_text_size" />
 
 
             <TextView
@@ -120,10 +142,21 @@
                 android:layout_column="0"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
-                android:layout_row="5"
+                android:layout_marginBottom="1dp"
+                android:layout_row="6"
                 android:text="@string/progress_from_the_highest_weight_section"
-                android:textSize="25sp" />
+                android:textSize="@dimen/progress_measurement_from_the_highest_weight_section_text_size" />
+
+            <TextView
+                android:id="@+id/progressMaxWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="5dp"
+                android:layout_row="7"
+                android:text="@string/progress_max_weight"
+                android:textSize="@dimen/progress_progress_max_weight_text_size" />
 
             <TextView
                 android:id="@+id/progressNumberOfMeasurementMadeFromHighestWeight"
@@ -131,19 +164,20 @@
                 android:layout_height="wrap_content"
                 android:layout_column="0"
                 android:layout_gravity="center_horizontal"
-                android:layout_row="6"
+                android:layout_row="8"
                 android:text="@string/number_of_measurement_made_from_highest_weight"
-                android:textSize="15sp" />
+                android:textSize="@dimen/progress_number_of_measurement_made_from_highest_weight_text_size" />
 
                 <TextView
-                    android:id="@+id/progressAvgDailyWeightChangeValueFromHighestWeight"
+                    android:id="@+id/progressAvgDailyWeightChangeFromHighestWeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_column="0"
+                    android:layout_row="9"
                     android:layout_alignParentLeft="true"
                     android:text="@string/avg_daily_weight_loose_from_highest_weight"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/progress_avreage_daily_weight_change_from_highest_weight_text_size" />
 
             <TextView
                 android:id="@+id/progressWeightDifferenceFromHighestWeight"
@@ -152,9 +186,9 @@
                 android:layout_column="0"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="0dp"
-                android:layout_row="8"
+                android:layout_row="10"
                 android:text="@string/weight_difference_from_highest_weight"
-                android:textSize="15sp" />
+                android:textSize="@dimen/progress_weight_difference_from_highest_weight_text_size" />
 
             <TextView
                 android:id="@+id/progressAchievingAGoalSection"
@@ -165,9 +199,9 @@
                 android:layout_marginLeft="0dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
-                android:layout_row="9"
+                android:layout_row="11"
                 android:text="@string/when_achieve_goal_section"
-                android:textSize="25sp" />
+                android:textSize="@dimen/progress_how_many_days_left_to_achieve_goal_section_text_size" />
 
             <TextView
                 android:id="@+id/progressHowManyDaysLeftToAchieveGoal"
@@ -176,9 +210,9 @@
                 android:layout_column="0"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="0dp"
-                android:layout_row="10"
+                android:layout_row="12"
                 android:text="@string/progress_days_left_to_achieve_goal_label"
-                android:textSize="20sp" />
+                android:textSize="@dimen/progress_how_many_days_left_to_achieve_goal_text_size" />
 
             <TextView
                 android:id="@+id/progressDateOfAchievingAGoal"
@@ -186,9 +220,9 @@
                 android:layout_height="wrap_content"
                 android:layout_column="0"
                 android:layout_gravity="center_horizontal"
-                android:layout_row="11"
+                android:layout_row="13"
                 android:text="@string/progress_prediction_date"
-                android:textSize="20sp" />
+                android:textSize="@dimen/progress_date_of_achieving_a_goal_text_size" />
 
         </GridLayout>
 
