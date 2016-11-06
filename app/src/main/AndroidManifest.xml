@@ -22,6 +22,7 @@
         <activity android:name=".view.UserProfileOptionActivity"/>
         <activity android:name=".view.ProgressActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".utility.GoalAchieveInformerActivity"/>
 
     </application>
 

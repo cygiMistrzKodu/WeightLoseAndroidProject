@@ -15,12 +15,13 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
+import creator.soft.cygi.com.friendlyloseweighthelper.R;
 import creator.soft.cygi.com.friendlyloseweighthelper.dao.DatabaseNotificationObserver;
 import creator.soft.cygi.com.friendlyloseweighthelper.dao.DatabaseNotificationSubject;
+import creator.soft.cygi.com.friendlyloseweighthelper.utility.GoalAchieveInformerActivity;
 import creator.soft.cygi.com.friendlyloseweighthelper.dto.DateTimeDTO;
 import creator.soft.cygi.com.friendlyloseweighthelper.utility.DateTimeStringUtility;
-import creator.soft.cygi.com.friendlyloseweighthelper.R;
-import creator.soft.cygi.com.friendlyloseweighthelper.utility.TextAnimatorUtilityHelper;
+import creator.soft.cygi.com.friendlyloseweighthelper.utility.TextAnimatorBasic;
 
 /**
  * Created by CygiMasterProgrammer on 2015-12-09.
@@ -29,7 +30,7 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
 
     private static final String AUTO_CHECK_BOX = "autoCheckBoxState";
     private static final String UNDO_LAST_DELETION_BUTTON_STATE = "undoLastDeletionButtonState";
-    private static String TAG = "WeightStandardViewFragment";
+    private static String TAG = "WeightStandardViewFrag";
 
     private Button deleteLatestEntryButton;
     private Button undoLastDeletionButton;
@@ -49,6 +50,9 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
         databaseNotificationSubject = weightTrackDatabaseHelper;
         databaseNotificationSubject.addNotificationObserver(this);
         restoreApplicationState();
+
+        addLatestWeightObserver(new GoalAchieveInformerActivity(weightTrackDatabaseHelper, getActivity()));
+
 
     }
 
@@ -170,7 +174,7 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
         SharedPreferences.Editor editor = getActivity().getPreferences(Context.MODE_PRIVATE).edit();
         editor.putBoolean(AUTO_CHECK_BOX, autoCheckBox.isChecked());
         editor.apply();
-        Log.i(TAG, "Zapisałem stan przycisku");
+        Log.d(TAG, "check box state saved");
     }
 
     @Override
@@ -190,7 +194,7 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
     @Override
     public void onNoMeasurementToUndo() {
         undoLastDeletionButton.setEnabled(false);
-        Log.i(TAG, "Stack is empty one more time hi hi");
+        Log.d(TAG, "Undo deletion stack is empty");
     }
 
     @Override
@@ -203,9 +207,9 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
 
         putDataToInputView(dateTimeDTO);
 
-        TextAnimatorUtilityHelper textAnimatorUtilityHelper = new TextAnimatorUtilityHelper();
-        textAnimatorUtilityHelper.addTextComponentToAnimate(weightInput);
-        textAnimatorUtilityHelper.animateTextComponents(Color.RED, textInputViewColor);
+        TextAnimatorBasic textAnimatorBasic = new TextAnimatorBasic();
+        textAnimatorBasic.addTextComponentToAnimate(weightInput);
+        textAnimatorBasic.animateTextComponents(Color.RED, textInputViewColor);
 
     }
 
@@ -221,7 +225,7 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
     public void onMeasurementFailToInsertToDatabase() {
         Log.d(TAG, "**Duplicate Date Value**");
 
-        TextAnimatorUtilityHelper animateDateAndTimeText = new TextAnimatorUtilityHelper();
+        TextAnimatorBasic animateDateAndTimeText = new TextAnimatorBasic();
         animateDateAndTimeText.addTextComponentToAnimate(dateTextView);
         animateDateAndTimeText.addTextComponentToAnimate(timeTextView);
         animateDateAndTimeText.animateTextComponents(Color.YELLOW, textDateAndTimeColor);
@@ -241,9 +245,9 @@ public class WeightStandardViewFragment extends WeightCommonViewFragment impleme
         deleteLatestEntryButton.setEnabled(true);
         modifyModeButton.setEnabled(true);
 
-        TextAnimatorUtilityHelper textAnimatorUtilityHelper = new TextAnimatorUtilityHelper();
-        textAnimatorUtilityHelper.addTextComponentToAnimate(weightInput);
-        textAnimatorUtilityHelper.animateTextComponents(Color.GREEN, textInputViewColor);
+        TextAnimatorBasic textAnimatorBasic = new TextAnimatorBasic();
+        textAnimatorBasic.addTextComponentToAnimate(weightInput);
+        textAnimatorBasic.animateTextComponents(Color.GREEN, textInputViewColor);
 
     }
 

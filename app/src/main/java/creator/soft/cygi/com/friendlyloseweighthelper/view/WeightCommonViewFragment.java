@@ -27,7 +27,12 @@ import android.widget.TextView;
 
 import org.apache.commons.lang3.math.NumberUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import creator.soft.cygi.com.friendlyloseweighthelper.R;
+import creator.soft.cygi.com.friendlyloseweighthelper.utility.LatestWeightObserver;
+import creator.soft.cygi.com.friendlyloseweighthelper.utility.LatestWeightSubject;
 import creator.soft.cygi.com.friendlyloseweighthelper.dao.WeightTrackDatabaseHelper;
 import creator.soft.cygi.com.friendlyloseweighthelper.dto.DateTimeDTO;
 import creator.soft.cygi.com.friendlyloseweighthelper.model.WeightDataModel;
@@ -36,7 +41,7 @@ import creator.soft.cygi.com.friendlyloseweighthelper.utility.DateTimeStringUtil
 /**
  * Created by CygiMasterProgrammer on 2016-01-09.
  */
-public abstract class WeightCommonViewFragment extends Fragment {
+public abstract class WeightCommonViewFragment extends Fragment implements LatestWeightSubject {
 
     private static final String DIALOG_DATE = "date";
     private static final String DIALOG_TIME = "time";
@@ -51,7 +56,7 @@ public abstract class WeightCommonViewFragment extends Fragment {
     }
 
     private final ChartHelper chartHelper = new ChartHelper();
-    public String TAG = "WeightCommonViewFragment";
+    public String TAG = "WeightCommonView";
     protected WeightDataModel weightDataModel;
     protected WeightTrackDatabaseHelper weightTrackDatabaseHelper;
     protected TextView dateTextView;
@@ -82,6 +87,7 @@ public abstract class WeightCommonViewFragment extends Fragment {
     protected EditText weightInput;
     private Button chartButton;
     private CheckBox autoCheckBox;
+    private List<LatestWeightObserver> latestWeightObservers = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -300,6 +306,8 @@ public abstract class WeightCommonViewFragment extends Fragment {
 
     private void saveData() {
         weightTrackDatabaseHelper.insertOneMeasurementIntoDatabase(weightDataModel);
+        notifyLatestWeightObservers();
+
     }
 
     private void clearAllValuesInUndoStack() {
@@ -373,6 +381,26 @@ public abstract class WeightCommonViewFragment extends Fragment {
 
         }
 
+    }
+
+    @Override
+    public void addLatestWeightObserver(LatestWeightObserver latestWeightObserver) {
+        latestWeightObservers.add(latestWeightObserver);
+
+    }
+
+    @Override
+    public void removeLatestWeightObserver(LatestWeightObserver latestWeightObserver) {
+
+        latestWeightObservers.remove(latestWeightObserver);
+    }
+
+    @Override
+    public void notifyLatestWeightObservers() {
+
+        for (LatestWeightObserver latestWeightObserver : latestWeightObservers){
+            latestWeightObserver.updateLatestWeight(weightDataModel.getLatestWeight());
+        }
     }
 }
 

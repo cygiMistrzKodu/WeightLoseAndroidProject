@@ -18,7 +18,7 @@ import android.widget.Toast;
 import creator.soft.cygi.com.friendlyloseweighthelper.dto.DateTimeDTO;
 import creator.soft.cygi.com.friendlyloseweighthelper.utility.DateTimeStringUtility;
 import creator.soft.cygi.com.friendlyloseweighthelper.R;
-import creator.soft.cygi.com.friendlyloseweighthelper.utility.TextAnimatorUtilityHelper;
+import creator.soft.cygi.com.friendlyloseweighthelper.utility.TextAnimatorBasic;
 import creator.soft.cygi.com.friendlyloseweighthelper.model.WeightDataObserver;
 
 /**
@@ -149,7 +149,7 @@ public class WeightModificationViewFragment extends WeightCommonViewFragment imp
     }
 
     private void animateInputText() {
-        TextAnimatorUtilityHelper animateInputText = new TextAnimatorUtilityHelper();
+        TextAnimatorBasic animateInputText = new TextAnimatorBasic();
         animateInputText.addTextComponentToAnimate(weightInput);
         animateInputText.animateTextComponents(Color.GREEN, textInputColor);
     }
@@ -164,7 +164,7 @@ public class WeightModificationViewFragment extends WeightCommonViewFragment imp
     }
 
     private void animateDateTimeText() {
-        TextAnimatorUtilityHelper animateDateAndTimeText = new TextAnimatorUtilityHelper();
+        TextAnimatorBasic animateDateAndTimeText = new TextAnimatorBasic();
         animateDateAndTimeText.addTextComponentToAnimate(dateTextView);
         animateDateAndTimeText.addTextComponentToAnimate(timeTextView);
         animateDateAndTimeText.animateTextComponents(Color.YELLOW, textDateAndTimeColor);

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/congratulations_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="25sp"
+        android:text="@string/congratulations_view_title"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/congratulations_message_you"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="You"
+        android:textSize="35sp"
+        android:layout_above="@+id/congratulations_message_achieve"
+        android:layout_alignLeft="@+id/congratulations_image"
+        android:rotation="30"
+        android:transformPivotX="-20dp"/>
+
+    <TextView
+        android:id="@+id/congratulations_message_achieve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="achieve"
+        android:textSize="38sp"
+        android:layout_toRightOf="@+id/congratulations_message_you"
+        android:layout_above="@+id/congratulations_image"
+        android:rotation="350"
+        android:transformPivotY="-20dp"/>
+
+    <TextView
+        android:id="@+id/congratulations_message_your"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="your"
+        android:textSize="35sp"
+        android:layout_alignStart="@+id/congratulations_image"
+        android:layout_alignLeft="@+id/congratulations_image"
+        android:layout_below="@+id/congratulations_image"
+        android:rotation="40" />
+
+    <TextView
+        android:id="@+id/congratulations_message_goal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="goal"
+        android:textSize="38sp"
+        android:layout_toRightOf="@+id/congratulations_message_your"
+        android:layout_below="@+id/congratulations_message_your"
+        android:rotation="320"
+        android:transformPivotY="-30dp"/>
+
+    <ImageView
+        android:id="@+id/congratulations_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="40dp"
+        android:minWidth="40dp"
+        android:src="@drawable/victory_image"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="10dp"
+        android:layout_alignRight="@+id/congratulations_title"
+        android:layout_alignEnd="@+id/congratulations_title" />
+
+</RelativeLayout>

@@ -87,7 +87,6 @@ public class ProgressActivityFragment extends Fragment {
         currentWeight.setText(String.format(getString(R.string.progress_current_weight),progressMeasurer.getCurrentWeight()));
 
 
-
        // progressArrowIndicatorFromBeginning.setImageResource(R.drawable.yellow_arrow_right);
 
 

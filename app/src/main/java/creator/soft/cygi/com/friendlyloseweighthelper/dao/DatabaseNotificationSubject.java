@@ -8,17 +8,24 @@ import creator.soft.cygi.com.friendlyloseweighthelper.dto.DateTimeDTO;
  */
 public interface DatabaseNotificationSubject {
 
-    public void addNotificationObserver(DatabaseNotificationObserver notificationObserver);
+    void addNotificationObserver(DatabaseNotificationObserver notificationObserver);
 
-    public void removeNotificationObserver(DatabaseNotificationObserver notificationObserver);
+    void removeNotificationObserver(DatabaseNotificationObserver notificationObserver);
 
-    public void notifyTableMeasurementIsEmpty() ;
-    public void notifyTableMeasurementIsNotEmpty();
-    public void notifyNoMeasurementToUndo();
-    public void notifyUndoStackIsNotEmpty();
-    public void notifyMeasurementDeletion(DateTimeDTO dateTimeDTO);
-    public void notifyMeasurementUndoDeletion(DateTimeDTO dateTimeDTO);
-    public void notifyMeasurementNotInserted();
-    public void notifyMeasurementInserted();
+    void notifyTableMeasurementIsEmpty();
+
+    void notifyTableMeasurementIsNotEmpty();
+
+    void notifyNoMeasurementToUndo();
+
+    void notifyUndoStackIsNotEmpty();
+
+    void notifyMeasurementDeletion(DateTimeDTO dateTimeDTO);
+
+    void notifyMeasurementUndoDeletion(DateTimeDTO dateTimeDTO);
+
+    void notifyMeasurementNotInserted();
+
+    void notifyMeasurementInserted();
 
 }

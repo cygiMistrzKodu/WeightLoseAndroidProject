@@ -13,7 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import creator.soft.cygi.com.friendlyloseweighthelper.R;
-import creator.soft.cygi.com.friendlyloseweighthelper.utility.TextAnimatorUtilityHelper;
+import creator.soft.cygi.com.friendlyloseweighthelper.utility.TextAnimateable;
+import creator.soft.cygi.com.friendlyloseweighthelper.utility.TextAnimatorBasic;
 import creator.soft.cygi.com.friendlyloseweighthelper.model.UserData;
 import creator.soft.cygi.com.friendlyloseweighthelper.dao.UserNotificationObserver;
 import creator.soft.cygi.com.friendlyloseweighthelper.dao.WeightTrackDatabaseHelper;
@@ -126,13 +127,13 @@ public class CreateNewUserFragment extends Fragment {
 
     private void animateUserNameText() {
 
-        TextAnimatorUtilityHelper textAnimatorUtilityHelper = new TextAnimatorUtilityHelper();
-        textAnimatorUtilityHelper.addTextComponentToAnimate(weightGoalEditText);
-        textAnimatorUtilityHelper.addTextComponentToAnimate(passwordEditText);
-        textAnimatorUtilityHelper.addTextComponentToAnimate(userNameEditText);
-        textAnimatorUtilityHelper.addTextComponentToAnimate(userEmailEditText);
+        TextAnimateable textAnimatorBasic = new TextAnimatorBasic();
+        textAnimatorBasic.addTextComponentToAnimate(weightGoalEditText);
+        textAnimatorBasic.addTextComponentToAnimate(passwordEditText);
+        textAnimatorBasic.addTextComponentToAnimate(userNameEditText);
+        textAnimatorBasic.addTextComponentToAnimate(userEmailEditText);
 
-        textAnimatorUtilityHelper.animateTextComponents(Color.GREEN, colorEditText);
+        textAnimatorBasic.animateTextComponents(Color.GREEN, colorEditText);
 
     }
 
